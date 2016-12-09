@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import com.betterda.mylibrary.Utils.StatusBarCompat;
 import com.betterda.shopping.R;
 import com.betterda.shopping.utils.RxManager;
 

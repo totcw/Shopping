@@ -18,8 +18,10 @@ public interface View extends IView{
 
 public interface  Presenter extends IPresenter<View>{
 
-
+    //切换到对应的fragment
     void switchToFragment(int id);
+    //检测popupwindow是否关闭
+    boolean checkPopWindow();
 }
 
 public interface Model extends IModel{

@@ -1,6 +1,5 @@
 package com.betterda.shopping.home;
 
-import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -12,7 +11,6 @@ import com.betterda.shopping.home.contract.HomeContract;
 import com.betterda.shopping.home.presenter.HomePresenterImpl;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -20,6 +18,8 @@ import butterknife.OnClick;
  */
 
 public class MainActivity extends BaseActivity<HomeContract.Presenter> implements HomeContract.View {
+
+
 
     @BindView(R.id.idv_activity_main_shouye)
     IndicatorView mIdvShouye;
@@ -58,20 +58,28 @@ public class MainActivity extends BaseActivity<HomeContract.Presenter> implement
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.idv_activity_main_shouye:
-                switchTo(mIdvShouye);
-                getPresenter().switchToFragment(R.id.idv_activity_main_shouye);
+                if (!getPresenter().checkPopWindow()) {
+                    switchTo(mIdvShouye);
+                    getPresenter().switchToFragment(R.id.idv_activity_main_shouye);
+                }
                 break;
             case R.id.idv_activity_main_sort:
-                switchTo(mIdvSort);
-                getPresenter().switchToFragment(R.id.idv_activity_main_sort);
+                if (!getPresenter().checkPopWindow()) {
+                    switchTo(mIdvSort);
+                    getPresenter().switchToFragment(R.id.idv_activity_main_sort);
+                }
                 break;
             case R.id.idv_activity_main_find:
-                switchTo(mIdvFind);
-                getPresenter().switchToFragment(R.id.idv_activity_main_find);
+                if (!getPresenter().checkPopWindow()) {
+                    switchTo(mIdvFind);
+                    getPresenter().switchToFragment(R.id.idv_activity_main_find);
+                }
                 break;
             case R.id.idv_activity_main_my:
-                switchTo(mIdvMy);
-                getPresenter().switchToFragment(R.id.idv_activity_main_my);
+                if (!getPresenter().checkPopWindow()) {
+                    switchTo(mIdvMy);
+                    getPresenter().switchToFragment(R.id.idv_activity_main_my);
+                }
                 break;
         }
     }
@@ -104,15 +112,19 @@ public class MainActivity extends BaseActivity<HomeContract.Presenter> implement
      */
     public void switchTo(IndicatorView idv) {
 
-        if (null != mIdvShouye && null != mIdvSort && null != mIdvFind && null != idv && mIdvMy != null) {
+            if (null != mIdvShouye && null != mIdvSort && null != mIdvFind && null != idv && mIdvMy != null) {
 
-            mIdvShouye.setTabSelected(false);
-            mIdvSort.setTabSelected(false);
-            mIdvFind.setTabSelected(false);
-            mIdvMy.setTabSelected(false);
-            idv.setTabSelected(true);
+                mIdvShouye.setTabSelected(false);
+                mIdvSort.setTabSelected(false);
+                mIdvFind.setTabSelected(false);
+                mIdvMy.setTabSelected(false);
+                idv.setTabSelected(true);
 
-        }
+            }
 
+    }
+
+    public IndicatorView getmIdvShouye() {
+        return mIdvShouye;
     }
 }

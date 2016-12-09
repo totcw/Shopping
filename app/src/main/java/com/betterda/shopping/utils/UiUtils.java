@@ -11,6 +11,7 @@ import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 
 import com.betterda.mylibrary.ShapeLoadingDialog;
 import com.betterda.mylibrary.Utils.Toast;
@@ -31,8 +32,8 @@ public class UiUtils {
      *
      * @param message
      */
-    public static void showToast(String message) {
-        Toast.makeText(MyApplication.getInstance(), message, Toast.LENGTH_SHORT).show();
+    public static void showToast(Context activity,String message) {
+        Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
     }
 
     /**
@@ -229,5 +230,29 @@ public class UiUtils {
             }
         }
     }
+
+    /**
+     * 打开软键盘
+     */
+    public static void openInput(Context context) {
+        //打开软键盘
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(0, InputMethodManager.HIDE_IMPLICIT_ONLY);
+    }
+
+    /**
+     * 关闭软键盘
+     */
+    public static void closeInput(Context context) {
+        //打开软键盘
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm.isActive()) {
+            imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+        }
+
+    }
+
+
+
 
 }

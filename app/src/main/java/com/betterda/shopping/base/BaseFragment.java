@@ -1,14 +1,19 @@
 package com.betterda.shopping.base;
 
 import android.app.Activity;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupWindow;
 
+import com.betterda.shopping.R;
 import com.betterda.shopping.utils.RxManager;
+import com.betterda.shopping.utils.UiUtils;
 
 import butterknife.ButterKnife;
 
@@ -20,6 +25,7 @@ public abstract class BaseFragment <P extends IPresenter> extends Fragment imple
     private Activity mActivity;
     protected P mPresenter;
     protected RxManager mRxManager;
+    private PopupWindow popupWindow;
 
     @Override
     public void onAttach(Activity activity) {
@@ -95,6 +101,100 @@ public abstract class BaseFragment <P extends IPresenter> extends Fragment imple
         Log.i("BaseFragment", msg);
     }
 
+
+
+    /**
+     * 初始化并显示PopupWindow
+     *
+     * @param view     要显示的界面
+     * @param showView 显示在哪个控件下面
+     * @param x 宽度
+     */
+    public void setUpPopupWindow(View view, View showView,int x,int y) {
+        // 如果activity不在运行 就返回
+        if (getActivity().isFinishing()) {
+            return;
+        }
+        if (null == showView) {
+            popupWindow = new PopupWindow(view, -1, -2);
+        } else {
+            if (x != 0 && y != 0) {
+
+                popupWindow = new PopupWindow(view, x, y);
+            } else {
+                popupWindow = new PopupWindow(view, -1, -1);
+            }
+        }
+
+        // 设置点到外面可以取消,下面这2句要一起
+        if (null == showView) {
+            popupWindow.setOutsideTouchable(true);
+        }
+        popupWindow.setBackgroundDrawable(new BitmapDrawable());
+
+        //设置为true 会拦截事件,pop外部的控件无法获取到事件
+        if (null == showView) {
+            popupWindow.setFocusable(true);
+        } else {
+            popupWindow.setFocusable(false);
+        }
+        if (null == showView) {
+            UiUtils.backgroundAlpha(0.7f, getmActivity());
+
+        }
+        //设置可以触摸
+        popupWindow.setTouchable(true);
+
+        if (popupWindow != null) {
+            if (!popupWindow.isShowing()) {
+                if (null == showView) {
+                    //设置动画
+                    popupWindow.setAnimationStyle(R.style.popwin_anim_style);
+                    popupWindow.showAtLocation(view, Gravity.BOTTOM, 0, 0);
+                } else {
+                    popupWindow.setAnimationStyle(R.style.popupwindow_anim);
+                    popupWindow.showAsDropDown(showView);
+                }
+
+            }
+        }
+        popupWindow.update();
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+
+            @Override
+            public void onDismiss() {
+
+                dismiss();
+                popupWindow = null;
+            }
+        });
+
+
+
+
+    }
+
+    /**
+     * popupwindow消失回调方法
+     */
+    public void dismiss() {
+
+    }
+
+    public PopupWindow getPopupWindow() {
+        return popupWindow;
+    }
+
+    /**
+     * 关闭popupwindow
+     */
+    public void closePopupWindow() {
+        if (null != popupWindow && popupWindow.isShowing()) {
+            popupWindow.dismiss();
+            popupWindow = null;
+        }
+    }
+
     @Override
     public void onDestroyView() {
         if (getPresenter() != null) {
@@ -104,6 +204,7 @@ public abstract class BaseFragment <P extends IPresenter> extends Fragment imple
             getPresenter().destroy();
         }
         mRxManager.clear();
+        closePopupWindow();
         super.onDestroyView();
     }
 }

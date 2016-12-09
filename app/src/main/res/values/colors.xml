@@ -5,4 +5,7 @@
     <color name="colorAccent">#FF4081</color>
     <color name="activityMainNormal">#7b7b7b</color>
     <color name="activityMainPressed">#2b2b2b</color>
+    <color name="fragmentSortGrayBg">#f1f1f1</color>
+    <color name="divierLine">#dcdcdc</color>
+    <color name="sortGray">#7b7b7b</color>
 </resources>

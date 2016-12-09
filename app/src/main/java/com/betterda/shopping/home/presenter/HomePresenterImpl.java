@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.widget.PopupWindow;
 
 import com.betterda.shopping.R;
 import com.betterda.shopping.base.BasePresenter;
@@ -104,6 +105,22 @@ public class HomePresenterImpl extends BasePresenter<HomeContract.View,HomeContr
 
                 break;
         }
+    }
+
+    /**
+     * 检测popupwindow是否关闭
+     * @return
+     */
+    @Override
+    public boolean checkPopWindow() {
+        if (mSortFragment != null) {
+            PopupWindow popupWindow = mSortFragment.getPopupWindow();
+            if (popupWindow != null&&popupWindow.isShowing()) {
+                mSortFragment.closePopupWindow();
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

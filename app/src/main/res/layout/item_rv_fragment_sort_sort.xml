@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/linear_item_sort_sort"
+    android:gravity="center"
+    android:layout_height="40dp">
+    <TextView
+        android:gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:singleLine="true"
+        android:id="@+id/tv_item_sort_sort"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="白酒"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:textSize="13sp"
+        android:textColor="@color/activityMainPressed"
+        android:background="@drawable/item_fragment_rv_sort_selector"
+        />
+
+</LinearLayout>
