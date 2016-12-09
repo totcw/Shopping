@@ -59,9 +59,14 @@ public class SortFragment extends BaseFragment<SortContract.Presenter> implement
 
     private LinearLayout mLinearSortNameChose; //筛选界面
     private LinearLayout mLinearSortNameChoseType;
+    private LinearLayout mLinearSortNameChosePrice;
     private RecyclerView mRvSortType; //筛选条件的rv
 
     private int pressNum = -1;//用来判断点击的是排序还是筛选
+    private EditText mEtNameStart;
+    private EditText mEtNameEnd;
+    private TextView mTvSortName;
+
 
 
     @Override
@@ -175,14 +180,30 @@ public class SortFragment extends BaseFragment<SortContract.Presenter> implement
             case 1:
                 mTtbvSort.setSecondSelect(!mTtbvSort.isSecondSelected());
                 View view2 = getPpView(R.layout.pp_fragment_sort_name);
+                mEtNameStart = (EditText) view2.findViewById(R.id.et_pp_sort_name_start);
+                mEtNameEnd = (EditText) view2.findViewById(R.id.et_pp_sort_name_end);
+                mTvSortName = (TextView) view2.findViewById(R.id.tv_pp_sort_name);
                 mLinearSortNameChose = (LinearLayout) view2.findViewById(R.id.linear_sort_name_shaixuan);
                 mLinearSortNameChoseType = (LinearLayout) view2.findViewById(R.id.linear_sort_name_shaixuan_type);
+                mLinearSortNameChosePrice = (LinearLayout) view2.findViewById(R.id.linear_pp_sort_name_price);
                 RecyclerView rvSortChose = (RecyclerView) view2.findViewById(R.id.rv_pp_sort_name_chose);
                 mRvSortType = (RecyclerView) view2.findViewById(R.id.rv_pp_sort_name_type);
                 mRvSortType.addItemDecoration(new DividerItemDecoration(getmActivity(),DividerItemDecoration.VERTICAL_LIST));
                 initRvSortChose(rvSortChose);
-
                 setUpPopupWindow(view2,mTtbvSort,mTtbvSort.getWidth(),height);
+                mLinearSortNameChosePrice.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                    }
+                });
+                mTvSortName.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        showType(false);
+                        getPresenter().priceComfirm();
+                    }
+                });
                 break;
         }
 
@@ -208,8 +229,15 @@ public class SortFragment extends BaseFragment<SortContract.Presenter> implement
     public void initRvSortType(String type) {
         mRvSortType.setLayoutManager(new LinearLayoutManager(getmActivity()));
         mRvSortType.setAdapter(getPresenter().getRvSortTypeAdapter(type));
+        if ("价格".equals(type)) {
+            mLinearSortNameChosePrice.setVisibility(View.VISIBLE);
+        } else {
+            mLinearSortNameChosePrice.setVisibility(View.GONE);
+        }
 
     }
+
+
 
 
     /**
@@ -234,6 +262,8 @@ public class SortFragment extends BaseFragment<SortContract.Presenter> implement
         super.dismiss();
         mTtbvSort.setSecondSelect(false);
         mTtbvSort.setFirstSelect(false);
+        //清楚popupwindow中的容器
+        getPresenter().clear();
 
     }
 

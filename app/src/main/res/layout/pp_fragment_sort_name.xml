@@ -32,11 +32,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="清空"
-                android:minHeight="40dp"
+                android:minHeight="30dp"
                 android:background="@drawable/shape_corner_white_gray"
                 />
             <TextView
-                android:minHeight="40dp"
+                android:minHeight="30dp"
                 android:layout_marginLeft="10dp"
                 android:gravity="center"
                 android:layout_weight="1"
@@ -69,6 +69,7 @@
 
         </android.support.v7.widget.RecyclerView>
         <LinearLayout
+            android:id="@+id/linear_pp_sort_name_price"
             android:visibility="gone"
             android:orientation="horizontal"
             android:padding="10dp"
@@ -86,10 +87,11 @@
                 />
             
             <EditText
+                android:id="@+id/et_pp_sort_name_start"
                 android:gravity="center"
                 android:layout_weight="1"
                 android:layout_width="0dp"
-                android:minHeight="40dp"
+                android:minHeight="30dp"
                 android:layout_height="wrap_content"
                 android:hint="起始价格"
                 android:textSize="12sp"
@@ -103,13 +105,26 @@
                 android:layout_height="1dp"></View>
             
             <EditText
+                android:id="@+id/et_pp_sort_name_end"
                 android:textSize="12sp"
                 android:gravity="center"
                 android:layout_weight="1"
                 android:layout_width="0dp"
-                android:minHeight="40dp"
+                android:minHeight="30dp"
                 android:layout_height="wrap_content"
                 android:hint="终止价格"
+                android:background="@drawable/shape_corner_white_gray"
+                />
+
+            <TextView
+                android:id="@+id/tv_pp_sort_name"
+                android:layout_marginLeft="5dp"
+                android:minHeight="30dp"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="确定"
                 android:background="@drawable/shape_corner_white_gray"
                 />
 

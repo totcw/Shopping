@@ -21,6 +21,8 @@ public interface View extends IView{
 
     void initRvSortType(String type);
 
+
+
     //判断popupwindow是否关闭
     boolean close();
 
@@ -43,6 +45,10 @@ public interface Presenter extends IPresenter<View>{
     RecyclerView.Adapter getRvSortChoseAdapter();
 
     RecyclerView.Adapter getRvSortTypeAdapter(String type);
+
+    void clear();
+    //价格确认
+    void priceComfirm();
 }
 
 public interface Model extends IModel{

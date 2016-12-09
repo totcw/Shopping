@@ -136,7 +136,7 @@ public abstract class BaseFragment <P extends IPresenter> extends Fragment imple
         if (null == showView) {
             popupWindow.setFocusable(true);
         } else {
-            popupWindow.setFocusable(false);
+            popupWindow.setFocusable(true);
         }
         if (null == showView) {
             UiUtils.backgroundAlpha(0.7f, getmActivity());
