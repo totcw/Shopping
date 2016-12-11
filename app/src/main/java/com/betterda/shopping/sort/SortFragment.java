@@ -57,17 +57,24 @@ public class SortFragment extends BaseFragment<SortContract.Presenter> implement
     @BindView(R.id.loadpager_fragment_sort)
     LoadingPager mLoadPagerSort;
 
+    /**
+     * popuwindow筛选条件界面的相关view
+     */
     private LinearLayout mLinearSortNameChose; //筛选界面
     private LinearLayout mLinearSortNameChoseType;
     private LinearLayout mLinearSortNameChosePrice;
     private RecyclerView mRvSortType; //筛选条件的rv
-
-    private int pressNum = -1;//用来判断点击的是排序还是筛选
     private EditText mEtNameStart;
     private EditText mEtNameEnd;
     private TextView mTvSortName;
 
+    /**
+     * popuwindow筛选界面相关的view
+     */
 
+
+
+    private int pressNum = -1;//用来判断点击的是排序还是筛选
 
     @Override
     public View initView(LayoutInflater inflater) {
@@ -180,35 +187,67 @@ public class SortFragment extends BaseFragment<SortContract.Presenter> implement
             case 1:
                 mTtbvSort.setSecondSelect(!mTtbvSort.isSecondSelected());
                 View view2 = getPpView(R.layout.pp_fragment_sort_name);
-                mEtNameStart = (EditText) view2.findViewById(R.id.et_pp_sort_name_start);
-                mEtNameEnd = (EditText) view2.findViewById(R.id.et_pp_sort_name_end);
-                mTvSortName = (TextView) view2.findViewById(R.id.tv_pp_sort_name);
-                mLinearSortNameChose = (LinearLayout) view2.findViewById(R.id.linear_sort_name_shaixuan);
-                mLinearSortNameChoseType = (LinearLayout) view2.findViewById(R.id.linear_sort_name_shaixuan_type);
-                mLinearSortNameChosePrice = (LinearLayout) view2.findViewById(R.id.linear_pp_sort_name_price);
-                RecyclerView rvSortChose = (RecyclerView) view2.findViewById(R.id.rv_pp_sort_name_chose);
-                mRvSortType = (RecyclerView) view2.findViewById(R.id.rv_pp_sort_name_type);
-                mRvSortType.addItemDecoration(new DividerItemDecoration(getmActivity(),DividerItemDecoration.VERTICAL_LIST));
-                initRvSortChose(rvSortChose);
+                initChose(view2);
+                initChoseType(view2);
                 setUpPopupWindow(view2,mTtbvSort,mTtbvSort.getWidth(),height);
-                mLinearSortNameChosePrice.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                    }
-                });
-                mTvSortName.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        showType(false);
-                        getPresenter().priceComfirm();
-                    }
-                });
                 break;
         }
 
 
 
+    }
+
+    /**
+     * 初始化筛选的界面
+     * @param view2
+     */
+    private void initChose(View view2) {
+        RecyclerView rvSortChose = (RecyclerView) view2.findViewById(R.id.rv_pp_sort_name_chose);
+        initRvSortChose(rvSortChose);
+        TextView mTvSortNameClear = (TextView) view2.findViewById(R.id.tv_sort_name_clear);
+        TextView mTvSortNameComfirm = (TextView) view2.findViewById(R.id.tv_sort_name_comfirm);
+        mTvSortNameClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getPresenter().clearChose();
+            }
+        });
+        mTvSortNameComfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getPresenter().comfirmChose();
+            }
+        });
+
+    }
+
+    /**
+     * 初始化筛选的条件界面
+     * @param view2
+     */
+    private void initChoseType(View view2) {
+        mEtNameStart = (EditText) view2.findViewById(R.id.et_pp_sort_name_start);
+        mEtNameEnd = (EditText) view2.findViewById(R.id.et_pp_sort_name_end);
+        mTvSortName = (TextView) view2.findViewById(R.id.tv_pp_sort_name);
+        mLinearSortNameChose = (LinearLayout) view2.findViewById(R.id.linear_sort_name_shaixuan);
+        mLinearSortNameChoseType = (LinearLayout) view2.findViewById(R.id.linear_sort_name_shaixuan_type);
+        mLinearSortNameChosePrice = (LinearLayout) view2.findViewById(R.id.linear_pp_sort_name_price);
+        mRvSortType = (RecyclerView) view2.findViewById(R.id.rv_pp_sort_name_type);
+        mRvSortType.addItemDecoration(new DividerItemDecoration(getmActivity(),DividerItemDecoration.VERTICAL_LIST));
+
+        mLinearSortNameChosePrice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        mTvSortName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showType(false);
+                getPresenter().priceComfirm();
+            }
+        });
     }
 
     /**
@@ -236,8 +275,6 @@ public class SortFragment extends BaseFragment<SortContract.Presenter> implement
         }
 
     }
-
-
 
 
     /**

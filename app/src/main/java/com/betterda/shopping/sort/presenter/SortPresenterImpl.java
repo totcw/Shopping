@@ -28,12 +28,12 @@ import java.util.jar.Manifest;
 
 public class SortPresenterImpl extends BasePresenter<SortContract.View, SortContract.Model> implements SortContract.Presenter {
     private CommonAdapter<Sort> mSortAdapter;
-    private List<Sort> mSortList; //类别的容器
     private CommonAdapter<String> mNameAdapter;
-    private List<String> mNameList, mNameLoadList; //商品的容器
+    private CommonAdapter<Chose> mChoseAdapter;
     HeaderAndFooterRecyclerViewAdapter adapter;
 
-    private CommonAdapter<Chose> mChoseAdapter;
+    private List<Sort> mSortList; //类别的容器
+    private List<String> mNameList, mNameLoadList; //商品的容器
     private List<Chose> mChoseList;//存放筛选的容器
     private HashMap<String, List<Type>> map; //存放筛选条件的map
 
@@ -223,6 +223,26 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
 
 
     /**
+     * 刷新筛选的rv的数据
+     *
+     * @param type 品牌 传入null 表示要清空
+     * @param s
+     */
+    private void refreshChoseRecycleview(String type, String s) {
+        for (Chose chose : mChoseList) {
+            if (type != null) {
+                if (type.equals(chose.getType())) {
+                    chose.setName(s);
+                    break;
+                }
+            } else {
+                chose.setName(s);
+            }
+        }
+        mChoseAdapter.notifyDataSetChanged();
+    }
+
+    /**
      * 加载更多
      */
     @Override
@@ -255,21 +275,6 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
     }
 
 
-    /**
-     * 刷出筛选的rv的数据
-     *
-     * @param type 品牌
-     * @param s
-     */
-    private void refreshChoseRecycleview(String type, String s) {
-        for (Chose chose : mChoseList) {
-            if (type.equals(chose.getType())) {
-                chose.setName(s);
-                break;
-            }
-        }
-        mChoseAdapter.notifyDataSetChanged();
-    }
 
     /**
      * 根据筛选的类型 来设置type的rv的数据
@@ -307,7 +312,9 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
 
     }
 
-
+    /**
+     * 情况数据
+     */
     @Override
     public void clear() {
         if (map != null) {
@@ -331,6 +338,23 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
         String stratPrice = getView().getStratPrice();
         String endPrice = getView().getEndPrice();
         refreshChoseRecycleview("价格", stratPrice+"-"+endPrice+"元");
+    }
+
+    /**
+     * 清空筛选
+     */
+    @Override
+    public void clearChose() {
+        refreshChoseRecycleview(null,"全部");
+
+    }
+
+    /**
+     * 确认筛选
+     */
+    @Override
+    public void comfirmChose() {
+
     }
 
 

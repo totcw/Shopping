@@ -6,7 +6,7 @@ package com.betterda.shopping.sort.model;
  */
 
 public class Chose {
-    private String type; //类型
+    private String type; //类型 品牌,价格
     private String name; //选中的名字
 
     public String getType() {
