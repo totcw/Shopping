@@ -69,7 +69,7 @@ public class SortFragment extends BaseFragment<SortContract.Presenter> implement
     private TextView mTvSortName;
 
     /**
-     * popuwindow筛选界面相关的view
+     * popuwindow筛选界面相关的vi ew
      */
 
 
