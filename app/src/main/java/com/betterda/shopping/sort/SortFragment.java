@@ -291,5 +291,15 @@ public class SortFragment extends BaseFragment<SortContract.Presenter> implement
 
     }
 
+    @Override
+    public String getStratPrice() {
+        return mEtNameStart.getText().toString().trim();
+    }
+
+    @Override
+    public String getEndPrice() {
+        return mEtNameEnd.getText().toString().trim();
+    }
+
 
 }

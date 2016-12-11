@@ -30,6 +30,10 @@ public interface View extends IView{
      * 显示筛选popupwindow的条件界面
      */
     void showType(boolean isShow);
+
+    String getStratPrice();
+
+    String getEndPrice();
 }
 
 public interface Presenter extends IPresenter<View>{

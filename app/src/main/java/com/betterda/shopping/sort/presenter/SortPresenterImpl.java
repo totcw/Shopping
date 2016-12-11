@@ -322,10 +322,15 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
 
     }
 
+    /**
+     * 价格的确认按钮
+     */
     @Override
     public void priceComfirm() {
         refreshTypeState(null, "价格");
-        refreshChoseRecycleview("价格", "100");
+        String stratPrice = getView().getStratPrice();
+        String endPrice = getView().getEndPrice();
+        refreshChoseRecycleview("价格", stratPrice+"-"+endPrice+"元");
     }
 
 

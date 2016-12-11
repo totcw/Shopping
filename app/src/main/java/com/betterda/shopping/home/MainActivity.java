@@ -38,6 +38,7 @@ public class MainActivity extends BaseActivity<HomeContract.Presenter> implement
     public void initView() {
         super.initView();
         setContentView(R.layout.activity_main);
+
     }
 
     @Override
