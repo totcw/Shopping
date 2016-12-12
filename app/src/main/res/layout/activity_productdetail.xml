@@ -25,11 +25,12 @@
                 app:ratio="2">
 
                 <ImageView
+                   android:src="@mipmap/banner3"
                     android:id="@+id/iv_productdetail_logo"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="fitXY"
-                    android:src="@mipmap/viewpager_zwt" />
+                     />
 
             </com.betterda.mylibrary.view.RatioLayout>
 
@@ -193,8 +194,17 @@
 
     </com.betterda.shopping.widget.GradationScrollView>
 
-    <RelativeLayout
+    <LinearLayout
 
+        android:id="@+id/linear"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"></View>
+    <RelativeLayout
         android:id="@+id/relative_productdetail_title"
         android:layout_width="match_parent"
         android:layout_height="40dp">
@@ -203,7 +213,7 @@
             android:id="@+id/ib_productdetail_back"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_centerVertical="true"
+
             android:background="@null"
 
             android:src="@mipmap/back" />
@@ -212,15 +222,16 @@
             android:id="@+id/tv_productdetail_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
+
             android:background="#00000000"
             android:gravity="center"
             android:text="商品详情"
             android:textColor="#00000000"
             android:textSize="18sp" />
     </RelativeLayout>
-
+    </LinearLayout>
     <LinearLayout
+
         android:layout_alignParentBottom="true"
         android:orientation="vertical"
         android:layout_width="match_parent"
