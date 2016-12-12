@@ -67,7 +67,18 @@
                     </android.support.v7.widget.RecyclerView>
                 </LinearLayout>
 
+                <FrameLayout
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_gravity="bottom|right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <include layout="@layout/layout_bus"></include>
+
+                </FrameLayout>
+
                 <com.betterda.mylibrary.LoadingPager
+
                     android:id="@+id/loadpager_fragment_sort_name"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">

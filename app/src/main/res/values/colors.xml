@@ -9,4 +9,5 @@
     <color name="divierLine">#dcdcdc</color>
     <color name="sortGray">#7b7b7b</color>
     <color name="sortBlue">#00aaee</color>
+    <color name="transparent">#00000000</color>
 </resources>

@@ -19,6 +19,7 @@ import com.betterda.mylibrary.view.LoadingFooter;
 import com.betterda.shopping.R;
 import com.betterda.shopping.base.BaseFragment;
 import com.betterda.shopping.home.MainActivity;
+import com.betterda.shopping.productdetails.ProductDetailActivity;
 import com.betterda.shopping.sort.contract.SortContract;
 import com.betterda.shopping.sort.presenter.SortPresenterImpl;
 import com.betterda.shopping.utils.UiUtils;
@@ -56,6 +57,10 @@ public class SortFragment extends BaseFragment<SortContract.Presenter> implement
     LoadingPager mLoadPagerSortName;
     @BindView(R.id.loadpager_fragment_sort)
     LoadingPager mLoadPagerSort;
+    @BindView(R.id.relative_layout_bus)
+    RelativeLayout mRelativeBus;
+    @BindView(R.id.tv_layout_bus)
+    TextView mTvBus;
 
     /**
      * popuwindow筛选条件界面的相关view
@@ -67,11 +72,6 @@ public class SortFragment extends BaseFragment<SortContract.Presenter> implement
     private EditText mEtNameStart;
     private EditText mEtNameEnd;
     private TextView mTvSortName;
-
-    /**
-     * popuwindow筛选界面相关的vi ew
-     */
-
 
 
     private int pressNum = -1;//用来判断点击的是排序还是筛选
@@ -99,13 +99,12 @@ public class SortFragment extends BaseFragment<SortContract.Presenter> implement
     }
 
 
-
-    @OnClick({R.id.et_search, R.id.mfiv_twotool_fist, R.id.mfiv_twotool_second,R.id.linear_fragment_sort})
+    @OnClick({R.id.et_search, R.id.mfiv_twotool_fist, R.id.mfiv_twotool_second, R.id.linear_fragment_sort,R.id.relative_layout_bus})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.et_search://搜索
                 if (!close()) {
-                    UiUtils.showToast(getmActivity(),"搜索");
+                    UiUtils.showToast(getmActivity(), "搜索");
                 }
                 break;
             case R.id.mfiv_twotool_fist: //全部排序
@@ -117,6 +116,12 @@ public class SortFragment extends BaseFragment<SortContract.Presenter> implement
             case R.id.linear_fragment_sort://类别的rv
                 close();
                 break;
+            case R.id.relative_layout_bus://购物车
+                if (!close()) {
+                    UiUtils.startIntent(getmActivity(), ProductDetailActivity.class);
+                }
+                mTvBus.setVisibility(View.VISIBLE);
+                break;
 
         }
     }
@@ -124,14 +129,17 @@ public class SortFragment extends BaseFragment<SortContract.Presenter> implement
 
     /**
      * 初始化类别rv
+     *
      * @param adapter
      */
     public void initRvSortSort(RecyclerView.Adapter adapter) {
         mRvSortSort.setLayoutManager(new LinearLayoutManager(getmActivity()));
         mRvSortSort.setAdapter(adapter);
     }
+
     /**
      * 初始化商品的rv
+     *
      * @param adapter
      */
     public void initRvSortName(RecyclerView.Adapter adapter) {
@@ -144,7 +152,7 @@ public class SortFragment extends BaseFragment<SortContract.Presenter> implement
                 return getPresenter().getPosition(position);
             }
         });
-        mRvSortName.addOnScrollListener(new EndlessRecyclerOnScrollListener(getmActivity()){
+        mRvSortName.addOnScrollListener(new EndlessRecyclerOnScrollListener(getmActivity()) {
             @Override
             public void onLoadNextPage(View view) {
                 super.onLoadNextPage(view);
@@ -155,17 +163,23 @@ public class SortFragment extends BaseFragment<SortContract.Presenter> implement
                     getPresenter().loadShopping();
                 }
             }
+
             @Override
             public void show(boolean isShow) {
                 super.show(isShow);
 
-                getPresenter().showShopping(isShow,mRvSortName);
+                getPresenter().showShopping(isShow, mRvSortName);
 
             }
         });
         mRvSortName.setAdapter(adapter);
     }
 
+    /**
+     * 选择排序或者筛选
+     *
+     * @param num
+     */
     private void choseSort(int num) {
         if (pressNum == num) {
             if (close()) {
@@ -177,39 +191,40 @@ public class SortFragment extends BaseFragment<SortContract.Presenter> implement
         pressNum = num;
         int idvHeight = ((MainActivity) getmActivity()).getmIdvShouye().getHeight();
         int screenHeight = UtilMethod.getHeight(getmActivity());
-        int height = screenHeight - idvHeight - mLinearSearch.getHeight() - mTtbvSort.getHeight()-UtilMethod.statusHeight(getmActivity());
+        int height = screenHeight - idvHeight - mLinearSearch.getHeight() - mTtbvSort.getHeight() - UtilMethod.statusHeight(getmActivity());
         switch (num) {
             case 0:
                 mTtbvSort.setFirstSelect(!mTtbvSort.isFirstSelected());
                 View view1 = getPpView(R.layout.pp_frament_sort_sort);
                 initRvSortNameSort(view1);
-                setUpPopupWindow(view1,mTtbvSort,mTtbvSort.getWidth(),height);
+                setUpPopupWindow(view1, mTtbvSort, mTtbvSort.getWidth(), height);
                 break;
             case 1:
                 mTtbvSort.setSecondSelect(!mTtbvSort.isSecondSelected());
                 View view2 = getPpView(R.layout.pp_fragment_sort_name);
                 initChose(view2);
                 initChoseType(view2);
-                setUpPopupWindow(view2,mTtbvSort,mTtbvSort.getWidth(),height);
+                setUpPopupWindow(view2, mTtbvSort, mTtbvSort.getWidth(), height);
                 break;
         }
-
 
 
     }
 
     /**
      * 初始化排序的rv
+     *
      * @param view1
      */
     private void initRvSortNameSort(View view1) {
         RecyclerView rvSortNameSort = (RecyclerView) view1.findViewById(R.id.rv_pp_sort_name_sort);
-        rvSortNameSort.setLayoutManager(new GridLayoutManager(getmActivity(),3));
+        rvSortNameSort.setLayoutManager(new GridLayoutManager(getmActivity(), 3));
         rvSortNameSort.setAdapter(getPresenter().getRvSortNameSortAdapter());
     }
 
     /**
      * 初始化筛选的界面
+     *
      * @param view2
      */
     private void initChose(View view2) {
@@ -234,6 +249,7 @@ public class SortFragment extends BaseFragment<SortContract.Presenter> implement
 
     /**
      * 初始化筛选的条件界面
+     *
      * @param view2
      */
     private void initChoseType(View view2) {
@@ -244,7 +260,7 @@ public class SortFragment extends BaseFragment<SortContract.Presenter> implement
         mLinearSortNameChoseType = (LinearLayout) view2.findViewById(R.id.linear_sort_name_shaixuan_type);
         mLinearSortNameChosePrice = (LinearLayout) view2.findViewById(R.id.linear_pp_sort_name_price);
         mRvSortType = (RecyclerView) view2.findViewById(R.id.rv_pp_sort_name_type);
-        mRvSortType.addItemDecoration(new DividerItemDecoration(getmActivity(),DividerItemDecoration.VERTICAL_LIST));
+        mRvSortType.addItemDecoration(new DividerItemDecoration(getmActivity(), DividerItemDecoration.VERTICAL_LIST));
 
         mLinearSortNameChosePrice.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -263,17 +279,19 @@ public class SortFragment extends BaseFragment<SortContract.Presenter> implement
 
     /**
      * 初始化筛选的rv
+     *
      * @param rvSortChose
      */
     private void initRvSortChose(RecyclerView rvSortChose) {
         rvSortChose.setLayoutManager(new LinearLayoutManager(getmActivity()));
         rvSortChose.setAdapter(getPresenter().getRvSortChoseAdapter());
-        rvSortChose.addItemDecoration(new DividerItemDecoration(getmActivity(),DividerItemDecoration.VERTICAL_LIST));
+        rvSortChose.addItemDecoration(new DividerItemDecoration(getmActivity(), DividerItemDecoration.VERTICAL_LIST));
 
     }
 
     /**
      * 初始化筛选界面的条件rv
+     *
      * @param type
      */
     public void initRvSortType(String type) {
@@ -290,6 +308,7 @@ public class SortFragment extends BaseFragment<SortContract.Presenter> implement
 
     /**
      * 获取popupwindow的view
+     *
      * @return
      */
     @NonNull
@@ -328,13 +347,16 @@ public class SortFragment extends BaseFragment<SortContract.Presenter> implement
         return false;
     }
 
+    /**
+     * 显示筛选popupwindow的条件界面
+     */
     @Override
     public void showType(boolean isShow) {
         if (mLinearSortNameChose != null) {
-            mLinearSortNameChose.setVisibility(isShow?View.INVISIBLE:View.VISIBLE);
+            mLinearSortNameChose.setVisibility(isShow ? View.INVISIBLE : View.VISIBLE);
         }
         if (mLinearSortNameChoseType != null) {
-            mLinearSortNameChoseType.setVisibility(isShow?View.VISIBLE:View.INVISIBLE);
+            mLinearSortNameChoseType.setVisibility(isShow ? View.VISIBLE : View.INVISIBLE);
         }
 
     }
