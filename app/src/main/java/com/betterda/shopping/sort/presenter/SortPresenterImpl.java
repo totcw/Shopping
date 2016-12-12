@@ -1,6 +1,7 @@
 package com.betterda.shopping.sort.presenter;
 
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -12,6 +13,7 @@ import com.betterda.shopping.base.BasePresenter;
 import com.betterda.shopping.sort.contract.SortContract;
 import com.betterda.shopping.sort.model.Chose;
 import com.betterda.shopping.sort.model.Sort;
+import com.betterda.shopping.sort.model.SortModelImpl;
 import com.betterda.shopping.sort.model.Type;
 import com.zhy.base.adapter.ViewHolder;
 import com.zhy.base.adapter.recyclerview.CommonAdapter;
@@ -30,9 +32,11 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
     private CommonAdapter<Sort> mSortAdapter;
     private CommonAdapter<String> mNameAdapter;
     private CommonAdapter<Chose> mChoseAdapter;
+    private CommonAdapter<Sort> mSortPAdapter;
     HeaderAndFooterRecyclerViewAdapter adapter;
 
     private List<Sort> mSortList; //类别的容器
+    private List<Sort> mSortPList; //排序的容器
     private List<String> mNameList, mNameLoadList; //商品的容器
     private List<Chose> mChoseList;//存放筛选的容器
     private HashMap<String, List<Type>> map; //存放筛选条件的map
@@ -40,6 +44,7 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
 
     @Override
     public void start() {
+        attachModel(new SortModelImpl());
         initSortRecycleview();
         initNameRecycleview();
         getData();
@@ -123,6 +128,7 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
 
                 holder.setText(R.id.tv_pp_shaixuan, s.getType());
                 holder.setText(R.id.tv_pp_shaixuan_name, s.getName());
+
                 holder.setOnClickListener(R.id.linear_pp_shaixuan, new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -152,6 +158,7 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
             public void convert(final ViewHolder holder, final Type s) {
 
                 holder.setText(R.id.tv_pp_shaixuan_type, s.getName());
+                setTextColor(s.isSelect(),holder,R.id.tv_pp_shaixuan_type,R.color.activityMainPressed,R.color.shouye_fenlei_red);
                 holder.setVisible(R.id.iv_pp_shaixuan_type_gou, s.isSelect());
 
                 holder.setOnClickListener(R.id.linear_pp_shaixuan_type, new View.OnClickListener() {
@@ -166,6 +173,36 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
         };
 
         return adapter;
+    }
+
+    /**
+     * 初始化排序的适配器
+     *
+     * @return
+     */
+    @Override
+    public RecyclerView.Adapter getRvSortNameSortAdapter() {
+        if (mSortPList == null) {
+            mSortPList = new ArrayList<>();
+            getModel().addSort(mSortPList);
+        }
+        mSortPAdapter = new CommonAdapter<Sort>(getView().getmActivity(), R.layout.item_rv_pp_sort, mSortPList) {
+            @Override
+            public void convert(final ViewHolder holder, Sort s) {
+                holder.setText(R.id.tv_item_sort_sort_p, s.getSortName());
+                setTextColor(s.isSelect(),holder,R.id.tv_item_sort_sort_p,R.color.activityMainPressed,R.color.sortBlue);
+                holder.setOnClickListener(R.id.linear_pp_sort, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        getModel().clear(mSortPList,holder.getAdapterPosition());
+                        getView().close();
+                       // mSortPAdapter.notifyDataSetChanged();
+                    }
+                });
+            }
+        };
+
+        return mSortPAdapter;
     }
 
 
@@ -185,6 +222,22 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
 
 
     }
+
+    /**
+     * 设置文字的颜色
+     * @param select
+     * @param holder
+     * @param activityMainPressed
+     * @param sortBlue
+     */
+    private void setTextColor(boolean select, ViewHolder holder, int id,int activityMainPressed, int sortBlue) {
+        if (select) {
+            holder.setTextColor(id, getView().getmActivity().getResources().getColor(sortBlue));
+        } else {
+            holder.setTextColor(id, getView().getmActivity().getResources().getColor(activityMainPressed));
+        }
+    }
+
 
     /**
      * 刷新类别的选中状态
@@ -312,32 +365,18 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
 
     }
 
-    /**
-     * 情况数据
-     */
-    @Override
-    public void clear() {
-        if (map != null) {
-            map.clear();
-            map = null;
-        }
-
-        if (mChoseList != null) {
-            mChoseList.clear();
-            mChoseList = null;
-        }
-
-    }
 
     /**
      * 价格的确认按钮
      */
     @Override
     public void priceComfirm() {
-        refreshTypeState(null, "价格");
         String stratPrice = getView().getStratPrice();
         String endPrice = getView().getEndPrice();
-        refreshChoseRecycleview("价格", stratPrice+"-"+endPrice+"元");
+        if (!TextUtils.isEmpty(stratPrice) && !TextUtils.isEmpty(endPrice)) {
+            refreshTypeState(null, "价格");
+            refreshChoseRecycleview("价格", stratPrice + "-" + endPrice + "元");
+        }
     }
 
     /**
@@ -357,6 +396,22 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
 
     }
 
+    /**
+     * 清空筛选条件数据
+     */
+    @Override
+    public void clear() {
+        if (map != null) {
+            map.clear();
+            map = null;
+        }
+
+     /*   if (mChoseList != null) {
+            mChoseList.clear();
+            mChoseList = null;
+        }*/
+
+    }
 
     @Override
     public void destroy() {

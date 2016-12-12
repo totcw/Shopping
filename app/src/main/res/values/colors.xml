@@ -8,4 +8,5 @@
     <color name="fragmentSortGrayBg">#f1f1f1</color>
     <color name="divierLine">#dcdcdc</color>
     <color name="sortGray">#7b7b7b</color>
+    <color name="sortBlue">#00aaee</color>
 </resources>

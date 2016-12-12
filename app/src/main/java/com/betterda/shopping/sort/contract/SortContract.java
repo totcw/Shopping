@@ -6,6 +6,12 @@ import android.view.View;
 import com.betterda.shopping.base.IModel;
 import com.betterda.shopping.base.IPresenter;
 import com.betterda.shopping.base.IView;
+import com.betterda.shopping.sort.model.Sort;
+import com.betterda.shopping.sort.model.Type;
+
+import java.util.List;
+
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
 
 /**
  * Created by Administrator on 2016/12/8.
@@ -68,6 +74,12 @@ public interface Presenter extends IPresenter<View>{
     RecyclerView.Adapter getRvSortTypeAdapter(String type);
 
     /**
+     * 获取排序的rv的适配器
+     * @return
+     */
+    RecyclerView.Adapter getRvSortNameSortAdapter();
+
+    /**
      * 情况数据
      */
     void clear();
@@ -83,9 +95,17 @@ public interface Presenter extends IPresenter<View>{
      * 筛选的确认
      */
     void comfirmChose();
+
 }
 
 public interface Model extends IModel{
+    /**
+     * 给排序,类别的容器添加数据
+     * @param list
+     */
+    void  addSort(List<Sort> list);
+
+    void clear(List<Sort> mSortList, int adapterPosition);
 }
 
 

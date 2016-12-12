@@ -182,6 +182,7 @@ public class SortFragment extends BaseFragment<SortContract.Presenter> implement
             case 0:
                 mTtbvSort.setFirstSelect(!mTtbvSort.isFirstSelected());
                 View view1 = getPpView(R.layout.pp_frament_sort_sort);
+                initRvSortNameSort(view1);
                 setUpPopupWindow(view1,mTtbvSort,mTtbvSort.getWidth(),height);
                 break;
             case 1:
@@ -195,6 +196,16 @@ public class SortFragment extends BaseFragment<SortContract.Presenter> implement
 
 
 
+    }
+
+    /**
+     * 初始化排序的rv
+     * @param view1
+     */
+    private void initRvSortNameSort(View view1) {
+        RecyclerView rvSortNameSort = (RecyclerView) view1.findViewById(R.id.rv_pp_sort_name_sort);
+        rvSortNameSort.setLayoutManager(new GridLayoutManager(getmActivity(),3));
+        rvSortNameSort.setAdapter(getPresenter().getRvSortNameSortAdapter());
     }
 
     /**

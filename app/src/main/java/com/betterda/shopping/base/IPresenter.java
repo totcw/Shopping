@@ -15,6 +15,7 @@ public interface IPresenter<T> {
 
     void detachView();
 
+
     void start();
 
     void destroy();

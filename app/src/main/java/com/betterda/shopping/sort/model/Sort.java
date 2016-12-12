@@ -1,12 +1,21 @@
 package com.betterda.shopping.sort.model;
 
 /**
+ * 类别
  * Created by Administrator on 2016/12/8.
  */
 
 public class Sort {
-    private String sortName;
+    private String sortName; //商品名
     private boolean isSelect;
+
+    public Sort(String sortName, boolean isSelect) {
+        this.sortName = sortName;
+        this.isSelect = isSelect;
+    }
+
+    public Sort() {
+    }
 
     public String getSortName() {
         return sortName;

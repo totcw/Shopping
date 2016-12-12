@@ -22,6 +22,10 @@ public abstract class BasePresenter<T extends IView,M extends IModel> implements
         mView = null;
     }
 
+    public void attachModel(M mModel) {
+        this.mModel = mModel;
+    }
+
     public boolean isViewAttached() {
         return mView != null;
     }
