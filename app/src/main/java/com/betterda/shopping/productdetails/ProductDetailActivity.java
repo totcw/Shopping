@@ -2,10 +2,10 @@ package com.betterda.shopping.productdetails;
 
 import android.graphics.Color;
 import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -13,11 +13,14 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.betterda.mylibrary.Utils.StatusBarCompat;
+import com.betterda.mylibrary.LoadingPager;
+import com.betterda.mylibrary.view.RatioLayout;
 import com.betterda.shopping.R;
 import com.betterda.shopping.base.BaseActivity;
 import com.betterda.shopping.productdetails.contract.ProductDetailContract;
+import com.betterda.shopping.utils.UiUtils;
 import com.betterda.shopping.utils.UtilMethod;
+import com.betterda.shopping.widget.AddAndSub;
 import com.betterda.shopping.widget.GradationScrollView;
 
 import butterknife.BindView;
@@ -49,12 +52,18 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailContract.Pr
     LinearLayout linear;
     @BindView(R.id.view)
     View viewL;
+    @BindView(R.id.ratio_productdetail)
+    RatioLayout mRatioLayout;
+    @BindView(R.id.aas_productdetail)
+    AddAndSub mAddAndSub;
+    @BindView(R.id.loadpager_productdetail)
+    LoadingPager mLoadingPager;
 
-    private int height;
-    private int height2;
-    private int height3;
-    private int mScreenHeight;
-    private boolean isFirst;
+    private int height; //logo图片的高度
+    private int height2; //标题栏的高度
+    private int height3;//内容的实际高度
+    private int mScreenHeight;//屏幕的高度
+    private boolean isFirst; //用来判断只设置重新设置一次内容的高度
 
     @Override
     protected ProductDetailContract.Presenter onLoadPresenter() {
@@ -65,42 +74,24 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailContract.Pr
     public void initView() {
         super.initView();
         setContentView(R.layout.activity_productdetail);
-
     }
 
     @Override
     public void init() {
         super.init();
-        //1. 首先将手机手机状态栏透明化：
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {//5.0及以上
-            View decorView = getWindow().getDecorView();
-            int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
-            decorView.setSystemUiVisibility(option);
-            getWindow().setStatusBarColor(Color.TRANSPARENT);
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            layoutParams.height = UtilMethod.statusHeight(getmActivity());
-            viewL.setLayoutParams(layoutParams);
-
-
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {//4.4到5.0
-            WindowManager.LayoutParams localLayoutParams = getWindow().getAttributes();
-            localLayoutParams.flags = (WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | localLayoutParams.flags);
-        }
-
-        mScreenHeight = UtilMethod.getHeight(getmActivity());
+        setStatusBar();
+        mLoadingPager.setLoadVisable();
 
     }
 
     @Override
     public void initListener() {
         super.initListener();
-        ViewTreeObserver vto = mIvProductdetailLogo.getViewTreeObserver();
+        ViewTreeObserver vto = mRatioLayout.getViewTreeObserver();
         vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
-                height = mIvProductdetailLogo.getHeight();
+                height = mRatioLayout.getHeight();
                 mSvProductdetail.setScrollViewListener(ProductDetailActivity.this);
             }
         });
@@ -118,9 +109,10 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailContract.Pr
             @Override
             public void onGlobalLayout() {
                 height3 = mLinearProductdetailContent.getHeight();
-                if (height != 0&&height2!=0) {
+                if (height != 0 && height2 != 0) {
                     if (!isFirst) {
-                        int h = mScreenHeight - height3 + height-height2;
+                        //保证只重新设置一次
+                        int h = mScreenHeight - height3 + height - height2;
                         if (h > 0) {
                             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
                             params.height = h;
@@ -143,36 +135,67 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailContract.Pr
         }
     }
 
+
+    /**
+     * 设置5.0以上的着色状态栏
+     */
+    private void setStatusBar() {
+        //1. 首先将手机手机状态栏透明化：
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {//5.0及以上
+            View decorView = getWindow().getDecorView();
+            int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+            decorView.setSystemUiVisibility(option);
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
+            //设置view的高度为状态栏的高度,这样标题栏才不会置顶
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            layoutParams.height = UtilMethod.statusHeight(getmActivity());
+            viewL.setLayoutParams(layoutParams);
+            //获取屏幕的高度
+            mScreenHeight = UtilMethod.getHeight(getmActivity());
+        } else {
+            //5.0一下因为没有使用着色状态栏,要减去状态栏的高度
+            mScreenHeight = UtilMethod.getHeight(getmActivity()) - UtilMethod.statusHeight(getmActivity());
+        }
+    }
+
+    /**
+     * scrollivew滑动的监听
+     *
+     * @param scrollView
+     * @param x
+     * @param y
+     * @param oldx
+     * @param oldy
+     */
+
     @Override
     public void onScrollChanged(GradationScrollView scrollView, int x, int y, int oldx, int oldy) {
-
-        if (y <= 0) {   //设置标题的背景颜色
-            mRelativeProductdetailTitle.setBackgroundColor(Color.argb( 0, 255, 255, 255));
-            viewL.setBackgroundColor(Color.argb( 0, 255, 255, 255));
-
-            com.betterda.mylibrary.Utils.StatusBarCompat.setStatusBar5(getmActivity(),R.color.transparent);
-        } else if (y > 0 && y <= height - height2) { //滑动距离小于banner图的高度时，设置背景和字体颜色颜色透明度渐变
-
+        //设置状态栏透明
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(getResources().getColor(R.color.transparent));
+        }
+        if (y <= 0) {
+            //设置标题的背景颜色透明
+            mRelativeProductdetailTitle.setBackgroundColor(Color.argb(0, 255, 255, 255));
+            viewL.setBackgroundColor(Color.argb(0, 255, 255, 255));
+        } else if (y > 0 && y <= height - height2) {
+            //滑动距离小于logo图的高度时，设置背景和字体颜色颜色透明度渐变
             float scale = (float) y / (height - height2);
             float alpha = (255 * scale);
             mTvProductdetailTitle.setTextColor(Color.argb((int) alpha, 144, 151, 166));
             mRelativeProductdetailTitle.setBackgroundColor(Color.argb((int) alpha, 255, 255, 255));
             viewL.setBackgroundColor(Color.argb((int) alpha, 255, 255, 255));
+            //当滑动高度等于logo图片的高度时,view的背景设置透明
             if (y == height - height2) {
                 viewL.setBackgroundColor(Color.argb(0, 255, 255, 255));
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-
-                    com.betterda.mylibrary.Utils.StatusBarCompat.setStatusBar5(getmActivity(), R.color.bg_color);
-                    // getWindow().setStatusBarColor(getResources().getColor(R.color.white));
+                    getWindow().setStatusBarColor(getResources().getColor(R.color.white));
                 }
-            } else {
-                com.betterda.mylibrary.Utils.StatusBarCompat.setStatusBar5(getmActivity(),R.color.transparent);
             }
 
-
-        } else {    //滑动到banner下面设置普通颜色
-            com.betterda.mylibrary.Utils.StatusBarCompat.setStatusBar5(getmActivity(),R.color.transparent);
-            // relatview.setBackgroundColor(Color.argb( 255, 144,151,166));
+        } else {
+            //滑动到banner下面设置普通颜色
             mRelativeProductdetailTitle.setBackgroundColor(Color.argb(255, 255, 255, 255));
             viewL.setBackgroundColor(Color.argb(255, 255, 255, 255));
         }

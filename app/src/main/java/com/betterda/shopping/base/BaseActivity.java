@@ -10,6 +10,7 @@ import android.util.Log;
 import com.betterda.mylibrary.Utils.StatusBarCompat;
 import com.betterda.shopping.R;
 import com.betterda.shopping.utils.RxManager;
+import com.betterda.shopping.utils.UiUtils;
 
 import butterknife.ButterKnife;
 
@@ -31,7 +32,7 @@ public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivi
         mRxManager = new RxManager();
 
         mPresenter = onLoadPresenter();
-        if(getPresenter() != null) {
+        if (getPresenter() != null) {
             getPresenter().attachView(this);
         }
 
@@ -40,13 +41,11 @@ public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivi
         initListener();
         init();
 
-        if(getPresenter() != null) {
+        if (getPresenter() != null) {
             //开始presenter的逻辑
             getPresenter().start();
         }
     }
-
-
 
 
     /**
@@ -78,6 +77,7 @@ public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivi
 
     /**
      * 加载presenter
+     *
      * @return
      */
     protected abstract P onLoadPresenter();
@@ -86,12 +86,9 @@ public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivi
      * 关闭activity的方法
      */
     public void back() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-          finishAfterTransition();
-        } else {
-            finish();
-             overridePendingTransition(R.anim.activity_slide_finish_in,R.anim.activity_slide_finish_out);
-        }
+        finish();
+        UiUtils.setOverdepengingOut(getmActivity());
+
     }
 
 
@@ -107,6 +104,11 @@ public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivi
         Log.i("BaseActivity", msg);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        UiUtils.setOverdepengingOut(this);
+    }
 
     @Override
     protected void onDestroy() {
@@ -120,5 +122,6 @@ public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivi
         mRxManager.clear();
         super.onDestroy();
     }
+
 
 }

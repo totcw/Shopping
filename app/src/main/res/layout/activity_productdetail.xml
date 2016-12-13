@@ -15,33 +15,33 @@
         <LinearLayout
             android:id="@+id/linear_productdetail_content"
             android:layout_width="match_parent"
+
             android:layout_height="match_parent"
             android:orientation="vertical">
 
             <com.betterda.mylibrary.view.RatioLayout
-
+                android:background="@color/bg_gray"
+                android:id="@+id/ratio_productdetail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:ratio="2">
+                app:ratio="1">
 
                 <ImageView
-                   android:src="@mipmap/banner3"
                     android:id="@+id/iv_productdetail_logo"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="fitXY"
-                     />
+                    android:src="@mipmap/banner3" />
 
             </com.betterda.mylibrary.view.RatioLayout>
 
             <LinearLayout
-                android:paddingTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="10dp"
                 android:paddingLeft="12dp"
                 android:paddingRight="12dp"
-               >
+                android:paddingTop="10dp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -86,17 +86,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:gravity="center_vertical"
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp">
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="12dp"
-
                     android:text="数量"
                     android:textColor="@color/sortGray"
                     android:textSize="14sp" />
+
+                <com.betterda.shopping.widget.AddAndSub
+                    android:id="@+id/aas_productdetail"
+                    android:layout_marginLeft="12dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </com.betterda.shopping.widget.AddAndSub>
+
             </LinearLayout>
 
             <LinearLayout
@@ -197,116 +205,120 @@
     <LinearLayout
 
         android:id="@+id/linear"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
         <View
             android:id="@+id/view"
             android:layout_width="match_parent"
             android:layout_height="0dp"></View>
-    <RelativeLayout
-        android:id="@+id/relative_productdetail_title"
-        android:layout_width="match_parent"
-        android:layout_height="40dp">
 
-        <ImageButton
-            android:id="@+id/ib_productdetail_back"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-
-            android:background="@null"
-
-            android:src="@mipmap/back" />
-
-        <TextView
-            android:id="@+id/tv_productdetail_title"
+        <RelativeLayout
+            android:id="@+id/relative_productdetail_title"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp">
 
-            android:background="#00000000"
-            android:gravity="center"
-            android:text="商品详情"
-            android:textColor="#00000000"
-            android:textSize="18sp" />
-    </RelativeLayout>
+            <ImageButton
+                android:id="@+id/ib_productdetail_back"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:background="@null"
+
+                android:src="@mipmap/back" />
+
+            <TextView
+                android:id="@+id/tv_productdetail_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="#00000000"
+                android:gravity="center"
+                android:text="商品详情"
+                android:textColor="#00000000"
+                android:textSize="18sp" />
+        </RelativeLayout>
     </LinearLayout>
-    <LinearLayout
 
-        android:layout_alignParentBottom="true"
-        android:orientation="vertical"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/divierLine"
-            ></View>
+            android:background="@color/divierLine"></View>
 
         <LinearLayout
 
-            android:minHeight="48dp"
-            android:orientation="horizontal"
-            android:background="#ffffff"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            android:minHeight="48dp"
+            android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_marginTop="5dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:orientation="vertical"
+                android:layout_marginTop="5dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content">
+                android:orientation="vertical">
+
                 <ImageView
                     android:layout_width="23dp"
                     android:layout_height="18dp"
-                    android:background="@mipmap/bus_product"
-                    />
+                    android:background="@mipmap/bus_product" />
 
                 <TextView
-                    android:layout_marginTop="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
                     android:text="购物车"
-                    android:textSize="12sp"
                     android:textColor="@color/sortGray"
-                    />
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
             <View
                 android:layout_width="1dp"
-                android:background="@color/divierLine"
-                android:layout_height="match_parent"></View>
+                android:layout_height="match_parent"
+                android:background="@color/divierLine"></View>
 
             <TextView
                 android:layout_width="0dp"
-                android:layout_weight="2"
                 android:layout_height="match_parent"
-                android:text="加入购物车"
-                android:gravity="center"
-                android:textSize="17sp"
-                android:textColor="#ffffff"
+                android:layout_weight="2"
                 android:background="@drawable/shape_corner_red"
-                />
+                android:gravity="center"
+                android:text="加入购物车"
+                android:textColor="#ffffff"
+                android:textSize="17sp" />
 
             <TextView
                 android:layout_width="0dp"
-                android:layout_weight="2"
                 android:layout_height="match_parent"
-                android:text="立即购买"
-                android:gravity="center"
-                android:textSize="17sp"
-                android:textColor="@color/activityMainPressed"
+                android:layout_weight="2"
                 android:background="@drawable/shape_corner_yellow"
-                />
+                android:gravity="center"
+                android:text="立即购买"
+                android:textColor="@color/activityMainPressed"
+                android:textSize="17sp" />
 
         </LinearLayout>
 
 
     </LinearLayout>
 
+    <com.betterda.mylibrary.LoadingPager
+        android:id="@+id/loadpager_productdetail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+    </com.betterda.mylibrary.LoadingPager>
 
 </RelativeLayout>
