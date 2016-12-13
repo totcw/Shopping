@@ -21,7 +21,10 @@
         <activity
             android:screenOrientation="portrait"
             android:name=".productdetails.ProductDetailActivity">
-
+        </activity>
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".bus.BusActivity">
         </activity>
 
     </application>

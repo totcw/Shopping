@@ -17,6 +17,7 @@ import com.betterda.mylibrary.LoadingPager;
 import com.betterda.mylibrary.view.RatioLayout;
 import com.betterda.shopping.R;
 import com.betterda.shopping.base.BaseActivity;
+import com.betterda.shopping.bus.BusActivity;
 import com.betterda.shopping.productdetails.contract.ProductDetailContract;
 import com.betterda.shopping.utils.UiUtils;
 import com.betterda.shopping.utils.UtilMethod;
@@ -158,7 +159,7 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailContract.Pr
 
                 break;
             case R.id.linear_productdetail_bus://购物车
-
+                    UiUtils.startIntent(getmActivity(), BusActivity.class);
                 break;
             case R.id.tv_productdetail_add://加入购物车
 

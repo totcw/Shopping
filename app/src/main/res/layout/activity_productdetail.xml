@@ -20,7 +20,6 @@
             android:orientation="vertical">
 
             <com.betterda.mylibrary.view.RatioLayout
-                android:background="@color/bg_gray"
                 android:id="@+id/ratio_productdetail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -30,8 +29,8 @@
                     android:id="@+id/iv_productdetail_logo"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scaleType="fitXY"
-                    android:src="@mipmap/banner3" />
+                    android:scaleType="fitCenter"
+                    android:src="@mipmap/zwt" />
 
             </com.betterda.mylibrary.view.RatioLayout>
 

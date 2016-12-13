@@ -71,8 +71,8 @@ public class AddAndSub extends FrameLayout {
         String trim = mTextView.getText().toString().trim();
         try {
             int s = Integer.parseInt(trim)-amount;
-            if (s < 0) {
-                s = 0;
+            if (s < 1) {
+                s = 1;
             }
             mTextView.setText(s+"");
         } catch (Exception e) {
