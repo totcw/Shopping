@@ -16,6 +16,7 @@ import com.betterda.mylibrary.LoadingPager;
 import com.betterda.mylibrary.recycleviehelper.EndlessRecyclerOnScrollListener;
 import com.betterda.mylibrary.recycleviehelper.RecyclerViewStateUtils;
 import com.betterda.mylibrary.view.LoadingFooter;
+import com.betterda.mylibrary.xrecycleview.XRecyclerView;
 import com.betterda.shopping.R;
 import com.betterda.shopping.base.BaseFragment;
 import com.betterda.shopping.home.MainActivity;
@@ -50,7 +51,7 @@ public class SortFragment extends BaseFragment<SortContract.Presenter> implement
     @BindView(R.id.rv_fragment_sort_sort)
     RecyclerView mRvSortSort;
     @BindView(R.id.rv_fragment_sort_name)
-    RecyclerView mRvSortName;
+    XRecyclerView mRvSortName;
     @BindView(R.id.ttbv_fragmen_sort)
     TwoToolBarView mTtbvSort;
     @BindView(R.id.loadpager_fragment_sort_name)
@@ -120,7 +121,6 @@ public class SortFragment extends BaseFragment<SortContract.Presenter> implement
                 if (!close()) {
                     UiUtils.startIntent(getmActivity(), ProductDetailActivity.class);
                 }
-                mTvBus.setVisibility(View.VISIBLE);
                 break;
 
         }
@@ -145,30 +145,15 @@ public class SortFragment extends BaseFragment<SortContract.Presenter> implement
     public void initRvSortName(RecyclerView.Adapter adapter) {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getmActivity(), 2);
         mRvSortName.setLayoutManager(gridLayoutManager);
-        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+        mRvSortName.setLoadingMoreEnabled(true);
+        mRvSortName.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
-            public int getSpanSize(int position) {
-                //动态的改变当前positon 占几列
-                return getPresenter().getPosition(position);
-            }
-        });
-        mRvSortName.addOnScrollListener(new EndlessRecyclerOnScrollListener(getmActivity()) {
-            @Override
-            public void onLoadNextPage(View view) {
-                super.onLoadNextPage(view);
-                if (LoadingFooter.State.Normal == RecyclerViewStateUtils.getFooterViewState(mRvSortName)) {
-                    //设置为加载状态
-                    RecyclerViewStateUtils.setFooterViewState(getmActivity(), mRvSortName, LoadingFooter.State.Loading, null);
-                    //网络请求
-                    getPresenter().loadShopping();
-                }
+            public void onRefresh() {
+                mRvSortName.refreshComplete();
             }
 
             @Override
-            public void show(boolean isShow) {
-                super.show(isShow);
-
-                getPresenter().showShopping(isShow, mRvSortName);
+            public void onLoadMore() {
 
             }
         });
@@ -304,6 +289,38 @@ public class SortFragment extends BaseFragment<SortContract.Presenter> implement
         }
 
     }
+
+    /**
+     * 设置购物车是否可见
+     * @param visable
+     */
+    public void setBusVisable(boolean visable) {
+        mTvBus.setVisibility(visable?View.VISIBLE:View.GONE);
+    }
+
+    /**
+     * 增加购物车的数量
+     * @param amount
+     */
+    public void addBus(int amount) {
+        String trim = mTvBus.getText().toString().trim();
+        try {
+            int count = Integer.parseInt(trim) + amount;
+            mTvBus.setText(count+"");
+            setBusVisable(true);
+        } catch (Exception e) {
+
+        }
+    }
+
+    /**
+     * 获取购物车的数量
+     * @return
+     */
+    public String getBusText() {
+        return mTvBus.getText().toString().trim();
+    }
+
 
 
     /**

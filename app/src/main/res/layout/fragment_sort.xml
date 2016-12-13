@@ -58,13 +58,13 @@
                     </com.betterda.shopping.widget.TwoToolBarView>
 
 
-                    <android.support.v7.widget.RecyclerView
+                    <com.betterda.mylibrary.xrecycleview.XRecyclerView
                         android:id="@+id/rv_fragment_sort_name"
                         android:overScrollMode="never"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
-                    </android.support.v7.widget.RecyclerView>
+                    </com.betterda.mylibrary.xrecycleview.XRecyclerView>
                 </LinearLayout>
 
                 <FrameLayout

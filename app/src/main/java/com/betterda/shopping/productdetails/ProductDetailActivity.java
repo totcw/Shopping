@@ -48,16 +48,37 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailContract.Pr
     FrameLayout mFrameProductdetailContent;
     @BindView(R.id.linear_productdetail_content)
     LinearLayout mLinearProductdetailContent;
-    @BindView(R.id.linear)
-    LinearLayout linear;
-    @BindView(R.id.view)
-    View viewL;
+    @BindView(R.id.linear) //标题栏
+            LinearLayout linear;
+    @BindView(R.id.view) //标题栏 隐藏的view 5.0高度是0
+            View viewL;
     @BindView(R.id.ratio_productdetail)
     RatioLayout mRatioLayout;
     @BindView(R.id.aas_productdetail)
     AddAndSub mAddAndSub;
     @BindView(R.id.loadpager_productdetail)
     LoadingPager mLoadingPager;
+    @BindView(R.id.tv_productdetail_shopname)
+    TextView mTvShopName;
+    @BindView(R.id.tv_productdetail_spec)
+    TextView mTvSpec;
+    @BindView(R.id.tv_productdetail_price)
+    TextView mTvPrice;
+    @BindView(R.id.tv_productdetail_comment)
+    TextView mTvComment;
+    @BindView(R.id.tv_productdetail_commentrate)
+    TextView mTvCommentRate;//好评率
+    @BindView(R.id.tv_productdetail_add)
+    TextView mTvAdd;
+    @BindView(R.id.tv_productdetail_buy)
+    TextView mTvBuy;
+    @BindView(R.id.iv_productdetail_share)
+    ImageView mIvShare;
+    @BindView(R.id.linear_productdetail_bus)
+    LinearLayout mLinearBus;
+    @BindView(R.id.linear_productdetail_comment)
+    LinearLayout mLinearComment;//评价
+
 
     private int height; //logo图片的高度
     private int height2; //标题栏的高度
@@ -80,7 +101,7 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailContract.Pr
     public void init() {
         super.init();
         setStatusBar();
-        mLoadingPager.setLoadVisable();
+
 
     }
 
@@ -126,11 +147,27 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailContract.Pr
         });
     }
 
-    @OnClick(R.id.ib_productdetail_back)
+    @OnClick({R.id.ib_productdetail_back, R.id.linear_productdetail_comment, R.id.linear_productdetail_bus, R.id.tv_productdetail_buy,
+            R.id.tv_productdetail_add, R.id.iv_productdetail_share})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ib_productdetail_back:
                 back();
+                break;
+            case R.id.linear_productdetail_comment://评价
+
+                break;
+            case R.id.linear_productdetail_bus://购物车
+
+                break;
+            case R.id.tv_productdetail_add://加入购物车
+
+                break;
+            case R.id.iv_productdetail_share://分享
+
+                break;
+            case R.id.tv_productdetail_buy://购买
+
                 break;
         }
     }

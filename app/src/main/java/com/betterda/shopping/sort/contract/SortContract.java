@@ -43,22 +43,16 @@ public interface View extends IView{
     String getStratPrice();
 
     String getEndPrice();
+
+    String getBusText();
+
+    void addBus(int amount);
+
+    void setBusVisable(boolean visable);
 }
 
 public interface Presenter extends IPresenter<View>{
 
-
-    void loadShopping();
-
-
-    void showShopping(boolean isShow, RecyclerView mRvSortName);
-
-    /**
-     * 用来确定rv当前item的列数
-     * @param position
-     * @return
-     */
-    int getPosition(int position);
 
     /**
      * 获取筛选的rv的适配器

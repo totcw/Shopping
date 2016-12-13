@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:id="@+id/linear_item_sort_name"
     android:layout_height="wrap_content"
     android:background="#ffffff"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -80,6 +81,7 @@
                     />
                     
                     <ImageView
+                        android:id="@+id/iv_item_sort_name_add"
                         android:layout_width="23dp"
                         android:layout_height="23dp"
                         android:background="@mipmap/add"
