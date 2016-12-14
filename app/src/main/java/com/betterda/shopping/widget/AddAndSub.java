@@ -18,6 +18,9 @@ public class AddAndSub extends FrameLayout {
     private ImageView mAdd,mSub;
     private TextView mTextView;
 
+    private AddAndSubClickInterface mAddAndSubClickInterface;
+
+
     public AddAndSub(Context context) {
         this(context, null);
     }
@@ -35,8 +38,10 @@ public class AddAndSub extends FrameLayout {
         mAdd.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 add(1);
+                if (mAddAndSubClickInterface != null) {
+                    mAddAndSubClickInterface.add(1);
+                }
             }
         });
 
@@ -44,6 +49,9 @@ public class AddAndSub extends FrameLayout {
             @Override
             public void onClick(View view) {
                 sub(1);
+                if (mAddAndSubClickInterface != null) {
+                    mAddAndSubClickInterface.sub(1);
+                }
             }
         });
         addView(inflate);
@@ -82,5 +90,18 @@ public class AddAndSub extends FrameLayout {
 
     public String getAmount() {
         return mTextView.getText().toString().trim();
+    }
+
+
+    public void setmAddAndSubClickInterface(AddAndSubClickInterface mAddAndSubClickInterface) {
+        this.mAddAndSubClickInterface = mAddAndSubClickInterface;
+    }
+
+
+    public interface AddAndSubClickInterface{
+
+        void add(int amount);
+
+        void sub(int amount);
     }
 }

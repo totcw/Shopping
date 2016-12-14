@@ -26,6 +26,10 @@
             android:screenOrientation="portrait"
             android:name=".bus.BusActivity">
         </activity>
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".order.OrderComfirmActivity">
+        </activity>
 
     </application>
 

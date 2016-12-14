@@ -274,19 +274,37 @@
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="23dp"
-                    android:layout_height="18dp"
-                    android:background="@mipmap/bus_product" />
+                <RelativeLayout
+                    android:layout_width="33dp"
+                    android:layout_height="23dp">
+
+                    <ImageView
+                        android:layout_alignParentBottom="true"
+                        android:layout_width="23dp"
+                        android:layout_height="18dp"
+                        android:background="@mipmap/bus_product" />
+                    <TextView
+                        android:id="@+id/tv_productdetail_bus"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/shape_oval"
+                        android:gravity="center"
+                        android:singleLine="true"
+                        android:text="1"
+                        android:textColor="#ffffff"
+                        android:textSize="10sp"
+                        android:visibility="gone"
+                       />
+                </RelativeLayout>
 
                 <TextView
-
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="2dp"
                     android:text="购物车"
                     android:textColor="@color/sortGray"
-                    android:textSize="12sp" />
+                    android:textSize="10sp" />
 
             </LinearLayout>
 

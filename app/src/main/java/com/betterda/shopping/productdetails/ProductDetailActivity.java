@@ -71,6 +71,8 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailContract.Pr
     TextView mTvCommentRate;//好评率
     @BindView(R.id.tv_productdetail_add)
     TextView mTvAdd;
+    @BindView(R.id.tv_productdetail_bus)
+    TextView mTvBus;//购物车的数字
     @BindView(R.id.tv_productdetail_buy)
     TextView mTvBuy;
     @BindView(R.id.iv_productdetail_share)
@@ -159,10 +161,10 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailContract.Pr
 
                 break;
             case R.id.linear_productdetail_bus://购物车
-                    UiUtils.startIntent(getmActivity(), BusActivity.class);
+                UiUtils.startIntent(getmActivity(), BusActivity.class);
                 break;
             case R.id.tv_productdetail_add://加入购物车
-
+                addBus();
                 break;
             case R.id.iv_productdetail_share://分享
 
@@ -238,4 +240,20 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailContract.Pr
             viewL.setBackgroundColor(Color.argb(255, 255, 255, 255));
         }
     }
+
+    /**
+     * 加入购物车
+     */
+    private void addBus() {
+        mTvBus.setVisibility(View.VISIBLE);
+        String amount = mAddAndSub.getAmount();
+        String text = mTvBus.getText().toString().trim();
+        try {
+            int count = Integer.valueOf(amount) + Integer.valueOf(text);
+            mTvBus.setText(count+"");
+        } catch (Exception e) {
+
+        }
+    }
+
 }
