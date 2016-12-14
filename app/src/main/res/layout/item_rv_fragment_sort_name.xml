@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         card_view:contentPadding="5dp"
         android:foreground="?android:attr/selectableItemBackground"
-        card_view:cardBackgroundColor="@color/cardview_light_background"
+        card_view:cardBackgroundColor="#ffffff"
         card_view:cardCornerRadius="8dp"
         card_view:cardElevation="4dp"
         card_view:cardUseCompatPadding="true">
@@ -23,24 +23,27 @@
             android:layout_height="wrap_content">
 
             <com.betterda.mylibrary.view.RatioLayout
+
                 android:id="@+id/ratio_sort_name"
+
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 app:ratio="1">
 
                 <ImageView
+                    android:layout_gravity="center"
                     android:id="@+id/sv_item_duobao"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scaleType="fitXY"
-                    android:src="@mipmap/viewpager_zwt"
+                    android:scaleType="fitCenter"
+                    android:src="@mipmap/zwt"
                     />
 
             </com.betterda.mylibrary.view.RatioLayout>
             <TextView
                 android:layout_below="@id/ratio_sort_name"
                 android:id="@+id/tv_item_sort_name"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="3dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
