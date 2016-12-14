@@ -3,6 +3,8 @@ package com.betterda.shopping.application;
 import android.app.Activity;
 import android.app.Application;
 
+import com.betterda.shopping.bus.model.Bus;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,15 +15,18 @@ public class MyApplication extends Application {
 
     private List<Activity> list;
     private static  MyApplication instance ;
+    private List<Bus> busList;//参与结算的购物车数据
 
     @Override
     public void onCreate() {
         super.onCreate();
-
+        instance = this;
         if (null == list) {
             list = new ArrayList<>();
         }
-
+        if (null == busList) {
+            busList = new ArrayList<>();
+        }
 
     }
 
@@ -71,5 +76,13 @@ public class MyApplication extends Application {
 
     public static MyApplication getInstance() {
         return instance;
+    }
+
+    public List<Bus> getBusList() {
+        return busList;
+    }
+
+    public void setBusList(List<Bus> busList) {
+        this.busList = busList;
     }
 }

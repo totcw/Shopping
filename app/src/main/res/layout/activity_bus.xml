@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:background="@color/bg_gray"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
@@ -10,6 +11,7 @@
         android:layout_height="wrap_content"></com.betterda.shopping.widget.NormalTopBar>
 
     <FrameLayout
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -17,7 +19,7 @@
             android:id="@+id/relative_bus"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/bg_gray"
+
             android:orientation="vertical">
 
 
@@ -69,18 +71,23 @@
                     <FrameLayout
                         android:id="@+id/frame_jiesuan"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true">
 
-                        <ImageView
-
+                        <TextView
+                            android:text="去结算"
+                            android:gravity="center"
+                            android:textColor="#ffffff"
                             android:id="@+id/iv_bus_jiesuan"
                             android:layout_width="100dp"
                             android:layout_height="match_parent"
-                            android:background="@drawable/buyjiesuan_selector" />
+                            android:background="@drawable/buydelete_selector" />
 
-                        <ImageView
+                        <TextView
+                            android:text="删除商品"
+                            android:gravity="center"
+                            android:textColor="#ffffff"
                             android:id="@+id/iv_bus_delete"
                             android:layout_width="100dp"
                             android:layout_height="match_parent"
@@ -102,7 +109,6 @@
 
                     <TextView
                         android:id="@+id/tv_bus_heji"
-
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"

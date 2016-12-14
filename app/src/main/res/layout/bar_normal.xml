@@ -12,7 +12,7 @@
         android:background="@drawable/imagebtn_selector"
         android:clickable="true"
         android:scaleType="center"
-        android:src="@mipmap/common_back" />
+        android:src="@mipmap/back" />
 
     <TextView
         android:id="@+id/bar_title"

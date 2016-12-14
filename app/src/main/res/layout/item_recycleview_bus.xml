@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffffff"
+    android:padding="10dp">
+
+    <RelativeLayout
+        android:padding="10dp"
+        android:id="@+id/relative_item_bus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true">
+
+        <ImageView
+            android:id="@+id/iv_item_bus"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+
+            android:background="@drawable/buycheck_selector" />
+    </RelativeLayout>
+
+
+    <ImageView
+        android:id="@+id/sv_item_bus"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/relative_item_bus"
+        android:background="@mipmap/zwt" />
+
+    <TextView
+        android:id="@+id/tv_item_bus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@id/sv_item_bus"
+        android:singleLine="true"
+        android:text="商品名"
+        android:textColor="@color/shouye_renmen_tv"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/tv_item_bus_spec"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_item_bus"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@id/sv_item_bus"
+        android:text="500ml/瓶"
+        android:textColor="@color/activityMainNormal"
+        android:textSize="12sp" />
+
+
+    <LinearLayout
+        android:layout_toRightOf="@id/sv_item_bus"
+        android:layout_below="@id/tv_item_bus_spec"
+        android:layout_marginLeft="10dp"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_weight="1"
+            android:id="@+id/tv_item_bus_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="￥ 0"
+            android:textColor="@color/shouye_fenlei_red"
+            android:textSize="12sp" />
+
+
+        <com.betterda.shopping.widget.AddAndSub
+            android:id="@+id/aas_bus"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content">
+
+        </com.betterda.shopping.widget.AddAndSub>
+    </LinearLayout>
+
+</RelativeLayout>
+
+
