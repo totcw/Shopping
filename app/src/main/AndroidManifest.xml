@@ -31,6 +31,11 @@
             android:name=".order.OrderComfirmActivity">
         </activity>
 
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".address.AddAddressActivity">
+        </activity>
+
     </application>
 
 </manifest>
