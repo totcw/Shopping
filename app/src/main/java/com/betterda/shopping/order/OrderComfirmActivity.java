@@ -13,6 +13,7 @@ import com.betterda.shopping.address.AddAddressActivity;
 import com.betterda.shopping.base.BaseActivity;
 import com.betterda.shopping.order.contract.OrderComfrimContract;
 import com.betterda.shopping.order.presenter.OrderComfrimPresenterImpl;
+import com.betterda.shopping.pay.PayActivity;
 import com.betterda.shopping.utils.UiUtils;
 import com.betterda.shopping.widget.NormalTopBar;
 import com.zhy.base.adapter.recyclerview.DividerItemDecoration;
@@ -82,6 +83,7 @@ public class OrderComfirmActivity extends BaseActivity<OrderComfrimContract.Pres
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_order_pay://立即付款
+                UiUtils.startIntent(getmActivity(), PayActivity.class);
                 break;
             case R.id.frame_address://添加配送地址
                 UiUtils.startIntent(getmActivity(), AddAddressActivity.class);

@@ -22,6 +22,7 @@ import com.betterda.mylibrary.view.RatioLayout;
 import com.betterda.shopping.R;
 import com.betterda.shopping.base.BaseActivity;
 import com.betterda.shopping.bus.BusActivity;
+import com.betterda.shopping.comment.CommentActivity;
 import com.betterda.shopping.order.OrderComfirmActivity;
 import com.betterda.shopping.productdetails.contract.ProductDetailContract;
 import com.betterda.shopping.productdetails.model.Share;
@@ -173,7 +174,7 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailContract.Pr
                 back();
                 break;
             case R.id.linear_productdetail_comment://评价
-
+                UiUtils.startIntent(getmActivity(), CommentActivity.class);
                 break;
             case R.id.linear_productdetail_bus://购物车
                 UiUtils.startIntent(getmActivity(), BusActivity.class);

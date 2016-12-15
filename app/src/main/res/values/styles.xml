@@ -37,4 +37,12 @@
         <item name="android:backgroundDimAmount">0.3</item>
     </style>
 
+
+    <!--五角星评价的样式-->
+    <style name="myRatingBar" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/myratingbar</item>
+        <item name="android:minHeight">16dp</item>
+        <item name="android:maxHeight">16dp</item>
+    </style>
+
 </resources>

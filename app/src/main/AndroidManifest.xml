@@ -38,6 +38,14 @@
             android:screenOrientation="portrait"
             android:name=".address.AddAddressActivity">
         </activity>
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".comment.CommentActivity">
+        </activity>
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".pay.PayActivity">
+        </activity>
 
     </application>
 
