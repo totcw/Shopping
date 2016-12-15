@@ -3,9 +3,13 @@ package com.betterda.shopping.productdetails;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -18,11 +22,19 @@ import com.betterda.mylibrary.view.RatioLayout;
 import com.betterda.shopping.R;
 import com.betterda.shopping.base.BaseActivity;
 import com.betterda.shopping.bus.BusActivity;
+import com.betterda.shopping.order.OrderComfirmActivity;
 import com.betterda.shopping.productdetails.contract.ProductDetailContract;
+import com.betterda.shopping.productdetails.model.Share;
+import com.betterda.shopping.productdetails.presenter.ProductDetailPresenterImpl;
 import com.betterda.shopping.utils.UiUtils;
 import com.betterda.shopping.utils.UtilMethod;
 import com.betterda.shopping.widget.AddAndSub;
 import com.betterda.shopping.widget.GradationScrollView;
+import com.zhy.base.adapter.ViewHolder;
+import com.zhy.base.adapter.recyclerview.CommonAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -75,12 +87,14 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailContract.Pr
     TextView mTvBus;//购物车的数字
     @BindView(R.id.tv_productdetail_buy)
     TextView mTvBuy;
-    @BindView(R.id.iv_productdetail_share)
-    ImageView mIvShare;
+    @BindView(R.id.relative_productdetail_share)
+    RelativeLayout mRelativeShare;
     @BindView(R.id.linear_productdetail_bus)
     LinearLayout mLinearBus;
     @BindView(R.id.linear_productdetail_comment)
     LinearLayout mLinearComment;//评价
+
+
 
 
     private int height; //logo图片的高度
@@ -89,9 +103,10 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailContract.Pr
     private int mScreenHeight;//屏幕的高度
     private boolean isFirst; //用来判断只设置重新设置一次内容的高度
 
+
     @Override
     protected ProductDetailContract.Presenter onLoadPresenter() {
-        return null;
+        return new ProductDetailPresenterImpl();
     }
 
     @Override
@@ -151,7 +166,7 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailContract.Pr
     }
 
     @OnClick({R.id.ib_productdetail_back, R.id.linear_productdetail_comment, R.id.linear_productdetail_bus, R.id.tv_productdetail_buy,
-            R.id.tv_productdetail_add, R.id.iv_productdetail_share})
+            R.id.tv_productdetail_add, R.id.relative_productdetail_share})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ib_productdetail_back:
@@ -166,14 +181,15 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailContract.Pr
             case R.id.tv_productdetail_add://加入购物车
                 addBus();
                 break;
-            case R.id.iv_productdetail_share://分享
-
+            case R.id.relative_productdetail_share://分享
+                share();
                 break;
             case R.id.tv_productdetail_buy://购买
-
+                addBuy();
                 break;
         }
     }
+
 
 
     /**
@@ -255,5 +271,75 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailContract.Pr
 
         }
     }
+
+    /**
+     * 立即购买
+     */
+    private void addBuy() {
+        View view = View.inflate(getmActivity(), R.layout.pp_productdetail_buy, null);
+        ImageView mIvPpLogo = (ImageView) view.findViewById(R.id.iv_pp_productdetail_logo);
+        TextView mTvPpPrice = (TextView) view.findViewById(R.id.tv_pp_productdetail_price);
+        TextView mTvPpPriceMember = (TextView) view.findViewById(R.id.tv_pp_productdetail_pricemember);
+        AddAndSub mAasub = (AddAndSub) view.findViewById(R.id.aas_pp_productdetail_buy);
+        ImageButton mIvPpdelete = (ImageButton) view.findViewById(R.id.iv_pp_productdetail_delete);
+        Button mBtnComfirm = (Button) view.findViewById(R.id.btn_pp_productdetail_buy);
+
+        mAasub.setAmount(mAddAndSub.getAmount());
+
+        mIvPpdelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                closePopupWindow();
+            }
+        });
+
+        mBtnComfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                closePopupWindow();
+                UiUtils.startIntent(getmActivity(), OrderComfirmActivity.class);
+            }
+        });
+        setUpPopupWindow(view);
+    }
+
+    /**
+     * 分享
+     */
+    private void share() {
+        View view = View.inflate(getmActivity(), R.layout.pp_productdetail_share, null);
+        RecyclerView  mRvShare = (RecyclerView) view.findViewById(R.id.rv_productdetail_share);
+        Button mBtnCancel = (Button) view.findViewById(R.id.btn_pp_productdetail_cancel);
+        mRvShare.setLayoutManager(new GridLayoutManager(getmActivity(),4));
+        initRvShare(mRvShare);
+        mBtnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                closePopupWindow();
+            }
+        });
+
+        setUpPopupWindow(view);
+    }
+
+
+    private void initRvShare(RecyclerView mRvShare) {
+        mRvShare.setAdapter(getPresenter().getRvShareAdapter());
+
+    }
+
+
+    @Override
+    public void close() {
+        closePopupWindow();
+    }
+
+
+    @Override
+    public void dismiss() {
+        super.dismiss();
+        UiUtils.backgroundAlpha(1.0f,getmActivity());
+    }
+
 
 }

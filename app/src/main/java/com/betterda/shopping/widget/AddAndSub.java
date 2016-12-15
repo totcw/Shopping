@@ -92,6 +92,10 @@ public class AddAndSub extends FrameLayout {
         return mTextView.getText().toString().trim();
     }
 
+    public void setAmount(String amount) {
+        mTextView.setText(amount);
+    }
+
 
     public void setmAddAndSubClickInterface(AddAndSubClickInterface mAddAndSubClickInterface) {
         this.mAddAndSubClickInterface = mAddAndSubClickInterface;

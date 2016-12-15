@@ -43,7 +43,7 @@
             <TextView
                 android:layout_below="@id/ratio_sort_name"
                 android:id="@+id/tv_item_sort_name"
-                android:layout_marginTop="3dp"
+                android:layout_marginTop="1dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
@@ -55,7 +55,7 @@
             <TextView
                 android:layout_below="@id/tv_item_sort_name"
                 android:id="@+id/tv_item_sort_account"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="2dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
@@ -64,26 +64,39 @@
                 android:textColor="@color/sortGray"
 
                 />
-            <LinearLayout
-                android:layout_marginTop="5dp"
-                android:orientation="horizontal"
+
+            <TextView
+                android:layout_marginTop="2dp"
                 android:layout_below="@id/tv_item_sort_account"
+                android:id="@+id/tv_item_sort_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:text="￥129"
+                android:textSize="12sp"
+                android:textColor="@color/shouye_renmen_tv"
+
+                />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_below="@id/tv_item_sort_money"
                 android:gravity="center_vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
                     android:layout_weight="1"
-                    android:id="@+id/tv_item_sort_money"
+                    android:id="@+id/tv_item_sort_moneymember"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:singleLine="true"
-                    android:text="￥129"
+                    android:text="会员价:￥129"
                     android:textSize="12sp"
                     android:textColor="@color/shouye_fenlei_red"
 
                     />
                     
                     <ImageView
+                        android:layout_marginRight="5dp"
                         android:id="@+id/iv_item_sort_name_add"
                         android:layout_width="23dp"
                         android:layout_height="23dp"
