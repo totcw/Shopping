@@ -21,6 +21,7 @@ import com.betterda.shopping.R;
 import com.betterda.shopping.base.BaseFragment;
 import com.betterda.shopping.home.MainActivity;
 import com.betterda.shopping.productdetails.ProductDetailActivity;
+import com.betterda.shopping.search.SearchActivity;
 import com.betterda.shopping.sort.contract.SortContract;
 import com.betterda.shopping.sort.presenter.SortPresenterImpl;
 import com.betterda.shopping.utils.UiUtils;
@@ -105,7 +106,7 @@ public class SortFragment extends BaseFragment<SortContract.Presenter> implement
         switch (view.getId()) {
             case R.id.et_search://搜索
                 if (!close()) {
-                    UiUtils.showToast(getmActivity(), "搜索");
+                   UiUtils.startIntent(getmActivity(), SearchActivity.class);
                 }
                 break;
             case R.id.mfiv_twotool_fist: //全部排序
