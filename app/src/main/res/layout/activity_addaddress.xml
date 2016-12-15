@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:toggle="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:toggle="http://schemas.android.com/apk/res-auto"
     android:background="@color/bg_gray"
     android:orientation="vertical">
 
@@ -20,50 +20,93 @@
 
         android:background="@color/lv_divider"></View>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="42dp"
-        android:background="#ffffff"
-        android:paddingLeft="16dp">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/et_name"
-            android:textColor="@color/shouye_renmen_tv"
+        <LinearLayout
+            android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:background="@null"
-            android:hint="收货人姓名"
-            android:singleLine="true"
-            android:textSize="12sp" />
+            android:orientation="vertical">
 
-    </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:background="#ffffff"
+                android:paddingLeft="16dp">
 
-    <View
+                <EditText
+                    android:id="@+id/et_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:background="@null"
+                    android:hint="收货人姓名"
+                    android:singleLine="true"
+                    android:textColor="@color/shouye_renmen_tv"
+                    android:textSize="12sp" />
 
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
+            </RelativeLayout>
 
-        android:background="@color/lv_divider"></View>
+            <View
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="42dp"
-        android:background="#ffffff"
-        android:paddingLeft="16dp">
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
 
-        <EditText
-            android:id="@+id/et_number"
-            android:textColor="@color/shouye_renmen_tv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:background="@null"
-            android:hint="手机号码"
-            android:singleLine="true"
-            android:textSize="12sp" />
+                android:background="@color/lv_divider"></View>
 
-    </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:background="#ffffff"
+                android:paddingLeft="16dp">
+
+                <EditText
+                    android:id="@+id/et_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:background="@null"
+                    android:hint="手机号码"
+                    android:singleLine="true"
+                    android:textColor="@color/shouye_renmen_tv"
+                    android:textSize="12sp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <View
+
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/lv_divider"></View>
+
+
+        <RelativeLayout
+            android:id="@+id/relative_addaddress_choseconstanct"
+            android:background="#ffffff"
+            android:layout_width="100dp"
+            android:layout_height="match_parent">
+
+
+            <TextView
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="选联系人"
+                android:textSize="13sp"
+                android:textColor="@color/activityMainNormal"
+                android:drawablePadding="5dp"
+                android:drawableTop="@mipmap/chose_constanct"
+                />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
 
     <View
 
@@ -81,13 +124,13 @@
 
         <TextView
             android:id="@+id/tv_address"
-            android:textColor="@color/shouye_renmen_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:background="@null"
-            android:text="所在区域"
             android:singleLine="true"
+            android:text="所在区域"
+            android:textColor="@color/shouye_renmen_tv"
             android:textSize="12sp" />
 
         <ImageView
@@ -115,22 +158,24 @@
 
         <EditText
             android:id="@+id/et_address2"
-            android:textColor="@color/shouye_renmen_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:background="@null"
             android:hint="详细地址"
             android:singleLine="true"
+            android:textColor="@color/shouye_renmen_tv"
             android:textSize="12sp" />
 
     </RelativeLayout>
+
     <View
 
         android:layout_width="match_parent"
         android:layout_height="1dp"
 
         android:background="@color/lv_divider"></View>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="42dp"
@@ -138,29 +183,30 @@
         android:paddingLeft="16dp">
 
         <TextView
-            android:textColor="@color/shouye_renmen_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:background="@null"
-            android:text="设为默认地址"
             android:singleLine="true"
+            android:text="设为默认地址"
+            android:textColor="@color/shouye_renmen_tv"
             android:textSize="12sp" />
 
 
         <com.zcw.togglebutton.ToggleButton
+            android:id="@+id/tbtn_addaddress"
+            android:layout_width="54dp"
+            android:layout_height="30dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
-            android:layout_width="54dp"
-            toggle:tbOnColor="#f75555"
             toggle:tbOffColor="#d7d7d7"
-            toggle:tbSpotColor="#ffffff"
-            android:layout_height="30dp" >
-        </com.zcw.togglebutton.ToggleButton>
+            toggle:tbOnColor="#f75555"
+            toggle:tbSpotColor="#ffffff"></com.zcw.togglebutton.ToggleButton>
 
 
     </RelativeLayout>
+
     <View
 
         android:layout_width="match_parent"
@@ -170,15 +216,15 @@
 
     <Button
         android:id="@+id/btn_address_moren"
-        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/shape_corner_red"
-        android:text="设为默认地址"
+        android:text="保存并使用"
         android:textColor="#ffffff"
-        android:textSize="16sp"
-        android:layout_width="match_parent"
-        android:layout_height="48dp" />
+        android:textSize="16sp" />
 
 
 </LinearLayout>
