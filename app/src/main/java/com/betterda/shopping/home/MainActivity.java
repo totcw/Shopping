@@ -50,8 +50,6 @@ public class MainActivity extends BaseActivity<HomeContract.Presenter> implement
     public void init() {
         super.init();
         initIdv();
-        getPresenter().start();
-
     }
 
 
