@@ -5,6 +5,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.betterda.shopping.R;
 
@@ -16,6 +17,7 @@ public class DeleteDialog {
     private Context mContext;
     private Dialog mDialog;
     private View mDialogContentView;
+    private TextView tv_content;
     private onConfirmListener listener;
 
     public DeleteDialog(Context context, onConfirmListener listener) {
@@ -23,12 +25,16 @@ public class DeleteDialog {
         this.listener = listener;
         init();
     }
+
+
+
     private void init() {
         mDialog = new Dialog(mContext, R.style.custom_dialog2);
 
         mDialogContentView= LayoutInflater.from(mContext).inflate(R.layout.dialog_delete,null);
         Button btn_quxiao = (Button) mDialogContentView.findViewById(R.id.btn_dialog_delete_quxiao);
         Button btn_comfirm = (Button) mDialogContentView.findViewById(R.id.btn_dialog_delete_comfrim);
+        tv_content = (TextView) mDialogContentView.findViewById(R.id.tv_dialog_delete);
         btn_quxiao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,5 +68,9 @@ public class DeleteDialog {
     public interface onConfirmListener{
         void comfirm();
 
+    }
+
+    public void setTvcontent(String content) {
+        tv_content.setText(content);
     }
 }

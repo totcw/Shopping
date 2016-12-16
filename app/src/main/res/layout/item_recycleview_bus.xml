@@ -49,16 +49,27 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_item_bus"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="4dp"
         android:layout_toRightOf="@id/sv_item_bus"
         android:text="500ml/瓶"
         android:textColor="@color/activityMainNormal"
         android:textSize="12sp" />
-
+    <TextView
+        android:layout_marginTop="4dp"
+        android:layout_toRightOf="@id/sv_item_bus"
+        android:layout_below="@id/tv_item_bus_spec"
+        android:layout_marginLeft="10dp"
+        android:layout_weight="1"
+        android:id="@+id/tv_item_bus_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="￥ 0"
+        android:textColor="@color/activityMainPressed"
+        android:textSize="12sp" />
 
     <LinearLayout
         android:layout_toRightOf="@id/sv_item_bus"
-        android:layout_below="@id/tv_item_bus_spec"
+        android:layout_below="@id/tv_item_bus_price"
         android:layout_marginLeft="10dp"
         android:gravity="center_vertical"
         android:layout_width="match_parent"
@@ -66,10 +77,10 @@
 
         <TextView
             android:layout_weight="1"
-            android:id="@+id/tv_item_bus_price"
+            android:id="@+id/tv_item_bus_pricemember"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="￥ 0"
+            android:text="会员价:￥0"
             android:textColor="@color/shouye_fenlei_red"
             android:textSize="12sp" />
 

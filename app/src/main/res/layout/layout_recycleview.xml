@@ -4,6 +4,9 @@
     android:layout_height="match_parent">
 
     <com.betterda.mylibrary.xrecycleview.XRecyclerView
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:visibility="invisible"
         android:id="@+id/layout_recycleview"
         android:overScrollMode="never"
         android:layout_height="match_parent"
