@@ -45,7 +45,6 @@ public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivi
         ButterKnife.bind(this);
         initListener();
         init();
-
         if (getPresenter() != null) {
             //开始presenter的逻辑
             getPresenter().start();

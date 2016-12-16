@@ -21,6 +21,11 @@ public class SearchContract {
 
         BusView getmBusView();
 
+        void initxRV(RecyclerView.Adapter adapter);
+
+        void initRemenFlow(TagAdapter adapter);
+
+        void initJiluFlow(TagAdapter adapter);
         /**
          * 设置rv 是否可见
          * @param b
@@ -36,8 +41,6 @@ public class SearchContract {
 
     public interface Presenter  extends IPresenter<View>{
 
-        TagAdapter getFlowRemenAdapter();
-        TagAdapter getFlowJiluAdapter();
 
         /**
          * flowlayout热门的点击事件
@@ -59,8 +62,6 @@ public class SearchContract {
          */
         void deleteJilu();
 
-
-        RecyclerView.Adapter getRvSearchAdapter();
 
         /**
          * 开启搜索

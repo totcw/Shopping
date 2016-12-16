@@ -50,6 +50,14 @@
             android:screenOrientation="portrait"
             android:name=".search.SearchActivity">
         </activity>
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".address.EditAddressActivity">
+        </activity>
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".address.AddressActivity">
+        </activity>
 
     </application>
 

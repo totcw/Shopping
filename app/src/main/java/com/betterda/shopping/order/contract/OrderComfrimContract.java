@@ -17,6 +17,8 @@ public class OrderComfrimContract {
     }
 
     public interface Presenter extends IPresenter<View> {
+        //设置收货地址
+        void setAddress(String name, String number, String area, String address);
     }
 
     public interface Model extends IModel{

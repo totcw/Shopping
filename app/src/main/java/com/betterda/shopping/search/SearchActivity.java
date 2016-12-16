@@ -1,6 +1,7 @@
 package com.betterda.shopping.search;
 
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -14,6 +15,7 @@ import com.betterda.shopping.search.presenter.SearchPresenterImpl;
 import com.betterda.shopping.widget.BusView;
 import com.betterda.shopping.widget.SearchView;
 import com.zhy.view.flowlayout.FlowLayout;
+import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
 
 import butterknife.BindView;
@@ -54,9 +56,7 @@ public class SearchActivity extends BaseActivity<SearchContract.Presenter> imple
     public void init() {
         super.init();
         mSearchView.setTvCancelVisable(true);
-        initRemenFlow();
-        initJiluFlow();
-        initxRV();
+
     }
 
     @Override
@@ -89,8 +89,8 @@ public class SearchActivity extends BaseActivity<SearchContract.Presenter> imple
     }
 
 
-    private void initRemenFlow() {
-        mFlowLayoutRemen.setAdapter(getPresenter().getFlowRemenAdapter());
+    public void initRemenFlow(TagAdapter adapter) {
+        mFlowLayoutRemen.setAdapter(adapter);
         mFlowLayoutRemen.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
             @Override
             public boolean onTagClick(View view, int position, FlowLayout parent) {
@@ -100,8 +100,8 @@ public class SearchActivity extends BaseActivity<SearchContract.Presenter> imple
         });
     }
 
-    private void initJiluFlow() {
-        mFlowLayoutJilu.setAdapter(getPresenter().getFlowJiluAdapter());
+    public void initJiluFlow(TagAdapter adapter) {
+        mFlowLayoutJilu.setAdapter(adapter);
         mFlowLayoutJilu.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
             @Override
             public boolean onTagClick(View view, int position, FlowLayout parent) {
@@ -115,10 +115,10 @@ public class SearchActivity extends BaseActivity<SearchContract.Presenter> imple
     /**
      * 初始化内容的rv
      */
-    private void initxRV() {
+    public void initxRV(RecyclerView.Adapter adapter) {
         mXRecyclerView.setLayoutManager(new GridLayoutManager(getmActivity(),2));
         mXRecyclerView.setPullRefreshEnabled(false);
-        mXRecyclerView.setAdapter(getPresenter().getRvSearchAdapter());
+        mXRecyclerView.setAdapter(adapter);
 
     }
 

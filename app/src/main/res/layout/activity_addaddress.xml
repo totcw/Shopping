@@ -200,7 +200,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
-            toggle:tbOffColor="#d7d7d7"
+            toggle:tbOffColor="#dcdcdc"
             toggle:tbOnColor="#f75555"
             toggle:tbSpotColor="#ffffff"></com.zcw.togglebutton.ToggleButton>
 

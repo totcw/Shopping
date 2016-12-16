@@ -1,5 +1,6 @@
 package com.betterda.shopping.order;
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -9,7 +10,7 @@ import android.widget.TextView;
 
 import com.betterda.mylibrary.LoadingPager;
 import com.betterda.shopping.R;
-import com.betterda.shopping.address.AddAddressActivity;
+import com.betterda.shopping.address.AddressActivity;
 import com.betterda.shopping.base.BaseActivity;
 import com.betterda.shopping.order.contract.OrderComfrimContract;
 import com.betterda.shopping.order.presenter.OrderComfrimPresenterImpl;
@@ -41,6 +42,8 @@ public class OrderComfirmActivity extends BaseActivity<OrderComfrimContract.Pres
     TextView mTvOrderNumber;//电话号码
     @BindView(R.id.frame_address)
     FrameLayout mFrameAddress;//添加配送地址
+     @BindView(R.id.relative_order_address)
+    RelativeLayout mRelativeAddress;//添加配送地址
     @BindView(R.id.rv_confirmorder)
     RecyclerView mRvConfirmorder;
     @BindView(R.id.tv_order_fapiao)
@@ -86,7 +89,8 @@ public class OrderComfirmActivity extends BaseActivity<OrderComfrimContract.Pres
                 UiUtils.startIntent(getmActivity(), PayActivity.class);
                 break;
             case R.id.frame_address://添加配送地址
-                UiUtils.startIntent(getmActivity(), AddAddressActivity.class);
+                Intent intent = new Intent(getmActivity(), AddressActivity.class);
+                startActivityForResult(intent,0);
                 break;
             case R.id.relative_order_fapiao://发票
                 break;
@@ -104,5 +108,21 @@ public class OrderComfirmActivity extends BaseActivity<OrderComfrimContract.Pres
         mRvConfirmorder.setLayoutManager(new LinearLayoutManager(getmActivity()));
         mRvConfirmorder.addItemDecoration(new DividerItemDecoration(getmActivity(),DividerItemDecoration.VERTICAL_LIST));
         mRvConfirmorder.setAdapter(adapter);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == 0 && data != null) {
+            String name = data.getStringExtra("name");
+            String number = data.getStringExtra("number");
+            String area = data.getStringExtra("area");
+            String address = data.getStringExtra("address");
+            getPresenter().setAddress(name, number, area, address);
+            mTvOrderNumber.setText(number);
+            mTvOrderShouhuoren2.setText(name);
+            mTvOrderAddress2.setText(area+address);
+            mRelativeAddress.setVisibility(View.VISIBLE);
+        }
     }
 }

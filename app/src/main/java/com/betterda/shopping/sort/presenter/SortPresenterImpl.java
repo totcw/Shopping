@@ -98,7 +98,7 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
                     holder.setText(R.id.tv_item_sort_account, s.getSpec());
                     holder.setText(R.id.tv_item_sort_money, "￥"+s.getPrice());
 
-                    holder.setOnClickListener(R.id.linear_item_sort_name, new View.OnClickListener() {
+                    holder.setOnClickListener(R.id.sv_item_duobao, new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             UiUtils.startIntent(getView().getmActivity(), ProductDetailActivity.class);
@@ -234,7 +234,7 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
         mSortAdapter.notifyDataSetChanged();
 
         for (int i = 0; i < 13; i++) {
-            mNameList.add(null);
+            mNameList.add(new Shopping());
         }
         mNameAdapter.notifyDataSetChanged();
 
