@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.betterda.mylibrary.LoadingPager;
+import com.betterda.mylibrary.Utils.StatusBarCompat;
 import com.betterda.mylibrary.recycleviehelper.EndlessRecyclerOnScrollListener;
 import com.betterda.mylibrary.recycleviehelper.RecyclerViewStateUtils;
 import com.betterda.mylibrary.view.LoadingFooter;
@@ -88,6 +89,10 @@ public class SortFragment extends BaseFragment<SortContract.Presenter> implement
         return new SortPresenterImpl();
     }
 
+
+
+
+
     @Override
     public void initData() {
         super.initData();
@@ -98,6 +103,17 @@ public class SortFragment extends BaseFragment<SortContract.Presenter> implement
         mTtbvSort.setSecondTitle("筛选");
 
         getPresenter().start();
+    }
+
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (hidden) {//隐藏
+        } else {
+            StatusBarCompat.setStatusBar5(getmActivity(), R.color.white);
+
+        }
     }
 
 

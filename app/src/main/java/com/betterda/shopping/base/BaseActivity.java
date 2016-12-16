@@ -40,7 +40,7 @@ public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivi
         if (getPresenter() != null) {
             getPresenter().attachView(this);
         }
-
+        StatusBarCompat.setStatusBar5(getmActivity(),R.color.white);
         initView();
         ButterKnife.bind(this);
         initListener();

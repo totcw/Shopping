@@ -3,6 +3,7 @@ package com.betterda.shopping.my;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import com.betterda.mylibrary.Utils.StatusBarCompat;
 import com.betterda.shopping.R;
 import com.betterda.shopping.base.BaseFragment;
 import com.betterda.shopping.my.contract.MyContract;
@@ -22,5 +23,23 @@ public class MyFragment extends BaseFragment<MyContract.Presenter> implements My
     @Override
     protected MyContract.Presenter onLoadPresenter() {
         return new MyPresenterImpl();
+    }
+
+
+
+    @Override
+    public void initData() {
+        super.initData();
+
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (hidden) {//隐藏
+
+        } else {
+            StatusBarCompat.setStatusBar5(getmActivity(),R.color.backgroudyellow);
+        }
     }
 }
