@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:layout_marginBottom="5dp"
+        android:orientation="vertical"
+        android:background="@drawable/shape_bottom_top_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:id="@+id/tv_photo_cameral"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:gravity="center"
+            android:text="拍照"
+
+            android:textSize="17sp" />
+
+        <View
+
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/lv_divider"></View>
+        <TextView
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:id="@+id/tv_photo_photo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:gravity="center"
+            android:text="从相册中选取"
+            android:textSize="17sp" />
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/shape_bottom_top_line"
+        android:id="@+id/tv_photo_cancell"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center"
+        android:text="取消"
+        android:textColor="#ff0000"
+        android:textSize="17sp" />
+
+</LinearLayout>

@@ -4,6 +4,9 @@
 
     <!--读取联系人权限,危险-->
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <!--危险权限,拍照和写存储-->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -57,6 +60,14 @@
         <activity
             android:screenOrientation="portrait"
             android:name=".address.AddressActivity">
+        </activity>
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".setting.SettingActivity">
+        </activity>
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".information.InformationActivity">
         </activity>
 
     </application>

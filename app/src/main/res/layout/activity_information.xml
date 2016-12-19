@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@color/bg_gray"
+    android:layout_height="match_parent">
+
+    <com.betterda.shopping.widget.NormalTopBar
+        android:id="@+id/topbar_information"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </com.betterda.shopping.widget.NormalTopBar>
+    <View
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/lv_divider"></View>
+    <RelativeLayout
+        android:id="@+id/relative_information_touxiang"
+        android:background="#ffffff"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="头像"
+            android:textSize="13sp"
+            android:textColor="@color/shouye_renmen_tv"
+            />
+
+
+        <ImageView
+            android:id="@+id/iv_information_jiantou"
+            android:layout_width="8dp"
+            android:layout_height="15dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@mipmap/jiantou" />
+
+        <ImageView
+            android:layout_toLeftOf="@id/iv_information_jiantou"
+            android:id="@+id/sv_information_touxinag"
+            android:layout_marginRight="10dp"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_centerVertical="true"
+            />
+        
+    </RelativeLayout>
+
+
+
+    <View
+
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/lv_divider"></View>
+
+    <View
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/lv_divider"></View>
+
+    <LinearLayout
+        android:id="@+id/linear_information_name"
+        android:background="#ffffff"
+        android:padding="10dp"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_weight="10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="昵称"
+            android:textSize="13sp"
+            android:textColor="@color/shouye_renmen_tv"
+            />
+
+        <TextView
+            android:id="@+id/tv_information_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="还没有昵称"
+            android:layout_marginRight="10dp"
+            android:textSize="13sp"
+            android:textColor="@color/shouye_renmen_tv"
+            />
+        <ImageView
+            android:id="@+id/iv_information_jiantou2"
+            android:layout_width="8dp"
+            android:layout_height="15dp"
+
+            android:background="@mipmap/jiantou" />
+
+
+
+
+    </LinearLayout>
+    <View
+
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/lv_divider"></View>
+
+</LinearLayout>
