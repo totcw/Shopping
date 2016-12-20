@@ -1,5 +1,6 @@
 package com.betterda.shopping.my;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -76,8 +77,9 @@ public class MyFragment extends BaseFragment<MyContract.Presenter> implements My
     @Override
     public void initData() {
         super.initData();
-
+        initIdv();
     }
+
 
     @Override
     public void onHiddenChanged(boolean hidden) {
@@ -90,8 +92,10 @@ public class MyFragment extends BaseFragment<MyContract.Presenter> implements My
     }
 
 
-
-    @OnClick({R.id.relative_my_touxiang, R.id.relative_my_setting,R.id.relative_my_message, R.id.relative_my_all, R.id.relative_my_tuikuan, R.id.relative_my_jiayouka, R.id.relative_my_bus, R.id.relative_my_address, R.id.relative_my_kefu})
+    @OnClick({R.id.relative_my_touxiang, R.id.relative_my_setting, R.id.relative_my_message, R.id.relative_my_all,
+            R.id.relative_my_tuikuan, R.id.relative_my_jiayouka, R.id.relative_my_bus,
+            R.id.relative_my_address, R.id.relative_my_kefu, R.id.idv_pay, R.id.idv_send,
+            R.id.idv_bring, R.id.idv_take, R.id.idv_comment})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.relative_my_touxiang:
@@ -100,12 +104,27 @@ public class MyFragment extends BaseFragment<MyContract.Presenter> implements My
                 UiUtils.startIntent(getmActivity(), SettingActivity.class);
                 break;
             case R.id.relative_my_message://消息
-
                 break;
             case R.id.relative_my_all://我的订单
-                UiUtils.startIntent(getmActivity(), OrderActivity.class);
+                startToOrder(0);
+                break;
+            case R.id.idv_pay://待付款
+                startToOrder(1);
+                break;
+            case R.id.idv_send:
+                startToOrder(2);
+                break;
+            case R.id.idv_bring:
+                startToOrder(3);
+                break;
+            case R.id.idv_take:
+                startToOrder(4);
+                break;
+            case R.id.idv_comment:
+                startToOrder(5);
                 break;
             case R.id.relative_my_tuikuan://我的钱包
+
                 break;
             case R.id.relative_my_jiayouka://成为会员
                 break;
@@ -117,4 +136,33 @@ public class MyFragment extends BaseFragment<MyContract.Presenter> implements My
                 break;
         }
     }
+
+
+    private void initIdv() {
+        mIdvPay.setTitle("待付款");
+        mIdvSend.setTitle("待发货");
+        mIdvBring.setTitle("待收货");
+        mIdvTake.setTitle("待提货");
+        mIdvComment.setTitle("待评价");
+
+        mIdvPay.setIvBackground(R.mipmap.dpay, R.mipmap.dpay);
+        mIdvSend.setIvBackground(R.mipmap.dsend, R.mipmap.dsend);
+        mIdvBring.setIvBackground(R.mipmap.dbring, R.mipmap.dbring);
+        mIdvTake.setIvBackground(R.mipmap.dtake, R.mipmap.dtake);
+        mIdvComment.setIvBackground(R.mipmap.dcomment, R.mipmap.dcomment);
+
+
+    }
+
+    /**
+     * 跳转到订单界面
+     *
+     * @param item
+     */
+    private void startToOrder(int item) {
+        Intent intent = new Intent(getmActivity(), OrderActivity.class);
+        intent.putExtra("item", item);
+        UiUtils.startIntent(getmActivity(), intent);
+    }
+
 }

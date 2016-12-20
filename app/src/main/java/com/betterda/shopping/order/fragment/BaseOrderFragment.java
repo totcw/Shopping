@@ -15,9 +15,11 @@ import com.betterda.mylibrary.xrecycleview.XRecyclerView;
 import com.betterda.shopping.R;
 import com.betterda.shopping.base.BaseFragment;
 import com.betterda.shopping.bus.model.Bus;
+import com.betterda.shopping.order.OrderDetailActivity;
 import com.betterda.shopping.order.contract.BaseOrderContract;
 import com.betterda.shopping.order.model.OrderAll;
 import com.betterda.shopping.order.presenter.BaseOrderPresenterImpl;
+import com.betterda.shopping.utils.UiUtils;
 import com.betterda.shopping.utils.UtilMethod;
 import com.zhy.base.adapter.ViewHolder;
 import com.zhy.base.adapter.recyclerview.CommonAdapter;
@@ -163,7 +165,7 @@ public class BaseOrderFragment extends BaseFragment<BaseOrderContract.Presenter>
             viewHolder.setOnClickListener(R.id.linear_comfirmorder, new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                   // startOnDetail(orderAll.getId());
+                    startOnDetail(orderAll.getId());
                 }
             });
 
@@ -199,7 +201,7 @@ public class BaseOrderFragment extends BaseFragment<BaseOrderContract.Presenter>
      * @param orderAll
      * @param busList
      */
-    private void loadShop(ViewHolder viewHolder, OrderAll orderAll, final List<Bus> busList) {
+    private void loadShop(ViewHolder viewHolder, final OrderAll orderAll, final List<Bus> busList) {
         if (null != busList) {
             //设置商品的件数
             viewHolder.setText(R.id.tv_item_orderall_amount2, "共" + UtilMethod.addAmount(busList) + "件商品");
@@ -222,7 +224,7 @@ public class BaseOrderFragment extends BaseFragment<BaseOrderContract.Presenter>
                         viewHolder.setOnClickListener(R.id.linear_comfirmorder2, new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                               // startOnDetail(orderAll.getId());
+                                startOnDetail(orderAll.getId());
                             }
                         });
                         //显示评价按钮
@@ -285,6 +287,7 @@ public class BaseOrderFragment extends BaseFragment<BaseOrderContract.Presenter>
      * @param orderid
      */
     private void startOnDetail(String orderid) {
+        UiUtils.startIntent(getmActivity(), OrderDetailActivity.class);
 
     }
 

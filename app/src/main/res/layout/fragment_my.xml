@@ -99,6 +99,12 @@
 
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divierLine"
+            ></View>
+
         <RelativeLayout
             android:id="@+id/relative_my_all"
             android:layout_width="match_parent"

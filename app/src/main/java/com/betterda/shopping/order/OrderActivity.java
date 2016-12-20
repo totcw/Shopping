@@ -1,14 +1,11 @@
 package com.betterda.shopping.order;
 
-import android.content.Intent;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import com.betterda.shopping.R;
 import com.betterda.shopping.adapter.MyAdapter;
-import com.betterda.shopping.address.AddressActivity;
 import com.betterda.shopping.base.BaseActivity;
 import com.betterda.shopping.order.contract.OrderContract;
 import com.betterda.shopping.order.fragment.AllFragment;
@@ -18,8 +15,6 @@ import com.betterda.shopping.order.fragment.PayFragment;
 import com.betterda.shopping.order.fragment.SendFragment;
 import com.betterda.shopping.order.fragment.TakeFragment;
 import com.betterda.shopping.order.presenter.OrderPresenterImpl;
-import com.betterda.shopping.pay.PayActivity;
-import com.betterda.shopping.utils.UiUtils;
 import com.betterda.shopping.widget.NormalTopBar;
 import com.betterda.shopping.widget.ViewPagerIndicator;
 
@@ -27,7 +22,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -64,7 +58,7 @@ public class OrderActivity extends BaseActivity<OrderContract.Presenter> impleme
         mTopbarOrder.setTitle("我的订单");
         initFragment();
         initIndicator();
-        mVpOrder.setAdapter(new MyAdapter(getSupportFragmentManager(),mFragmentList));
+
     }
 
     private void initFragment() {
@@ -92,8 +86,10 @@ public class OrderActivity extends BaseActivity<OrderContract.Presenter> impleme
         mDatas.add("待提货");
         mDatas.add("待评价");
         mOrderIndicator.setTabItemTitles(mDatas);
+        mVpOrder.setAdapter(new MyAdapter(getSupportFragmentManager(),mFragmentList));
         int item = getIntent().getIntExtra("item", 0);
         mOrderIndicator.setViewPager(mVpOrder,item);
+
     }
 
     @OnClick({R.id.bar_back})

@@ -4,4 +4,13 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="status_top">0dp</dimen>
     <dimen name="title_height">40dp</dimen>
+    <dimen name="textsize_smallest">10.0sp</dimen>
+    <dimen name="textsize_xsmall">11.0sp</dimen>
+    <dimen name="textsize_small">12.0sp</dimen>
+    <dimen name="textsize_little">13.0sp</dimen>
+    <dimen name="textsize_normal">14.0sp</dimen>
+    <dimen name="textsize_large">15.0sp</dimen>
+    <dimen name="textsize_xlarge">16.0sp</dimen>
+    <dimen name="textsize_xxlarge">17.0sp</dimen>
+    <dimen name="textsize_largest">20.0sp</dimen>
 </resources>
