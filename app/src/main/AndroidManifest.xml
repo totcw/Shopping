@@ -14,9 +14,9 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".home.MainActivity"
-            android:windowSoftInputMode="adjustPan|stateHidden"
-            >
+        <activity
+            android:name=".home.MainActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,62 +25,60 @@
         </activity>
 
         <activity
-            android:screenOrientation="portrait"
-            android:name=".productdetails.ProductDetailActivity">
-        </activity>
+            android:name=".productdetails.ProductDetailActivity"
+            android:screenOrientation="portrait"></activity>
         <activity
-            android:screenOrientation="portrait"
-            android:name=".bus.BusActivity">
-        </activity>
+            android:name=".bus.BusActivity"
+            android:screenOrientation="portrait"></activity>
         <activity
-            android:screenOrientation="portrait"
-            android:name=".order.OrderComfirmActivity">
-        </activity>
+            android:name=".order.OrderComfirmActivity"
+            android:screenOrientation="portrait"></activity>
 
         <activity
-            android:screenOrientation="portrait"
-            android:name=".address.AddAddressActivity">
-        </activity>
+            android:name=".address.AddAddressActivity"
+            android:screenOrientation="portrait"></activity>
         <activity
-            android:screenOrientation="portrait"
-            android:name=".comment.CommentActivity">
-        </activity>
+            android:name=".comment.CommentActivity"
+            android:screenOrientation="portrait"></activity>
         <activity
-            android:screenOrientation="portrait"
-            android:name=".pay.PayActivity">
-        </activity>
+            android:name=".pay.PayActivity"
+            android:screenOrientation="portrait"></activity>
         <activity
-            android:screenOrientation="portrait"
-            android:name=".search.SearchActivity">
-        </activity>
+            android:name=".search.SearchActivity"
+            android:screenOrientation="portrait"></activity>
         <activity
-            android:screenOrientation="portrait"
-            android:name=".address.EditAddressActivity">
-        </activity>
+            android:name=".address.EditAddressActivity"
+            android:screenOrientation="portrait"></activity>
         <activity
-            android:screenOrientation="portrait"
-            android:name=".address.AddressActivity">
-        </activity>
+            android:name=".address.AddressActivity"
+            android:screenOrientation="portrait"></activity>
         <activity
-            android:screenOrientation="portrait"
-            android:name=".setting.SettingActivity">
-        </activity>
+            android:name=".setting.SettingActivity"
+            android:screenOrientation="portrait"></activity>
         <activity
-            android:screenOrientation="portrait"
-            android:name=".information.InformationActivity">
-        </activity>
+            android:name=".information.InformationActivity"
+            android:screenOrientation="portrait"></activity>
         <activity
-            android:screenOrientation="portrait"
-            android:name=".information.NameActivity">
-        </activity>
+            android:name=".information.NameActivity"
+            android:screenOrientation="portrait"></activity>
         <activity
-            android:screenOrientation="portrait"
-            android:name=".order.OrderActivity">
-        </activity>
+            android:name=".order.OrderActivity"
+            android:screenOrientation="portrait"></activity>
         <activity
-            android:screenOrientation="portrait"
-            android:name=".order.OrderDetailActivity">
-        </activity>
+            android:name=".order.OrderDetailActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".wallet.WalletActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".wallet.CashWalletActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".wallet.XiaoFeiWalletActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".wallet.MingXiActivity"
+            android:screenOrientation="portrait"></activity>
 
     </application>
 

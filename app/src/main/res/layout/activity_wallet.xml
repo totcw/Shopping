@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@color/backgroudGray"
+    android:layout_height="match_parent">
+
+    <com.betterda.shopping.widget.NormalTopBar
+        android:id="@+id/topbar_wallet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></com.betterda.shopping.widget.NormalTopBar>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/linear_wallet"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <View
+
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/lv_divider"></View>
+                <RelativeLayout
+                    android:id="@+id/relative_wallet_jinbi"
+                    android:background="#ffffff"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp">
+
+                    <ImageView
+                        android:id="@+id/iv_wallet_jinbi"
+                        android:layout_centerVertical="true"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:background="@mipmap/wallte_xianjin"
+                        />
+
+                    <TextView
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@id/iv_wallet_jinbi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="现金钱包"
+                        android:textColor="@color/shouye_renmen_tv"
+                        android:textSize="@dimen/textsize_small"
+                        />
+
+                    <ImageView
+                        android:id="@+id/iv_wallet_jiantou"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="8dp"
+                        android:layout_height="15dp"
+                        android:background="@mipmap/jiantou"
+                        />
+                    <TextView
+                        android:id="@+id/tv_wallet_jinbi"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:layout_toLeftOf="@id/iv_wallet_jiantou"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0枚"
+                        android:textColor="@color/shouye_renmen_tv"
+                        android:textSize="@dimen/textsize_small"
+                        />
+                </RelativeLayout>
+
+                <View
+
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+
+                    android:background="@color/lv_divider"></View>
+
+                <RelativeLayout
+                    android:id="@+id/relative_wallet_yinbi"
+                    android:background="#ffffff"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp">
+
+                    <ImageView
+                        android:id="@+id/iv_wallet_yinbi"
+                        android:layout_centerVertical="true"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:background="@mipmap/wallet_xiaofei"
+                        />
+
+                    <TextView
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@id/iv_wallet_yinbi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="消费钱包"
+                        android:textColor="@color/shouye_renmen_tv"
+                        android:textSize="@dimen/textsize_small"
+                        />
+
+                    <ImageView
+                        android:id="@+id/iv_wallet_jiantou2"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="8dp"
+                        android:layout_height="15dp"
+                        android:background="@mipmap/jiantou"
+                        />
+                    <TextView
+                        android:id="@+id/tv_wallet_yinbi"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:layout_toLeftOf="@id/iv_wallet_jiantou2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0枚"
+                        android:textColor="@color/shouye_renmen_tv"
+                        android:textSize="@dimen/textsize_small"
+                        />
+                </RelativeLayout>
+
+                <View
+
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+
+                    android:background="@color/lv_divider"></View>
+
+
+            </LinearLayout>
+
+            <com.betterda.mylibrary.LoadingPager
+                android:id="@+id/loadpager_wallet"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></com.betterda.mylibrary.LoadingPager>
+
+        </FrameLayout>
+</LinearLayout>

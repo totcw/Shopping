@@ -18,6 +18,7 @@ import com.betterda.shopping.my.presenter.MyPresenterImpl;
 import com.betterda.shopping.order.OrderActivity;
 import com.betterda.shopping.setting.SettingActivity;
 import com.betterda.shopping.utils.UiUtils;
+import com.betterda.shopping.wallet.WalletActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -124,7 +125,7 @@ public class MyFragment extends BaseFragment<MyContract.Presenter> implements My
                 startToOrder(5);
                 break;
             case R.id.relative_my_tuikuan://我的钱包
-
+                UiUtils.startIntent(getmActivity(), WalletActivity.class);
                 break;
             case R.id.relative_my_jiayouka://成为会员
                 break;
