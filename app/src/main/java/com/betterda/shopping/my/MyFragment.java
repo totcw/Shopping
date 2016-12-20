@@ -12,11 +12,14 @@ import android.widget.TextView;
 import com.betterda.mylibrary.Utils.StatusBarCompat;
 import com.betterda.mylibrary.view.IndicatorView;
 import com.betterda.shopping.R;
+import com.betterda.shopping.address.AddressActivity;
 import com.betterda.shopping.base.BaseFragment;
 import com.betterda.shopping.my.contract.MyContract;
 import com.betterda.shopping.my.presenter.MyPresenterImpl;
 import com.betterda.shopping.order.OrderActivity;
 import com.betterda.shopping.setting.SettingActivity;
+import com.betterda.shopping.tuijian.LiJiTuijianActivity;
+import com.betterda.shopping.tuijian.MyTuijianActivity;
 import com.betterda.shopping.utils.UiUtils;
 import com.betterda.shopping.wallet.WalletActivity;
 
@@ -130,10 +133,13 @@ public class MyFragment extends BaseFragment<MyContract.Presenter> implements My
             case R.id.relative_my_jiayouka://成为会员
                 break;
             case R.id.relative_my_bus://立即推荐
+                UiUtils.startIntent(getmActivity(), LiJiTuijianActivity.class);
                 break;
             case R.id.relative_my_address://我的推荐
+                UiUtils.startIntent(getmActivity(), MyTuijianActivity.class);
                 break;
             case R.id.relative_my_kefu://常用地址
+                UiUtils.startIntent(getmActivity(), AddressActivity.class);
                 break;
         }
     }

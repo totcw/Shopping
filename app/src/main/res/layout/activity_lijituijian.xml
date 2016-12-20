@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical">
+
+
+    <com.betterda.shopping.widget.NormalTopBar
+        android:id="@+id/topbar_myeweima"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></com.betterda.shopping.widget.NormalTopBar>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:background="@color/divierLine"
+        ></View>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:overScrollMode="never"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+
+                    <ImageView
+                        android:id="@+id/iv_myerweima"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:scaleType="fitXY" />
+
+                </RelativeLayout>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:text="*邀请好友购买有奖励:"
+                    android:textColor="@color/shouye_lv_tv"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="5dp"
+                    android:text="邀请的每个朋友每次购买,实时获得的推荐奖励;邀请越多,奖励越多;好友多多,福利多多"
+                    android:textColor="@color/shouye_lv_tv"
+                    android:textSize="12sp" />
+
+
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <com.betterda.mylibrary.LoadingPager
+            android:id="@+id/loadpager_myeweima"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></com.betterda.mylibrary.LoadingPager>
+
+    </FrameLayout>
+</LinearLayout>

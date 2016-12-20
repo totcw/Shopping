@@ -79,6 +79,15 @@
         <activity
             android:name=".wallet.MingXiActivity"
             android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".tuijian.LiJiTuijianActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".tuijian.MyTuijianActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".tuijian.TuiJianFanxianActivity"
+            android:screenOrientation="portrait"></activity>
 
     </application>
 
