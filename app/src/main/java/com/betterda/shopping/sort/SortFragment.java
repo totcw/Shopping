@@ -111,7 +111,7 @@ public class SortFragment extends BaseFragment<SortContract.Presenter> implement
         super.onHiddenChanged(hidden);
         if (hidden) {//隐藏
         } else {
-            StatusBarCompat.setStatusBar5(getmActivity(), R.color.white);
+            StatusBarCompat.setStatusBar5(getmActivity(),R.color.white);
 
         }
     }

@@ -4,11 +4,13 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
+import com.betterda.mylibrary.Utils.StatusBarCompat;
 import com.betterda.mylibrary.view.IndicatorView;
 import com.betterda.shopping.R;
 import com.betterda.shopping.base.BaseActivity;
 import com.betterda.shopping.home.contract.HomeContract;
 import com.betterda.shopping.home.presenter.HomePresenterImpl;
+import com.betterda.shopping.utils.UiUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -18,8 +20,6 @@ import butterknife.OnClick;
  */
 
 public class MainActivity extends BaseActivity<HomeContract.Presenter> implements HomeContract.View {
-
-
 
     @BindView(R.id.idv_activity_main_shouye)
     IndicatorView mIdvShouye;
@@ -37,6 +37,7 @@ public class MainActivity extends BaseActivity<HomeContract.Presenter> implement
     @Override
     public void initView() {
         super.initView();
+        StatusBarCompat.setStatusBar5(getmActivity(), R.color.white);
         setContentView(R.layout.activity_main);
 
     }

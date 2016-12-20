@@ -198,10 +198,10 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailContract.Pr
      */
     private void setStatusBar() {
         //1. 首先将手机手机状态栏透明化：
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {//5.0及以上
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {//6.0及以上
             View decorView = getWindow().getDecorView();
             int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+                    | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
             decorView.setSystemUiVisibility(option);
             getWindow().setStatusBarColor(Color.TRANSPARENT);
             //设置view的高度为状态栏的高度,这样标题栏才不会置顶
@@ -211,7 +211,7 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailContract.Pr
             //获取屏幕的高度
             mScreenHeight = UtilMethod.getHeight(getmActivity());
         } else {
-            //5.0一下因为没有使用着色状态栏,要减去状态栏的高度
+            //6.0一下因为没有使用着色状态栏,要减去状态栏的高度
             mScreenHeight = UtilMethod.getHeight(getmActivity()) - UtilMethod.statusHeight(getmActivity());
         }
     }
@@ -229,7 +229,7 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailContract.Pr
     @Override
     public void onScrollChanged(GradationScrollView scrollView, int x, int y, int oldx, int oldy) {
         //设置状态栏透明
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             getWindow().setStatusBarColor(getResources().getColor(R.color.transparent));
         }
         if (y <= 0) {
@@ -246,7 +246,7 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailContract.Pr
             //当滑动高度等于logo图片的高度时,view的背景设置透明
             if (y == height - height2) {
                 viewL.setBackgroundColor(Color.argb(0, 255, 255, 255));
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     getWindow().setStatusBarColor(getResources().getColor(R.color.white));
                 }
             }

@@ -14,6 +14,7 @@ import com.betterda.shopping.R;
 import com.betterda.shopping.base.BaseFragment;
 import com.betterda.shopping.my.contract.MyContract;
 import com.betterda.shopping.my.presenter.MyPresenterImpl;
+import com.betterda.shopping.order.OrderActivity;
 import com.betterda.shopping.setting.SettingActivity;
 import com.betterda.shopping.utils.UiUtils;
 
@@ -90,7 +91,7 @@ public class MyFragment extends BaseFragment<MyContract.Presenter> implements My
 
 
 
-    @OnClick({R.id.relative_my_touxiang, R.id.relative_my_setting, R.id.relative_my_all, R.id.relative_my_tuikuan, R.id.relative_my_jiayouka, R.id.relative_my_bus, R.id.relative_my_address, R.id.relative_my_kefu})
+    @OnClick({R.id.relative_my_touxiang, R.id.relative_my_setting,R.id.relative_my_message, R.id.relative_my_all, R.id.relative_my_tuikuan, R.id.relative_my_jiayouka, R.id.relative_my_bus, R.id.relative_my_address, R.id.relative_my_kefu})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.relative_my_touxiang:
@@ -98,7 +99,11 @@ public class MyFragment extends BaseFragment<MyContract.Presenter> implements My
             case R.id.relative_my_setting:
                 UiUtils.startIntent(getmActivity(), SettingActivity.class);
                 break;
+            case R.id.relative_my_message://消息
+
+                break;
             case R.id.relative_my_all://我的订单
+                UiUtils.startIntent(getmActivity(), OrderActivity.class);
                 break;
             case R.id.relative_my_tuikuan://我的钱包
                 break;

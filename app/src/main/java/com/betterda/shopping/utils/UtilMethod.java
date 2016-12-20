@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import com.betterda.mylibrary.LoadingPager;
+import com.betterda.shopping.bus.model.Bus;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -378,7 +379,41 @@ public class UtilMethod {
     }
 
 
+    /**
+     * 计算总价
+     *
+     * @return
+     */
+    public static float addUp(List<Bus> list) {
+        float a = 0;
 
+        if (list != null) {
+            for (Bus bus : list) {
+                int amount = bus.getAmount();
+                float money = bus.getMoney();
+                float sum = amount * money;
+                a += sum;
+            }
+        }
+        return a;
+    }
+
+    /**
+     * 计算商品的件数
+     *
+     * @return
+     */
+    public static int addAmount(List<Bus> list) {
+        int a = 0;
+
+        if (list != null) {
+            for (Bus bus : list) {
+                int amount = bus.getAmount();
+                a += amount;
+            }
+        }
+        return a;
+    }
 
 
 }

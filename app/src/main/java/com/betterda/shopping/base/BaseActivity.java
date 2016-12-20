@@ -5,10 +5,13 @@ import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.PopupWindow;
 
 import com.betterda.mylibrary.Utils.StatusBarCompat;
@@ -40,7 +43,6 @@ public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivi
         if (getPresenter() != null) {
             getPresenter().attachView(this);
         }
-        StatusBarCompat.setStatusBar5(getmActivity(),R.color.white);
         initView();
         ButterKnife.bind(this);
         initListener();
@@ -49,8 +51,8 @@ public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivi
             //开始presenter的逻辑
             getPresenter().start();
         }
-    }
 
+    }
 
     /**
      * 处理业务逻辑

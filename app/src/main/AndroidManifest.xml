@@ -69,6 +69,14 @@
             android:screenOrientation="portrait"
             android:name=".information.InformationActivity">
         </activity>
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".information.NameActivity">
+        </activity>
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".order.OrderActivity">
+        </activity>
 
     </application>
 

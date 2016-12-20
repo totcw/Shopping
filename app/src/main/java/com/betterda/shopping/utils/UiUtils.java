@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
@@ -253,6 +254,19 @@ public class UiUtils {
     }
 
 
+  /*  public static void setStatus(Activity   activity,int color) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {//6.0 and above
+            // In some cases, you need to clear the transparent flag first
+            activity. getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            View decorView = activity.getWindow().getDecorView();
+            int option =  View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+            decorView.setSystemUiVisibility(option);
+            //Set the color of the status bar
+            activity.getWindow().setStatusBarColor(activity.getResources().getColor(color));
+
+        }
+    }*/
 
 
 }
