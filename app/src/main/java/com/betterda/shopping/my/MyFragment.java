@@ -14,9 +14,13 @@ import com.betterda.mylibrary.view.IndicatorView;
 import com.betterda.shopping.R;
 import com.betterda.shopping.address.AddressActivity;
 import com.betterda.shopping.base.BaseFragment;
+import com.betterda.shopping.findpwd.FindPwdActivity;
+import com.betterda.shopping.findpwd.contract.FindPwdContract;
+import com.betterda.shopping.login.LoginActivity;
 import com.betterda.shopping.my.contract.MyContract;
 import com.betterda.shopping.my.presenter.MyPresenterImpl;
 import com.betterda.shopping.order.OrderActivity;
+import com.betterda.shopping.register.RegisterActivity;
 import com.betterda.shopping.setting.SettingActivity;
 import com.betterda.shopping.tuijian.LiJiTuijianActivity;
 import com.betterda.shopping.tuijian.MyTuijianActivity;
@@ -103,6 +107,7 @@ public class MyFragment extends BaseFragment<MyContract.Presenter> implements My
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.relative_my_touxiang:
+                UiUtils.startIntent(getmActivity(), LoginActivity.class);
                 break;
             case R.id.relative_my_setting:
                 UiUtils.startIntent(getmActivity(), SettingActivity.class);

@@ -88,6 +88,15 @@
         <activity
             android:name=".tuijian.TuiJianFanxianActivity"
             android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".register.RegisterActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".findpwd.FindPwdActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".login.LoginActivity"
+            android:screenOrientation="portrait"></activity>
 
     </application>
 
