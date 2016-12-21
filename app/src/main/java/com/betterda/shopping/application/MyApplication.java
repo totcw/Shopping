@@ -3,6 +3,7 @@ package com.betterda.shopping.application;
 import android.app.Activity;
 import android.app.Application;
 
+import com.baidu.mapapi.SDKInitializer;
 import com.betterda.shopping.bus.model.Bus;
 
 import java.util.ArrayList;
@@ -27,6 +28,9 @@ public class MyApplication extends Application {
         if (null == busList) {
             busList = new ArrayList<>();
         }
+
+        //百度地图
+        SDKInitializer.initialize(getApplicationContext());
 
     }
 

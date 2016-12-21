@@ -76,4 +76,11 @@ dependencies {
     compile 'com.zcw:togglebutton-library:1.0.0'
     compile 'com.zhy:flowlayout-lib:1.0.3'
     compile files('libs/core-3.1.0.jar')
+    compile files('libs/BaiduLBS_Android.jar')
+    compile files('libs/baidumapapi_base_v4_1_1.jar')
+    compile files('libs/baidumapapi_cloud_v4_1_1.jar')
+    compile files('libs/baidumapapi_map_v4_1_1.jar')
+    compile files('libs/baidumapapi_radar_v4_1_1.jar')
+    compile files('libs/baidumapapi_search_v4_1_1.jar')
+    compile files('libs/baidumapapi_util_v4_1_1.jar')
 }
