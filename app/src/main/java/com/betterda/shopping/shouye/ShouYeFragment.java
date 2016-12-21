@@ -44,6 +44,7 @@ public class ShouYeFragment extends BaseFragment<ShouYeContract.Presenter> imple
     LoadingPager mLoadpagerShouye;
     private View mViewLunbotu; //轮播图
     private View mViewSecond;//第二区域的view
+    private View mViewThree;
     private ViewPager mVpLunbotu;
     private LinearLayout mLinearFirst;
 
@@ -64,7 +65,10 @@ public class ShouYeFragment extends BaseFragment<ShouYeContract.Presenter> imple
         initLunbotu();
         //加载第二区域
         initSecond();
+        //加载第三区域
+        initThree();
     }
+
 
 
     @Override
@@ -108,6 +112,10 @@ public class ShouYeFragment extends BaseFragment<ShouYeContract.Presenter> imple
         mFrameShouyeSecond.addView(mViewSecond);
     }
 
+    private void initThree() {
+        mViewThree = View.inflate(getmActivity(), R.layout.view_three, null);
+        mFrameShouyeThree.addView(mViewThree);
+    }
 
 
     /**
