@@ -1,13 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="@color/bg"
-    android:layout_height="match_parent">
+    android:id="@+id/linear_shouye"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="首页"
-        />
+    <RelativeLayout
+        android:id="@+id/relative_shouye2_title"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/backgroudyellow"
+
+        >
+        <ImageView
+            android:id="@+id/iv_shouye2_title"
+            android:layout_width="82dp"
+            android:layout_height="21dp"
+            android:layout_centerInParent="true"
+            />
+
+
+        <LinearLayout
+            android:layout_toLeftOf="@id/iv_shouye2_title"
+            android:id="@+id/linear_location"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="16dp"
+            android:gravity="center_vertical">
+
+            <ImageView
+
+                android:layout_width="12dp"
+                android:layout_height="16dp"
+                android:background="@mipmap/location_title_icon" />
+
+            <TextView
+                android:id="@+id/tv_shouye_city"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:layout_marginLeft="6dp"
+                android:text="定位失败"
+                android:textColor="@color/activityMainPressed"
+                android:textSize="@dimen/textsize_xlarge" />
+
+
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:layout_marginRight="10dp"
+            android:layout_centerVertical="true"
+            android:id="@+id/relative_shouye_message"
+            android:padding="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_centerInParent="true"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:background="@drawable/message_selector" />
+
+
+
+        </RelativeLayout>
+
+
+        <ImageView
+            android:layout_toLeftOf="@id/relative_shouye_message"
+            android:id="@+id/iv_shouye_search"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:background="@mipmap/search_icon" />
+
+
+    </RelativeLayout>
+
+        <FrameLayout
+            android:id="@+id/frame_shouye"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+          >
+
+
+            <ScrollView
+                android:background="@color/backgroudGray"
+                android:id="@+id/myscrollview"
+                android:scrollbars="none"
+                android:overScrollMode="never"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <FrameLayout
+                        android:id="@+id/frame_shouye_lunbotu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    </FrameLayout>
+                    <FrameLayout
+                        android:id="@+id/frame_shouye_second"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    </FrameLayout>
+                    <View
+                        android:background="@color/divierLine"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp">
+
+                    </View>
+                    <FrameLayout
+                        android:layout_marginTop="10dp"
+                        android:id="@+id/frame_shouye_three"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    </FrameLayout>
+
+
+                </LinearLayout>
+
+
+            </ScrollView>
+
+            <com.betterda.mylibrary.LoadingPager
+                android:id="@+id/loadpager_shouye"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </com.betterda.mylibrary.LoadingPager>
+
+
+        </FrameLayout>
+
+
+
 
 </LinearLayout>

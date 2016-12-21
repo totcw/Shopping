@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:orientation="horizontal"
+                android:paddingTop="15dp">
+
+                <RelativeLayout
+
+                    android:id="@+id/relative_tjq"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <ImageView
+
+                        android:id="@+id/iv_main_second"
+                        android:layout_width="@dimen/iv_main_second"
+                        android:layout_height="@dimen/iv_main_second"
+                        android:layout_centerHorizontal="true"
+                        android:background="@mipmap/white_wine"
+                        android:scaleType="fitXY" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/iv_main_second"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="5dp"
+                        android:text="白酒"
+                        android:textColor="@color/shouye_renmen_tv"
+                        android:textSize="@dimen/textsize_small" />
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/relative_zpjy"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/iv_main_second2"
+                        android:layout_width="@dimen/iv_main_second"
+                        android:layout_height="@dimen/iv_main_second"
+                        android:layout_centerHorizontal="true"
+                        android:background="@mipmap/red_wine"
+                        android:scaleType="fitXY" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/iv_main_second2"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="5dp"
+                        android:text="4S店"
+                        android:textColor="@color/shouye_renmen_tv"
+                        android:textSize="@dimen/textsize_small" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/relative_qcjy"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/iv_main_second3"
+                        android:layout_width="@dimen/iv_main_second"
+                        android:layout_height="@dimen/iv_main_second"
+                        android:layout_centerHorizontal="true"
+                        android:background="@mipmap/yang_wine"
+                        android:scaleType="fitXY" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/iv_main_second3"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="5dp"
+                        android:text="二手车"
+                        android:textColor="@color/shouye_renmen_tv"
+                        android:textSize="@dimen/textsize_small" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/relative_xiuc"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/iv_main_second4"
+                        android:layout_width="@dimen/iv_main_second"
+                        android:layout_height="@dimen/iv_main_second"
+                        android:layout_centerHorizontal="true"
+                        android:background="@mipmap/sort_wine"
+                        android:scaleType="fitXY" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/iv_main_second4"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="5dp"
+                        android:text="车辆租赁"
+                        android:textColor="@color/shouye_renmen_tv"
+                        android:textSize="@dimen/textsize_small" />
+                </RelativeLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp">
+
+                <RelativeLayout
+                    android:id="@+id/relative_xic"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/iv_main_second5"
+                        android:layout_width="@dimen/iv_main_second"
+                        android:layout_height="@dimen/iv_main_second"
+                        android:layout_centerHorizontal="true"
+                        android:background="@mipmap/white_wine"
+                        android:scaleType="fitXY" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/iv_main_second5"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="5dp"
+                        android:text="车金融"
+                        android:textColor="@color/shouye_renmen_tv"
+                        android:textSize="@dimen/textsize_small" />
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/relative_jyz"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/iv_main_second6"
+                        android:layout_width="@dimen/iv_main_second"
+                        android:layout_height="@dimen/iv_main_second"
+                        android:layout_centerHorizontal="true"
+                        android:background="@mipmap/red_wine"
+                        android:scaleType="fitXY" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/iv_main_second6"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="5dp"
+                        android:text="车保险"
+                        android:textColor="@color/shouye_renmen_tv"
+                        android:textSize="@dimen/textsize_small" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/relative_xhfw"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/iv_main_second7"
+                        android:layout_width="@dimen/iv_main_second"
+                        android:layout_height="@dimen/iv_main_second"
+                        android:layout_centerHorizontal="true"
+                        android:background="@mipmap/yang_wine"
+                        android:scaleType="fitXY" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/iv_main_second7"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="5dp"
+                        android:text="油站商店"
+                        android:textColor="@color/shouye_renmen_tv"
+                        android:textSize="@dimen/textsize_small" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/relative_dj"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/iv_main_second8"
+                        android:layout_width="@dimen/iv_main_second"
+                        android:layout_height="@dimen/iv_main_second"
+                        android:layout_centerHorizontal="true"
+                        android:background="@mipmap/sort_wine"
+                        android:scaleType="fitXY" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/iv_main_second8"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="5dp"
+                        android:text="生活缴费"
+                        android:textColor="@color/shouye_renmen_tv"
+                        android:textSize="@dimen/textsize_small" />
+                </RelativeLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+</LinearLayout>

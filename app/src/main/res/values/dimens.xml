@@ -13,4 +13,5 @@
     <dimen name="textsize_xlarge">16.0sp</dimen>
     <dimen name="textsize_xxlarge">17.0sp</dimen>
     <dimen name="textsize_largest">20.0sp</dimen>
+    <dimen name="iv_main_second">48dp</dimen> <!--首页第2块区域的图片的大小-->
 </resources>
