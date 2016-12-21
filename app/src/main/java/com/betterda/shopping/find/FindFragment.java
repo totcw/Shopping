@@ -28,6 +28,9 @@ import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.map.TextureMapView;
 import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.navi.BaiduMapAppNotSupportNaviException;
+import com.baidu.mapapi.navi.BaiduMapNavigation;
+import com.baidu.mapapi.navi.NaviParaOption;
 import com.baidu.mapapi.search.core.SearchResult;
 import com.baidu.mapapi.search.route.BikingRouteResult;
 import com.baidu.mapapi.search.route.DrivingRouteResult;
@@ -101,7 +104,7 @@ public class FindFragment extends BaseFragment<FindContract.Presenter> implement
         super.onHiddenChanged(hidden);
         if (hidden) {//隐藏
         } else {
-            StatusBarCompat.setStatusBar5(getmActivity(),R.color.white);
+            StatusBarCompat.setStatusBar5(getmActivity(), R.color.white);
         }
     }
 
@@ -175,8 +178,29 @@ public class FindFragment extends BaseFragment<FindContract.Presenter> implement
      */
     @Override
     public boolean onMarkerClick(Marker marker) {
+        //吊起百度地图
+/*        // 构建 导航参数
+// 天安门坐标
+        double mLat1 = 39.915291;
+        double mLon1 = 116.403857;
+// 百度大厦坐标
+        double mLat2 = 40.056858;
+        double mLon2 = 116.308194;
+        LatLng pt1 = new LatLng(mLat1, mLon1);
+        LatLng pt2 = new LatLng(mLat2, mLon2);
 
-        //showInfoWindow(marker.getPosition());
+        NaviParaOption para = new NaviParaOption()
+                .startPoint(pt1).endPoint(pt2)
+                .startName("天安门").endName("百度大厦");
+
+        try {
+// 调起百度地图步行导航
+            BaiduMapNavigation.openBaiduMapWalkNavi(para, getmActivity());
+        } catch (BaiduMapAppNotSupportNaviException e) {
+            e.printStackTrace();
+
+        }*/
+        showInfoWindow(marker.getPosition());
         showRoteLine(marker.getPosition());
         return false;
     }
@@ -303,7 +327,6 @@ public class FindFragment extends BaseFragment<FindContract.Presenter> implement
 
         }
     };
-
 
 
     /**
