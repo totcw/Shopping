@@ -2,9 +2,17 @@ package com.betterda.shopping.application;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.net.Uri;
+import android.os.Build;
+import android.provider.Settings;
 
 import com.baidu.mapapi.SDKInitializer;
 import com.betterda.shopping.bus.model.Bus;
+import com.betterda.shopping.home.MainActivity;
+import com.betterda.shopping.utils.PermissionUtil;
+import com.betterda.shopping.utils.UiUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +40,13 @@ public class MyApplication extends Application {
         //百度地图
         SDKInitializer.initialize(getApplicationContext());
 
+        System.out.println("applica");
+
+
+
     }
+
+
 
     /**
      * 将activity添加到容器中
@@ -89,4 +103,7 @@ public class MyApplication extends Application {
     public void setBusList(List<Bus> busList) {
         this.busList = busList;
     }
+
+
+
 }

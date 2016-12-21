@@ -85,6 +85,7 @@ public class UiUtils {
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
                         if (listener != null) {
                             listener.comfirmDialog();
                         }
@@ -93,6 +94,8 @@ public class UiUtils {
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+
                         if (listener != null) {
                             listener.exitDialog();
                         }

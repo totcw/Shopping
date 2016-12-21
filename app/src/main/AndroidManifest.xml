@@ -41,7 +41,7 @@
             android:value="4AD6iSK8q9XB7vwVHHFWkw6egj2iTIwP" />
 
         <activity
-            android:name=".home.MainActivity"
+            android:name=".welcome.WelcomeActivity"
             android:windowSoftInputMode="adjustPan|stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -49,6 +49,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".home.MainActivity"
+            android:screenOrientation="portrait"></activity>
 
         <activity
             android:name=".productdetails.ProductDetailActivity"
