@@ -45,10 +45,8 @@ public interface View extends IView{
     String getEndPrice();
 
     String getBusText();
-
     void addBus(int amount);
 
-    void setBusVisable(boolean visable);
 }
 
 public interface Presenter extends IPresenter<View>{

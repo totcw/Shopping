@@ -60,10 +60,7 @@ public class SortFragment extends BaseFragment<SortContract.Presenter> implement
     LoadingPager mLoadPagerSortName;
     @BindView(R.id.loadpager_fragment_sort)
     LoadingPager mLoadPagerSort;
-    @BindView(R.id.relative_layout_bus)
-    RelativeLayout mRelativeBus;
-    @BindView(R.id.tv_layout_bus)
-    TextView mTvBus;
+
 
     /**
      * popuwindow筛选条件界面的相关view
@@ -117,7 +114,7 @@ public class SortFragment extends BaseFragment<SortContract.Presenter> implement
     }
 
 
-    @OnClick({R.id.et_search, R.id.mfiv_twotool_fist, R.id.mfiv_twotool_second, R.id.linear_fragment_sort,R.id.relative_layout_bus})
+    @OnClick({R.id.et_search, R.id.mfiv_twotool_fist, R.id.mfiv_twotool_second, R.id.linear_fragment_sort})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.et_search://搜索
@@ -134,11 +131,7 @@ public class SortFragment extends BaseFragment<SortContract.Presenter> implement
             case R.id.linear_fragment_sort://类别的rv
                 close();
                 break;
-            case R.id.relative_layout_bus://购物车
-                if (!close()) {
-                    UiUtils.startIntent(getmActivity(), ProductDetailActivity.class);
-                }
-                break;
+
 
         }
     }
@@ -307,37 +300,31 @@ public class SortFragment extends BaseFragment<SortContract.Presenter> implement
 
     }
 
-    /**
-     * 设置购物车是否可见
-     * @param visable
-     */
-    public void setBusVisable(boolean visable) {
-        mTvBus.setVisibility(visable?View.VISIBLE:View.GONE);
-    }
 
-    /**
+
+/*    *
      * 增加购物车的数量
      * @param amount
      */
     public void addBus(int amount) {
-        String trim = mTvBus.getText().toString().trim();
+        String trim = ((MainActivity)getmActivity()).getmBvMain().getBusText();
         try {
             int count = Integer.parseInt(trim) + amount;
-            mTvBus.setText(count+"");
-            setBusVisable(true);
+            ((MainActivity)getmActivity()).getmBvMain().setTvBusText(count+"");
+            ((MainActivity)getmActivity()).getmBvMain().setTvBusVisable(true);
         } catch (Exception e) {
 
         }
     }
 
-    /**
+/*    *
      * 获取购物车的数量
      * @return
      */
     public String getBusText() {
-        return mTvBus.getText().toString().trim();
-    }
+       return ((MainActivity)getmActivity()).getmBvMain().getBusText();
 
+    }
 
 
     /**

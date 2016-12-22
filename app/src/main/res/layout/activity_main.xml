@@ -55,13 +55,24 @@
     </LinearLayout>
 
     <FrameLayout
-
-        android:id="@+id/frame_activity_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/linear_activity_main">
 
+        <FrameLayout
+
+            android:id="@+id/frame_activity_main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </FrameLayout>
+
+        <com.betterda.shopping.widget.BusView
+            android:id="@+id/bv_main"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="20dp"></com.betterda.shopping.widget.BusView>
     </FrameLayout>
-
-
 </RelativeLayout>

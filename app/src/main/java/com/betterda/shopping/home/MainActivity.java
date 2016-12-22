@@ -12,6 +12,7 @@ import com.betterda.shopping.home.contract.HomeContract;
 import com.betterda.shopping.home.presenter.HomePresenterImpl;
 import com.betterda.shopping.utils.UiUtils;
 import com.betterda.shopping.welcome.WelcomeActivity;
+import com.betterda.shopping.widget.BusView;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -34,6 +35,9 @@ public class MainActivity extends BaseActivity<HomeContract.Presenter> implement
     LinearLayout mLinearActivityMain;
     @BindView(R.id.frame_activity_main)
     FrameLayout mFrameActivityMain;
+
+    @BindView(R.id.bv_main)
+    BusView mBvMain;//购物车
 
     @Override
     public void initView() {
@@ -137,5 +141,9 @@ public class MainActivity extends BaseActivity<HomeContract.Presenter> implement
 
     }
 
+
+    public BusView getmBvMain() {
+        return mBvMain;
+    }
 
 }
