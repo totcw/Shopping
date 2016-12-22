@@ -68,7 +68,11 @@ public class InformationActivity extends BaseActivity<InformationContract.Presen
         setContentView(R.layout.activity_information);
     }
 
-
+    @Override
+    public void init() {
+        super.init();
+        mTopbarInformation.setTitle("个人资料");
+    }
 
     @OnClick({R.id.relative_information_touxiang, R.id.linear_information_name,R.id.bar_back})
     public void onClick(View view) {

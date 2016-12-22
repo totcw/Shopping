@@ -7,6 +7,7 @@ import android.widget.LinearLayout;
 
 import com.betterda.shopping.R;
 import com.betterda.shopping.base.BaseActivity;
+import com.betterda.shopping.findpwd.FindPwdActivity;
 import com.betterda.shopping.information.InformationActivity;
 import com.betterda.shopping.setting.contract.SettingContract;
 import com.betterda.shopping.setting.presenter.SettingPresenterImpl;
@@ -46,17 +47,27 @@ public class SettingActivity extends BaseActivity<SettingContract.Presenter> imp
     }
 
 
-    @OnClick({R.id.linear_setting_ziliao, R.id.linear_setting_editpwd, R.id.linear_setting_us, R.id.btn_setting_exit})
+    @Override
+    public void init() {
+        super.init();
+        topbarSetting.setTitle("设置");
+    }
+
+    @OnClick({R.id.linear_setting_ziliao,R.id.bar_back, R.id.linear_setting_editpwd, R.id.linear_setting_us, R.id.btn_setting_exit})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.linear_setting_ziliao:
                 UiUtils.startIntent(getmActivity(), InformationActivity.class);
                 break;
             case R.id.linear_setting_editpwd:
+                UiUtils.startIntent(getmActivity(), FindPwdActivity.class);
                 break;
             case R.id.linear_setting_us:
                 break;
             case R.id.btn_setting_exit:
+                break;
+            case R.id.bar_back:
+                back();
                 break;
         }
     }
