@@ -16,8 +16,10 @@ import com.betterda.mylibrary.LoadingPager;
 import com.betterda.mylibrary.Utils.StatusBarCompat;
 import com.betterda.shopping.R;
 import com.betterda.shopping.base.BaseFragment;
+import com.betterda.shopping.location.LocationActivity;
 import com.betterda.shopping.shouye.contract.ShouYeContract;
 import com.betterda.shopping.shouye.presenter.ShouYePresenterImpl;
+import com.betterda.shopping.utils.UiUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -86,6 +88,7 @@ public class ShouYeFragment extends BaseFragment<ShouYeContract.Presenter> imple
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.linear_location:
+                UiUtils.startIntent(getmActivity(), LocationActivity.class);
                 break;
             case R.id.relative_shouye_message:
                 break;

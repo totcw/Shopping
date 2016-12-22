@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/transparent"
+    android:layout_height="match_parent">
+
+        <FrameLayout
+            android:visibility="invisible"
+            android:id="@+id/frame_pp_choseaddress"
+            android:background="@android:color/transparent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <android.support.v7.widget.RecyclerView
+
+                android:id="@+id/rv_pp_choseaddress"
+                android:background="#ffffff"
+                android:overScrollMode="never"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent">
+
+            </android.support.v7.widget.RecyclerView>
+
+            <com.betterda.mylibrary.LoadingPager
+                android:id="@+id/loadpager_pp_choseaddress"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent">
+
+            </com.betterda.mylibrary.LoadingPager>
+        </FrameLayout>
+
+
+
+</merge>

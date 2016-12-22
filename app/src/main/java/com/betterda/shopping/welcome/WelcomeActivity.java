@@ -17,12 +17,15 @@ import com.betterda.shopping.dialog.DeleteDialog;
 import com.betterda.shopping.dialog.PermissionDialog;
 import com.betterda.shopping.home.MainActivity;
 import com.betterda.shopping.utils.PermissionUtil;
+import com.betterda.shopping.utils.RxBus;
+import com.betterda.shopping.utils.RxManager;
 import com.betterda.shopping.utils.UiUtils;
 
 import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
+import rx.functions.Action1;
 
 /**
  * 欢迎页面
@@ -35,7 +38,7 @@ public class WelcomeActivity extends AppCompatActivity {
     private HashMap<String,String> map;//管理权限的map
     private static final int REQUEST_PERMISSION_CODE_TAKE_PIC = 9; //权限的请求码
     private static final int REQUEST_PERMISSION_SEETING = 8; //去设置界面的请求码
-
+    protected RxManager mRxManager;
     @BindView(R.id.iv_welcome)
     ImageView mIvWelcome;
     private PermissionDialog permissionDialog;//权限请求对话框
@@ -45,21 +48,28 @@ public class WelcomeActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
-
+        initRxBus();
         if (Build.VERSION.SDK_INT < 23) {
             //6.0一下直接去主页
             UiUtils.startIntent(this, MainActivity.class);
             finish();
         } else {
             //6.0以上请求权限
-
             checkPermiss();
-
-
         }
     }
 
+    private void initRxBus() {
+        mRxManager = new RxManager();
+        mRxManager.on(WelcomeActivity.class.getSimpleName(), new Action1<Object>() {
+            @Override
+            public void call(Object o) {
+                System.out.println("ss");
+                finish();
+            }
+        });
 
+    }
 
 
     /**
@@ -245,5 +255,12 @@ public class WelcomeActivity extends AppCompatActivity {
         if ( permissionDialog!= null) {
             permissionDialog.dismiss();
         }
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mRxManager.clear();
     }
 }

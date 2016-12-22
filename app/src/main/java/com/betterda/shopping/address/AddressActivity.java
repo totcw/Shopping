@@ -48,6 +48,7 @@ public class AddressActivity extends BaseActivity<AddressContract.Presenter> imp
         super.init();
         mTopBarAddress.setTitle("常用地址");
         mTopBarAddress.setActionText("添加");
+        mTopBarAddress.setActionTextVisibility(true);
 
     }
 

@@ -11,6 +11,7 @@ import com.betterda.shopping.base.BaseActivity;
 import com.betterda.shopping.home.contract.HomeContract;
 import com.betterda.shopping.home.presenter.HomePresenterImpl;
 import com.betterda.shopping.utils.UiUtils;
+import com.betterda.shopping.welcome.WelcomeActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -127,4 +128,14 @@ public class MainActivity extends BaseActivity<HomeContract.Presenter> implement
     public IndicatorView getmIdvShouye() {
         return mIdvShouye;
     }
+
+    @Override
+    public void onBackPressed() {
+        //发送广播 关闭欢迎页面
+        mRxManager.post(WelcomeActivity.class.getSimpleName(),"finish");
+        super.onBackPressed();
+
+    }
+
+
 }

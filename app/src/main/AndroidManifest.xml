@@ -129,6 +129,9 @@
         <activity
             android:name=".login.LoginActivity"
             android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".location.LocationActivity"
+            android:screenOrientation="portrait"></activity>
 
 
         <!--百度地图服务-->

@@ -33,6 +33,7 @@
             android:textSize="14sp" />
 
         <TextView
+            android:visibility="gone"
             android:layout_marginLeft="15dp"
             android:padding="3dp"
             android:id="@+id/tv_address_moren"
