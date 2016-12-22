@@ -39,7 +39,7 @@ import butterknife.OnClick;
  */
 
 public class InformationActivity extends BaseActivity<InformationContract.Presenter> implements InformationContract.View {
-    private String[] REQUEST_PERMISSIONS = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.CAMERA};
+    private String[] REQUEST_PERMISSIONS = new String[]{Manifest.permission.CAMERA};
     private static final int REQUEST_PERMISSION_CODE_TAKE_PIC = 9; //权限的请求码
     private static final int REQUEST_PERMISSION_SEETING = 8; //去设置界面的请求码
 

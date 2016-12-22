@@ -123,6 +123,8 @@ public class LocationActivity extends BaseActivity<LocationContract.Presenter> i
     @Override
     public void init() {
         super.init();
+        mLinearSearch.setBackgroundColor(getResources().getColor(R.color.backgroudyellow));
+
         initSuggestionAndLocation();
         list = new ArrayList<>();
         listLocation = new ArrayList<>();
@@ -392,7 +394,7 @@ public class LocationActivity extends BaseActivity<LocationContract.Presenter> i
             return;
         }
         Intent intent = new Intent();
-        intent.putExtra("city", city);
+        intent.putExtra("address", city);
         intent.putExtra("longitude",longitude);
         intent.putExtra("dimension",dimension);
         setResult(0, intent);

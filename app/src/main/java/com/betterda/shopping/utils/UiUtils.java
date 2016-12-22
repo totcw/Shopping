@@ -141,6 +141,17 @@ public class UiUtils {
         setOverdepengingIn((Activity) context);
     }
 
+    /**
+     * 跳转activity带返回参数
+     *
+     * @param context
+     * @param intent
+     */
+    public static  void startIntentForResult(Context context, Intent intent,int resquetCode) {
+        ((Activity)context).startActivityForResult(intent,resquetCode);
+        setOverdepengingIn((Activity) context);
+    }
+
 
     /**
      * 带伸缩动画的跳转

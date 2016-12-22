@@ -1,5 +1,6 @@
 package com.betterda.shopping.shouye;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -17,6 +18,7 @@ import com.betterda.mylibrary.Utils.StatusBarCompat;
 import com.betterda.shopping.R;
 import com.betterda.shopping.base.BaseFragment;
 import com.betterda.shopping.location.LocationActivity;
+import com.betterda.shopping.search.SearchActivity;
 import com.betterda.shopping.shouye.contract.ShouYeContract;
 import com.betterda.shopping.shouye.presenter.ShouYePresenterImpl;
 import com.betterda.shopping.utils.UiUtils;
@@ -88,11 +90,14 @@ public class ShouYeFragment extends BaseFragment<ShouYeContract.Presenter> imple
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.linear_location:
-                UiUtils.startIntent(getmActivity(), LocationActivity.class);
+                Intent intent = new Intent(getmActivity(), LocationActivity.class);
+                startActivityForResult(intent,0);
+                UiUtils.setOverdepengingIn(getmActivity());
                 break;
             case R.id.relative_shouye_message:
                 break;
             case R.id.iv_shouye_search:
+                UiUtils.startIntent(getmActivity(), SearchActivity.class);
                 break;
         }
     }
@@ -139,4 +144,15 @@ public class ShouYeFragment extends BaseFragment<ShouYeContract.Presenter> imple
         return mVpLunbotu;
     }
 
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 0) {
+            if (data != null) {
+                String address = data.getStringExtra("address");
+                mTvShouyeCity.setText(address);
+            }
+        }
+    }
 }
