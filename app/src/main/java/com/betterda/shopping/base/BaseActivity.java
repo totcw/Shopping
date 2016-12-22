@@ -1,5 +1,6 @@
 package com.betterda.shopping.base;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
@@ -16,8 +17,13 @@ import android.widget.PopupWindow;
 
 import com.betterda.mylibrary.Utils.StatusBarCompat;
 import com.betterda.shopping.R;
+import com.betterda.shopping.application.MyApplication;
+import com.betterda.shopping.utils.PermissionUtil;
 import com.betterda.shopping.utils.RxManager;
 import com.betterda.shopping.utils.UiUtils;
+import com.betterda.shopping.welcome.WelcomeActivity;
+
+import java.util.List;
 
 import butterknife.ButterKnife;
 
@@ -27,7 +33,8 @@ import butterknife.ButterKnife;
  */
 
 public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivity implements IView {
-
+    private String[] REQUEST_PERMISSIONS = new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+    private static final int REQUEST_PERMISSION_CODE_TAKE_PIC = 9; //权限的请求码
     protected P mPresenter;
     protected RxManager mRxManager;
     private PopupWindow popupWindow;
@@ -52,6 +59,26 @@ public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivi
             getPresenter().start();
         }
 
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //统一检查权限
+        PermissionUtil.checkPermission(getmActivity(), REQUEST_PERMISSIONS,  new PermissionUtil.permissionInterface() {
+            @Override
+            public void success() {
+
+            }
+
+            @Override
+            public void fail(List<String> permissions) {
+                    //没有权限就回到欢迎页面
+                UiUtils.startIntent(getmActivity(), WelcomeActivity.class);
+
+            }
+        });
     }
 
     /**
@@ -197,6 +224,7 @@ public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivi
         }
         mRxManager.clear();
         closePopupWindow();
+
         super.onDestroy();
     }
 

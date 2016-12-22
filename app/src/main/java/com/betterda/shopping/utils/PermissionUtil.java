@@ -23,38 +23,19 @@ public class PermissionUtil {
     /**
      * Detection authority
      * @param activity
-     * @param view //Just a view to use display snackbar
      * @param permissions  //Requested permission group
-     * @param requestCode  //Request code
      */
-    public  static void checkPermission(final Activity activity, final View view, final String[] permissions, final int requestCode, permissionInterface permissionInterface) {
+    public  static void checkPermission(final Activity activity, final String[] permissions, permissionInterface permissionInterface) {
         //Less than 23 do nothing.
         if (Build.VERSION.SDK_INT < 23) {
             return;
         }
         final List<String> deniedPermissions = findDeniedPermissions(activity, permissions);
-        System.out.println("size:"+deniedPermissions.size());
+
         if (deniedPermissions!=null&&deniedPermissions.size()>0) {
             //Greater than 0, said there is no application for permission
-           /* UiUtils.showDialog("开启酒品仓", "为了您能正常使用酒品仓,需要一下权限:位置信息,存储空间", new UiUtils.showDialogListener() {
-                @Override
-                public void exitDialog() {
 
-                }
-
-                @Override
-                public void comfirmDialog() {
-                    requestContactsPermissions(activity, view,  deniedPermissions.toArray(new String[deniedPermissions.size()]), requestCode);
-                }
-            });*/
-
-            DeleteDialog deleteDialog = new DeleteDialog(activity, new DeleteDialog.onConfirmListener() {
-                @Override
-                public void comfirm() {
-                    requestContactsPermissions(activity, view,  deniedPermissions.toArray(new String[deniedPermissions.size()]), requestCode);
-                }
-            });
-            deleteDialog.show();
+            permissionInterface.fail(deniedPermissions);
 
         } else {
             //have authority
@@ -71,21 +52,13 @@ public class PermissionUtil {
     /**
      * Request permission
      */
-    public static void requestContactsPermissions(final Activity activity, View view, final String[] permissions, final int requestCode) {
+    public static void requestContactsPermissions(final Activity activity,  final String[] permissions, final int requestCode) {
         //The default is false, but as long as the request once permission will be true, unless the point is no longer asked to be re changed to false
         if (shouldShowPermissions(activity,permissions)) {
 
-            Snackbar.make(view, "need some permission",
-                    Snackbar.LENGTH_INDEFINITE)
-                    .setAction("OK", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            ActivityCompat
-                                    .requestPermissions(activity, permissions,
-                                            requestCode);
-                        }
-                    })
-                    .show();
+            ActivityCompat
+                    .requestPermissions(activity, permissions,
+                            requestCode);
         } else {
 
             // No need to prompt the user interface, the direct request permissions, if the user points are no longer asked, even if the request does not have the right to request permissions dialog box
@@ -120,6 +93,8 @@ public class PermissionUtil {
 
     public interface permissionInterface{
         void success();
+
+        void fail(List<String> permissions);
     }
 
     /**
@@ -136,7 +111,7 @@ public class PermissionUtil {
         {
             if (ContextCompat.checkSelfPermission(activity,value) != PackageManager.PERMISSION_GRANTED)
             {
-                System.out.println("has");
+
                 //Add without permission
                 denyPermissions.add(value);
             }

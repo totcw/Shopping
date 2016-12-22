@@ -40,8 +40,6 @@ public class MyApplication extends Application {
         //百度地图
         SDKInitializer.initialize(getApplicationContext());
 
-        System.out.println("applica");
-
 
 
     }

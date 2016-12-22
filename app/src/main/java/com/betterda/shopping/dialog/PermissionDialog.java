@@ -11,16 +11,17 @@ import com.betterda.shopping.R;
 
 
 /**
+ * 权限管理兑换框
  * Created by Administrator on 2016/5/19.
  */
-public class DeleteDialog {
+public class PermissionDialog {
     private Context mContext;
     private Dialog mDialog;
     private View mDialogContentView;
     private TextView tv_content;
     private onConfirmListener listener;
 
-    public DeleteDialog(Context context, onConfirmListener listener) {
+    public PermissionDialog(Context context, onConfirmListener listener) {
         this.mContext = context;
         this.listener = listener;
         init();
@@ -31,10 +32,10 @@ public class DeleteDialog {
     private void init() {
         mDialog = new Dialog(mContext, R.style.custom_dialog2);
 
-        mDialogContentView= LayoutInflater.from(mContext).inflate(R.layout.dialog_delete,null);
-        Button btn_quxiao = (Button) mDialogContentView.findViewById(R.id.btn_dialog_delete_quxiao);
-        Button btn_comfirm = (Button) mDialogContentView.findViewById(R.id.btn_dialog_delete_comfrim);
-        tv_content = (TextView) mDialogContentView.findViewById(R.id.tv_dialog_delete);
+        mDialogContentView= LayoutInflater.from(mContext).inflate(R.layout.dialog_permission,null);
+        Button btn_quxiao = (Button) mDialogContentView.findViewById(R.id.btn_dialog_permission_quxiao);
+        Button btn_comfirm = (Button) mDialogContentView.findViewById(R.id.btn_dialog_permission_comfrim);
+        tv_content = (TextView) mDialogContentView.findViewById(R.id.tv_dialog_permission_content);
         btn_quxiao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
