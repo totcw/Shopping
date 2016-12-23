@@ -19,6 +19,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
+ * 立即推荐
  * Created by Administrator on 2016/12/20.
  */
 
