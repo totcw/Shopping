@@ -2,6 +2,7 @@ package com.betterda.shopping.my;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import com.betterda.shopping.address.AddressActivity;
 import com.betterda.shopping.base.BaseFragment;
 import com.betterda.shopping.findpwd.FindPwdActivity;
 import com.betterda.shopping.findpwd.contract.FindPwdContract;
+import com.betterda.shopping.home.MainActivity;
 import com.betterda.shopping.login.LoginActivity;
 import com.betterda.shopping.my.contract.MyContract;
 import com.betterda.shopping.my.presenter.MyPresenterImpl;
@@ -32,6 +34,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
+ * 我的
  * Created by Administrator on 2016/12/8.
  */
 
@@ -96,6 +99,7 @@ public class MyFragment extends BaseFragment<MyContract.Presenter> implements My
 
         } else {
             StatusBarCompat.setStatusBar5(getmActivity(), R.color.backgroudyellow);
+            ((MainActivity)getmActivity()).getmBvMain().setVisibility(View.GONE);
         }
     }
 
@@ -144,7 +148,9 @@ public class MyFragment extends BaseFragment<MyContract.Presenter> implements My
                 UiUtils.startIntent(getmActivity(), MyTuijianActivity.class);
                 break;
             case R.id.relative_my_kefu://常用地址
-                UiUtils.startIntent(getmActivity(), AddressActivity.class);
+                Intent intent = new Intent(getmActivity(), AddressActivity.class);
+                intent.putExtra("isMy", true);
+                UiUtils.startIntent(getmActivity(), intent);
                 break;
         }
     }

@@ -47,6 +47,7 @@ import com.betterda.shopping.R;
 import com.betterda.shopping.base.BaseFragment;
 import com.betterda.shopping.find.contract.FindContract;
 import com.betterda.shopping.find.presenter.FindPresenterImpl;
+import com.betterda.shopping.home.MainActivity;
 import com.betterda.shopping.utils.UtilMethod;
 
 import butterknife.BindView;
@@ -105,6 +106,7 @@ public class FindFragment extends BaseFragment<FindContract.Presenter> implement
         if (hidden) {//隐藏
         } else {
             StatusBarCompat.setStatusBar5(getmActivity(), R.color.white);
+            ((MainActivity)getmActivity()).getmBvMain().setVisibility(View.GONE);
         }
     }
 

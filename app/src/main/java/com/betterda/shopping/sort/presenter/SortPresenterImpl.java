@@ -71,8 +71,10 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
                     holder.setOnClickListener(R.id.linear_item_sort_sort, new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            if (!getView().close())
+                            if (!getView().close()) {
                                 refreshState(holder);
+                                updateShopping();
+                            }
                         }
                     });
                 }
@@ -223,6 +225,15 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
 
         return mSortPAdapter;
     }
+
+
+    /**
+     * 根据类别更新商品
+     */
+    private void updateShopping() {
+
+    }
+
 
 
     private void getData() {

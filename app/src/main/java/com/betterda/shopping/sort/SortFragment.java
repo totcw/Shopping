@@ -109,7 +109,7 @@ public class SortFragment extends BaseFragment<SortContract.Presenter> implement
         if (hidden) {//隐藏
         } else {
             StatusBarCompat.setStatusBar5(getmActivity(),R.color.white);
-
+            ((MainActivity)getmActivity()).getmBvMain().setVisibility(View.VISIBLE);
         }
     }
 

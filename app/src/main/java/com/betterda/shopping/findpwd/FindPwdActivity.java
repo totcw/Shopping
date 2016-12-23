@@ -27,7 +27,7 @@ public class FindPwdActivity extends BaseActivity<FindPwdContract.Presenter> imp
     @BindView(R.id.et_register_yzm)
     EditText mEtRegisterYzm;
     @BindView(R.id.countdown_register)
-    CountDown countdownRegister;
+    CountDown mCountdownRegister;
     @BindView(R.id.et_register_pwd)
     EditText mEtRegisterPwd;
     @BindView(R.id.et_register_pwd2)
@@ -48,12 +48,16 @@ public class FindPwdActivity extends BaseActivity<FindPwdContract.Presenter> imp
     public void init() {
         super.init();
         mTopbarRegister.setTitle("修改密码");
+        mCountdownRegister.setSelected(true);
     }
 
     @OnClick({R.id.countdown_register, R.id.btn_register,R.id.bar_back})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.countdown_register:
+                if (mCountdownRegister.isSelected()) {
+                    getPresenter().countDown();
+                }
                 break;
             case R.id.btn_register:
                 break;
@@ -61,5 +65,10 @@ public class FindPwdActivity extends BaseActivity<FindPwdContract.Presenter> imp
                 back();
                 break;
         }
+    }
+
+    @Override
+    public void showCountDown() {
+        mCountdownRegister.showCountDown("秒后重新获取","60秒后重新获取");
     }
 }

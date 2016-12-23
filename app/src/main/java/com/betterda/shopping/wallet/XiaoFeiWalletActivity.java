@@ -20,11 +20,14 @@ public class XiaoFeiWalletActivity extends CashWalletActivity {
         mRelativeWallet2Chongzhi.setVisibility(View.GONE);
     }
 
-    @OnClick({ R.id.bar_action})
+    @OnClick({ R.id.bar_action,R.id.bar_back})
     public void onClick(View view) {
         switch (view.getId()) {
 
             case R.id.bar_action:
+                break;
+            case R.id.bar_back:
+                back();
                 break;
 
         }

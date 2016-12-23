@@ -15,6 +15,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
+ * 修改昵称
  * Created by Administrator on 2016/12/19.
  */
 
