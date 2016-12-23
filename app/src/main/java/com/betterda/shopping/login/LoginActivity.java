@@ -1,5 +1,6 @@
 package com.betterda.shopping.login;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -13,6 +14,11 @@ import com.betterda.shopping.login.presenter.LoginPresenterImpl;
 import com.betterda.shopping.register.RegisterActivity;
 import com.betterda.shopping.utils.UiUtils;
 import com.betterda.shopping.widget.NormalTopBar;
+import com.umeng.socialize.UMAuthListener;
+import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,6 +35,7 @@ public class LoginActivity extends BaseActivity<LoginContract.Presenter> impleme
     EditText mEtLoginNumber;
     @BindView(R.id.et_login_pwd)
     EditText mEtLoginPwd;
+
 
     @Override
     protected LoginContract.Presenter onLoadPresenter() {
@@ -47,7 +54,7 @@ public class LoginActivity extends BaseActivity<LoginContract.Presenter> impleme
         mTopbarLogin.setTitle("登录");
     }
 
-    @OnClick({R.id.tv_login_pwd,R.id.bar_back, R.id.btn_login, R.id.relative_login_register, R.id.relative_login_wx, R.id.relative_login_weibo, R.id.relative_login_QQ})
+    @OnClick({R.id.tv_login_pwd, R.id.bar_back, R.id.btn_login, R.id.relative_login_register, R.id.relative_login_wx, R.id.relative_login_weibo, R.id.relative_login_QQ})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_login_pwd://忘记密码
@@ -61,12 +68,45 @@ public class LoginActivity extends BaseActivity<LoginContract.Presenter> impleme
             case R.id.relative_login_wx:
                 break;
             case R.id.relative_login_weibo:
+                UMShareAPI mShareAPI = UMShareAPI.get(this);
+                mShareAPI.doOauthVerify(this, SHARE_MEDIA.SINA, umAuthListener);
                 break;
             case R.id.relative_login_QQ:
+
                 break;
             case R.id.bar_back:
                 back();
                 break;
         }
     }
+
+    /**
+     * 友盟的回调
+     */
+    UMAuthListener umAuthListener = new UMAuthListener() {
+        @Override
+        public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
+
+        }
+
+        @Override
+        public void onError(SHARE_MEDIA share_media, int i, Throwable throwable) {
+
+        }
+
+        @Override
+        public void onCancel(SHARE_MEDIA share_media, int i) {
+
+        }
+    };
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //qq需要
+        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
+    }
+
+
 }

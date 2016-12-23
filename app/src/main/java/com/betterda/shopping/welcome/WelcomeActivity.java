@@ -34,7 +34,8 @@ import rx.functions.Action1;
 
 public class WelcomeActivity extends AppCompatActivity {
 
-    private String[] REQUEST_PERMISSIONS = new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+    private String[] REQUEST_PERMISSIONS = new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.CALL_PHONE};
     private HashMap<String,String> map;//管理权限的map
     private static final int REQUEST_PERMISSION_CODE_TAKE_PIC = 9; //权限的请求码
     private static final int REQUEST_PERMISSION_SEETING = 8; //去设置界面的请求码
@@ -91,6 +92,8 @@ public class WelcomeActivity extends AppCompatActivity {
                     map = new HashMap<>();
                     map.put("android.permission.ACCESS_COARSE_LOCATION", "位置信息");
                     map.put("android.permission.WRITE_EXTERNAL_STORAGE", "存储空间");
+                    map.put("android.permission.CALL_PHONE", "打电话");
+
                 }
 
                 requestPermission(permissions.toArray(new String[permissions.size()]));

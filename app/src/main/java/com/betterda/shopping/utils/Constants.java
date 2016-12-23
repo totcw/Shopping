@@ -19,4 +19,8 @@ public class Constants {
 
        public  final static String URL="";
     }
+
+    public class WeiXin {
+        public static final String APP_ID ="";
+    }
 }
