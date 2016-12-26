@@ -1,5 +1,6 @@
 package com.betterda.shopping.tuijian;
 
+import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -14,6 +15,7 @@ import com.betterda.shopping.tuijian.presenter.LiJiTuijianPresenterImpl;
 import com.betterda.shopping.utils.ImageTools;
 import com.betterda.shopping.utils.UiUtils;
 import com.betterda.shopping.widget.NormalTopBar;
+import com.umeng.socialize.UMShareAPI;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -64,7 +66,12 @@ public class LiJiTuijianActivity extends BaseActivity<LiJiTuijianContract.Presen
 
     }
 
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //qq需要
+        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
+    }
     /**
      * 分享
      */

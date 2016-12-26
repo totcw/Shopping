@@ -1,5 +1,6 @@
 package com.betterda.shopping.productdetails;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
@@ -31,6 +32,7 @@ import com.betterda.shopping.utils.UiUtils;
 import com.betterda.shopping.utils.UtilMethod;
 import com.betterda.shopping.widget.AddAndSub;
 import com.betterda.shopping.widget.GradationScrollView;
+import com.umeng.socialize.UMShareAPI;
 import com.zhy.base.adapter.ViewHolder;
 import com.zhy.base.adapter.recyclerview.CommonAdapter;
 
@@ -191,7 +193,12 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailContract.Pr
         }
     }
 
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //qq需要
+        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
+    }
 
     /**
      * 设置5.0以上的着色状态栏

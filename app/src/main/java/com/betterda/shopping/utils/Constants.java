@@ -18,6 +18,9 @@ public class Constants {
     public static class Url {
 
        public  final static String URL="";
+        public static final String URL_REGISTER = " ";
+        public static final String URL_LOGIN = "";
+        public static final String URL_PWD_UPDATE = "";
     }
 
     public class WeiXin {

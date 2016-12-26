@@ -12,6 +12,8 @@ import com.betterda.shopping.findpwd.FindPwdActivity;
 import com.betterda.shopping.login.contract.LoginContract;
 import com.betterda.shopping.login.presenter.LoginPresenterImpl;
 import com.betterda.shopping.register.RegisterActivity;
+import com.betterda.shopping.utils.NetworkUtils;
+import com.betterda.shopping.utils.RxManager;
 import com.betterda.shopping.utils.UiUtils;
 import com.betterda.shopping.widget.NormalTopBar;
 import com.umeng.socialize.UMAuthListener;
@@ -46,6 +48,7 @@ public class LoginActivity extends BaseActivity<LoginContract.Presenter> impleme
     public void initView() {
         super.initView();
         setContentView(R.layout.activity_login);
+
     }
 
     @Override
@@ -61,6 +64,12 @@ public class LoginActivity extends BaseActivity<LoginContract.Presenter> impleme
                 UiUtils.startIntent(getmActivity(), FindPwdActivity.class);
                 break;
             case R.id.btn_login:
+                NetworkUtils.isNetWork(getmActivity(), mTopbarLogin, new NetworkUtils.SetDataInterface() {
+                    @Override
+                    public void getDataApi() {
+                        getPresenter().login();
+                    }
+                });
                 break;
             case R.id.relative_login_register:
                 UiUtils.startIntent(getmActivity(), RegisterActivity.class);
@@ -109,5 +118,9 @@ public class LoginActivity extends BaseActivity<LoginContract.Presenter> impleme
         UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
     }
 
+
+    public RxManager getRxManager() {
+        return mRxManager;
+    }
 
 }

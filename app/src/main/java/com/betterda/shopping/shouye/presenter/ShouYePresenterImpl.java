@@ -4,6 +4,7 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.view.MotionEvent;
@@ -13,9 +14,14 @@ import android.widget.LinearLayout;
 
 import com.betterda.shopping.R;
 import com.betterda.shopping.base.BasePresenter;
+import com.betterda.shopping.factory.LoadImageFactory;
+import com.betterda.shopping.shouye.adapter.LunBoTuAdapter;
 import com.betterda.shopping.shouye.contract.ShouYeContract;
 import com.betterda.shopping.shouye.model.LunBoTu;
+import com.betterda.shopping.utils.GlideCircleTransform;
+import com.betterda.shopping.utils.GlideRoundTransform;
 import com.betterda.shopping.utils.UtilMethod;
+import com.bumptech.glide.Glide;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -50,6 +56,8 @@ public class ShouYePresenterImpl extends BasePresenter<ShouYeContract.View,ShouY
             return;
         }
         stringList = new ArrayList<>();
+        stringList.add(new LunBoTu("http://www.meichebang.com.cn/xsnano_web/upload/files/20161024162309xE23Av0x.png","1"));
+        getView().initVpLunbotu(new LunBoTuAdapter(this));
       /*  RequestParams params = new RequestParams(Constants.URL_LUNBO);
         params.addBodyParameter("regionId", Constants.regiondId);
         GetNetUtil.getData(GetNetUtil.POST, params, new GetNetUtil.GetDataCallBack() {
@@ -297,7 +305,7 @@ public class ShouYePresenterImpl extends BasePresenter<ShouYeContract.View,ShouY
             if (null != stringList) {
                 String url = stringList.get(position).getUrl();
                 if (!TextUtils.isEmpty(url)) {
-
+                    LoadImageFactory.getLoadImageInterface().loadImageCrop(getView().getmActivity(),url,iv);
                 }
             }
             return iv;

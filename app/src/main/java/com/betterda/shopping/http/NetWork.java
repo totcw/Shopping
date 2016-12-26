@@ -41,9 +41,9 @@ public class NetWork {
      * 通过retrofit返回接口的实现类
      * @return
      */
-    public static NetService getNetService(Subscription subscription) {
+    public static NetService getNetService() {
 
-        unsubscribe(subscription);
+       // unsubscribe(subscription);
         if (netService == null) {
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(Constants.Url.URL)

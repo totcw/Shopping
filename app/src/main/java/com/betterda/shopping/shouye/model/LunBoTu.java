@@ -8,6 +8,14 @@ public class LunBoTu {
     private String url;
     private String id;
 
+    public LunBoTu(String url, String id) {
+        this.url = url;
+        this.id = id;
+    }
+
+    public LunBoTu() {
+    }
+
     public String getUrl() {
         return url;
     }
