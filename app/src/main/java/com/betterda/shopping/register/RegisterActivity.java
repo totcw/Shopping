@@ -17,6 +17,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
+ * 注册
  * Created by Administrator on 2016/12/20.
  */
 
@@ -64,10 +65,36 @@ public class RegisterActivity extends BaseActivity<RegisterContract.Presenter> i
                 mIvRegisterChoose.setSelected(!mIvRegisterChoose.isSelected());
                 break;
             case R.id.btn_register:
+                getPresenter().register();
                 break;
             case R.id.bar_back:
                 back();
                 break;
         }
+    }
+
+    @Override
+    public String getAccount() {
+        return mEtRegisterNumber.getText().toString().trim();
+    }
+
+    @Override
+    public String getYzm() {
+        return mEtRegisterYzm.getText().toString().trim();
+    }
+
+    @Override
+    public String getPwd() {
+        return mEtRegisterPwd.getText().toString().trim();
+    }
+
+    @Override
+    public String getPwd2() {
+        return mEtRegisterPwd2.getText().toString().trim();
+    }
+
+    @Override
+    public String getNumber() {
+        return mEtRegisterPhone.getText().toString().trim();
     }
 }

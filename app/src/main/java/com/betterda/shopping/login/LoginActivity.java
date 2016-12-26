@@ -27,6 +27,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
+ * 登录
  * Created by Administrator on 2016/12/20.
  */
 
@@ -90,6 +91,15 @@ public class LoginActivity extends BaseActivity<LoginContract.Presenter> impleme
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //qq需要
+        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
+    }
+
+
+
     /**
      * 友盟的回调
      */
@@ -111,16 +121,16 @@ public class LoginActivity extends BaseActivity<LoginContract.Presenter> impleme
     };
 
 
+
+
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        //qq需要
-        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
+    public String getAccount() {
+        return mEtLoginNumber.getText().toString().trim();
     }
 
-
-    public RxManager getRxManager() {
-        return mRxManager;
+    @Override
+    public String getPwd() {
+        return mEtLoginPwd.getText().toString().trim();
     }
 
 }

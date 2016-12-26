@@ -9,6 +9,7 @@ import com.betterda.shopping.R;
 import com.betterda.shopping.base.BaseActivity;
 import com.betterda.shopping.findpwd.contract.FindPwdContract;
 import com.betterda.shopping.findpwd.presenter.FindPwdPresenterImpl;
+import com.betterda.shopping.utils.NetworkUtils;
 import com.betterda.shopping.widget.NormalTopBar;
 
 import butterknife.BindView;
@@ -16,6 +17,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
+ * 忘记密码
  * Created by Administrator on 2016/12/20.
  */
 
@@ -60,6 +62,12 @@ public class FindPwdActivity extends BaseActivity<FindPwdContract.Presenter> imp
                 }
                 break;
             case R.id.btn_register:
+                NetworkUtils.isNetWork(getmActivity(), mCountdownRegister, new NetworkUtils.SetDataInterface() {
+                    @Override
+                    public void getDataApi() {
+                        getPresenter().register();
+                    }
+                });
                 break;
             case R.id.bar_back:
                 back();
@@ -70,5 +78,25 @@ public class FindPwdActivity extends BaseActivity<FindPwdContract.Presenter> imp
     @Override
     public void showCountDown() {
         mCountdownRegister.showCountDown("秒后重新获取","60秒后重新获取");
+    }
+
+    @Override
+    public String getAccount() {
+        return mEtRegisterNumber.getText().toString().trim();
+    }
+
+    @Override
+    public String getPwd() {
+        return mEtRegisterPwd.getText().toString().trim();
+    }
+
+    @Override
+    public String getPwd2() {
+        return mEtRegisterPwd2.getText().toString().trim();
+    }
+
+    @Override
+    public String getYzm() {
+        return mEtRegisterYzm.getText().toString().trim();
     }
 }

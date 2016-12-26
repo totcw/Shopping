@@ -12,7 +12,10 @@ import com.betterda.shopping.utils.RxManager;
 public class LoginContract {
     
 public interface View extends IView{
-    RxManager getRxManager();
+
+    String getAccount();
+
+    String getPwd();
 }
 
 public interface Presenter extends IPresenter<View>{
