@@ -72,7 +72,8 @@ public class LoginActivity extends BaseActivity<LoginContract.Presenter> impleme
                 mShareAPI.doOauthVerify(this, SHARE_MEDIA.SINA, umAuthListener);
                 break;
             case R.id.relative_login_QQ:
-
+                UMShareAPI mQqShareAPI = UMShareAPI.get(this);
+                mQqShareAPI.doOauthVerify(this, SHARE_MEDIA.QQ, umAuthListener);
                 break;
             case R.id.bar_back:
                 back();

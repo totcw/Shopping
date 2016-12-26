@@ -45,9 +45,9 @@ public class MyApplication extends Application {
         SDKInitializer.initialize(getApplicationContext());
         //友盟
         UMShareAPI.get(this);
-        PlatformConfig.setWeixin("wx967daebe835fbeac", "5bb696d9ccd75a38c8a0bfe0675559b3");
+        PlatformConfig.setWeixin("wx5baf9605cac65d91", "5bb696d9ccd75a38c8a0bfe0675559b3");
         PlatformConfig.setSinaWeibo("2029403152", "5385e8aec38d793dcbe4c8c94b381007");
-        PlatformConfig.setQQZone("101375552", "c7394704798a158208a74ab60104f0ba");
+        PlatformConfig.setQQZone("101375552", "7aafc9a0d3c62dd92af2922d7e3eabda");
         Config.REDIRECT_URL = "https://api.weibo.com/oauth2/default.html";
 
     }
