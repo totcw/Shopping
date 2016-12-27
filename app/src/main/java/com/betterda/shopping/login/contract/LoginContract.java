@@ -20,6 +20,8 @@ public interface View extends IView{
 
 public interface Presenter extends IPresenter<View>{
     void login();
+
+    void loginThree(String s,String uid);
 }
 
 public interface Model extends IModel{

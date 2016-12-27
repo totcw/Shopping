@@ -131,7 +131,9 @@ public class AddAddressActivity extends BaseActivity<AddAddressContract.Presente
 
         if (requestCode == REQUEST_PERMISSION_CODE_TAKE_PIC) {
             if (PermissionUtil.verifyPermissions(grantResults)) {//有权限
-                // TODO
+
+                //请求权限成功
+                startToContact();
             } else {
                 //没有权限
                 if (!PermissionUtil.shouldShowPermissions(this, permissions)) {//这个返回false 表示勾选了不再提示

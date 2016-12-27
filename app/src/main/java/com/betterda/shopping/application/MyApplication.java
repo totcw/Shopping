@@ -49,6 +49,8 @@ public class MyApplication extends Application {
         PlatformConfig.setSinaWeibo("2029403152", "5385e8aec38d793dcbe4c8c94b381007");
         PlatformConfig.setQQZone("101375552", "7aafc9a0d3c62dd92af2922d7e3eabda");
         Config.REDIRECT_URL = "https://api.weibo.com/oauth2/default.html";
+        //对应平台没有安装的时候跳转转到应用商店下载
+        Config.isJumptoAppStore = true;
 
     }
 

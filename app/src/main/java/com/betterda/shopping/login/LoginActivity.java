@@ -1,10 +1,8 @@
 package com.betterda.shopping.login;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
 
 import com.betterda.shopping.R;
 import com.betterda.shopping.base.BaseActivity;
@@ -13,7 +11,6 @@ import com.betterda.shopping.login.contract.LoginContract;
 import com.betterda.shopping.login.presenter.LoginPresenterImpl;
 import com.betterda.shopping.register.RegisterActivity;
 import com.betterda.shopping.utils.NetworkUtils;
-import com.betterda.shopping.utils.RxManager;
 import com.betterda.shopping.utils.UiUtils;
 import com.betterda.shopping.widget.NormalTopBar;
 import com.umeng.socialize.UMAuthListener;
@@ -21,9 +18,9 @@ import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 
 import java.util.Map;
+import java.util.Set;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -76,20 +73,20 @@ public class LoginActivity extends BaseActivity<LoginContract.Presenter> impleme
                 UiUtils.startIntent(getmActivity(), RegisterActivity.class);
                 break;
             case R.id.relative_login_wx:
+                loginThree("微信");
                 break;
             case R.id.relative_login_weibo:
-                UMShareAPI mShareAPI = UMShareAPI.get(this);
-                mShareAPI.doOauthVerify(this, SHARE_MEDIA.SINA, umAuthListener);
+                loginThree("微博");
                 break;
             case R.id.relative_login_QQ:
-                UMShareAPI mQqShareAPI = UMShareAPI.get(this);
-                mQqShareAPI.doOauthVerify(this, SHARE_MEDIA.QQ, umAuthListener);
+                loginThree("QQ");
                 break;
             case R.id.bar_back:
                 back();
                 break;
         }
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -98,6 +95,38 @@ public class LoginActivity extends BaseActivity<LoginContract.Presenter> impleme
         UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
     }
 
+    /**
+     * 三方登录
+     *
+     * @param type
+     */
+    private void loginThree(final String type) {
+
+        NetworkUtils.isNetWork(getmActivity(), mTopbarLogin, new NetworkUtils.SetDataInterface() {
+            @Override
+            public void getDataApi() {
+                UMShareAPI mShareAPI = UMShareAPI.get(getmActivity());
+                switch (type) {
+                    case "微信":
+                        mShareAPI.doOauthVerify(getmActivity(), SHARE_MEDIA.WEIXIN, umAuthListener);
+                        break;
+                    case "微博":
+                        mShareAPI.doOauthVerify(getmActivity(), SHARE_MEDIA.SINA, umAuthListener);
+                        break;
+                    case "QQ":
+                        boolean install = mShareAPI.isInstall(LoginActivity.this, SHARE_MEDIA.QQ);
+                        if (install) {
+                            mShareAPI.doOauthVerify(getmActivity(), SHARE_MEDIA.QQ, umAuthListener);
+                        } else {
+                            UiUtils.showToast(getmActivity(),"请先安装qq");
+                        }
+                        break;
+                }
+            }
+        });
+
+
+    }
 
 
     /**
@@ -106,21 +135,25 @@ public class LoginActivity extends BaseActivity<LoginContract.Presenter> impleme
     UMAuthListener umAuthListener = new UMAuthListener() {
         @Override
         public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
+            log(share_media.toString()+",i:"+i);
+            Set<Map.Entry<String, String>> entries = map.entrySet();
+            for (Map.Entry<String, String> m : entries) {
+                System.out.println(m.getKey()+":"+m.getValue());
+            }
 
+            getPresenter().loginThree(share_media.toString(),"uid");
         }
 
         @Override
         public void onError(SHARE_MEDIA share_media, int i, Throwable throwable) {
-
+            log(share_media.toString()+","+throwable.toString());
         }
 
         @Override
         public void onCancel(SHARE_MEDIA share_media, int i) {
-
+            log(share_media.toString());
         }
     };
-
-
 
 
     @Override

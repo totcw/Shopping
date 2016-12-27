@@ -102,6 +102,10 @@ public abstract class BaseFragment <P extends IPresenter> extends Fragment imple
     }
 
 
+    @Override
+    public RxManager getRxManager() {
+        return mRxManager;
+    }
 
     /**
      * 初始化并显示PopupWindow

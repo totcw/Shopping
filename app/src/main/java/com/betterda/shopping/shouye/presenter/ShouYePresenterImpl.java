@@ -15,6 +15,9 @@ import android.widget.LinearLayout;
 import com.betterda.shopping.R;
 import com.betterda.shopping.base.BasePresenter;
 import com.betterda.shopping.factory.LoadImageFactory;
+import com.betterda.shopping.http.MyObserver;
+import com.betterda.shopping.http.NetWork;
+import com.betterda.shopping.javabean.BaseCallModel;
 import com.betterda.shopping.shouye.adapter.LunBoTuAdapter;
 import com.betterda.shopping.shouye.contract.ShouYeContract;
 import com.betterda.shopping.shouye.model.LunBoTu;
@@ -58,6 +61,28 @@ public class ShouYePresenterImpl extends BasePresenter<ShouYeContract.View,ShouY
         stringList = new ArrayList<>();
         stringList.add(new LunBoTu("http://www.meichebang.com.cn/xsnano_web/upload/files/20161024162309xE23Av0x.png","1"));
         getView().initVpLunbotu(new LunBoTuAdapter(this));
+
+        getView().getRxManager().add(NetWork.getNetService()
+        .getAdvertisement()
+        .compose(NetWork.handleResult(new BaseCallModel<LunBoTu>()))
+        .subscribe(new MyObserver<LunBoTu>() {
+            @Override
+            protected void onSuccess(LunBoTu data, String resultMsg) {
+
+            }
+
+            @Override
+            public void onFail(String resultMsg) {
+
+            }
+
+            @Override
+            public void onExit() {
+
+            }
+        }));
+
+
       /*  RequestParams params = new RequestParams(Constants.URL_LUNBO);
         params.addBodyParameter("regionId", Constants.regiondId);
         GetNetUtil.getData(GetNetUtil.POST, params, new GetNetUtil.GetDataCallBack() {

@@ -50,6 +50,7 @@
             android:value="4AD6iSK8q9XB7vwVHHFWkw6egj2iTIwP" />
 
         <activity
+            android:theme="@style/SplashTheme"
             android:name=".welcome.WelcomeActivity"
             android:launchMode="singleTask"
             android:windowSoftInputMode="adjustPan|stateHidden">
@@ -190,7 +191,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <data android:scheme="tencent100424468" />
+                <data android:scheme="tencent101375552" />
             </intent-filter>
         </activity>
         <activity
