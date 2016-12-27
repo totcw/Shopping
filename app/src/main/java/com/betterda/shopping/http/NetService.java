@@ -87,4 +87,15 @@ public interface NetService {
                                                     @Field("filter") String filter,
                                                     @Field("pageNo") String pageNo,
                                                     @Field("pageSize") String pageSize);
+
+    /**
+     * 商品列表接口
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(Constants.Url.URL_LUNBO)
+    Observable<BaseCallModel<String>> getBandDelete(@Field("account") String account,
+                                                    @Field("token") String token,
+                                                    @Field("id") String id);
 }

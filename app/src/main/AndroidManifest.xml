@@ -50,6 +50,7 @@
             android:value="4AD6iSK8q9XB7vwVHHFWkw6egj2iTIwP" />
 
         <activity
+            android:screenOrientation="portrait"
             android:theme="@style/SplashTheme"
             android:name=".welcome.WelcomeActivity"
             android:launchMode="singleTask"
@@ -141,6 +142,12 @@
             android:screenOrientation="portrait"></activity>
         <activity
             android:name=".location.LocationActivity"
+            android:screenOrientation="portrait"></activity>
+     <activity
+            android:name=".wallet.MyYinHangKaActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".wallet.AddBankCardActivity"
             android:screenOrientation="portrait"></activity>
 
 

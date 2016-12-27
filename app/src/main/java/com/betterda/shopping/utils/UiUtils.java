@@ -78,8 +78,8 @@ public class UiUtils {
      * 创建对话框
      */
 
-    public static void showDialog(String title, String content, final showDialogListener listener) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(MyApplication.getInstance());
+    public static void showDialog(Activity activity,String title, String content, final showDialogListener listener) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(title)
                 .setMessage(content)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {

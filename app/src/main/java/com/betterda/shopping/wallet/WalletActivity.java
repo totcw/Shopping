@@ -49,7 +49,7 @@ public class WalletActivity extends BaseActivity<WalletContract.Presenter> imple
         mTopbarWallet.setTitle("我的钱包");
     }
 
-    @OnClick({R.id.relative_wallet_jinbi, R.id.relative_wallet_yinbi,R.id.bar_back})
+    @OnClick({R.id.relative_wallet_jinbi, R.id.relative_wallet_yinbi,R.id.bar_back,R.id.relative_wallet_yinhangka})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.relative_wallet_jinbi://现金钱包
@@ -57,6 +57,9 @@ public class WalletActivity extends BaseActivity<WalletContract.Presenter> imple
                 break;
             case R.id.relative_wallet_yinbi://消费钱包
                 UiUtils.startIntent(getmActivity(),XiaoFeiWalletActivity.class);
+                break;
+            case R.id.relative_wallet_yinhangka://我的银行卡
+                UiUtils.startIntent(getmActivity(),MyYinHangKaActivity.class);
                 break;
             case R.id.bar_back:
                 back();

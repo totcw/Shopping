@@ -345,6 +345,12 @@ public class ShouYePresenterImpl extends BasePresenter<ShouYeContract.View,ShouY
     @Override
     public void destroy() {
 
+
+        //将handler关闭防止 内存泄漏
+        if (mHandler != null) {
+            mHandler.removeCallbacksAndMessages(null); // 把所有的消息和任务清空
+            mHandler = null;
+        }
     }
 
 
