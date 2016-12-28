@@ -46,7 +46,7 @@ public class CashWalletActivity extends BaseActivity<CashWalletContract.Presente
     @Override
     public void init() {
         super.init();
-        mTopbarCashwallet.setTitle("消费钱包");
+        mTopbarCashwallet.setTitle("现金钱包");
         mTopbarCashwallet.setActionText("明细");
         mTopbarCashwallet.setActionTextVisibility(true);
     }
@@ -61,6 +61,7 @@ public class CashWalletActivity extends BaseActivity<CashWalletContract.Presente
                 UiUtils.startIntent(getmActivity(),MingXiActivity.class);
                 break;
             case R.id.relative_wallet2_chongzhi://提现
+                UiUtils.startIntent(getmActivity(),TiXianActivity.class);
                 break;
         }
 

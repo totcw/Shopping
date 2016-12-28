@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroudGray"
+    android:orientation="vertical">
+
+    <com.betterda.shopping.widget.NormalTopBar
+        android:id="@+id/topbar_yetixian"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></com.betterda.shopping.widget.NormalTopBar>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divierLine"></View>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+
+        <TextView
+            android:id="@+id/tv_yrtixian_tishi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:text="可提现余额"
+            android:textColor="@color/shouye_lv_tv"
+            android:textSize="@dimen/textsize_small" />
+
+        <TextView
+            android:id="@+id/tv_yrtixian_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/tv_yrtixian_tishi"
+            android:text="0.00元"
+            android:textColor="@color/shouye_fenlei_red"
+            android:textSize="@dimen/textsize_small" />
+
+        <RelativeLayout
+            android:id="@+id/relative_tixian_tiqu"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:paddingRight="10dp">
+
+            <TextView
+                android:id="@+id/tv_tixian_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="全部提取"
+                android:textColor="@color/bg"
+                android:textSize="@dimen/textsize_little" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+
+        android:background="@color/lv_divider"></View>
+
+
+    <LinearLayout
+        android:id="@+id/linear_tixian"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="#ffffff"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <FrameLayout
+
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv_tixian_icon"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@mipmap/xingye" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_tixian_bank"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="所属银行"
+                        android:textColor="@color/shouye_renmen_tv"
+                        android:textSize="@dimen/textsize_small" />
+
+                    <TextView
+                        android:id="@+id/tv_tixian_bankcard"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="银行卡号"
+                        android:textColor="@color/shouye_lv_tv"
+                        android:textSize="@dimen/textsize_small" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/relative_tixian_chose"
+                android:background="#ffffff"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="请选择银行卡"
+                    android:textSize="16sp"
+                    android:textColor="@color/activityMainPressed"
+                    android:layout_centerVertical="true"
+                    />
+
+            </RelativeLayout>
+
+        </FrameLayout>
+
+        <ImageView
+            android:id="@+id/iv_my_jiantou2"
+            android:layout_width="8dp"
+            android:layout_height="15dp"
+            android:layout_gravity="center"
+
+            android:background="@mipmap/jiantou" />
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+
+        android:background="@color/lv_divider"></View>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="#ffffff"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="金额"
+            android:textColor="@color/shouye_lv_tv"
+            android:textSize="@dimen/textsize_small" />
+
+        <EditText
+            android:id="@+id/et_tixian_money"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="单笔提现最高五万,只能输入整数单位元"
+            android:inputType="number"
+            android:textColor="@color/shouye_lv_tv"
+            android:textSize="@dimen/textsize_small" />
+
+        <ImageView
+            android:id="@+id/iv_chongzhi_delete"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:background="@mipmap/delete" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+
+        android:background="@color/lv_divider"></View>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="预计"
+            android:textColor="@color/shouye_lv_tv"
+            android:textSize="@dimen/textsize_smallest" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="今天24点之前"
+            android:textColor="@color/shouye_fenlei_red"
+            android:textSize="@dimen/textsize_smallest" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="到账"
+            android:textColor="@color/shouye_lv_tv"
+            android:textSize="@dimen/textsize_smallest" />
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/btn_tixian"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/shape_corner_red"
+        android:text="确认提现"
+        android:textColor="#ffffff" />
+
+
+</LinearLayout>

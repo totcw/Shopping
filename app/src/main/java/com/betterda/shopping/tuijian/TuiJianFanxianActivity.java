@@ -8,6 +8,8 @@ import com.betterda.mylibrary.LoadingPager;
 import com.betterda.shopping.R;
 import com.betterda.shopping.base.BaseActivity;
 import com.betterda.shopping.base.IPresenter;
+import com.betterda.shopping.utils.UiUtils;
+import com.betterda.shopping.wallet.MingXiActivity;
 import com.betterda.shopping.widget.NormalTopBar;
 
 import butterknife.BindView;
@@ -42,14 +44,19 @@ public class TuiJianFanxianActivity extends BaseActivity {
     public void init() {
         super.init();
         mTopbarCashwallet.setTitle("推荐返现");
+        mTopbarCashwallet.setActionText("明细");
+        mTopbarCashwallet.setActionTextVisibility(true);
     }
 
-    @OnClick({R.id.bar_back})
+    @OnClick({R.id.bar_back,R.id.bar_action})
     public void onClick(View view) {
         switch (view.getId()) {
 
             case R.id.bar_back:
                 back();
+                break;
+            case R.id.bar_action:
+                UiUtils.startIntent(getmActivity(), MingXiActivity.class);
                 break;
         }
     }

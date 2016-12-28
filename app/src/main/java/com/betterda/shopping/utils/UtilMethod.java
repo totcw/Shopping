@@ -440,17 +440,4 @@ public class UtilMethod {
     }
 
 
-    /**
-     * 判断数据不是空
-     */
-    public  static void judgeData(List list,LoadingPager loadingPager) {
-
-        if (list != null) {
-            if (list.size() == 0) {
-                loadingPager.setEmptyVisable();
-                return;
-            }
-        }
-        loadingPager.hide();
-    }
 }
