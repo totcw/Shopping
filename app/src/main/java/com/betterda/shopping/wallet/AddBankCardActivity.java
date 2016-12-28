@@ -55,7 +55,7 @@ public class AddBankCardActivity extends BaseActivity<AddBankCardContract.Presen
     @Override
     public void init() {
         super.init();
-
+        mTopbarAddbankcard.setTitle("添加银行卡");
     }
 
     @OnClick({R.id.linear_addbank_bankname, R.id.btn_addbank_next,R.id.bar_back})
@@ -65,6 +65,7 @@ public class AddBankCardActivity extends BaseActivity<AddBankCardContract.Presen
                 chooseBank();
                 break;
             case R.id.btn_addbank_next:
+                getPresenter().commit();
                 break;
             case R.id.bar_back:
                 back();
@@ -101,6 +102,32 @@ public class AddBankCardActivity extends BaseActivity<AddBankCardContract.Presen
         setUpPopupWindow(view);
     }
 
+
+    @Override
+    public String getTrueName() {
+        return mEtAddbankName.getText().toString().trim();
+    }
+
+    @Override
+    public String getIdentityCard() {
+        return mEtAddbankIdentity.getText().toString().trim();
+    }
+
+    @Override
+    public String getCardNum() {
+        return mEtAddbankCardNo.getText().toString().trim();
+    }
+
+    @Override
+    public String getNumber() {
+        return mEtAddbankNumber.getText().toString().trim();
+    }
+
+    public EditText getmEtAddbankName() {
+        return mEtAddbankName;
+    }
+
+
     @Override
     public void dismiss() {
         super.dismiss();
@@ -119,4 +146,6 @@ public class AddBankCardActivity extends BaseActivity<AddBankCardContract.Presen
             BankData.bankList = null;
         }
     }
+
+
 }

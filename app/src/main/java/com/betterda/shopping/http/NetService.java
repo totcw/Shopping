@@ -5,6 +5,9 @@ import com.betterda.shopping.javabean.UserInfo;
 import com.betterda.shopping.shouye.model.LunBoTu;
 import com.betterda.shopping.sort.model.Shopping;
 import com.betterda.shopping.utils.Constants;
+import com.betterda.shopping.wallet.model.BankCard;
+
+import java.util.List;
 
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -89,7 +92,7 @@ public interface NetService {
                                                     @Field("pageSize") String pageSize);
 
     /**
-     * 商品列表接口
+     * 银行卡删除
      *
      * @return
      */
@@ -98,4 +101,42 @@ public interface NetService {
     Observable<BaseCallModel<String>> getBandDelete(@Field("account") String account,
                                                     @Field("token") String token,
                                                     @Field("id") String id);
+
+
+    /**
+     * 银行卡添加
+     *
+     * @param account
+     * @param token
+     * @param truename     持卡人姓名
+     * @param identitycard 身份证
+     * @param bank         所属银行
+     * @param cardnum      卡号
+     * @param number       预留手机号
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(Constants.Url.URL_LUNBO)
+    Observable<BaseCallModel<String>> getBandAdd(@Field("account") String account,
+                                                 @Field("token") String token,
+                                                 @Field("cardName") String truename,
+                                                 @Field("identityCard") String identitycard,
+                                                 @Field("bank") String bank,
+                                                 @Field("cardNum") String cardnum,
+                                                 @Field("number") String number
+    );
+
+    /**
+     * 银行卡查询
+     *
+     * @param account
+     * @param token
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(Constants.Url.URL_LUNBO)
+    Observable<BaseCallModel<List<BankCard>>> getBandGet(@Field("account") String account,
+                                                         @Field("token") String token
+    );
+
 }

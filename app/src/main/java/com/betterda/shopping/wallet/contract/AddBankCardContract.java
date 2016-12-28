@@ -1,5 +1,7 @@
 package com.betterda.shopping.wallet.contract;
 
+import android.widget.EditText;
+
 import com.betterda.shopping.base.IModel;
 import com.betterda.shopping.base.IPresenter;
 import com.betterda.shopping.base.IView;
@@ -11,6 +13,15 @@ import com.betterda.shopping.base.IView;
 public class AddBankCardContract {
 
     public interface View extends IView{
+        String getTrueName();
+
+        String getIdentityCard();
+
+        String getCardNum();
+
+        String getNumber();
+
+        EditText getmEtAddbankName();
     }
 
     public interface Presenter  extends IPresenter<View>{
@@ -19,6 +30,11 @@ public class AddBankCardContract {
          * @param s
          */
         void setBank(String s);
+
+        /**
+         * 提交数据
+         */
+        void commit();
     }
 
     public interface Model extends IModel {
