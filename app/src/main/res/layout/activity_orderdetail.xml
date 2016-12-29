@@ -39,46 +39,66 @@
                     android:layout_height="1dp"
                     android:background="@color/lv_divider"></View>
 
-                <LinearLayout
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="48dp">
+                    android:layout_height="wrap_content">
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp">
+
+                        <RelativeLayout
+
+                            android:id="@+id/relative_orderdetail_delete"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="#f7b354">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:text="取消订单"
+                                android:textColor="#ffffff"
+                                android:textSize="@dimen/textsize_large" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:visibility="gone"
+                            android:id="@+id/relative_orderdetail_pay"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="#f75756">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:text="立即付款"
+                                android:textColor="#ffffff"
+                                android:textSize="@dimen/textsize_large" />
+                        </RelativeLayout>
+
+                    </LinearLayout>
                     <RelativeLayout
-
-                        android:id="@+id/relative_orderdetail_delete"
-                        android:layout_width="0dp"
+                        android:id="@+id/relative_orderdetail_comment"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:background="#f7b354">
+                        android:background="#ffffff">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
-                            android:text="取消订单"
-                            android:textColor="#ffffff"
-                            android:textSize="@dimen/textsize_large" />
-
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:id="@+id/relative_orderdetail_pay"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="#f75756">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:text="立即付款"
-                            android:textColor="#ffffff"
+                            android:text="立即评价"
+                            android:textColor="@color/activityMainPressed"
                             android:textSize="@dimen/textsize_large" />
                     </RelativeLayout>
-
-                </LinearLayout>
-
+                </FrameLayout>
             </LinearLayout>
 
             <ScrollView
@@ -206,15 +226,6 @@
                             android:text="收货地址"
                             android:textColor="@color/shouye_lv_tv"
                             android:textSize="@dimen/textsize_small" />
-                        <!--     <ImageView
-
-                                 android:id="@+id/iv_order_jiantou"
-                                 android:layout_width="8dp"
-                                 android:layout_height="15dp"
-                                 android:layout_centerVertical="true"
-                                 android:layout_alignParentRight="true"
-                                 android:layout_marginRight="10dp"
-                                 android:background="@mipmap/jiantou" />-->
 
                         <TextView
                             android:id="@+id/tv_orderdetail_number"

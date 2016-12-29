@@ -1,5 +1,7 @@
 package com.betterda.shopping.wallet;
 
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 
 import com.betterda.shopping.R;
@@ -20,7 +22,7 @@ public class XiaoFeiWalletActivity extends CashWalletActivity {
         mRelativeWallet2Chongzhi.setVisibility(View.GONE);
     }
 
-    @OnClick({ R.id.bar_action,R.id.bar_back})
+    @OnClick({ R.id.bar_action,R.id.bar_back,R.id.tv_cashwallet_shouming})
     public void onClick(View view) {
         switch (view.getId()) {
 
@@ -28,6 +30,19 @@ public class XiaoFeiWalletActivity extends CashWalletActivity {
                 break;
             case R.id.bar_back:
                 back();
+                break;
+            case R.id.tv_cashwallet_shouming://说明
+                AlertDialog.Builder builder = new AlertDialog.Builder(getmActivity());
+                builder.setTitle("消费钱包说明")
+                        .setMessage("消费钱包会在下单的时候自动抵用一半的金额")
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+
+                            }
+                        });
+                builder.show();
                 break;
 
         }

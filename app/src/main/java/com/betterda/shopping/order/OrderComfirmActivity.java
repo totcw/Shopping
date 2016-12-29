@@ -27,7 +27,7 @@ import butterknife.OnClick;
  * Created by Administrator on 2016/12/14.
  */
 
-public class OrderComfirmActivity extends BaseActivity<OrderComfrimContract.Presenter> implements OrderComfrimContract.View {
+public class OrderComfirmActivity extends BaseActivity<OrderComfrimContract.Presenter> implements OrderComfrimContract.View, View.OnClickListener {
     @BindView(R.id.topbar_oder)
     NormalTopBar mTopbarOder;
     @BindView(R.id.tv_order_pay)
@@ -90,25 +90,45 @@ public class OrderComfirmActivity extends BaseActivity<OrderComfrimContract.Pres
                 break;
             case R.id.frame_address://添加配送地址
                 Intent intent = new Intent(getmActivity(), AddressActivity.class);
-                startActivityForResult(intent,0);
+                UiUtils.startIntentForResult(getmActivity(),intent,0);
                 break;
             case R.id.relative_order_fapiao://发票
+                showFapiao();
                 break;
             case R.id.relative_order_youhuiquan://代金券
                 break;
             case R.id.relative_order_peisong://配送方式
+                showpeison();
                 break;
             case R.id.bar_back:
                 back();
                 break;
+            case R.id.tv_peisong_ziti:
+                getPresenter().ziti();
+                 closePopupWindow();
+                break;
+            case R.id.tv_peisong_kuaidi:
+                getPresenter().kuaidi();
+                 closePopupWindow();
+                break;
+            case R.id.tv_fapiao_shi:
+                getPresenter().shi();
+                 closePopupWindow();
+                break;
+            case R.id.tv_fapiao_fou:
+                 getPresenter().fou();
+                 closePopupWindow();
+                break;
         }
     }
+
 
     public void initRvOrder(RecyclerView.Adapter adapter) {
         mRvConfirmorder.setLayoutManager(new LinearLayoutManager(getmActivity()));
         mRvConfirmorder.addItemDecoration(new DividerItemDecoration(getmActivity(),DividerItemDecoration.VERTICAL_LIST));
         mRvConfirmorder.setAdapter(adapter);
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -124,5 +144,45 @@ public class OrderComfirmActivity extends BaseActivity<OrderComfrimContract.Pres
             mTvOrderAddress2.setText(area+address);
             mRelativeAddress.setVisibility(View.VISIBLE);
         }
+    }
+
+    @Override
+    public void setPeisong(String type) {
+        mTvOrderPeisong.setText(type);
+    }
+
+    @Override
+    public void setFapiao(String fapiao) {
+        mTvOrderFapiao.setText(fapiao);
+    }
+
+
+    /**
+     * 显示发票
+     */
+    private void showFapiao() {
+        View view = View.inflate(this, R.layout.pp_choose_fapiao, null);
+        TextView tv_shi = (TextView) view.findViewById(R.id.tv_fapiao_shi);
+        TextView tv_fou = (TextView) view.findViewById(R.id.tv_fapiao_fou);
+        tv_shi.setOnClickListener(this);
+        tv_fou.setOnClickListener(this);
+        setUpPopupWindow(view);
+    }
+    /**
+     * 显示配送
+     */
+    private void showpeison() {
+        View view2 = View.inflate(this, R.layout.pp_choose_peisong, null);
+        TextView tv_ziti = (TextView) view2.findViewById(R.id.tv_peisong_ziti);
+        TextView tv_kuaidi = (TextView) view2.findViewById(R.id.tv_peisong_kuaidi);
+        tv_kuaidi.setOnClickListener(this);
+        tv_ziti.setOnClickListener(this);
+        setUpPopupWindow(view2);
+    }
+
+    @Override
+    public void dismiss() {
+        super.dismiss();
+        UiUtils.backgroundAlpha(1.0f,getmActivity());
     }
 }
