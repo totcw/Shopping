@@ -152,6 +152,12 @@
         <activity
             android:name=".wallet.TiXianActivity"
             android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ziti.ZiTiActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ziti.EweiMaActivity"
+            android:screenOrientation="portrait"></activity>
 
 
         <!--百度地图服务-->

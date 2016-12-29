@@ -28,6 +28,7 @@ import com.betterda.shopping.tuijian.LiJiTuijianActivity;
 import com.betterda.shopping.tuijian.MyTuijianActivity;
 import com.betterda.shopping.utils.UiUtils;
 import com.betterda.shopping.wallet.WalletActivity;
+import com.betterda.shopping.ziti.ZiTiActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -74,6 +75,7 @@ public class MyFragment extends BaseFragment<MyContract.Presenter> implements My
     @BindView(R.id.relative_my_kefu)
     RelativeLayout mRelativeMyAddress;//常用地址
 
+
     @Override
     public View initView(LayoutInflater inflater) {
         return inflater.inflate(R.layout.fragment_my, null);
@@ -107,7 +109,7 @@ public class MyFragment extends BaseFragment<MyContract.Presenter> implements My
     @OnClick({R.id.relative_my_touxiang, R.id.relative_my_setting, R.id.relative_my_message, R.id.relative_my_all,
             R.id.relative_my_tuikuan, R.id.relative_my_jiayouka, R.id.relative_my_bus,
             R.id.relative_my_address, R.id.relative_my_kefu, R.id.idv_pay, R.id.idv_send,
-            R.id.idv_bring, R.id.idv_take, R.id.idv_comment})
+            R.id.idv_bring, R.id.idv_take, R.id.idv_comment,R.id.relative_my_ziti})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.relative_my_touxiang:
@@ -146,6 +148,9 @@ public class MyFragment extends BaseFragment<MyContract.Presenter> implements My
                 break;
             case R.id.relative_my_address://我的推荐
                 UiUtils.startIntent(getmActivity(), MyTuijianActivity.class);
+                break;
+            case R.id.relative_my_ziti://自提码
+                UiUtils.startIntent(getmActivity(), ZiTiActivity.class);
                 break;
             case R.id.relative_my_kefu://常用地址
                 Intent intent = new Intent(getmActivity(), AddressActivity.class);

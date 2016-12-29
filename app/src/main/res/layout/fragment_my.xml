@@ -376,6 +376,42 @@
 
 
         <RelativeLayout
+            android:id="@+id/relative_my_ziti"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="#ffffff">
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:textSize="15sp"
+                android:text="自提码"
+                android:textColor="@color/shouye_renmen_tv" />
+
+
+            <ImageView
+                android:id="@+id/iv_my_jiantou7"
+                android:layout_width="8dp"
+                android:layout_height="15dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:background="@mipmap/jiantou" />
+
+
+        </RelativeLayout>
+
+        <View
+
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+
+            android:background="@color/lv_divider"></View>
+        <RelativeLayout
             android:id="@+id/relative_my_kefu"
             android:layout_width="match_parent"
             android:layout_height="48dp"
