@@ -50,6 +50,19 @@ public class WelcomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
         initRxBus();
+        startToHome();
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        startToHome();
+    }
+
+    /**
+     * 跳转到首页
+     */
+    private void startToHome() {
         if (Build.VERSION.SDK_INT < 23) {
             //6.0一下直接去主页
             UiUtils.startIntent(this, MainActivity.class);

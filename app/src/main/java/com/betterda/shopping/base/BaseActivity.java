@@ -33,7 +33,8 @@ import butterknife.ButterKnife;
  */
 
 public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivity implements IView {
-    private String[] REQUEST_PERMISSIONS = new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+    private String[] REQUEST_PERMISSIONS = new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.CALL_PHONE};
     private static final int REQUEST_PERMISSION_CODE_TAKE_PIC = 9; //权限的请求码
     protected P mPresenter;
     protected RxManager mRxManager;
