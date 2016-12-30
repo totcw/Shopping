@@ -61,6 +61,18 @@ public class MingXiActivity extends BaseActivity<MingXiContract.Presenter> imple
         mLayoutRecycleview.setVisibility(View.VISIBLE);
         mLayoutRecycleview.setLayoutManager(new LinearLayoutManager(getmActivity()));
         mLayoutRecycleview.setLoadingMoreEnabled(true);
+        mLayoutRecycleview.addItemDecoration(getPresenter().getItemDecoration());
         mLayoutRecycleview.setAdapter(adapter);
+        mLayoutRecycleview.setLoadingListener(new XRecyclerView.LoadingListener() {
+            @Override
+            public void onRefresh() {
+
+            }
+
+            @Override
+            public void onLoadMore() {
+
+            }
+        });
     }
 }
