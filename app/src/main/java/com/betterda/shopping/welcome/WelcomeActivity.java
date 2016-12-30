@@ -269,9 +269,7 @@ public class WelcomeActivity extends AppCompatActivity {
             map.clear();
             map = null;
         }
-        if ( permissionDialog!= null) {
-            permissionDialog.dismiss();
-        }
+
 
     }
 
