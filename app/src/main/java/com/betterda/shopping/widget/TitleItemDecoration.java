@@ -27,7 +27,7 @@ public class TitleItemDecoration<T> extends RecyclerView.ItemDecoration {
     private Rect mBounds;//用于存放测量文字Rect
 
     private int mTitleHeight;//title的高
-    private static int COLOR_TITLE_BG = Color.parseColor("#FFDFDFDF");
+    private static int COLOR_TITLE_BG = Color.parseColor("#FFfafafa");
     private static int COLOR_TITLE_FONT = Color.parseColor("#FF000000");
     private static int mTitleFontSize;//title字体大小
 

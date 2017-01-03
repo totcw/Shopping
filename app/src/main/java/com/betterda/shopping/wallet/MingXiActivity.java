@@ -1,6 +1,5 @@
 package com.betterda.shopping.wallet;
 
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -9,13 +8,11 @@ import com.betterda.mylibrary.LoadingPager;
 import com.betterda.mylibrary.xrecycleview.XRecyclerView;
 import com.betterda.shopping.R;
 import com.betterda.shopping.base.BaseActivity;
-import com.betterda.shopping.utils.UiUtils;
 import com.betterda.shopping.wallet.contract.MingXiContract;
 import com.betterda.shopping.wallet.presenter.MingXiPresenterImpl;
 import com.betterda.shopping.widget.NormalTopBar;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
