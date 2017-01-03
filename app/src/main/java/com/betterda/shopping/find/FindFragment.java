@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -127,7 +128,7 @@ public class FindFragment extends BaseFragment<FindContract.Presenter> implement
     private void setMap() {
         //设置缩放级别
         mBaiduMap.setMapStatus(MapStatusUpdateFactory.
-                newMapStatus(new MapStatus.Builder().zoom(18).build()));
+                newMapStatus(new MapStatus.Builder().zoom(19).build()));
         //设置当前位置的点击事件
         mBaiduMap.setOnMyLocationClickListener(this);
         //设置marker的点击事件
@@ -256,12 +257,14 @@ public class FindFragment extends BaseFragment<FindContract.Presenter> implement
     /**
      * 设置标记
      */
-    private void marker(double l, double a) {
+    private void marker(double l, double a,String distance) {
         //定义Maker坐标点
         LatLng point = new LatLng(l, a);
         //构建Marker图标
-        BitmapDescriptor bitmap = BitmapDescriptorFactory
-                .fromResource(R.mipmap.ic_store_mark_press);
+        View inflate = View.inflate(getmActivity(), R.layout.layout_marker, null);
+        TextView marker = (TextView) inflate.findViewById(R.id.tv_marker);
+        marker.setText(distance);
+        BitmapDescriptor bitmap = BitmapDescriptorFactory.fromView(inflate);
         //构建MarkerOption，用于在地图上添加Marker
         OverlayOptions option = new MarkerOptions()
                 .position(point)
@@ -348,9 +351,9 @@ public class FindFragment extends BaseFragment<FindContract.Presenter> implement
             mLocationClient.stop();
 
             //显示商家信息
-            marker(24.50408, 118.147768);
-            marker(24.50608, 118.147768);
-            marker(24.50508, 118.147768);
+            marker(24.50408, 118.147768,"1m");
+            marker(24.50608, 118.147768,"10m");
+            marker(24.50508, 118.147768,"30m");
 
 
         }
