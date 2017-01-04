@@ -29,7 +29,7 @@ public class AnimUtils {
      * @param anim_mask_layout  根布局
      * @param imgCart  购物车的view
      */
-    public static void playAnimation(Activity activity ,View add,ViewGroup anim_mask_layout,View imgCart){
+    public static void playAnimation(Activity activity ,View add,ViewGroup anim_mask_layout,View imgCart,AnimEndListener animEndListener){
 
         int[] des = new int[2];
         add.getLocationInWindow(des);
@@ -39,7 +39,7 @@ public class AnimUtils {
         layoutParams.width = UtilMethod.dip2px(activity,15);
         img.setLayoutParams(layoutParams);
         img.setImageResource(R.drawable.shape_oval);
-        setAnim(anim_mask_layout,imgCart,img,des);
+        setAnim(anim_mask_layout,imgCart,img,des,animEndListener);
     }
 
     /**
@@ -51,7 +51,7 @@ public class AnimUtils {
      * @param start_location //起始位置
      */
 
-    private static  void setAnim(final ViewGroup anim_mask_layout, View imgCart, final View v, int[] start_location) {
+    private static  void setAnim(final ViewGroup anim_mask_layout, View imgCart, final View v, int[] start_location, final AnimEndListener animEndListener) {
 
         addViewToAnimLayout(anim_mask_layout, v, start_location);
         Animation set = createAnim(imgCart,start_location[0],start_location[1]);
@@ -71,6 +71,10 @@ public class AnimUtils {
                         anim_mask_layout.removeView(v);
                     }
                 },100);
+
+                if (animEndListener != null) {
+                    animEndListener.end();
+                }
             }
 
             @Override
@@ -129,5 +133,9 @@ public class AnimUtils {
         vg.addView(view);
     }
 
+
+    public interface AnimEndListener{
+        void end();
+    }
 
 }

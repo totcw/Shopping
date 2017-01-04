@@ -3,6 +3,8 @@ package com.betterda.shopping.search;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -36,6 +38,8 @@ public class SearchActivity extends BaseActivity<SearchContract.Presenter> imple
     XRecyclerView mXRecyclerView;
     @BindView(R.id.linear_search_content)
     LinearLayout mLinearSearch;
+    @BindView(R.id.frame_search)
+    FrameLayout mFrameSearch;
     @BindView(R.id.searchview_search)
     SearchView mSearchView;
     @BindView(R.id.busview_search)
@@ -141,6 +145,11 @@ public class SearchActivity extends BaseActivity<SearchContract.Presenter> imple
     @Override
     public void setEtSearch(String s) {
         mSearchView.setEtText(s);
+    }
+
+    @Override
+    public ViewGroup getViewGroup() {
+        return mFrameSearch;
     }
 
 

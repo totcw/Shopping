@@ -127,8 +127,13 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
                         public void onClick(View view) {
                             ViewGroup viewgroup = getView().getViewgroup();
                             View busView = getView().getBusView();
-                            AnimUtils.playAnimation(getView().getmActivity(),view,viewgroup,busView);
-                            getView().addBus(1);
+                            AnimUtils.playAnimation(getView().getmActivity(), view, viewgroup, busView, new AnimUtils.AnimEndListener() {
+                                @Override
+                                public void end() {
+                                    getView().addBus(1);
+                                }
+                            });
+
                         }
                     });
                 }

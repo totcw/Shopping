@@ -1,6 +1,7 @@
 package com.betterda.shopping.search.contract;
 
 import android.support.v7.widget.RecyclerView;
+import android.view.ViewGroup;
 
 import com.betterda.mylibrary.LoadingPager;
 import com.betterda.shopping.base.IModel;
@@ -37,6 +38,8 @@ public class SearchContract {
          * @param s
          */
         void setEtSearch(String s);
+
+        ViewGroup getViewGroup();
     }
 
     public interface Presenter  extends IPresenter<View>{
