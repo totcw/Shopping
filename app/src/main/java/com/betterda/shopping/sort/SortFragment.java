@@ -6,7 +6,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -44,6 +46,8 @@ public class SortFragment extends BaseFragment<SortContract.Presenter> implement
     RelativeLayout mRelativeSearch;
     @BindView(R.id.linear_search)
     LinearLayout mLinearSearch;
+    @BindView(R.id.linear_sort)
+    FrameLayout mLinearSort;//根布局
     @BindView(R.id.iv_layout_search_delete)
     ImageView mIvSearchDelete;
     @BindView(R.id.et_search)
@@ -317,10 +321,20 @@ public class SortFragment extends BaseFragment<SortContract.Presenter> implement
         }
     }
 
-/*    *
-     * 获取购物车的数量
-     * @return
-     */
+    @Override
+    public ViewGroup getViewgroup() {
+        return mLinearSort;
+    }
+
+    @Override
+    public View getBusView() {
+      return   ((MainActivity) getActivity()).getmBvMain();
+    }
+
+    /*    *
+         * 获取购物车的数量
+         * @return
+         */
     public String getBusText() {
        return ((MainActivity)getmActivity()).getmBvMain().getBusText();
 

@@ -3,6 +3,7 @@ package com.betterda.shopping.sort.presenter;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.betterda.mylibrary.recycleviehelper.HeaderAndFooterRecyclerViewAdapter;
@@ -18,6 +19,7 @@ import com.betterda.shopping.sort.model.Shopping;
 import com.betterda.shopping.sort.model.Sort;
 import com.betterda.shopping.sort.model.SortModelImpl;
 import com.betterda.shopping.sort.model.Type;
+import com.betterda.shopping.utils.AnimUtils;
 import com.betterda.shopping.utils.Constants;
 import com.betterda.shopping.utils.UiUtils;
 import com.zhy.base.adapter.ViewHolder;
@@ -112,7 +114,7 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
                     holder.setText(R.id.tv_item_sort_name, s.getShopName());
                     holder.setText(R.id.tv_item_sort_account, s.getSpec());
                     holder.setText(R.id.tv_item_sort_money, "￥"+s.getPrice());
-
+                    View view = holder.getView(R.id.iv_item_sort_name_add);
                     holder.setOnClickListener(R.id.linear_item_sort_name, new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -123,6 +125,9 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
                     holder.setOnClickListener(R.id.iv_item_sort_name_add, new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
+                            ViewGroup viewgroup = getView().getViewgroup();
+                            View busView = getView().getBusView();
+                            AnimUtils.playAnimation(getView().getmActivity(),view,viewgroup,busView);
                             getView().addBus(1);
                         }
                     });

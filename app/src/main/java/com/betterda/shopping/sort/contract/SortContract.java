@@ -2,6 +2,7 @@ package com.betterda.shopping.sort.contract;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.betterda.shopping.base.IModel;
 import com.betterda.shopping.base.IPresenter;
@@ -46,7 +47,10 @@ public interface View extends IView{
 
     String getBusText();
     void addBus(int amount);
-
+    //获取当前页面的根布局
+    ViewGroup getViewgroup();
+    //获取购物车的view
+    android.view.View getBusView();
 }
 
 public interface Presenter extends IPresenter<View>{
