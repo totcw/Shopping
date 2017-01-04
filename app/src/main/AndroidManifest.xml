@@ -158,6 +158,9 @@
         <activity
             android:name=".ziti.EweiMaActivity"
             android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".message.MeassageActivity"
+            android:screenOrientation="portrait"></activity>
 
 
         <!--百度地图服务-->
@@ -169,7 +172,6 @@
         </service>
 
         <!--新浪微博-->
-
         <activity
             android:name=".WBShareActivity"
             android:configChanges="keyboardHidden|orientation"
@@ -185,8 +187,7 @@
             android:windowSoftInputMode="adjustResize"
             android:exported="false" >
         </activity>
-        <service android:name="com.sina.weibo.sdk.net.DownloadService"
-            android:exported="false"></service>
+
 
         <!--微信-->
         <activity

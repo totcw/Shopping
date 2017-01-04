@@ -19,6 +19,7 @@ import com.betterda.shopping.R;
 import com.betterda.shopping.base.BaseFragment;
 import com.betterda.shopping.home.MainActivity;
 import com.betterda.shopping.location.LocationActivity;
+import com.betterda.shopping.message.MeassageActivity;
 import com.betterda.shopping.search.SearchActivity;
 import com.betterda.shopping.shouye.contract.ShouYeContract;
 import com.betterda.shopping.shouye.presenter.ShouYePresenterImpl;
@@ -116,6 +117,7 @@ public class ShouYeFragment extends BaseFragment<ShouYeContract.Presenter> imple
                 UiUtils.setOverdepengingIn(getmActivity());
                 break;
             case R.id.relative_shouye_message:
+                UiUtils.startIntent(getmActivity(), MeassageActivity.class);
                 break;
             case R.id.iv_shouye_search:
                 UiUtils.startIntent(getmActivity(), SearchActivity.class);

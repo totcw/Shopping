@@ -101,29 +101,32 @@ public class LoginActivity extends BaseActivity<LoginContract.Presenter> impleme
      * @param type
      */
     private void loginThree(final String type) {
-
-        NetworkUtils.isNetWork(getmActivity(), mTopbarLogin, new NetworkUtils.SetDataInterface() {
-            @Override
-            public void getDataApi() {
-                UMShareAPI mShareAPI = UMShareAPI.get(getmActivity());
-                switch (type) {
-                    case "微信":
-                        mShareAPI.doOauthVerify(getmActivity(), SHARE_MEDIA.WEIXIN, umAuthListener);
-                        break;
-                    case "微博":
-                        mShareAPI.doOauthVerify(getmActivity(), SHARE_MEDIA.SINA, umAuthListener);
-                        break;
-                    case "QQ":
-                        boolean install = mShareAPI.isInstall(LoginActivity.this, SHARE_MEDIA.QQ);
-                        if (install) {
-                            mShareAPI.doOauthVerify(getmActivity(), SHARE_MEDIA.QQ, umAuthListener);
-                        } else {
-                            UiUtils.showToast(getmActivity(),"请先安装qq");
-                        }
-                        break;
+        try {
+            NetworkUtils.isNetWork(getmActivity(), mTopbarLogin, new NetworkUtils.SetDataInterface() {
+                @Override
+                public void getDataApi() {
+                    UMShareAPI mShareAPI = UMShareAPI.get(getmActivity());
+                    switch (type) {
+                        case "微信":
+                            mShareAPI.doOauthVerify(getmActivity(), SHARE_MEDIA.WEIXIN, umAuthListener);
+                            break;
+                        case "微博":
+                            mShareAPI.doOauthVerify(getmActivity(), SHARE_MEDIA.SINA, umAuthListener);
+                            break;
+                        case "QQ":
+                            boolean install = mShareAPI.isInstall(LoginActivity.this, SHARE_MEDIA.QQ);
+                            if (install) {
+                                mShareAPI.doOauthVerify(getmActivity(), SHARE_MEDIA.QQ, umAuthListener);
+                            } else {
+                                UiUtils.showToast(getmActivity(), "请先安装qq");
+                            }
+                            break;
+                    }
                 }
-            }
-        });
+            });
+        } catch (Exception e) {
+
+        }
 
 
     }
@@ -135,18 +138,18 @@ public class LoginActivity extends BaseActivity<LoginContract.Presenter> impleme
     UMAuthListener umAuthListener = new UMAuthListener() {
         @Override
         public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
-            log(share_media.toString()+",i:"+i);
+            log(share_media.toString() + ",i:" + i);
             Set<Map.Entry<String, String>> entries = map.entrySet();
             for (Map.Entry<String, String> m : entries) {
-                System.out.println(m.getKey()+":"+m.getValue());
+                System.out.println(m.getKey() + ":" + m.getValue());
             }
 
-            getPresenter().loginThree(share_media.toString(),"uid");
+            getPresenter().loginThree(share_media.toString(), "uid");
         }
 
         @Override
         public void onError(SHARE_MEDIA share_media, int i, Throwable throwable) {
-            log(share_media.toString()+","+throwable.toString());
+            log(share_media.toString() + "," + throwable.toString());
         }
 
         @Override

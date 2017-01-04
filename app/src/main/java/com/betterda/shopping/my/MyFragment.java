@@ -19,6 +19,7 @@ import com.betterda.shopping.findpwd.FindPwdActivity;
 import com.betterda.shopping.findpwd.contract.FindPwdContract;
 import com.betterda.shopping.home.MainActivity;
 import com.betterda.shopping.login.LoginActivity;
+import com.betterda.shopping.message.MeassageActivity;
 import com.betterda.shopping.my.contract.MyContract;
 import com.betterda.shopping.my.presenter.MyPresenterImpl;
 import com.betterda.shopping.order.OrderActivity;
@@ -119,6 +120,7 @@ public class MyFragment extends BaseFragment<MyContract.Presenter> implements My
                 UiUtils.startIntent(getmActivity(), SettingActivity.class);
                 break;
             case R.id.relative_my_message://消息
+                UiUtils.startIntent(getmActivity(), MeassageActivity.class);
                 break;
             case R.id.relative_my_all://我的订单
                 startToOrder(0);
