@@ -1,4 +1,4 @@
-package com.betterda.shopping.order.model;
+package com.betterda.shopping.javabean;
 
 
 import com.betterda.shopping.bus.model.Bus;

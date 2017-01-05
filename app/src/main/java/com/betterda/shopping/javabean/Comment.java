@@ -1,4 +1,4 @@
-package com.betterda.shopping.comment.model;
+package com.betterda.shopping.javabean;
 
 /**
  * Created by Administrator on 2016/5/17.

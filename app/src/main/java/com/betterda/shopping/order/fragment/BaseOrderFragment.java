@@ -1,14 +1,10 @@
 package com.betterda.shopping.order.fragment;
 
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.betterda.mylibrary.LoadingPager;
 import com.betterda.mylibrary.xrecycleview.XRecyclerView;
@@ -17,7 +13,7 @@ import com.betterda.shopping.base.BaseFragment;
 import com.betterda.shopping.bus.model.Bus;
 import com.betterda.shopping.order.OrderDetailActivity;
 import com.betterda.shopping.order.contract.BaseOrderContract;
-import com.betterda.shopping.order.model.OrderAll;
+import com.betterda.shopping.javabean.OrderAll;
 import com.betterda.shopping.order.presenter.BaseOrderPresenterImpl;
 import com.betterda.shopping.utils.UiUtils;
 import com.betterda.shopping.utils.UtilMethod;
@@ -28,7 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * 订单的基类

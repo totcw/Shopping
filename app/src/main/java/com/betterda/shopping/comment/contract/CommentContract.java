@@ -5,7 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import com.betterda.shopping.base.IModel;
 import com.betterda.shopping.base.IPresenter;
 import com.betterda.shopping.base.IView;
-import com.betterda.shopping.comment.model.Comment;
+import com.betterda.shopping.javabean.Comment;
 
 import java.util.List;
 

@@ -261,20 +261,55 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
     }
 
 
-
+    /**
+     * 获取商品类型
+     */
     private void getData() {
-        for (int i = 0; i < 5; i++) {
-            Sort sort = new Sort();
-            sort.setSortName("白酒");
-            mSortList.add(sort);
-        }
-        mSortAdapter.notifyDataSetChanged();
 
-        for (int i = 0; i < 13; i++) {
-            mNameList.add(new Shopping());
-        }
-        mNameAdapter.notifyDataSetChanged();
 
+        getView().getRxManager().add(NetWork.getNetService()
+        .getShopTypeList()
+        .compose(NetWork.handleResult(new BaseCallModel<String>()))
+        .subscribe(new MyObserver<String>() {
+            @Override
+            protected void onSuccess(String data, String resultMsg) {
+                for (int i = 0; i < 5; i++) {
+                    Sort sort = new Sort();
+                    sort.setSortName("白酒");
+                    mSortList.add(sort);
+                }
+                mSortAdapter.notifyDataSetChanged();
+
+                //获取第一个商品类型的商品
+                productType = "";
+                for (int i = 0; i < 13; i++) {
+                    mNameList.add(new Shopping());
+                }
+                mNameAdapter.notifyDataSetChanged();
+
+                getShopList();
+            }
+
+            @Override
+            public void onFail(String resultMsg) {
+
+            }
+
+            @Override
+            public void onExit() {
+
+            }
+        }));
+
+
+
+
+    }
+
+    /**
+     * 获取商品列表
+     */
+    private void getShopList() {
         getView().getRxManager().add(NetWork.getNetService()
         .getShopList(productType,sort,filter,pangeNo, Constants.PAGESIZE)
         .compose(NetWork.handleResult(new BaseCallModel<Shopping>()))
@@ -294,7 +329,6 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
 
             }
         }));
-
     }
 
     /**

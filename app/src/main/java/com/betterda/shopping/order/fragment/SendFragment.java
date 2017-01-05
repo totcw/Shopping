@@ -1,6 +1,6 @@
 package com.betterda.shopping.order.fragment;
 
-import com.betterda.shopping.order.model.OrderAll;
+import com.betterda.shopping.javabean.OrderAll;
 
 /**
  * 待发货订单
