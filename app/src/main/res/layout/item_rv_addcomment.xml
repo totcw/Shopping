@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/backgroudGray"
+    android:paddingTop="10dp"
+    android:paddingBottom="5dp"
+    android:layout_height="wrap_content">
+
+
+    <LinearLayout
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:background="@drawable/shape_bottom_top_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+
+                android:id="@+id/iv_item_addcomment_touxinag"
+                android:layout_width="40dp"
+                android:background="@mipmap/zwt_zheng"
+                android:layout_height="40dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="商品名"
+                android:layout_marginLeft="10dp"
+                android:textSize="16sp"
+                android:textColor="@color/activityMainPressed"
+                />
+            
+        </LinearLayout>
+
+        <View
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/divierLine"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"></View>
+
+        <TextView
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="为商品打分"
+            android:textSize="14sp"
+            android:textColor="@color/activityMainNormal"
+            />
+
+        <RatingBar
+            android:layout_marginBottom="10dp"
+            android:id="@+id/rb_addcomment_comment"
+            style="@style/myRatingBar2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:isIndicator="false"
+            android:numStars="5"
+            android:rating="2" />
+
+        <EditText
+            android:id="@+id/et_addcomment_comment"
+            android:padding="10dp"
+            android:hint="写下您对商品的评价吧"
+            android:textSize="14sp"
+            android:gravity="start"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/shape_corner_white_gray"
+            android:layout_width="match_parent"
+            android:minHeight="100dp"
+            android:layout_height="wrap_content" />
+
+
+    </LinearLayout>
+
+</LinearLayout>

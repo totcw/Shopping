@@ -15,6 +15,7 @@ import com.betterda.mylibrary.view.IndicatorView;
 import com.betterda.shopping.R;
 import com.betterda.shopping.address.AddressActivity;
 import com.betterda.shopping.base.BaseFragment;
+import com.betterda.shopping.comment.AddCommentActivity;
 import com.betterda.shopping.findpwd.FindPwdActivity;
 import com.betterda.shopping.findpwd.contract.FindPwdContract;
 import com.betterda.shopping.home.MainActivity;
@@ -143,7 +144,8 @@ public class MyFragment extends BaseFragment<MyContract.Presenter> implements My
             case R.id.relative_my_tuikuan://我的钱包
                 UiUtils.startIntent(getmActivity(), WalletActivity.class);
                 break;
-            case R.id.relative_my_jiayouka://成为会员
+            case R.id.relative_my_jiayouka://成为会员\
+                UiUtils.startIntent(getmActivity(), AddCommentActivity.class);
                 break;
             case R.id.relative_my_bus://立即推荐
                 UiUtils.startIntent(getmActivity(), LiJiTuijianActivity.class);
