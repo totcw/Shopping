@@ -23,7 +23,7 @@ public class CommentContract {
     }
 
     public interface Model extends IModel{
-        void setCommentList(List<Comment> list);
+        void setCommentList(List<Comment> list,List<Comment> commentList);
     }
 
 

@@ -118,20 +118,15 @@ public interface NetService {
      *
      * @param account
      * @param token
-     * @param productId   商品id
-     * @param orderNum    订单id
-     * @param content     评论内容
-     * @param commentStar 评论星级
+     * @param dataJson
      * @return
      */
     @FormUrlEncoded
     @POST(Constants.Url.URL_LUNBO)
     Observable<BaseCallModel<String>> addComment(@Field("account") String account,
                                                  @Field("token") String token,
-                                                 @Field("productId") String productId,
-                                                 @Field("orderNum") String orderNum,
-                                                 @Field("content") String content,
-                                                 @Field("commentStar") String commentStar);
+                                                 @Field("dataJson") String dataJson
+                                              );
 
     /**
      * 获取商品评论列表
@@ -143,7 +138,7 @@ public interface NetService {
      */
     @FormUrlEncoded
     @POST(Constants.Url.URL_LUNBO)
-    Observable<BaseCallModel<Comment>> getComment(@Field("productId") String productId,
+    Observable<BaseCallModel<List<Comment>>> getComment(@Field("productId") String productId,
                                                   @Field("pageNo") String pageNo,
                                                   @Field("pageSize") String pageSize
     );

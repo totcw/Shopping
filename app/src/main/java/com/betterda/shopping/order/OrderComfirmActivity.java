@@ -86,7 +86,7 @@ public class OrderComfirmActivity extends BaseActivity<OrderComfrimContract.Pres
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_order_pay://立即付款
-                UiUtils.startIntent(getmActivity(), PayActivity.class);
+                getPresenter().commit();
                 break;
             case R.id.frame_address://添加配送地址
                 Intent intent = new Intent(getmActivity(), AddressActivity.class);

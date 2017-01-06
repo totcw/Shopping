@@ -17,6 +17,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
+ * 添加评论
  * Created by Administrator on 2017/1/5.
  */
 
@@ -59,6 +60,7 @@ public class AddCommentActivity extends BaseActivity<AddCommentContract.Presente
                 back();
                 break;
             case R.id.tv_addcomment:
+                getPresenter().addComment();
                 break;
         }
     }

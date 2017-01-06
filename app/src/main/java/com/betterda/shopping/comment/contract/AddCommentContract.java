@@ -17,6 +17,7 @@ public class AddCommentContract {
     }
 
     public interface Presenter extends IPresenter<View> {
+        void addComment();
     }
 
     public interface Model  extends IModel{

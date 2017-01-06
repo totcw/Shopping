@@ -32,6 +32,8 @@ public class OrderComfrimContract {
         void shi();
 
         void fou();
+        //提交订单
+        void commit();
     }
 
     public interface Model extends IModel{

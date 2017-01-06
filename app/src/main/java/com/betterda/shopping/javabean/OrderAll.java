@@ -6,6 +6,7 @@ import com.betterda.shopping.bus.model.Bus;
 import java.util.List;
 
 /**
+ * 订单详情
  * Created by Administrator on 2016/5/27.
  */
 public class OrderAll {
@@ -14,9 +15,10 @@ public class OrderAll {
     private String type; //交易状态
     private List<Bus> list;
     private String state;//状态
-    private String refund_status;//退款状态
     private float amount;//订单金额
     private float freight;//运费
+
+
 
     public float getFreight() {
         return freight;
@@ -34,13 +36,6 @@ public class OrderAll {
         this.amount = amount;
     }
 
-    public String getRefund_status() {
-        return refund_status;
-    }
-
-    public void setRefund_status(String refund_status) {
-        this.refund_status = refund_status;
-    }
 
     public String getId() {
         return id;
@@ -81,4 +76,6 @@ public class OrderAll {
     public void setState(String state) {
         this.state = state;
     }
+
+
 }

@@ -7,8 +7,8 @@ package com.betterda.shopping.javabean;
 public class UserInfo {
     private String account;
     private String token;
-    private String nickName;
-    private String photo;
+    private String nickName; //昵称
+    private String photo;  //头像
 
     public String getAccount() {
         return account;
