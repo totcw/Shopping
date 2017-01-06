@@ -50,7 +50,7 @@ public class FindPwdActivity extends BaseActivity<FindPwdContract.Presenter> imp
     public void init() {
         super.init();
         mTopbarRegister.setTitle("修改密码");
-        mCountdownRegister.setSelected(true);
+
     }
 
     @OnClick({R.id.countdown_register, R.id.btn_register,R.id.bar_back})

@@ -18,9 +18,9 @@ public class Constants {
 
     public static class Url {
 
-       public  final static String URL="http://www.meichebang.com.cn/xsnano_web/";
-        public static final String URL_REGISTER = " ";
-        public static final String URL_LOGIN = "";
+       public  final static String URL="http://192.168.1.104:8080/WinePIN/";
+        public static final String URL_REGISTER = "appAPI.do?api/account/user/register";
+        public static final String URL_LOGIN = "appAPI.do?api/account/user/login";
         public static final String URL_PWD_UPDATE = "";
         public static final String URL_LUNBO = URL+"appAPI.do?api/indeximages/get";//轮播广告
     }

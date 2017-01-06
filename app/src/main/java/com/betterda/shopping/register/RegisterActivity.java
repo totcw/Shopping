@@ -54,6 +54,7 @@ public class RegisterActivity extends BaseActivity<RegisterContract.Presenter> i
     public void init() {
         super.init();
         mTopbarRegister.setTitle("注册");
+        mCountdownRegister.setCountdownBackground(R.drawable.yzm_selector);
     }
 
     @OnClick({R.id.countdown_register, R.id.bar_back,R.id.iv_register_choose, R.id.btn_register})
