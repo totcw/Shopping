@@ -78,7 +78,7 @@
         <FrameLayout
 
             android:layout_weight="1"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent">
 
             <LinearLayout
@@ -93,7 +93,7 @@
                     android:background="@mipmap/xingye" />
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
@@ -173,7 +173,7 @@
 
         <EditText
             android:id="@+id/et_tixian_money"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
             android:layout_weight="1"

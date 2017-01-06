@@ -219,12 +219,12 @@ public class ViewPagerIndicator extends LinearLayout {
      * @author zhy
      */
     public interface PageChangeListener {
-        public void onPageScrolled(int position, float positionOffset,
+         void onPageScrolled(int position, float positionOffset,
                                    int positionOffsetPixels);
 
-        public void onPageSelected(int position);
+         void onPageSelected(int position);
 
-        public void onPageScrollStateChanged(int state);
+         void onPageScrollStateChanged(int state);
     }
 
     // 对外的ViewPager的回调接口

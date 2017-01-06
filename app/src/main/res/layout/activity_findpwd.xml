@@ -71,7 +71,7 @@
                 android:textSize="@dimen/textsize_little"
                 android:id="@+id/et_register_yzm"
                 android:background="@null"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:hint="请输入验证码"
 

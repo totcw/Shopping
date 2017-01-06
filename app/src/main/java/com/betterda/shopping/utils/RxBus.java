@@ -70,7 +70,7 @@ public class RxBus {
     public void unregister(@NonNull Object tag, @NonNull Observable observable) {
         List<Subject> subjects = subjectMapper.get(tag);
         if (null != subjects) {
-            subjects.remove((Subject) observable);
+            subjects.remove( observable);
             if (isEmpty(subjects)) {
                 subjectMapper.remove(tag);
             }

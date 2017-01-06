@@ -18,7 +18,7 @@
             android:id="@+id/tv_address_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:singleLine="true"
+            android:maxLines="1"
             android:text="小李"
             android:textColor="@color/shouye_renmen_tv"
             android:textSize="14sp" />
@@ -27,7 +27,7 @@
             android:id="@+id/tv_address_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:singleLine="true"
+            android:maxLines="1"
             android:text="13337226464"
             android:textColor="@color/shouye_renmen_tv"
             android:textSize="14sp" />
@@ -39,7 +39,7 @@
             android:id="@+id/tv_address_moren"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:singleLine="true"
+            android:maxLines="1"
             android:background="@drawable/shape_corner_red"
             android:text="默认"
             android:textColor="#ffffff"
@@ -47,7 +47,7 @@
 
         <TextView
             android:layout_weight="1"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content" />
 
         <RelativeLayout
@@ -74,7 +74,7 @@
         android:id="@+id/tv_address_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:singleLine="true"
+        android:maxLines="1"
         android:text="收货的地址"
 
         android:textColor="@color/shouye_lv_tv"
@@ -86,7 +86,7 @@
         android:id="@+id/tv_address_address2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:singleLine="true"
+        android:maxLines="1"
         android:text="详细地址"
         android:textColor="@color/shouye_lv_tv"
         android:textSize="13sp" />

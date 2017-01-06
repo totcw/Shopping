@@ -27,7 +27,7 @@
 
         <LinearLayout
             android:layout_weight="1"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
@@ -44,7 +44,7 @@
                     android:layout_centerVertical="true"
                     android:background="@null"
                     android:hint="收货人姓名"
-                    android:singleLine="true"
+                    android:maxLines="1"
                     android:textColor="@color/shouye_renmen_tv"
                     android:textSize="12sp" />
 
@@ -64,13 +64,14 @@
                 android:paddingLeft="16dp">
 
                 <EditText
+                    android:inputType="number"
                     android:id="@+id/et_number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:background="@null"
                     android:hint="手机号码"
-                    android:singleLine="true"
+                    android:maxLines="1"
                     android:textColor="@color/shouye_renmen_tv"
                     android:textSize="12sp" />
 
@@ -128,7 +129,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:background="@null"
-            android:singleLine="true"
+            android:maxLines="1"
             android:text="所在区域"
             android:textColor="@color/shouye_renmen_tv"
             android:textSize="12sp" />
@@ -163,7 +164,7 @@
             android:layout_centerVertical="true"
             android:background="@null"
             android:hint="详细地址"
-            android:singleLine="true"
+            android:maxLines="1"
             android:textColor="@color/shouye_renmen_tv"
             android:textSize="12sp" />
 
@@ -187,7 +188,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:background="@null"
-            android:singleLine="true"
+            android:maxLines="1"
             android:text="设为默认地址"
             android:textColor="@color/shouye_renmen_tv"
             android:textSize="12sp" />

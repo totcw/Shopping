@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_toRightOf="@id/sv_item_bus"
-        android:singleLine="true"
+        android:maxLines="1"
         android:text="商品名"
         android:textColor="@color/shouye_renmen_tv"
         android:textSize="12sp" />
@@ -59,7 +59,6 @@
         android:layout_toRightOf="@id/sv_item_bus"
         android:layout_below="@id/tv_item_bus_spec"
         android:layout_marginLeft="10dp"
-        android:layout_weight="1"
         android:id="@+id/tv_item_bus_price"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -78,7 +77,7 @@
         <TextView
             android:layout_weight="1"
             android:id="@+id/tv_item_bus_pricemember"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="会员价:￥0"
             android:textColor="@color/shouye_fenlei_red"

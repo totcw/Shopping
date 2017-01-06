@@ -225,7 +225,7 @@ public class ShouYePresenterImpl extends BasePresenter<ShouYeContract.View,ShouY
 
     }
 
-    class InternalHandler extends Handler {
+      class  InternalHandler extends Handler {
 
         private WeakReference<Activity> mContextWeakReference;
 

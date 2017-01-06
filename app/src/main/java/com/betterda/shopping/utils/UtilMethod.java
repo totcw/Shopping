@@ -25,6 +25,7 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by lyf
@@ -282,7 +283,7 @@ public class UtilMethod {
      */
     public static String getCurrdentTime() {
         Date date = new Date();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
         String time = format.format(date);
         return time;
     }
@@ -292,7 +293,7 @@ public class UtilMethod {
      */
     public static String getCurrdentTime2() {
         Date date = new Date();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd ");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd ",Locale.CHINA);
         String time = format.format(date);
         return time;
     }

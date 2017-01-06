@@ -6,6 +6,7 @@ import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -16,6 +17,7 @@ import android.view.WindowManager;
 import android.widget.PopupWindow;
 
 import com.betterda.mylibrary.Utils.StatusBarCompat;
+import com.betterda.shopping.BuildConfig;
 import com.betterda.shopping.R;
 import com.betterda.shopping.application.MyApplication;
 import com.betterda.shopping.utils.PermissionUtil;
@@ -59,6 +61,18 @@ public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivi
             //开始presenter的逻辑
             getPresenter().start();
         }
+
+  /*    if (BuildConfig.DEBUG) {
+            StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
+                    .detectAll()
+                    .penaltyLog()
+                    .build());
+
+            StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder().detectAll()
+                    .penaltyLog()
+                    .build());
+       }*/
+
 
     }
 

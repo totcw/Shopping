@@ -8,7 +8,7 @@
         android:gravity="center"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:singleLine="true"
+        android:maxLines="1"
         android:id="@+id/tv_item_sort_sort"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

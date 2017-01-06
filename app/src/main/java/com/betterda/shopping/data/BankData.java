@@ -39,7 +39,7 @@ public class BankData {
     }
 
 
-    public static List getBankList() {
+    public static List<String> getBankList() {
         if (bankList == null) {
             bankList = new ArrayList<>();
             bankList.add("中国农业银行");

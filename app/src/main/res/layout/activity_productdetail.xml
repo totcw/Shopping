@@ -44,7 +44,7 @@
 
                 <TextView
                     android:id="@+id/tv_productdetail_shopname"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="商品名"
@@ -75,14 +75,14 @@
                 android:textColor="@color/sortGray"
                 android:textSize="12sp" />
 
-            l<LinearLayout
+            <LinearLayout
             android:orientation="horizontal"
             android:padding="12dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
                 android:layout_weight="1"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/tv_productdetail_price"
                 android:text="￥1099"
@@ -187,7 +187,7 @@
                     android:textSize="13sp" />
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:id="@+id/tv_productdetail_comment"
@@ -312,7 +312,7 @@
                         android:layout_alignParentRight="true"
                         android:background="@drawable/shape_oval"
                         android:gravity="center"
-                        android:singleLine="true"
+                        android:maxLines="1"
                         android:text="1"
                         android:textColor="#ffffff"
                         android:textSize="10sp"

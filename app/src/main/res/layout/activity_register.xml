@@ -71,7 +71,7 @@
                 android:textSize="@dimen/textsize_little"
                 android:id="@+id/et_register_yzm"
                 android:background="@null"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:hint="请输入验证码"
 
@@ -177,7 +177,7 @@
 
 
             <EditText
-                android:inputType="textPassword"
+                android:inputType="number"
                 android:textSize="@dimen/textsize_little"
                 android:id="@+id/et_register_phone"
                 android:layout_toRightOf="@id/iv_register_phone"
@@ -196,7 +196,7 @@
         android:layout_marginTop="12dp"
         android:id="@+id/linear_register_xieyi"
         android:gravity="center"
-        android:layout_centerVertical="true"
+
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">

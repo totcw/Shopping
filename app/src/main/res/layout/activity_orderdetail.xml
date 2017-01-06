@@ -44,6 +44,7 @@
                     android:layout_height="wrap_content">
 
                     <LinearLayout
+                        android:baselineAligned="false"
                         android:layout_width="match_parent"
                         android:layout_height="48dp">
 
@@ -87,7 +88,6 @@
                         android:id="@+id/relative_orderdetail_comment"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
                         android:background="#ffffff">
 
                         <TextView
@@ -112,7 +112,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical">
 
                     <RelativeLayout
@@ -264,7 +264,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:singleLine="true"
+                            android:maxLines="1"
                             android:text="商品列表"
                             android:textColor="@color/shouye_renmen_tv"
                             android:textSize="@dimen/textsize_small" />
@@ -298,7 +298,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:singleLine="true"
+                            android:maxLines="1"
                             android:text="运费"
                             android:textColor="@color/shouye_renmen_tv"
                             android:textSize="@dimen/textsize_small" />
@@ -310,7 +310,7 @@
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
                             android:layout_marginRight="10dp"
-                            android:singleLine="true"
+                            android:maxLines="1"
                             android:text="免费"
                             android:textColor="@color/shouye_renmen_tv"
                             android:textSize="@dimen/textsize_small" />
@@ -335,7 +335,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:singleLine="true"
+                            android:maxLines="1"
                             android:text="代金卷"
                             android:textColor="@color/shouye_renmen_tv"
                             android:textSize="@dimen/textsize_small" />
@@ -347,7 +347,7 @@
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
                             android:layout_marginRight="10dp"
-                            android:singleLine="true"
+                            android:maxLines="1"
                             android:text="0"
                             android:textColor="@color/shouye_renmen_tv"
                             android:textSize="@dimen/textsize_small" />

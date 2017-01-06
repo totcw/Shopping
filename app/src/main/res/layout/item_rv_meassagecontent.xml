@@ -28,7 +28,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="5dp"
-            android:singleLine="true"
+            android:maxLines="1"
             android:text="消息标题" />
 
         <TextView
