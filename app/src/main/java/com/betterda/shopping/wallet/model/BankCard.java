@@ -68,4 +68,18 @@ public class BankCard {
     public void setType(String type) {
         this.cardType = type;
     }
+
+
+    @Override
+    public String toString() {
+        return "BankCard{" +
+                "id='" + id + '\'' +
+                ", cardName='" + cardName + '\'' +
+                ", identityCard='" + identityCard + '\'' +
+                ", bank='" + bank + '\'' +
+                ", cardNum='" + cardNum + '\'' +
+                ", number='" + number + '\'' +
+                ", cardType='" + cardType + '\'' +
+                '}';
+    }
 }

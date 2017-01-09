@@ -16,13 +16,25 @@ public class Constants {
     public static final int PHOTOHRAPH = 2;// 相机拍照
     public static final String IMAGE_UNSPECIFIED = "image/*";
 
+
+    public static class Cache{
+        public final static String ISLOGIN = "isLogin";//登录状态
+        public final static String ACCOUNT = "account";//
+        public final static String TOKEN = "token";//
+        public final static String NICKNAME = "nickName";//昵称
+        public final static String TOUXIANG = "touxiang";//头像
+    }
+
     public static class Url {
 
-       public  final static String URL="http://192.168.1.104:8080/WinePIN/";
+       public  final static String URL="http://192.168.1.145:8080/WinePIN/";
         public static final String URL_REGISTER = "appAPI.do?api/account/user/register";
         public static final String URL_LOGIN = "appAPI.do?api/account/user/login";
         public static final String URL_PWD_UPDATE = "";
         public static final String URL_LUNBO = URL+"appAPI.do?api/indeximages/get";//轮播广告
+        public static final String URL_ADD_BANK = "appAPI.do?api/account/bank/add";
+        public static final String URL_GET_BANK = "appAPI.do?api/account/bank/get";
+        public static final String URL_DEL_BANK = "appAPI.do?api/account/bank/del";
     }
 
     public class WeiXin {

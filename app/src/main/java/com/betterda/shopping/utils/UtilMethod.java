@@ -370,14 +370,22 @@ public class UtilMethod {
      * @param loadingPagerLocation
      */
     public static void hideOrEmpty(List listLocation, LoadingPager loadingPagerLocation) {
-        if (listLocation != null&&loadingPagerLocation!=null) {
-            if (listLocation.size() > 0) {
-                loadingPagerLocation.hide();
+        if (loadingPagerLocation != null) {
+            if (listLocation != null) {
+                if (listLocation.size() > 0) {
+                    loadingPagerLocation.hide();
+                } else {
+                    loadingPagerLocation.setEmptyVisable();
+                }
             } else {
                 loadingPagerLocation.setEmptyVisable();
             }
-        } else {
-            loadingPagerLocation.setEmptyVisable();
+        }
+    }
+
+    public static void setLoadpagerError(LoadingPager loadpagerError) {
+        if (loadpagerError != null) {
+            loadpagerError.setErrorVisable();
         }
     }
 

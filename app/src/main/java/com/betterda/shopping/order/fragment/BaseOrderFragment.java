@@ -11,10 +11,14 @@ import com.betterda.mylibrary.xrecycleview.XRecyclerView;
 import com.betterda.shopping.R;
 import com.betterda.shopping.base.BaseFragment;
 import com.betterda.shopping.bus.model.Bus;
+import com.betterda.shopping.http.MyObserver;
+import com.betterda.shopping.http.NetWork;
+import com.betterda.shopping.javabean.BaseCallModel;
 import com.betterda.shopping.order.OrderDetailActivity;
 import com.betterda.shopping.order.contract.BaseOrderContract;
 import com.betterda.shopping.javabean.OrderAll;
 import com.betterda.shopping.order.presenter.BaseOrderPresenterImpl;
+import com.betterda.shopping.utils.Constants;
 import com.betterda.shopping.utils.UiUtils;
 import com.betterda.shopping.utils.UtilMethod;
 import com.zhy.base.adapter.ViewHolder;
@@ -40,6 +44,7 @@ public class BaseOrderFragment extends BaseFragment<BaseOrderContract.Presenter>
 
     public CommonAdapter<OrderAll> mOrderAllCommonAdapter;
     public List<OrderAll> mOrderAllList;
+    private int pageNo;//页数
 
     @Override
     protected BaseOrderContract.Presenter onLoadPresenter() {
@@ -291,6 +296,26 @@ public class BaseOrderFragment extends BaseFragment<BaseOrderContract.Presenter>
      * 获取数据
      */
     public void getData() {
+
+        getRxManager().add(NetWork.getNetService()
+        .getOrder("account","token","orderStatus",pageNo+"", Constants.PAGESIZE)
+        .compose(NetWork.handleResult(new BaseCallModel<OrderAll>()))
+        .subscribe(new MyObserver<OrderAll>() {
+            @Override
+            protected void onSuccess(OrderAll data, String resultMsg) {
+
+            }
+
+            @Override
+            public void onFail(String resultMsg) {
+
+            }
+
+            @Override
+            public void onExit() {
+
+            }
+        }));
 
     }
 

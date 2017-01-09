@@ -6,7 +6,7 @@ import com.betterda.shopping.bus.model.Bus;
 import java.util.List;
 
 /**
- * 订单详情
+ * 订单列表
  * Created by Administrator on 2016/5/27.
  */
 public class OrderAll {

@@ -46,11 +46,17 @@ public class MyYinHangKaActivity extends BaseActivity<MyYinHangKaContract.Presen
     @Override
     public void init() {
         super.init();
+        setTopBar();
+
+        mLoadingpager.setLoadVisable();
+
+        initRv();
+    }
+
+    private void setTopBar() {
         mTopbarMyyinhangka.setTitle("我的银行卡");
         mTopbarMyyinhangka.setActionText("添加");
         mTopbarMyyinhangka.setActionTextVisibility(true);
-
-        initRv();
     }
 
     @OnClick({R.id.bar_back,R.id.bar_action})
@@ -78,8 +84,8 @@ public class MyYinHangKaActivity extends BaseActivity<MyYinHangKaContract.Presen
         return mTopbarMyyinhangka;
     }
 
-    public LoadingPager getLoadpager() {
+    @Override
+    public LoadingPager getLodapger() {
         return mLoadingpager;
     }
-
 }

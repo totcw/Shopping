@@ -290,10 +290,10 @@ public interface NetService {
      * @return
      */
     @FormUrlEncoded
-    @POST(Constants.Url.URL_LUNBO)
+    @POST(Constants.Url.URL_DEL_BANK)
     Observable<BaseCallModel<String>> getBandDelete(@Field("account") String account,
                                                     @Field("token") String token,
-                                                    @Field("id") String id);
+                                                    @Field("jsonData") String id);
 
 
     /**
@@ -309,7 +309,7 @@ public interface NetService {
      * @return
      */
     @FormUrlEncoded
-    @POST(Constants.Url.URL_LUNBO)
+    @POST(Constants.Url.URL_ADD_BANK)
     Observable<BaseCallModel<String>> getBandAdd(@Field("account") String account,
                                                  @Field("token") String token,
                                                  @Field("cardName") String truename,
@@ -327,7 +327,7 @@ public interface NetService {
      * @return
      */
     @FormUrlEncoded
-    @POST(Constants.Url.URL_LUNBO)
+    @POST(Constants.Url.URL_GET_BANK)
     Observable<BaseCallModel<List<BankCard>>> getBandGet(@Field("account") String account,
                                                          @Field("token") String token
     );

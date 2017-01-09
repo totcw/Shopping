@@ -16,10 +16,13 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.PopupWindow;
 
+import com.betterda.mylibrary.LoadingPager;
 import com.betterda.mylibrary.Utils.StatusBarCompat;
 import com.betterda.shopping.BuildConfig;
 import com.betterda.shopping.R;
 import com.betterda.shopping.application.MyApplication;
+import com.betterda.shopping.utils.CacheUtils;
+import com.betterda.shopping.utils.Constants;
 import com.betterda.shopping.utils.PermissionUtil;
 import com.betterda.shopping.utils.RxManager;
 import com.betterda.shopping.utils.UiUtils;
@@ -139,6 +142,22 @@ public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivi
 
     }
 
+    /**
+     * 获取帐号
+     * @return
+     */
+    public String getAccount() {
+        return CacheUtils.getString(getmActivity(), Constants.Cache.ACCOUNT, "");
+    }
+
+    /**
+     * 获取token
+     * @return
+     */
+    public String getToken() {
+        return  CacheUtils.getString(getmActivity(), getAccount()+Constants.Cache.TOKEN, "");
+    }
+
 
     public Activity getmActivity() {
         return this;
@@ -156,6 +175,10 @@ public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivi
     public RxManager getRxManager() {
         return mRxManager;
     }
+
+    public LoadingPager getLodapger(){
+        return null;
+    };
 
     /**
      * 初始化并显示PopupWindow

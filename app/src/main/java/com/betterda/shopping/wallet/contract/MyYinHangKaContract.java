@@ -17,7 +17,7 @@ public class MyYinHangKaContract {
     public interface View extends IView{
         NormalTopBar getNormalTopBar();
 
-        LoadingPager getLoadpager();
+
     }
 
     public interface Presenter extends IPresenter<View> {

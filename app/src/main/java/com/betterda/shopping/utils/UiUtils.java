@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 
+import com.betterda.mylibrary.LoadingPager;
 import com.betterda.mylibrary.ShapeLoadingDialog;
 import com.betterda.mylibrary.Utils.Toast;
 import com.betterda.shopping.R;
@@ -66,6 +67,8 @@ public class UiUtils {
                 }).show();
     }
 
+
+
     public interface showSnackBarListener{
 
         /**
@@ -82,7 +85,7 @@ public class UiUtils {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(title)
                 .setMessage(content)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -91,7 +94,7 @@ public class UiUtils {
                         }
                     }
                 })
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();

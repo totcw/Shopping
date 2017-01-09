@@ -11,7 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupWindow;
 
+import com.betterda.mylibrary.LoadingPager;
 import com.betterda.shopping.R;
+import com.betterda.shopping.utils.CacheUtils;
+import com.betterda.shopping.utils.Constants;
 import com.betterda.shopping.utils.RxManager;
 import com.betterda.shopping.utils.UiUtils;
 
@@ -100,12 +103,30 @@ public abstract class BaseFragment <P extends IPresenter> extends Fragment imple
     public void log(String msg) {
         Log.i("BaseFragment", msg);
     }
+    /**
+     * 获取帐号
+     * @return
+     */
+    public String getAccount() {
+        return CacheUtils.getString(getmActivity(), Constants.Cache.ACCOUNT, "");
+    }
 
+    /**
+     * 获取token
+     * @return
+     */
+    public String getToken() {
+        return  CacheUtils.getString(getmActivity(), getAccount()+Constants.Cache.TOKEN, "");
+    }
 
     @Override
     public RxManager getRxManager() {
         return mRxManager;
     }
+
+    public LoadingPager getLodapger(){
+        return null;
+    };
 
     /**
      * 初始化并显示PopupWindow
