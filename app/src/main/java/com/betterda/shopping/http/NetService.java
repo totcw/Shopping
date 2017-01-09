@@ -474,8 +474,8 @@ public interface NetService {
      * @return
      */
     @FormUrlEncoded
-    @POST(Constants.Url.URL_LUNBO)
-    Observable<BaseCallModel<List<BankCard>>> addAddress(@Field("account") String account,
+    @POST(Constants.Url.URL_ADD_ADDRESS)
+    Observable<BaseCallModel<String>> addAddress(@Field("account") String account,
                                                          @Field("token") String token,
                                                          @Field("consigneeName") String consigneeName,
                                                          @Field("mobilePhone") String mobilePhone,
@@ -498,14 +498,15 @@ public interface NetService {
      * @return
      */
     @FormUrlEncoded
-    @POST(Constants.Url.URL_LUNBO)
-    Observable<BaseCallModel<List<BankCard>>> editAddress(@Field("account") String account,
+    @POST(Constants.Url.URL_UPDATE_ADDRESS)
+    Observable<BaseCallModel<String>> editAddress(@Field("account") String account,
                                                           @Field("token") String token,
                                                           @Field("consigneeName") String consigneeName,
                                                           @Field("mobilePhone") String mobilePhone,
                                                           @Field("address") String address,
                                                           @Field("detailAddress") String detailAddress,
-                                                          @Field("isDefault") String isDefault
+                                                          @Field("isDefault") String isDefault,
+                                                            @Field("addressId") String addressId
 
     );
 
