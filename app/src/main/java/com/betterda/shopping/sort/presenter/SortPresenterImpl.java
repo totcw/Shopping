@@ -49,7 +49,7 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
     private String productType;//商品类型
     private String sort; //排序
     private String filter; //筛选
-    private String pangeNo ;//分页加载的页数
+    private int pangeNo=1 ;//分页加载的页数
 
 
     @Override
@@ -265,8 +265,6 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
      * 获取商品类型
      */
     private void getData() {
-
-
         getView().getRxManager().add(NetWork.getNetService()
         .getShopTypeList()
         .compose(NetWork.handleResult(new BaseCallModel<String>()))
@@ -311,7 +309,7 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
      */
     private void getShopList() {
         getView().getRxManager().add(NetWork.getNetService()
-        .getShopList(productType,sort,filter,pangeNo, Constants.PAGESIZE)
+        .getShopList(productType,sort,filter,pangeNo+"", Constants.PAGESIZE)
         .compose(NetWork.handleResult(new BaseCallModel<Shopping>()))
         .subscribe(new MyObserver<Shopping>() {
             @Override

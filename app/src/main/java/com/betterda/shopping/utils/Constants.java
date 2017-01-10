@@ -39,6 +39,14 @@ public class Constants {
         public static final String URL_UPDATE_ADDRESS = "appAPI.do?api/account/address/update";//更新配送地址
         public static final String URL_DEL_ADDRESS = "appAPI.do?api/account/address/del";//删除配送地址
         public static final String URL_GET_ADDRESS = "appAPI.do?api/account/address/get";//获取配送地址列表
+        public static final String URL_GET_SHOPLIST = "appAPI.do?api/account/address/get";//获取商品列表
+        public static final String URL_GET_SHOPTYPE = "appAPI.do?api/account/address/get";//获取商品类型
+        public static final String URL_GET_SHOPDETAIL = "appAPI.do?api/account/address/get";//获取商品详情
+        public static final String URL_GET_SHOPBRAND = "appAPI.do?api/account/address/get";//获取商品品牌
+        public static final String URL_ADD_SHOPCOMMENT = "appAPI.do?api/account/address/get";//添加商品评论
+        public static final String URL_GET_SHOPCOMMENT = "appAPI.do?api/account/address/get";//获取商品评论
+
+
     }
 
     public class WeiXin {

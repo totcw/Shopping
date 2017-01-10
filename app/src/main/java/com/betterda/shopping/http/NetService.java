@@ -1,5 +1,6 @@
 package com.betterda.shopping.http;
 
+import com.betterda.shopping.address.model.Address;
 import com.betterda.shopping.javabean.Comment;
 import com.betterda.shopping.javabean.BaseCallModel;
 import com.betterda.shopping.javabean.ShopDetail;
@@ -87,7 +88,7 @@ public interface NetService {
      * @return
      */
     @FormUrlEncoded
-    @POST(Constants.Url.URL_LUNBO)
+    @POST(Constants.Url.URL_GET_SHOPLIST)
     Observable<BaseCallModel<Shopping>> getShopList(@Field("productType") String productType,
                                                     @Field("sort") String sort,
                                                     @Field("filter") String filter,
@@ -99,7 +100,7 @@ public interface NetService {
      *
      * @return
      */
-    @GET(Constants.Url.URL_LUNBO)
+    @GET(Constants.Url.URL_GET_SHOPTYPE)
     Observable<BaseCallModel<String>> getShopTypeList();
 
 
@@ -512,7 +513,7 @@ public interface NetService {
 
 
     /**
-     * 修改配送地址
+     * 删除配送地址
      *
      * @param account
      * @param token
@@ -520,8 +521,8 @@ public interface NetService {
      * @return
      */
     @FormUrlEncoded
-    @POST(Constants.Url.URL_LUNBO)
-    Observable<BaseCallModel<List<BankCard>>> deleteAddress(@Field("account") String account,
+    @POST(Constants.Url.URL_DEL_ADDRESS)
+    Observable<BaseCallModel<String>> deleteAddress(@Field("account") String account,
                                                             @Field("token") String token,
                                                             @Field("addressId") String addressId
     );
@@ -534,9 +535,9 @@ public interface NetService {
      * @return
      */
     @FormUrlEncoded
-    @POST(Constants.Url.URL_LUNBO)
-    Observable<BaseCallModel<List<BankCard>>> getAddress(@Field("account") String account,
-                                                         @Field("token") String token
+    @POST(Constants.Url.URL_GET_ADDRESS)
+    Observable<BaseCallModel<List<Address>>> getAddress(@Field("account") String account,
+                                                        @Field("token") String token
     );
 
     /**

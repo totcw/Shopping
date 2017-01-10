@@ -286,4 +286,22 @@ public class EditAddressActivity extends BaseActivity<EditAddressContract.Presen
     public String getaddressText() {
         return mEtAddress2.getText().toString().trim();
     }
+
+
+    public void setValue(String name, String number, String ares, String address, boolean isDefault) {
+        mEtName.setText(name);
+        mEtNumber.setText(number);
+        mTvAddress.setText(ares);
+        mEtAddress2.setText(address);
+        if (isDefault) {
+            mTbtnAddaddress.setToggleOn();
+        } else {
+            mTbtnAddaddress.setToggleOff();
+        }
+    }
+
+    @Override
+    public TextView getTv() {
+        return mTvAddress;
+    }
 }

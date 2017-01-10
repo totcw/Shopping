@@ -1,5 +1,8 @@
 package com.betterda.shopping.address.contract;
 
+import android.view.View;
+import android.widget.TextView;
+
 import com.betterda.shopping.base.IModel;
 import com.betterda.shopping.base.IPresenter;
 import com.betterda.shopping.base.IView;
@@ -17,6 +20,10 @@ public class EditAddressContract {
         String getAreaText();
 
         String getaddressText();
+
+        void setValue(String name, String number, String ares, String address, boolean isDefault);
+
+        TextView getTv();
     }
 
     public interface Presenter extends IPresenter<View>{

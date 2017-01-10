@@ -5,61 +5,90 @@ package com.betterda.shopping.address.model;
  * Created by Administrator on 2016/5/20.
  */
 public class Address {
-    private String id;
+    private String addressId;
+    private String account;
+    private String token;
+    private String consigneeName;//姓名
+    private String mobilePhone;//手机号
+    private String address;//省丶市
+    private String detailAddress;//详细地址
+    private boolean isDefault;//是否是默认
 
-    public String getId() {
-        return id;
+    public String getAccount() {
+        return account;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setAccount(String account) {
+        this.account = account;
     }
 
-    private String name;//姓名
-    private String number;//手机号
-    private String address2;//省丶市
-    private String address3;//详细地址
-    private boolean isMoren;//是否是默认
-
-    public String getAddress2() {
-        return address2;
+    public String getAddressId() {
+        return addressId;
     }
 
-    public void setAddress2(String address2) {
-        this.address2 = address2;
+    public void setAddressId(String addressId) {
+        this.addressId = addressId;
     }
 
-    public String getAddress3() {
-        return address3;
+    public String getToken() {
+        return token;
     }
 
-    public void setAddress3(String address3) {
-        this.address3 = address3;
+    public void setToken(String token) {
+        this.token = token;
     }
 
-
-    public String getName() {
-        return name;
+    public String getConsigneeName() {
+        return consigneeName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setConsigneeName(String consigneeName) {
+        this.consigneeName = consigneeName;
     }
 
-    public String getNumber() {
-        return number;
+    public String getMobilePhone() {
+        return mobilePhone;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    public void setMobilePhone(String mobilePhone) {
+        this.mobilePhone = mobilePhone;
     }
 
-
-    public boolean isMoren() {
-        return isMoren;
+    public String getAddress() {
+        return address;
     }
 
-    public void setIsMoren(boolean isMoren) {
-        this.isMoren = isMoren;
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getDetailAddress() {
+        return detailAddress;
+    }
+
+    public void setDetailAddress(String detailAddress) {
+        this.detailAddress = detailAddress;
+    }
+
+    public boolean isDefault() {
+        return isDefault;
+    }
+
+    public void setDefault(boolean aDefault) {
+        isDefault = aDefault;
+    }
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "addressId='" + addressId + '\'' +
+                ", account='" + account + '\'' +
+                ", token='" + token + '\'' +
+                ", consigneeName='" + consigneeName + '\'' +
+                ", tellPhone='" + mobilePhone + '\'' +
+                ", address='" + address + '\'' +
+                ", detailAddress='" + detailAddress + '\'' +
+                ", isDefault=" + isDefault +
+                '}';
     }
 }
