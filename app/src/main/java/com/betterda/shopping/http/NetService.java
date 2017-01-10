@@ -8,6 +8,7 @@ import com.betterda.shopping.javabean.UserInfo;
 import com.betterda.shopping.javabean.OrderAll;
 import com.betterda.shopping.shouye.model.LunBoTu;
 import com.betterda.shopping.sort.model.Shopping;
+import com.betterda.shopping.sort.model.Sort;
 import com.betterda.shopping.utils.Constants;
 import com.betterda.shopping.wallet.model.BankCard;
 
@@ -89,9 +90,11 @@ public interface NetService {
      */
     @FormUrlEncoded
     @POST(Constants.Url.URL_GET_SHOPLIST)
-    Observable<BaseCallModel<Shopping>> getShopList(@Field("productType") String productType,
+    Observable<BaseCallModel<List<Shopping>>> getShopList(@Field("productType") String productType,
                                                     @Field("sort") String sort,
-                                                    @Field("filter") String filter,
+                                                    @Field("brand") String brand,
+                                                    @Field("beginPrice") String beginPrice,
+                                                    @Field("endPrice") String endPrice,
                                                     @Field("pageNo") String pageNo,
                                                     @Field("pageSize") String pageSize);
 
@@ -101,7 +104,7 @@ public interface NetService {
      * @return
      */
     @GET(Constants.Url.URL_GET_SHOPTYPE)
-    Observable<BaseCallModel<String>> getShopTypeList();
+    Observable<BaseCallModel<List<Sort>>> getShopTypeList();
 
 
     /**

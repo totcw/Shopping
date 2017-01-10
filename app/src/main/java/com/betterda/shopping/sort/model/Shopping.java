@@ -6,26 +6,35 @@ package com.betterda.shopping.sort.model;
  */
 
 public class Shopping {
-
-    private  String imageUrl;
-    private String shopName;
+    private String id;
+    private  String littlePicture;//商品小图片
+    private String productName;//商品名称
     private String  spec;//规格
-    private String price;
+    private String salePrice;//原价
+    private String vipPrice;//会员价
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getId() {
+        return id;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getShopName() {
-        return shopName;
+    public String getLittlePicture() {
+        return littlePicture;
     }
 
-    public void setShopName(String shopName) {
-        this.shopName = shopName;
+    public void setLittlePicture(String littlePicture) {
+        this.littlePicture = littlePicture;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
     public String getSpec() {
@@ -36,11 +45,19 @@ public class Shopping {
         this.spec = spec;
     }
 
-    public String getPrice() {
-        return price;
+    public String getSalePrice() {
+        return salePrice;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
+    public void setSalePrice(String salePrice) {
+        this.salePrice = salePrice;
+    }
+
+    public String getVipPrice() {
+        return vipPrice;
+    }
+
+    public void setVipPrice(String vipPrice) {
+        this.vipPrice = vipPrice;
     }
 }

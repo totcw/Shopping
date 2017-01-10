@@ -6,23 +6,23 @@ package com.betterda.shopping.sort.model;
  */
 
 public class Sort {
-    private String sortName; //商品名
+    private String catalogname; //商品类型品
     private boolean isSelect;
 
-    public Sort(String sortName, boolean isSelect) {
-        this.sortName = sortName;
+    public Sort(String catalogname, boolean isSelect) {
+        this.catalogname = catalogname;
         this.isSelect = isSelect;
     }
 
     public Sort() {
     }
 
-    public String getSortName() {
-        return sortName;
+    public String getCatalogname() {
+        return catalogname;
     }
 
-    public void setSortName(String sortName) {
-        this.sortName = sortName;
+    public void setCatalogname(String catalogname) {
+        this.catalogname = catalogname;
     }
 
     public boolean isSelect() {
@@ -31,5 +31,13 @@ public class Sort {
 
     public void setSelect(boolean select) {
         isSelect = select;
+    }
+
+    @Override
+    public String toString() {
+        return "Sort{" +
+                "catalogname='" + catalogname + '\'' +
+                ", isSelect=" + isSelect +
+                '}';
     }
 }

@@ -103,7 +103,6 @@ public class SortFragment extends BaseFragment<SortContract.Presenter> implement
         mTtbvSort.setFirstTitle("综合排序");
         mTtbvSort.setSecondTitle("筛选");
 
-        getPresenter().start();
     }
 
 

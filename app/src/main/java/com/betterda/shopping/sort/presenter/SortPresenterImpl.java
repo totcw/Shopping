@@ -48,8 +48,10 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
 
     private String productType;//商品类型
     private String sort; //排序
-    private String filter; //筛选
-    private int pangeNo=1 ;//分页加载的页数
+    private String brand; //品牌
+    private String beginPrice; //起始价格
+    private String endPrice; //始末价格
+    private int pangeNo = 1;//分页加载的页数
 
 
     @Override
@@ -74,19 +76,19 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
                     view.setSelected(s.isSelect());
                     if (s.isSelect()) {
                         //记录商品类型
-                        productType = s.getSortName();
+                        productType = s.getCatalogname();
                         view.setTextColor(getView().getmActivity().getResources().getColor(R.color.white));
                     } else {
                         view.setTextColor(getView().getmActivity().getResources().getColor(R.color.activityMainPressed));
                     }
-                    holder.setText(R.id.tv_item_sort_sort, s.getSortName());
+                    holder.setText(R.id.tv_item_sort_sort, s.getCatalogname());
 
                     holder.setOnClickListener(R.id.linear_item_sort_sort, new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             if (!getView().close()) {
                                 //记录商品类型
-                                productType = s.getSortName();
+                                productType = s.getCatalogname();
                                 refreshState(holder);
                                 updateShopping();
                             }
@@ -111,9 +113,10 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
 
                 if (null != s) {
 
-                    holder.setText(R.id.tv_item_sort_name, s.getShopName());
+                    holder.setText(R.id.tv_item_sort_name, s.getProductName());
                     holder.setText(R.id.tv_item_sort_account, s.getSpec());
-                    holder.setText(R.id.tv_item_sort_money, "￥"+s.getPrice());
+                    holder.setText(R.id.tv_item_sort_money, "￥" + s.getSalePrice());
+                    holder.setText(R.id.tv_item_sort_moneymember, "会员价:￥" + s.getVipPrice());
                     View view = holder.getView(R.id.iv_item_sort_name_add);
                     holder.setOnClickListener(R.id.linear_item_sort_name, new View.OnClickListener() {
                         @Override
@@ -210,6 +213,9 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
                     public void onClick(View view) {
                         refreshTypeState(holder, type);
                         refreshChoseRecycleview(type, s.getName());
+                        if ("品牌".equals(type)) {
+                            brand = s.getName();
+                        }
                         getView().showType(false);
                     }
                 });
@@ -233,13 +239,13 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
         mSortPAdapter = new CommonAdapter<Sort>(getView().getmActivity(), R.layout.item_rv_pp_sort, mSortPList) {
             @Override
             public void convert(final ViewHolder holder, final Sort s) {
-                holder.setText(R.id.tv_item_sort_sort_p, s.getSortName());
+                holder.setText(R.id.tv_item_sort_sort_p, s.getCatalogname());
                 setTextColor(s.isSelect(), holder, R.id.tv_item_sort_sort_p, R.color.activityMainPressed, R.color.sortBlue);
                 holder.setOnClickListener(R.id.linear_pp_sort, new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         //记录排序
-                        sort = s.getSortName();
+                        sort = s.getCatalogname();
                         getModel().clear(mSortPList, holder.getAdapterPosition());
                         //TODO getdata
                         getView().close();
@@ -266,41 +272,42 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
      */
     private void getData() {
         getView().getRxManager().add(NetWork.getNetService()
-        .getShopTypeList()
-        .compose(NetWork.handleResult(new BaseCallModel<String>()))
-        .subscribe(new MyObserver<String>() {
-            @Override
-            protected void onSuccess(String data, String resultMsg) {
-                for (int i = 0; i < 5; i++) {
-                    Sort sort = new Sort();
-                    sort.setSortName("白酒");
-                    mSortList.add(sort);
-                }
-                mSortAdapter.notifyDataSetChanged();
+                .getShopTypeList()
+                .compose(NetWork.handleResult(new BaseCallModel<List<Sort>>()))
+                .subscribe(new MyObserver<List<Sort>>() {
+                    @Override
+                    protected void onSuccess(List<Sort> data, String resultMsg) {
 
-                //获取第一个商品类型的商品
-                productType = "";
-                for (int i = 0; i < 13; i++) {
-                    mNameList.add(new Shopping());
-                }
-                mNameAdapter.notifyDataSetChanged();
+                        if (mSortList != null && mSortAdapter != null) {
+                            mSortList.clear();
+                            mSortList.addAll(data);
+                            mSortAdapter.notifyDataSetChanged();
+                            initNameFirst(data);
 
-                getShopList();
-            }
+                        }
 
-            @Override
-            public void onFail(String resultMsg) {
+                    }
 
-            }
+                    @Override
+                    public void onFail(String resultMsg) {
 
-            @Override
-            public void onExit() {
+                    }
 
-            }
-        }));
+                    @Override
+                    public void onExit() {
+
+                    }
+                }));
 
 
+    }
 
+    //获取第一个商品类型的商品
+    private void initNameFirst(List<Sort> data) {
+        if (data != null && data.size() > 0) {
+            productType = data.get(0).getCatalogname();
+            getShopList();
+        }
 
     }
 
@@ -309,24 +316,29 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
      */
     private void getShopList() {
         getView().getRxManager().add(NetWork.getNetService()
-        .getShopList(productType,sort,filter,pangeNo+"", Constants.PAGESIZE)
-        .compose(NetWork.handleResult(new BaseCallModel<Shopping>()))
-        .subscribe(new MyObserver<Shopping>() {
-            @Override
-            protected void onSuccess(Shopping data, String resultMsg) {
+                .getShopList(productType, sort, brand, beginPrice, endPrice, pangeNo + "", Constants.PAGESIZE)
+                .compose(NetWork.handleResult(new BaseCallModel<List<Shopping>>()))
+                .subscribe(new MyObserver<List<Shopping>>() {
+                    @Override
+                    protected void onSuccess(List<Shopping> data, String resultMsg) {
+                        System.out.println("商品列表:"+data);
+                        if (mNameList != null && mNameAdapter != null) {
+                            mNameList.clear();
+                            mNameList.addAll(data);
+                            mNameAdapter.notifyDataSetChanged();
+                        }
+                    }
 
-            }
+                    @Override
+                    public void onFail(String resultMsg) {
+                        System.out.println("错误:"+resultMsg);
+                    }
 
-            @Override
-            public void onFail(String resultMsg) {
+                    @Override
+                    public void onExit() {
 
-            }
-
-            @Override
-            public void onExit() {
-
-            }
-        }));
+                    }
+                }));
     }
 
     /**
@@ -445,11 +457,11 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
      */
     @Override
     public void priceComfirm() {
-        String stratPrice = getView().getStratPrice();
-        String endPrice = getView().getEndPrice();
-        if (!TextUtils.isEmpty(stratPrice) && !TextUtils.isEmpty(endPrice)) {
+        beginPrice = getView().getStratPrice();
+        endPrice = getView().getEndPrice();
+        if (!TextUtils.isEmpty(beginPrice) && !TextUtils.isEmpty(endPrice)) {
             refreshTypeState(null, "价格");
-            refreshChoseRecycleview("价格", stratPrice + "-" + endPrice + "元");
+            refreshChoseRecycleview("价格", beginPrice + "-" + endPrice + "元");
         }
     }
 
@@ -459,7 +471,9 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
     @Override
     public void clearChose() {
         refreshChoseRecycleview(null, "全部");
-
+        beginPrice = null;
+        endPrice = null;
+        brand = null;
     }
 
     /**
@@ -467,17 +481,8 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
      */
     @Override
     public void comfirmChose() {
-        StringBuilder sb = new StringBuilder();
-        int size = mChoseList.size();
-        for (int i = 0; i <size ; i++) {
-            if (i == size - 1) {
-                sb.append(mChoseList.get(i).getName());
-            } else {
-                sb.append(mChoseList.get(i).getName() + ",");
-            }
-        }
-        filter = sb.toString();
-        //TODO getdata
+
+        getShopList();
         getView().close();
     }
 
@@ -491,10 +496,6 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
             map = null;
         }
 
-     /*   if (mChoseList != null) {
-            mChoseList.clear();
-            mChoseList = null;
-        }*/
 
     }
 
