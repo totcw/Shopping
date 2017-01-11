@@ -182,7 +182,7 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailContract.Pr
                 UiUtils.startIntent(getmActivity(), BusActivity.class);
                 break;
             case R.id.tv_productdetail_add://加入购物车
-                addBus();
+                getPresenter().addBus();
                 break;
             case R.id.relative_productdetail_share://分享
                 share();
@@ -265,20 +265,6 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailContract.Pr
         }
     }
 
-    /**
-     * 加入购物车
-     */
-    private void addBus() {
-        mTvBus.setVisibility(View.VISIBLE);
-        String amount = mAddAndSub.getAmount();
-        String text = mTvBus.getText().toString().trim();
-        try {
-            int count = Integer.valueOf(amount) + Integer.valueOf(text);
-            mTvBus.setText(count+"");
-        } catch (Exception e) {
-
-        }
-    }
 
     /**
      * 立即购买
@@ -340,6 +326,16 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailContract.Pr
     @Override
     public void close() {
         closePopupWindow();
+    }
+
+    @Override
+    public TextView getTvBus() {
+        return mTvBus;
+    }
+
+    @Override
+    public AddAndSub getMaddAndSub() {
+        return mAddAndSub;
     }
 
 

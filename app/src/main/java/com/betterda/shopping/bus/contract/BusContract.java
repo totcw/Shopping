@@ -1,6 +1,8 @@
 package com.betterda.shopping.bus.contract;
 
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.TextView;
 
 import com.betterda.shopping.base.IModel;
 import com.betterda.shopping.base.IPresenter;
@@ -35,6 +37,8 @@ public class BusContract {
         void setHejiText(String money);
         //显示结算还删除
         void setStatusVisable(boolean isEdit);
+
+        TextView getTvHeji();
     }
 
     public interface Presenter extends IPresenter<View>{

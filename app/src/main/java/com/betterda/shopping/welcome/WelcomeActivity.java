@@ -16,11 +16,19 @@ import com.betterda.shopping.R;
 import com.betterda.shopping.dialog.DeleteDialog;
 import com.betterda.shopping.dialog.PermissionDialog;
 import com.betterda.shopping.home.MainActivity;
+import com.betterda.shopping.http.MyObserver;
+import com.betterda.shopping.http.NetWork;
+import com.betterda.shopping.javabean.BaseCallModel;
+import com.betterda.shopping.javabean.ShopBrand;
+import com.betterda.shopping.utils.CacheUtils;
+import com.betterda.shopping.utils.Constants;
+import com.betterda.shopping.utils.GsonTools;
+import com.betterda.shopping.utils.NetworkUtils;
 import com.betterda.shopping.utils.PermissionUtil;
-import com.betterda.shopping.utils.RxBus;
 import com.betterda.shopping.utils.RxManager;
 import com.betterda.shopping.utils.UiUtils;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -50,28 +58,16 @@ public class WelcomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
         initRxBus();
-        startToHome();
+        startTopermission();
     }
 
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        startToHome();
+        startTopermission();
     }
 
-    /**
-     * 跳转到首页
-     */
-    private void startToHome() {
-        if (Build.VERSION.SDK_INT < 23) {
-            //6.0一下直接去主页
-            UiUtils.startIntent(this, MainActivity.class);
-            finish();
-        } else {
-            //6.0以上请求权限
-            checkPermiss();
-        }
-    }
+
 
     private void initRxBus() {
         mRxManager = new RxManager();
@@ -85,6 +81,29 @@ public class WelcomeActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * 获取权限
+     */
+    private void startTopermission() {
+        if (Build.VERSION.SDK_INT < 23) {
+            //6.0一下直接去主页
+            starToHome();
+
+        } else {
+            //6.0以上请求权限
+            checkPermiss();
+        }
+    }
+
+    //跳转到首页
+    public void  starToHome(){
+        if (Build.VERSION.SDK_INT < 23) {
+            UiUtils.startIntent(this, MainActivity.class);
+            finish();
+        } else {
+            UiUtils.startIntent(this, MainActivity.class);
+        }
+    }
 
     /**
      * 请求权限
@@ -94,8 +113,7 @@ public class WelcomeActivity extends AppCompatActivity {
             @Override
             public void success() {
                 //请求成功
-                UiUtils.startIntent(WelcomeActivity.this, MainActivity.class);
-                UiUtils.showToast(WelcomeActivity.this,"请求权限成功,去首页");
+                getData();
             }
 
             @Override
@@ -221,8 +239,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
         if (requestCode == REQUEST_PERMISSION_CODE_TAKE_PIC) {
             if (PermissionUtil.verifyPermissions(grantResults)) {//有权限
-                //TODO 有权限
-                UiUtils.startIntent(this, MainActivity.class);
+                getData();
 
             } else {
                 //没有权限
@@ -261,6 +278,50 @@ public class WelcomeActivity extends AppCompatActivity {
         }
 
     }
+
+    /**
+     * 从服务器获取数据缓存
+     */
+    public void getData() {
+        //判断是否有网络
+        boolean netAvailable = NetworkUtils.isNetAvailable(this);
+        if (netAvailable) {
+            mRxManager.add(NetWork.getNetService()
+            .getShopBrand()
+            .compose(NetWork.handleResult(new BaseCallModel<List<ShopBrand>>()))
+            .subscribe(new MyObserver<List<ShopBrand>>() {
+                @Override
+                protected void onSuccess(List<ShopBrand> data, String resultMsg) {
+                    if (data != null) {
+                        List<String> list = new ArrayList<String>();
+                            for (ShopBrand s : data) {
+                                if (null != s) {
+                                    list.add(s.getBrand());
+                                }
+                            }
+                        //缓存品牌
+                        CacheUtils.putString(WelcomeActivity.this,Constants.Cache.PINPAI, GsonTools.getJsonListString(list));
+                    }
+                    starToHome();
+                }
+
+                @Override
+                public void onFail(String resultMsg) {
+                    System.out.println("品牌fail:"+resultMsg);
+                    starToHome();
+                }
+
+                @Override
+                public void onExit() {
+
+                }
+            }));
+        } else {
+            //没有网络直接去首页
+            starToHome();
+        }
+    }
+
 
     @Override
     protected void onStop() {

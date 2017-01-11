@@ -38,9 +38,11 @@ public class AddAndSub extends FrameLayout {
         mAdd.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                add(1);
+
                 if (mAddAndSubClickInterface != null) {
                     mAddAndSubClickInterface.add(1);
+                } else {
+                    add(1);
                 }
             }
         });
@@ -48,9 +50,11 @@ public class AddAndSub extends FrameLayout {
         mSub.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                sub(1);
+
                 if (mAddAndSubClickInterface != null) {
                     mAddAndSubClickInterface.sub(1);
+                } else {
+                    sub(1);
                 }
             }
         });

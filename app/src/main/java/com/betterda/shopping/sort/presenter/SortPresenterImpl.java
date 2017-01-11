@@ -1,17 +1,21 @@
 package com.betterda.shopping.sort.presenter;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.betterda.mylibrary.recycleviehelper.HeaderAndFooterRecyclerViewAdapter;
 import com.betterda.shopping.R;
 import com.betterda.shopping.base.BasePresenter;
+import com.betterda.shopping.factory.LoadImageFactory;
 import com.betterda.shopping.http.MyObserver;
 import com.betterda.shopping.http.NetWork;
 import com.betterda.shopping.javabean.BaseCallModel;
+import com.betterda.shopping.javabean.ShopBrand;
 import com.betterda.shopping.productdetails.ProductDetailActivity;
 import com.betterda.shopping.sort.contract.SortContract;
 import com.betterda.shopping.sort.model.Chose;
@@ -20,8 +24,12 @@ import com.betterda.shopping.sort.model.Sort;
 import com.betterda.shopping.sort.model.SortModelImpl;
 import com.betterda.shopping.sort.model.Type;
 import com.betterda.shopping.utils.AnimUtils;
+import com.betterda.shopping.utils.CacheUtils;
 import com.betterda.shopping.utils.Constants;
+import com.betterda.shopping.utils.GsonParse;
+import com.betterda.shopping.utils.GsonTools;
 import com.betterda.shopping.utils.UiUtils;
+import com.betterda.shopping.welcome.WelcomeActivity;
 import com.zhy.base.adapter.ViewHolder;
 import com.zhy.base.adapter.recyclerview.CommonAdapter;
 
@@ -59,6 +67,7 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
         attachModel(new SortModelImpl());
         initSortRecycleview();
         initNameRecycleview();
+        getCacheData();
         getData();
     }
 
@@ -109,19 +118,22 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
         mNameList = new ArrayList<>();
         mNameAdapter = new CommonAdapter<Shopping>(getView().getmActivity(), R.layout.item_rv_fragment_sort_name, mNameList) {
             @Override
-            public void convert(ViewHolder holder, Shopping s) {
+            public void convert(ViewHolder holder, final Shopping s) {
 
                 if (null != s) {
 
                     holder.setText(R.id.tv_item_sort_name, s.getProductName());
-                    holder.setText(R.id.tv_item_sort_account, s.getSpec());
                     holder.setText(R.id.tv_item_sort_money, "￥" + s.getSalePrice());
                     holder.setText(R.id.tv_item_sort_moneymember, "会员价:￥" + s.getVipPrice());
+                    ImageView imageView = holder.getView(R.id.sv_item_duobao);
+                    LoadImageFactory.getLoadImageInterface().loadImageFit(getView().getmActivity(), s.getLittlePicture(), imageView);
                     View view = holder.getView(R.id.iv_item_sort_name_add);
                     holder.setOnClickListener(R.id.linear_item_sort_name, new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            UiUtils.startIntent(getView().getmActivity(), ProductDetailActivity.class);
+                            Intent intent = new Intent(getView().getmActivity(), ProductDetailActivity.class);
+                            intent.putExtra("productId", s.getId());
+                            UiUtils.startIntent(getView().getmActivity(), intent);
                         }
                     });
 
@@ -247,7 +259,7 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
                         //记录排序
                         sort = s.getCatalogname();
                         getModel().clear(mSortPList, holder.getAdapterPosition());
-                        //TODO getdata
+                        getShopList();
                         getView().close();
                         // mSortPAdapter.notifyDataSetChanged();
                     }
@@ -264,6 +276,45 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
      */
     private void updateShopping() {
 
+    }
+
+    /**
+     * 获取缓存数据 如:品牌
+     */
+    private void getCacheData() {
+        String string = CacheUtils.getString(getView().getmActivity(), Constants.Cache.PINPAI, "");
+        if (TextUtils.isEmpty(string)) {//如果为空,表示没有缓存,需要从服务器去获取
+            getView().getRxManager().add(NetWork.getNetService()
+                    .getShopBrand()
+                    .compose(NetWork.handleResult(new BaseCallModel<List<ShopBrand>>()))
+                    .subscribe(new MyObserver<List<ShopBrand>>() {
+                        @Override
+                        protected void onSuccess(List<ShopBrand> data, String resultMsg) {
+                            if (data != null) {
+                                List<String> list = new ArrayList<String>();
+                                for (ShopBrand s : data) {
+                                    if (null != s) {
+                                        list.add(s.getBrand());
+                                    }
+                                }
+                                //缓存品牌
+                                CacheUtils.putString(getView().getmActivity(), Constants.Cache.PINPAI, GsonTools.getJsonListString(list));
+                            }
+
+                        }
+
+                        @Override
+                        public void onFail(String resultMsg) {
+
+                        }
+
+                        @Override
+                        public void onExit() {
+
+                        }
+
+                    }));
+        }
     }
 
 
@@ -321,7 +372,7 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
                 .subscribe(new MyObserver<List<Shopping>>() {
                     @Override
                     protected void onSuccess(List<Shopping> data, String resultMsg) {
-                        System.out.println("商品列表:"+data);
+                        System.out.println("商品列表:" + data);
                         if (mNameList != null && mNameAdapter != null) {
                             mNameList.clear();
                             mNameList.addAll(data);
@@ -331,7 +382,7 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
 
                     @Override
                     public void onFail(String resultMsg) {
-                        System.out.println("错误:"+resultMsg);
+                        System.out.println("错误:" + resultMsg);
                     }
 
                     @Override
@@ -428,13 +479,25 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
         if (map.get(type) == null) {
             List<Type> mTypeList = new ArrayList<>();
             if ("品牌".equals(type)) {
-                Type type1 = new Type("全部", true);
-                Type type2 = new Type("茅台");
-                Type type3 = new Type("人头马");
-
-                mTypeList.add(type1);
-                mTypeList.add(type2);
-                mTypeList.add(type3);
+                String string = CacheUtils.getString(getView().getmActivity(), Constants.Cache.PINPAI, "");
+                if (!TextUtils.isEmpty(string)) {
+                    List<String> listString = GsonParse.getListString(string);
+                    if (listString != null) {
+                        for (String s : listString) {
+                            if ("全部".equals(s)) {
+                                Type type1 = new Type(s, true);
+                                mTypeList.add(type1);
+                            } else {
+                                Type type1 = new Type(s, false);
+                                mTypeList.add(type1);
+                            }
+                        }
+                    } else {
+                        mTypeList.add(new Type("全部", true));
+                    }
+                } else {
+                    mTypeList.add(new Type("全部", true));
+                }
 
             } else if ("价格".equals(type)) {
                 mTypeList.add(new Type("全部", true));

@@ -52,6 +52,8 @@ public class MyApplication extends Application {
         //对应平台没有安装的时候跳转转到应用商店下载
         Config.isJumptoAppStore = true;
 
+
+
     }
 
 

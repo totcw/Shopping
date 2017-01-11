@@ -142,5 +142,13 @@ public class BusActivity extends BaseActivity<BusContract.Presenter> implements 
         mIvBusDelete.setVisibility(isEdit ? View.VISIBLE : View.INVISIBLE);
     }
 
+    @Override
+    public TextView getTvHeji() {
+        return mTvHeji;
+    }
 
+    @Override
+    public LoadingPager getLodapger() {
+        return loadpagerBus;
+    }
 }

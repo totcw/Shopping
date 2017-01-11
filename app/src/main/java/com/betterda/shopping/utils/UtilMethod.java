@@ -400,10 +400,15 @@ public class UtilMethod {
 
         if (list != null) {
             for (Bus bus : list) {
-                int amount = bus.getAmount();
-                float money = bus.getMoney();
-                float sum = amount * money;
-                a += sum;
+                try {
+                    int amount = Integer.parseInt(bus.getTotalCount());
+                    float money = Float.parseFloat(bus.getSalePrice());
+                    float sum = amount * money;
+                    a += sum;
+                } catch (Exception e) {
+
+                }
+
             }
         }
         return a;
@@ -419,8 +424,13 @@ public class UtilMethod {
 
         if (list != null) {
             for (Bus bus : list) {
-                int amount = bus.getAmount();
-                a += amount;
+                try {
+                    int amount = Integer.parseInt(bus.getTotalCount());
+                    a += amount;
+                } catch (Exception e) {
+
+                }
+
             }
         }
         return a;

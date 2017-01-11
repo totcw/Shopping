@@ -5,93 +5,90 @@ package com.betterda.shopping.bus.model;
  * Created by Administrator on 2016/5/17.
  */
 public class Bus {
-    private String id;//商品的id
+    private String shopcartDetailId;//商品的id
     private boolean isChosed; //是否选择
-    private String url; //图片的地址
-    private String name;//商品名字
-    private float money;//价格
-    private int amount;//选择的数量
-    private String state;//订单的状态
-    private int goldCount;//商品对应的可抵消的金币个数
-    private String shopId;//店铺id
-    private String isComment="N";//是否评价
+    private String littlePicture; //图片的地址
+    private String productName;//商品名字
+    private String salePrice;//售价
+    private String totalCount;//选择的数量
+    private String vipPrice;//会员价
+    private String spec;//规格
 
-    public String getIsComment() {
-        return isComment;
+    public String getShopcartDetailId() {
+        return shopcartDetailId;
     }
 
-    public void setIsComment(String isComment) {
-        this.isComment = isComment;
-    }
-
-    public String getShopId() {
-        return shopId;
-    }
-
-    public void setShopId(String shopId) {
-        this.shopId = shopId;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
+    public void setShopcartDetailId(String shopcartDetailId) {
+        this.shopcartDetailId = shopcartDetailId;
     }
 
     public boolean isChosed() {
         return isChosed;
     }
 
-    public void setIsChosed(boolean isChosed) {
-        this.isChosed = isChosed;
+    public void setChosed(boolean chosed) {
+        isChosed = chosed;
     }
 
-    public String getUrl() {
-        return url;
+    public String getLittlePicture() {
+        return littlePicture;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setLittlePicture(String littlePicture) {
+        this.littlePicture = littlePicture;
     }
 
-    public String getName() {
-        return name;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
-    public float getMoney() {
-        return money;
+    public String getSalePrice() {
+        return salePrice;
     }
 
-    public void setMoney(float money) {
-        this.money = money;
+    public void setSalePrice(String salePrice) {
+        this.salePrice = salePrice;
     }
 
-    public int getAmount() {
-        return amount;
+    public String getTotalCount() {
+        return totalCount;
     }
 
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
-    public String getId() {
-        return id;
+    public void setTotalCount(String totalCount) {
+        this.totalCount = totalCount;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public String getVipPrice() {
+        return vipPrice;
     }
 
-    public int getGoldCount() {
-        return goldCount;
+    public void setVipPrice(String vipPrice) {
+        this.vipPrice = vipPrice;
     }
 
-    public void setGoldCount(int goldCount) {
-        this.goldCount = goldCount;
+    public String getSpec() {
+        return spec;
+    }
+
+    public void setSpec(String spec) {
+        this.spec = spec;
+    }
+
+    @Override
+    public String toString() {
+        return "Bus{" +
+                "shopcartDetailId='" + shopcartDetailId + '\'' +
+                ", isChosed=" + isChosed +
+                ", littlePicture='" + littlePicture + '\'' +
+                ", productName='" + productName + '\'' +
+                ", salePrice='" + salePrice + '\'' +
+                ", totalCount='" + totalCount + '\'' +
+                ", vipPrice='" + vipPrice + '\'' +
+                ", spec='" + spec + '\'' +
+                '}';
     }
 }

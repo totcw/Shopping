@@ -23,11 +23,12 @@ public class Constants {
         public final static String TOKEN = "token";//
         public final static String NICKNAME = "nickName";//昵称
         public final static String TOUXIANG = "touxiang";//头像
+        public final static String PINPAI = "touxiang";//品牌
     }
 
     public static class Url {
 
-       public  final static String URL="http://192.168.1.104:8080/WinePIN/";
+       public  final static String URL="http://192.168.1.145:8080/WinePIN/";
         public static final String URL_REGISTER = "appAPI.do?api/account/user/register";
         public static final String URL_LOGIN = "appAPI.do?api/account/user/login";
         public static final String URL_PWD_UPDATE = "";
@@ -41,10 +42,15 @@ public class Constants {
         public static final String URL_GET_ADDRESS = "appAPI.do?api/account/address/get";//获取配送地址列表
         public static final String URL_GET_SHOPLIST = "appAPI.do?api/account/product/get";//获取商品列表
         public static final String URL_GET_SHOPTYPE = "appAPI.do?api/account/catalog/get";//获取商品类型
+        public static final String URL_GET_BRAND = "appAPI.do?api/account/brand/get";//获取品牌
         public static final String URL_GET_SHOPDETAIL = "appAPI.do?api/account/product/detail/get";//获取商品详情
         public static final String URL_GET_SHOPBRAND = "appAPI.do?api/account/brand/get";//获取商品品牌
         public static final String URL_ADD_SHOPCOMMENT = "appAPI.do?api/account/comment/add";//添加商品评论
         public static final String URL_GET_SHOPCOMMENT = "appAPI.do?api/account/comment/get";//获取商品评论
+        public static final String URL_ADD_BUS = "appAPI.do?api/shopcart/product/add";//添加购物车
+        public static final String URL_UPDATE_BUS = "appAPI.do?api/shopcart/product/update";//更新购物车
+        public static final String URL_GET_BUS = "appAPI.do?api/shopcart/product/get";//获取购物车
+        public static final String URL_DEL_BUS = "appAPI.do?api/shopcart/product/del";//删除购物车
 
 
     }

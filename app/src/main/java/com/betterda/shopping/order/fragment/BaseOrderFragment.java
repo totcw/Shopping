@@ -214,10 +214,10 @@ public class BaseOrderFragment extends BaseFragment<BaseOrderContract.Presenter>
                 public void convert(ViewHolder viewHolder, final Bus bus) {
                     if (bus != null) {
                         //设置商品信息
-                        viewHolder.setText(R.id.tv_item_order_name, bus.getName());
-                        viewHolder.setText(R.id.tv_item_order_price, "￥" + bus.getMoney());
-                        viewHolder.setText(R.id.tv_item_order_amount, "X " + bus.getAmount());
-                        if (!TextUtils.isEmpty(bus.getUrl())) {
+                        viewHolder.setText(R.id.tv_item_order_name, bus.getProductName());
+                        viewHolder.setText(R.id.tv_item_order_price, "￥" + bus.getSalePrice());
+                        viewHolder.setText(R.id.tv_item_order_amount, "X " + bus.getTotalCount());
+                        if (!TextUtils.isEmpty(bus.getLittlePicture())) {
                             //TODO 加载图标
                         }
                         //订单详情

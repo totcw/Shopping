@@ -16,14 +16,10 @@ import android.widget.TextView;
 
 import com.betterda.mylibrary.LoadingPager;
 import com.betterda.mylibrary.Utils.StatusBarCompat;
-import com.betterda.mylibrary.recycleviehelper.EndlessRecyclerOnScrollListener;
-import com.betterda.mylibrary.recycleviehelper.RecyclerViewStateUtils;
-import com.betterda.mylibrary.view.LoadingFooter;
 import com.betterda.mylibrary.xrecycleview.XRecyclerView;
 import com.betterda.shopping.R;
 import com.betterda.shopping.base.BaseFragment;
 import com.betterda.shopping.home.MainActivity;
-import com.betterda.shopping.productdetails.ProductDetailActivity;
 import com.betterda.shopping.search.SearchActivity;
 import com.betterda.shopping.sort.contract.SortContract;
 import com.betterda.shopping.sort.presenter.SortPresenterImpl;
@@ -34,6 +30,7 @@ import com.zhy.base.adapter.recyclerview.DividerItemDecoration;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+
 
 /**
  * 分类
@@ -102,6 +99,7 @@ public class SortFragment extends BaseFragment<SortContract.Presenter> implement
 
         mTtbvSort.setFirstTitle("综合排序");
         mTtbvSort.setSecondTitle("筛选");
+
 
     }
 

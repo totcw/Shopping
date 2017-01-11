@@ -1,8 +1,10 @@
 package com.betterda.shopping.http;
 
 import com.betterda.shopping.address.model.Address;
+import com.betterda.shopping.bus.model.Bus;
 import com.betterda.shopping.javabean.Comment;
 import com.betterda.shopping.javabean.BaseCallModel;
+import com.betterda.shopping.javabean.ShopBrand;
 import com.betterda.shopping.javabean.ShopDetail;
 import com.betterda.shopping.javabean.UserInfo;
 import com.betterda.shopping.javabean.OrderAll;
@@ -106,6 +108,14 @@ public interface NetService {
     @GET(Constants.Url.URL_GET_SHOPTYPE)
     Observable<BaseCallModel<List<Sort>>> getShopTypeList();
 
+    /**
+     * 商品品牌
+     *
+     * @return
+     */
+    @GET(Constants.Url.URL_GET_BRAND)
+    Observable<BaseCallModel<List<ShopBrand>>> getShopBrand();
+
 
     /**
      * 商品详情接口
@@ -113,7 +123,7 @@ public interface NetService {
      * @return
      */
     @FormUrlEncoded
-    @POST(Constants.Url.URL_LUNBO)
+    @POST(Constants.Url.URL_GET_SHOPDETAIL)
     Observable<BaseCallModel<ShopDetail>> getShopDetail(@Field("productId") String productId);
 
 
@@ -577,8 +587,8 @@ public interface NetService {
      * @return
      */
     @FormUrlEncoded
-    @POST(Constants.Url.URL_LUNBO)
-    Observable<BaseCallModel<List<BankCard>>> addBus(@Field("account") String account,
+    @POST(Constants.Url.URL_ADD_BUS)
+    Observable<BaseCallModel<String>> addBus(@Field("account") String account,
                                                                @Field("token") String token,
                                                                @Field("productId") String productId,
                                                                @Field("totalCount") String totalCount
@@ -591,10 +601,10 @@ public interface NetService {
      * @return
      */
     @FormUrlEncoded
-    @POST(Constants.Url.URL_LUNBO)
-    Observable<BaseCallModel<List<BankCard>>> updateBus(@Field("account") String account,
+    @POST(Constants.Url.URL_UPDATE_BUS)
+    Observable<BaseCallModel<String>> updateBus(@Field("account") String account,
                                                                @Field("token") String token,
-                                                               @Field("productId") String productId,
+                                                               @Field("shopcartDetailId") String shopcartDetailId,
                                                                @Field("totalCount") String totalCount
     );
 
@@ -606,9 +616,9 @@ public interface NetService {
      * @return
      */
     @FormUrlEncoded
-    @POST(Constants.Url.URL_LUNBO)
-    Observable<BaseCallModel<List<BankCard>>> getBus(@Field("account") String account,
-                                                               @Field("token") String token
+    @POST(Constants.Url.URL_GET_BUS)
+    Observable<BaseCallModel<List<Bus>>> getBus(@Field("account") String account,
+                                                @Field("token") String token
     );
     /**
      * 删除购物车
@@ -618,10 +628,10 @@ public interface NetService {
      * @return
      */
     @FormUrlEncoded
-    @POST(Constants.Url.URL_LUNBO)
-    Observable<BaseCallModel<List<BankCard>>> deleteBus(@Field("account") String account,
+    @POST(Constants.Url.URL_DEL_BUS)
+    Observable<BaseCallModel<String>> deleteBus(@Field("account") String account,
                                                                @Field("token") String token,
-                                                               @Field("shopId") String shopId
+                                                               @Field("jsonData") String jsonData
     );
 
 

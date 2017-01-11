@@ -60,4 +60,16 @@ public class Shopping {
     public void setVipPrice(String vipPrice) {
         this.vipPrice = vipPrice;
     }
+
+    @Override
+    public String toString() {
+        return "Shopping{" +
+                "id='" + id + '\'' +
+                ", littlePicture='" + littlePicture + '\'' +
+                ", productName='" + productName + '\'' +
+                ", spec='" + spec + '\'' +
+                ", salePrice='" + salePrice + '\'' +
+                ", vipPrice='" + vipPrice + '\'' +
+                '}';
+    }
 }
