@@ -7,25 +7,29 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.widget.PopupWindow;
 
+import com.betterda.shopping.BuildConfig;
 import com.betterda.shopping.R;
 import com.betterda.shopping.base.BasePresenter;
 import com.betterda.shopping.find.FindFragment;
 import com.betterda.shopping.home.contract.HomeContract;
 import com.betterda.shopping.home.contract.HomeContract.Presenter;
+import com.betterda.shopping.http.MyObserver;
+import com.betterda.shopping.http.NetWork;
+import com.betterda.shopping.javabean.BaseCallModel;
 import com.betterda.shopping.my.MyFragment;
 import com.betterda.shopping.shouye.ShouYeFragment;
 import com.betterda.shopping.sort.SortFragment;
 
 /**
-* Created by Administrator on 2016/12/05
-*/
+ * Created by Administrator on 2016/12/05
+ */
 
-public class HomePresenterImpl extends BasePresenter<HomeContract.View,HomeContract.Model> implements HomeContract.Presenter {
+public class HomePresenterImpl extends BasePresenter<HomeContract.View, HomeContract.Model> implements HomeContract.Presenter {
 
     private ShouYeFragment mShouYeFragment;
     private SortFragment mSortFragment;
     private FindFragment mFindFragment;
-    private MyFragment  mMyFragment;
+    private MyFragment mMyFragment;
     private FragmentManager mFragmentManager;
 
     @Override
@@ -49,16 +53,17 @@ public class HomePresenterImpl extends BasePresenter<HomeContract.View,HomeContr
         FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
         if (!getView().getmActivity().isFinishing()) {
             fragmentTransaction.add(R.id.frame_activity_main, mShouYeFragment).add(R.id.frame_activity_main, mSortFragment)
-                    .add(R.id.frame_activity_main, mFindFragment).add(R.id.frame_activity_main,mMyFragment);
+                    .add(R.id.frame_activity_main, mFindFragment).add(R.id.frame_activity_main, mMyFragment);
 
             fragmentTransaction.commitAllowingStateLoss();
         }
 
-      switchFragmentTo(mShouYeFragment);
+        switchFragmentTo(mShouYeFragment);
     }
 
     /**
      * 切换到对应的fragment
+     *
      * @param fragment
      */
     public void switchFragmentTo(Fragment fragment) {
@@ -80,6 +85,7 @@ public class HomePresenterImpl extends BasePresenter<HomeContract.View,HomeContr
 
     /**
      * 切换到对应的fragment
+     *
      * @param id
      */
     @Override
@@ -109,18 +115,56 @@ public class HomePresenterImpl extends BasePresenter<HomeContract.View,HomeContr
 
     /**
      * 检测popupwindow是否关闭
+     *
      * @return
      */
     @Override
     public boolean checkPopWindow() {
         if (mSortFragment != null) {
             PopupWindow popupWindow = mSortFragment.getPopupWindow();
-            if (popupWindow != null&&popupWindow.isShowing()) {
+            if (popupWindow != null && popupWindow.isShowing()) {
                 mSortFragment.closePopupWindow();
                 return true;
             }
         }
         return false;
+    }
+
+    /**
+     * 获取购物车数量
+     */
+    public void getData() {
+        getView().getRxManager().add(NetWork.getNetService()
+                .getBusCount(getView().getAccount(), getView().getToken())
+                .compose(NetWork.handleResult(new BaseCallModel<String>()))
+                .subscribe(new MyObserver<String>() {
+                    @Override
+                    protected void onSuccess(String data, String resultMsg) {
+                        if (BuildConfig.LOG_DEBUG) {
+                            System.out.println("首页bus:" + data);
+                        }
+                        if (!"0".equals(data)) {
+                            getView().getBusView().setTvBusVisable(true);
+                            getView().getBusView().setTvBusText(data);
+                        } else {
+                            getView().getBusView().setTvBusVisable(false);
+                            getView().getBusView().setTvBusText("0");
+                        }
+                    }
+
+                    @Override
+                    public void onFail(String resultMsg) {
+                        if (BuildConfig.LOG_DEBUG) {
+                            System.out.println("首页busfail:" + resultMsg);
+                        }
+
+                    }
+
+                    @Override
+                    public void onExit() {
+
+                    }
+                }));
     }
 
     @Override

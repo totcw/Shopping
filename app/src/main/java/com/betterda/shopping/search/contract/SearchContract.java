@@ -71,6 +71,8 @@ public class SearchContract {
          * @param content
          */
         void load(String content);
+
+        void getDataForBusCount();
     }
 
     public interface Model extends IModel{

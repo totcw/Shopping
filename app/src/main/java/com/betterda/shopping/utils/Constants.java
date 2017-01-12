@@ -51,6 +51,11 @@ public class Constants {
         public static final String URL_UPDATE_BUS = "appAPI.do?api/shopcart/product/update";//更新购物车
         public static final String URL_GET_BUS = "appAPI.do?api/shopcart/product/get";//获取购物车
         public static final String URL_DEL_BUS = "appAPI.do?api/shopcart/product/del";//删除购物车
+        public static final String URL_DEFAULT_ADDRESS = "appAPI.do?api/default/address/get";//获取默认地址和消费钱包
+        public static final String URL_BUS_COUNT = "appAPI.do?api/shopcart/count/get";//获取购物车数量
+        public static final String URL_SEARCH = "appAPI.do?api/product/search";//搜索
+        public static final String URL_SEARCH_REMEN = "appAPI.do?api/hotSearch/get";//获取热门搜索记录
+        public static final String URL_SEARCH_JILU = "appAPI.do?api/account/search/get";//获取搜索记录
 
 
     }

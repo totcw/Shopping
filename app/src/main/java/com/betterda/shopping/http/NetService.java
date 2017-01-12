@@ -1,9 +1,11 @@
 package com.betterda.shopping.http;
 
-import com.betterda.shopping.address.model.Address;
+import com.betterda.shopping.javabean.Address;
 import com.betterda.shopping.javabean.Bus;
 import com.betterda.shopping.javabean.Comment;
 import com.betterda.shopping.javabean.BaseCallModel;
+import com.betterda.shopping.javabean.DefaultAddress;
+import com.betterda.shopping.javabean.Search;
 import com.betterda.shopping.javabean.ShopBrand;
 import com.betterda.shopping.javabean.ShopDetail;
 import com.betterda.shopping.javabean.UserInfo;
@@ -384,10 +386,10 @@ public interface NetService {
      * @return
      */
     @FormUrlEncoded
-    @POST(Constants.Url.URL_LUNBO)
-    Observable<BaseCallModel<List<BankCard>>> getSearch(@Field("account") String account,
-                                                        @Field("token") String token,
-                                                        @Field("searchKey") String searchKey
+    @POST(Constants.Url.URL_SEARCH)
+    Observable<BaseCallModel<Search>> getSearch(@Field("account") String account,
+                                                      @Field("token") String token,
+                                                      @Field("searchKey") String searchKey
     );
 
     /**
@@ -395,25 +397,12 @@ public interface NetService {
      *
      * @return
      */
-    @FormUrlEncoded
-    @POST(Constants.Url.URL_LUNBO)
-    Observable<BaseCallModel<List<BankCard>>> getRemenSearchList();
+
+    @GET(Constants.Url.URL_SEARCH_REMEN)
+    Observable<BaseCallModel<List<String>>> getRemenSearchList();
 
 
-    /**
-     * 添加搜索
-     *
-     * @param account
-     * @param token
-     * @param key     搜索关键字
-     * @return
-     */
-    @FormUrlEncoded
-    @POST(Constants.Url.URL_LUNBO)
-    Observable<BaseCallModel<List<BankCard>>> addSearch(@Field("account") String account,
-                                                        @Field("token") String token,
-                                                        @Field("key") String key
-    );
+
 
     /**
      * 删除搜索记录
@@ -429,15 +418,15 @@ public interface NetService {
     );
 
     /**
-     * 删除搜索记录
+     * 获取搜索记录
      *
      * @param account
      * @param token
      * @return
      */
     @FormUrlEncoded
-    @POST(Constants.Url.URL_LUNBO)
-    Observable<BaseCallModel<List<BankCard>>> getSearchList(@Field("account") String account,
+    @POST(Constants.Url.URL_SEARCH_JILU)
+    Observable<BaseCallModel<List<String>>> getSearchList(@Field("account") String account,
                                                             @Field("token") String token
     );
 
@@ -633,6 +622,33 @@ public interface NetService {
                                                                @Field("token") String token,
                                                                @Field("jsonData") String jsonData
     );
+
+    /**
+     * 获取默认地址和消费钱包
+     *
+     * @param account
+     * @param token
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(Constants.Url.URL_DEFAULT_ADDRESS)
+    Observable<BaseCallModel<DefaultAddress>> getDefaultAddress(@Field("account") String account,
+                                                                @Field("token") String token
+    );
+    /**
+     * 获取购物车数量
+     *
+     * @param account
+     * @param token
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(Constants.Url.URL_BUS_COUNT)
+    Observable<BaseCallModel<String>> getBusCount(@Field("account") String account,
+                                                               @Field("token") String token
+    );
+
+
 
 
 }

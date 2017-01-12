@@ -1,4 +1,4 @@
-package com.betterda.shopping.address.model;
+package com.betterda.shopping.javabean;
 
 /**
  * 收货地址

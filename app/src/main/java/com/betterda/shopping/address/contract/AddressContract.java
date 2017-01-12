@@ -2,7 +2,7 @@ package com.betterda.shopping.address.contract;
 
 import android.support.v7.widget.RecyclerView;
 
-import com.betterda.shopping.address.model.Address;
+import com.betterda.shopping.javabean.Address;
 import com.betterda.shopping.base.IModel;
 import com.betterda.shopping.base.IPresenter;
 import com.betterda.shopping.base.IView;

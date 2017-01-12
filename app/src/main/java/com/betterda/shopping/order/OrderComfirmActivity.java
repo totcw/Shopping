@@ -13,6 +13,7 @@ import com.betterda.mylibrary.LoadingPager;
 import com.betterda.shopping.R;
 import com.betterda.shopping.address.AddressActivity;
 import com.betterda.shopping.base.BaseActivity;
+import com.betterda.shopping.javabean.DefaultAddress;
 import com.betterda.shopping.order.contract.OrderComfrimContract;
 import com.betterda.shopping.order.presenter.OrderComfrimPresenterImpl;
 import com.betterda.shopping.pay.PayActivity;
@@ -162,6 +163,15 @@ public class OrderComfirmActivity extends BaseActivity<OrderComfrimContract.Pres
         return mTvConfirmorderYunfei.getText().toString().trim();
     }
 
+    @Override
+    public void setValue(DefaultAddress data) {
+        System.out.println("va");
+        mTvOrderNumber.setText(data.getMobilePhone());
+        mTvOrderShouhuoren2.setText(data.getConsigneeName());
+        mTvOrderAddress2.setText(data.getAddress()+data.getDetailAddress());
+        mRelativeAddress.setVisibility(View.VISIBLE);
+    }
+
 
     /**
      * 显示发票
@@ -184,6 +194,12 @@ public class OrderComfirmActivity extends BaseActivity<OrderComfrimContract.Pres
         tv_kuaidi.setOnClickListener(this);
         tv_ziti.setOnClickListener(this);
         setUpPopupWindow(view2);
+    }
+
+
+    @Override
+    public LoadingPager getLodapger() {
+        return mLoadpagerOrder;
     }
 
     @Override

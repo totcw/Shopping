@@ -24,6 +24,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
+ * 搜索
  * Created by Administrator on 2016/12/15.
  */
 
@@ -78,6 +79,12 @@ public class SearchActivity extends BaseActivity<SearchContract.Presenter> imple
                 setRvSearchVisable(false);
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        getPresenter().getDataForBusCount();
     }
 
     @OnClick({R.id.relative_search_delete,R.id.tv__search_cancel})

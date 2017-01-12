@@ -95,9 +95,9 @@ public class LocationActivity extends BaseActivity<LocationContract.Presenter> i
     private boolean isFinishAnim;//是否完成过动画
     private String city;//记录当前定位城市
     private List<Address> list;
-    private List<com.betterda.shopping.address.model.Address> listLocation;//常用地址的容器
+    private List<com.betterda.shopping.javabean.Address> listLocation;//常用地址的容器
     private CommonAdapter<Address> adapter;//建议查询的适配器
-    private CommonAdapter<com.betterda.shopping.address.model.Address> adapterLocation;
+    private CommonAdapter<com.betterda.shopping.javabean.Address> adapterLocation;
     /**
      * 定位功能
      */
@@ -315,11 +315,11 @@ public class LocationActivity extends BaseActivity<LocationContract.Presenter> i
      * 初始化常用地址的rv
      */
     private void setLocationRecycleview() {
-        adapterLocation = new CommonAdapter<com.betterda.shopping.address.model.Address>(this, R.layout.item_recycleview_address, listLocation) {
+        adapterLocation = new CommonAdapter<com.betterda.shopping.javabean.Address>(this, R.layout.item_recycleview_address, listLocation) {
 
 
             @Override
-            public void convert(ViewHolder holder, final com.betterda.shopping.address.model.Address address) {
+            public void convert(ViewHolder holder, final com.betterda.shopping.javabean.Address address) {
                 if (null != address) {
                     holder.setVisible(R.id.relative_item_address, false);
 
@@ -571,7 +571,7 @@ public class LocationActivity extends BaseActivity<LocationContract.Presenter> i
 
     private void getData() {
         for (int i=0;i<3;i++) {
-            listLocation.add(new com.betterda.shopping.address.model.Address());
+            listLocation.add(new com.betterda.shopping.javabean.Address());
         }
         adapterLocation.notifyDataSetChanged();
     }

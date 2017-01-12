@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import com.betterda.shopping.base.IModel;
 import com.betterda.shopping.base.IPresenter;
 import com.betterda.shopping.base.IView;
+import com.betterda.shopping.javabean.DefaultAddress;
 
 /**
  * Created by Administrator on 2016/12/14.
@@ -21,6 +22,8 @@ public class OrderComfrimContract {
         void setFapiao(String fapiao);
         //获取运费
         String getFreight();
+
+        void setValue(DefaultAddress data);
     }
 
     public interface Presenter extends IPresenter<View> {

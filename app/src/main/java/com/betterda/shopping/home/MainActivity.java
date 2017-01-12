@@ -59,6 +59,12 @@ public class MainActivity extends BaseActivity<HomeContract.Presenter> implement
     }
 
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        getPresenter().getData();
+    }
+
     @OnClick({R.id.idv_activity_main_shouye, R.id.idv_activity_main_sort, R.id.idv_activity_main_find, R.id.idv_activity_main_my})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -146,4 +152,8 @@ public class MainActivity extends BaseActivity<HomeContract.Presenter> implement
         return mBvMain;
     }
 
+    @Override
+    public BusView getBusView() {
+        return mBvMain;
+    }
 }
