@@ -1,6 +1,7 @@
 package com.betterda.shopping.javabean;
 
 /**
+ * 商品评价
  * Created by Administrator on 2016/5/17.
  */
 public class Comment {

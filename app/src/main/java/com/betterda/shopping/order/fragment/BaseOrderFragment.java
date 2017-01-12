@@ -10,7 +10,7 @@ import com.betterda.mylibrary.LoadingPager;
 import com.betterda.mylibrary.xrecycleview.XRecyclerView;
 import com.betterda.shopping.R;
 import com.betterda.shopping.base.BaseFragment;
-import com.betterda.shopping.bus.model.Bus;
+import com.betterda.shopping.javabean.Bus;
 import com.betterda.shopping.http.MyObserver;
 import com.betterda.shopping.http.NetWork;
 import com.betterda.shopping.javabean.BaseCallModel;

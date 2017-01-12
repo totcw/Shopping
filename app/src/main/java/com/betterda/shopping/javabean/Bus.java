@@ -1,10 +1,13 @@
-package com.betterda.shopping.bus.model;
+package com.betterda.shopping.javabean;
+
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /**
  * 购物车商品的类
  * Created by Administrator on 2016/5/17.
  */
-public class Bus {
+public class Bus implements Parcelable {
     private String shopcartDetailId;//商品的id
     private boolean isChosed; //是否选择
     private String littlePicture; //图片的地址
@@ -13,6 +16,33 @@ public class Bus {
     private String totalCount;//选择的数量
     private String vipPrice;//会员价
     private String spec;//规格
+
+    protected Bus(Parcel in) {
+        shopcartDetailId = in.readString();
+        isChosed = in.readByte() != 0;
+        littlePicture = in.readString();
+        productName = in.readString();
+        salePrice = in.readString();
+        totalCount = in.readString();
+        vipPrice = in.readString();
+        spec = in.readString();
+    }
+
+    public Bus() {
+
+    }
+
+    public static final Creator<Bus> CREATOR = new Creator<Bus>() {
+        @Override
+        public Bus createFromParcel(Parcel in) {
+            return new Bus(in);
+        }
+
+        @Override
+        public Bus[] newArray(int size) {
+            return new Bus[size];
+        }
+    };
 
     public String getShopcartDetailId() {
         return shopcartDetailId;
@@ -90,5 +120,22 @@ public class Bus {
                 ", vipPrice='" + vipPrice + '\'' +
                 ", spec='" + spec + '\'' +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(shopcartDetailId);
+        dest.writeByte((byte) (isChosed ? 1 : 0));
+        dest.writeString(littlePicture);
+        dest.writeString(productName);
+        dest.writeString(salePrice);
+        dest.writeString(totalCount);
+        dest.writeString(vipPrice);
+        dest.writeString(spec);
     }
 }

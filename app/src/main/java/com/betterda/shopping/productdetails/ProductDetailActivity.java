@@ -24,6 +24,8 @@ import com.betterda.shopping.R;
 import com.betterda.shopping.base.BaseActivity;
 import com.betterda.shopping.bus.BusActivity;
 import com.betterda.shopping.comment.CommentActivity;
+import com.betterda.shopping.factory.LoadImageFactory;
+import com.betterda.shopping.javabean.ShopDetail;
 import com.betterda.shopping.order.OrderComfirmActivity;
 import com.betterda.shopping.productdetails.contract.ProductDetailContract;
 import com.betterda.shopping.productdetails.model.Share;
@@ -80,6 +82,8 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailContract.Pr
     TextView mTvSpec;
     @BindView(R.id.tv_productdetail_price)
     TextView mTvPrice;
+    @BindView(R.id.tv_productdetail_pricemember)
+    TextView mTvPriceMember;
     @BindView(R.id.tv_productdetail_comment)
     TextView mTvComment;
     @BindView(R.id.tv_productdetail_commentrate)
@@ -338,6 +342,23 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailContract.Pr
         return mAddAndSub;
     }
 
+    @Override
+    public void setValue(ShopDetail data) {
+        mTvShopName.setText(data.getProductName());
+        mTvComment.setText("("+data.getQuantity()+"人评价)");
+        mTvCommentRate.setText(data.getDegree());
+        mTvSpec.setText(data.getSpec());
+        mTvPrice.setText("￥:"+data.getSalePrice());
+        mTvPriceMember.setText("会员价￥:"+data.getSalePrice());
+        if (data.getBigPicture() != null) {
+            LoadImageFactory.getLoadImageInterface().loadImageFit(getmActivity(),data.getBigPicture(),mIvProductdetailLogo);
+        }
+    }
+
+    @Override
+    public LoadingPager getLodapger() {
+        return mLoadingPager;
+    }
 
     @Override
     public void dismiss() {

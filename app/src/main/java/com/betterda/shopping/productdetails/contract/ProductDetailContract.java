@@ -7,6 +7,7 @@ import android.widget.TextView;
 import com.betterda.shopping.base.IModel;
 import com.betterda.shopping.base.IPresenter;
 import com.betterda.shopping.base.IView;
+import com.betterda.shopping.javabean.ShopDetail;
 import com.betterda.shopping.productdetails.model.Share;
 import com.betterda.shopping.widget.AddAndSub;
 
@@ -25,6 +26,8 @@ public class ProductDetailContract {
         TextView getTvBus();
 
         AddAndSub getMaddAndSub();
+
+        void setValue(ShopDetail data);
     }
 
     public interface Presenter extends IPresenter<View>{

@@ -17,7 +17,7 @@ import android.view.inputmethod.InputMethodManager;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.betterda.mylibrary.LoadingPager;
-import com.betterda.shopping.bus.model.Bus;
+import com.betterda.shopping.javabean.Bus;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -386,6 +386,12 @@ public class UtilMethod {
     public static void setLoadpagerError(LoadingPager loadpagerError) {
         if (loadpagerError != null) {
             loadpagerError.setErrorVisable();
+        }
+    }
+
+ public static void setLoadpagerHide(LoadingPager loadpagerError) {
+        if (loadpagerError != null) {
+            loadpagerError.hide();
         }
     }
 

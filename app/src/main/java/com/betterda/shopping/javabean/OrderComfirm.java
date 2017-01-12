@@ -2,8 +2,6 @@ package com.betterda.shopping.javabean;
 
 
 
-import com.betterda.shopping.bus.model.Bus;
-
 import java.util.List;
 
 /**

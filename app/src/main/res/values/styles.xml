@@ -52,8 +52,8 @@
     <!--五角星大的-->
     <style name="myRatingBar2" parent="@android:style/Widget.RatingBar">
         <item name="android:progressDrawable">@drawable/myratingbar2</item>
-        <item name="android:minHeight">34dp</item>
-        <item name="android:maxHeight">34dp</item>
+        <item name="android:minHeight">36dp</item>
+        <item name="android:maxHeight">36dp</item>
     </style>
 
 </resources>

@@ -19,6 +19,8 @@ public class OrderComfrimContract {
 
         //设置是否需要发票
         void setFapiao(String fapiao);
+        //获取运费
+        String getFreight();
     }
 
     public interface Presenter extends IPresenter<View> {

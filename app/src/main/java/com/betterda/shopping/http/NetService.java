@@ -1,7 +1,7 @@
 package com.betterda.shopping.http;
 
 import com.betterda.shopping.address.model.Address;
-import com.betterda.shopping.bus.model.Bus;
+import com.betterda.shopping.javabean.Bus;
 import com.betterda.shopping.javabean.Comment;
 import com.betterda.shopping.javabean.BaseCallModel;
 import com.betterda.shopping.javabean.ShopBrand;
