@@ -26,7 +26,7 @@ public interface View extends IView{
 
     void initRvSortName(RecyclerView.Adapter adapter);
 
-    void initRvSortType(String type);
+    void initRvSortType(String type,String name);
 
 
     //判断popupwindow是否关闭
@@ -67,7 +67,7 @@ public interface Presenter extends IPresenter<View>{
      * @param type
      * @return
      */
-    RecyclerView.Adapter getRvSortTypeAdapter(String type);
+    RecyclerView.Adapter getRvSortTypeAdapter(String type,String name);
 
     /**
      * 获取排序的rv的适配器
@@ -92,6 +92,8 @@ public interface Presenter extends IPresenter<View>{
      */
     void comfirmChose();
 
+
+    void reFreshChose();
 }
 
 public interface Model extends IModel{

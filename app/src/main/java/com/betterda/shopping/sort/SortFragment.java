@@ -290,9 +290,9 @@ public class SortFragment extends BaseFragment<SortContract.Presenter> implement
      *
      * @param type
      */
-    public void initRvSortType(String type) {
+    public void initRvSortType(String type,String name) {
         mRvSortType.setLayoutManager(new LinearLayoutManager(getmActivity()));
-        mRvSortType.setAdapter(getPresenter().getRvSortTypeAdapter(type));
+        mRvSortType.setAdapter(getPresenter().getRvSortTypeAdapter(type,name));
         if ("价格".equals(type)) {
             mLinearSortNameChosePrice.setVisibility(View.VISIBLE);
         } else {
@@ -361,8 +361,10 @@ public class SortFragment extends BaseFragment<SortContract.Presenter> implement
         super.dismiss();
         mTtbvSort.setSecondSelect(false);
         mTtbvSort.setFirstSelect(false);
+        getPresenter().reFreshChose();
+
         //清楚popupwindow中的容器
-        getPresenter().clear();
+       // getPresenter().clear();
 
     }
 

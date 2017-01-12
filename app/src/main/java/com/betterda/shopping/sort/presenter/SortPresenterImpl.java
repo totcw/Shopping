@@ -56,9 +56,9 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
 
     private String productType;//商品类型
     private String sort; //排序
-    private String brand; //品牌
-    private String beginPrice; //起始价格
-    private String endPrice; //始末价格
+    private String brand, lastBrand; //品牌 ,记录上一选择的品牌
+    private String beginPrice, lastBeginPrice; //起始价格
+    private String endPrice, lastEndPrice; //始末价格
     private int pangeNo = 1;//分页加载的页数
 
 
@@ -192,7 +192,7 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
                     @Override
                     public void onClick(View view) {
 
-                        getView().initRvSortType(s.getType());
+                        getView().initRvSortType(s.getType(), s.getName());
                         getView().showType(true);
                     }
                 });
@@ -209,7 +209,7 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
      * @return
      */
     @Override
-    public RecyclerView.Adapter getRvSortTypeAdapter(final String type) {
+    public RecyclerView.Adapter getRvSortTypeAdapter(final String type, String name) {
 
 
         CommonAdapter<Type> adapter = new CommonAdapter<Type>(getView().getmActivity(), R.layout.item_rv_pp_shaixuan_type, getTypeList(type)) {
@@ -226,7 +226,17 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
                         refreshTypeState(holder, type);
                         refreshChoseRecycleview(type, s.getName());
                         if ("品牌".equals(type)) {
-                            brand = s.getName();
+                            lastBrand = s.getName();
+                        } else if ("价格".equals(type)) {
+                            if (s.getName() != null) {
+                                String[] split = s.getName().split("-");
+                                if (split.length > 1) {
+                                    lastBeginPrice = split[0];
+                                    lastEndPrice = split[1];
+                                }
+
+                            }
+
                         }
                         getView().showType(false);
                     }
@@ -372,7 +382,7 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
                 .subscribe(new MyObserver<List<Shopping>>() {
                     @Override
                     protected void onSuccess(List<Shopping> data, String resultMsg) {
-                        System.out.println("商品列表:" + data);
+
                         if (mNameList != null && mNameAdapter != null) {
                             mNameList.clear();
                             mNameList.addAll(data);
@@ -382,7 +392,7 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
 
                     @Override
                     public void onFail(String resultMsg) {
-                        System.out.println("错误:" + resultMsg);
+
                     }
 
                     @Override
@@ -451,7 +461,7 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
      * @param type 品牌 传入null 表示要清空
      * @param s
      */
-    private void refreshChoseRecycleview(String type, String s) {
+    public void refreshChoseRecycleview(String type, String s) {
         for (Chose chose : mChoseList) {
             if (type != null) {
                 if (type.equals(chose.getType())) {
@@ -520,11 +530,11 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
      */
     @Override
     public void priceComfirm() {
-        beginPrice = getView().getStratPrice();
-        endPrice = getView().getEndPrice();
-        if (!TextUtils.isEmpty(beginPrice) && !TextUtils.isEmpty(endPrice)) {
+        if (!TextUtils.isEmpty( getView().getStratPrice()) && !TextUtils.isEmpty(getView().getEndPrice())) {
+            lastBeginPrice = getView().getStratPrice();
+            lastEndPrice = getView().getEndPrice();
             refreshTypeState(null, "价格");
-            refreshChoseRecycleview("价格", beginPrice + "-" + endPrice + "元");
+            refreshChoseRecycleview("价格", lastBeginPrice + "-" + lastEndPrice + "元");
         }
     }
 
@@ -544,9 +554,59 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
      */
     @Override
     public void comfirmChose() {
-
+        brand = lastBrand;
+        beginPrice = lastBeginPrice;
+        endPrice = lastEndPrice;
         getShopList();
         getView().close();
+    }
+
+    /**
+     * 如果是没有点击确定关闭筛选的就将数据还原
+     */
+    @Override
+    public void reFreshChose() {
+        for (int i = 0; i < mChoseList.size(); i++) {
+        //还原来筛选
+            Chose chose = mChoseList.get(i);
+            if (chose != null) {
+                if ("品牌".equals(chose.getType())) {
+                    if (brand != null) {
+                        refreshChoseRecycleview(chose.getType(), brand);
+                    } else {
+                        refreshChoseRecycleview(chose.getType(), "全部");
+                    }
+                } else if ("价格".equals(chose.getType())) {
+                    if (!TextUtils.isEmpty(beginPrice) && !TextUtils.isEmpty(endPrice)) {
+                        refreshChoseRecycleview(chose.getType(), beginPrice + "-" + endPrice);
+                    } else {
+                        refreshChoseRecycleview(chose.getType(), "全部");
+                    }
+                }
+                if (map != null) {
+                    //还原条件
+                    List<Type> types = map.get(chose.getType());
+                    if (types != null) {
+
+                        for (Type type : types) {
+                            if (type != null) {
+                                if (chose.getName().equals(type.getName())) {
+                                    type.setSelect(true);
+                                } else {
+                                    type.setSelect(false);
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+
+        lastEndPrice = endPrice;
+        lastBeginPrice = beginPrice;
+        lastBrand = brand;
+
     }
 
     /**
@@ -573,6 +633,8 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
             mNameList.clear();
             mNameList = null;
         }
+
+        clear();
     }
 
 
