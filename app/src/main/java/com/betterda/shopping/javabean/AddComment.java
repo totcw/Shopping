@@ -6,18 +6,18 @@ package com.betterda.shopping.javabean;
  */
 
 public class AddComment {
-    private String shopId;
+    private String shopcartDetailId;//商品的id
     private String shopName;
     private String shopUrl;
     private double shopStar;
     private String commentContent;
 
-    public String getShopId() {
-        return shopId;
+    public String getShopcartDetailId() {
+        return shopcartDetailId;
     }
 
-    public void setShopId(String shopId) {
-        this.shopId = shopId;
+    public void setShopcartDetailId(String shopcartDetailId) {
+        this.shopcartDetailId = shopcartDetailId;
     }
 
     public String getShopName() {
@@ -50,5 +50,16 @@ public class AddComment {
 
     public void setCommentContent(String commentContent) {
         this.commentContent = commentContent;
+    }
+
+    @Override
+    public String toString() {
+        return "AddComment{" +
+                "shopcartDetailId='" + shopcartDetailId + '\'' +
+                ", shopName='" + shopName + '\'' +
+                ", shopUrl='" + shopUrl + '\'' +
+                ", shopStar=" + shopStar +
+                ", commentContent='" + commentContent + '\'' +
+                '}';
     }
 }

@@ -361,7 +361,7 @@ public class SortFragment extends BaseFragment<SortContract.Presenter> implement
         super.dismiss();
         mTtbvSort.setSecondSelect(false);
         mTtbvSort.setFirstSelect(false);
-        getPresenter().reFreshChose();
+        getPresenter().reFreshChose(pressNum);
 
         //清楚popupwindow中的容器
        // getPresenter().clear();

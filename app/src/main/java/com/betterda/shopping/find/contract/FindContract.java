@@ -14,6 +14,7 @@ public class FindContract {
     }
 
     public interface Presenter extends IPresenter<View> {
+        void getData(double longitude, double latitude);
     }
 
     public interface Model extends IModel{

@@ -5,12 +5,15 @@ import com.betterda.shopping.javabean.Bus;
 import com.betterda.shopping.javabean.Comment;
 import com.betterda.shopping.javabean.BaseCallModel;
 import com.betterda.shopping.javabean.DefaultAddress;
+import com.betterda.shopping.javabean.Location;
 import com.betterda.shopping.javabean.OrderComfirm;
 import com.betterda.shopping.javabean.Search;
 import com.betterda.shopping.javabean.ShopBrand;
 import com.betterda.shopping.javabean.ShopDetail;
 import com.betterda.shopping.javabean.UserInfo;
 
+import com.betterda.shopping.javabean.Wallet;
+import com.betterda.shopping.javabean.ZItiMa;
 import com.betterda.shopping.shouye.model.LunBoTu;
 import com.betterda.shopping.sort.model.Shopping;
 import com.betterda.shopping.sort.model.Sort;
@@ -19,10 +22,14 @@ import com.betterda.shopping.wallet.model.BankCard;
 
 import java.util.List;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import rx.Observable;
 
 /**
@@ -205,7 +212,7 @@ public interface NetService {
      * @return
      */
     @FormUrlEncoded
-    @POST(Constants.Url.URL_LUNBO)
+    @POST(Constants.Url.URL_GET_ORDERDETAIL)
     Observable<BaseCallModel<OrderComfirm>> getOrderDetail(@Field("account") String account,
                                                        @Field("token") String token,
                                                        @Field("orderId") String orderId
@@ -264,8 +271,8 @@ public interface NetService {
      * @return
      */
     @FormUrlEncoded
-    @POST(Constants.Url.URL_LUNBO)
-    Observable<BaseCallModel<String>> getWallet(@Field("account") String account,
+    @POST(Constants.Url.URL_GET_WALLET)
+    Observable<BaseCallModel<Wallet>> getWallet(@Field("account") String account,
                                                 @Field("token") String token
     );
 
@@ -463,8 +470,9 @@ public interface NetService {
      */
     @FormUrlEncoded
     @POST(Constants.Url.URL_GET_LOCATION)
-    Observable<BaseCallModel<List<BankCard>>> getShop(@Field("longitude") String longitude,
-                                                      @Field("latitude") String latitude
+    Observable<BaseCallModel<List<Location>>> getShop(@Field("latitude") String latitude,
+            @Field("longitude") String longitude
+
     );
 
     /**
@@ -648,10 +656,37 @@ public interface NetService {
     @FormUrlEncoded
     @POST(Constants.Url.URL_BUS_COUNT)
     Observable<BaseCallModel<String>> getBusCount(@Field("account") String account,
+
                                                                @Field("token") String token
+    );
+
+    /**
+     * 获取自提码
+     *
+     * @param account
+     * @param token
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(Constants.Url.URL_GET_ZITIMA)
+    Observable<BaseCallModel<List<ZItiMa>>> getZiTiMa(@Field("account") String account,
+                                                @Field("token") String token
     );
 
 
 
+    /**
+     * 图片上传
+     * @param account
+     * @param token
+     * @param file
+     * @return
+     */
+    @Multipart
+    @POST(Constants.Url.URL_UPLOAD)
+    Observable<BaseCallModel<String>> getImgUpload(@Part("account") RequestBody account,
+                                                   @Part("token") RequestBody token,
+                                                   @Part MultipartBody.Part file
+    );
 
 }

@@ -99,16 +99,18 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailContract.Presen
             case R.id.relative_orderdetail_pay://立即付款
                 break;
             case R.id.relative_orderdetail_comment://立即评价
-                Intent intent = new Intent(getmActivity(), AddCommentActivity.class);
-                ArrayList<Bus> arrayList = new ArrayList<>();
-                arrayList.add(new Bus());
-                intent.putParcelableArrayListExtra("list", arrayList);
-                UiUtils.startIntent(getmActivity(),intent);
+                getPresenter().comment();
+
                 break;
             case R.id.bar_back:
                 back();
                 break;
 
         }
+    }
+
+    @Override
+    public LoadingPager getLodapger() {
+        return mLoadpagerOrderdetail;
     }
 }

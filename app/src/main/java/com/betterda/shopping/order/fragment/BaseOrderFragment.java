@@ -1,6 +1,6 @@
 package com.betterda.shopping.order.fragment;
 
-import android.provider.Contacts;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -14,10 +14,10 @@ import com.betterda.shopping.BuildConfig;
 import com.betterda.shopping.R;
 import com.betterda.shopping.base.BaseFragment;
 import com.betterda.shopping.factory.LoadImageFactory;
-import com.betterda.shopping.javabean.Bus;
 import com.betterda.shopping.http.MyObserver;
 import com.betterda.shopping.http.NetWork;
 import com.betterda.shopping.javabean.BaseCallModel;
+import com.betterda.shopping.javabean.Bus;
 import com.betterda.shopping.javabean.OrderComfirm;
 import com.betterda.shopping.order.OrderDetailActivity;
 import com.betterda.shopping.order.contract.BaseOrderContract;
@@ -27,8 +27,6 @@ import com.betterda.shopping.utils.UiUtils;
 import com.betterda.shopping.utils.UtilMethod;
 import com.zhy.base.adapter.ViewHolder;
 import com.zhy.base.adapter.recyclerview.CommonAdapter;
-
-import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -250,7 +248,9 @@ public class BaseOrderFragment extends BaseFragment<BaseOrderContract.Presenter>
      * @param orderid
      */
     private void startOnDetail(String orderid) {
-        UiUtils.startIntent(getmActivity(), OrderDetailActivity.class);
+        Intent intent = new Intent(getmActivity(), OrderDetailActivity.class);
+        intent.putExtra("orderId", orderid);
+        UiUtils.startIntent(getmActivity(), intent);
 
     }
 
@@ -297,6 +297,7 @@ public class BaseOrderFragment extends BaseFragment<BaseOrderContract.Presenter>
      * 立即收货
      */
     private void getData2(String orderid) {
+
 
     }
 

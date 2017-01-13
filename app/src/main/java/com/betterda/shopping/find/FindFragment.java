@@ -357,15 +357,12 @@ public class FindFragment extends BaseFragment<FindContract.Presenter> implement
             marker(24.50608, 118.147768,"10m");
             marker(24.50508, 118.147768,"30m");
             //获取商家信息
-            getData();
+            getPresenter().getData(location.getLongitude(), location.getLatitude());
         }
 
 
     }
 
-    private void getData() {
-
-    }
 
     @Override
     public void onDestroy() {

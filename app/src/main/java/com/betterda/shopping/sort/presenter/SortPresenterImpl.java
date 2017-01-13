@@ -70,7 +70,7 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
         initSortRecycleview();
         initNameRecycleview();
         getCacheData();
-        getView().getLodapger().setLoadVisable();
+
         getData();
     }
 
@@ -102,7 +102,7 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
                                 //记录商品类型
                                 productType = s.getCatalogname();
                                 refreshState(holder);
-                                updateShopping();
+                                getShopList();
                             }
                         }
                     });
@@ -295,12 +295,7 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
     }
 
 
-    /**
-     * 根据类别更新商品
-     */
-    private void updateShopping() {
 
-    }
 
     /**
      * 获取缓存数据 如:品牌
@@ -381,6 +376,8 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
     private void initNameFirst(List<Sort> data) {
         if (data != null && data.size() > 0) {
             productType = data.get(0).getCatalogname();
+            data.get(0).setSelect(true);
+            mSortAdapter.notifyDataSetChanged();
             getShopList();
         }
 
@@ -391,7 +388,7 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
      */
     private void getShopList() {
 
-
+        getView().getLodapger().setLoadVisable();
         getView().getRxManager().add(NetWork.getNetService()
                 .getShopList(productType, sort, brand, beginPrice, endPrice, pangeNo + "", Constants.PAGESIZE)
                 .compose(NetWork.handleResult(new BaseCallModel<List<Shopping>>()))
@@ -584,49 +581,55 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
      * 如果是没有点击确定关闭筛选的就将数据还原
      */
     @Override
-    public void reFreshChose() {
-        for (int i = 0; i < mChoseList.size(); i++) {
-            //还原来筛选
-            Chose chose = mChoseList.get(i);
-            if (chose != null) {
-                if ("品牌".equals(chose.getType())) {
-                    if (brand != null) {
-                        refreshChoseRecycleview(chose.getType(), brand);
-                    } else {
-                        refreshChoseRecycleview(chose.getType(), "全部");
-                    }
-                } else if ("价格".equals(chose.getType())) {
-                    if (!TextUtils.isEmpty(beginPrice) && !TextUtils.isEmpty(endPrice)) {
-                        refreshChoseRecycleview(chose.getType(), beginPrice + "-" + endPrice + "元");
-                    } else if (!TextUtils.isEmpty(beginPrice) && TextUtils.isEmpty(endPrice)) {
-                        refreshChoseRecycleview(chose.getType(), beginPrice+ "元以上");
-                    } else {
-                        refreshChoseRecycleview(chose.getType(), "全部");
-                    }
-                }
-                if (map != null) {
-                    //还原条件
-                    List<Type> types = map.get(chose.getType());
-                    if (types != null) {
+    public void reFreshChose(int pressNum) {
+        if (pressNum == 1) {
+            if (mChoseList != null) {
+                for (int i = 0; i < mChoseList.size(); i++) {
+                    //还原来筛选
+                    Chose chose = mChoseList.get(i);
+                    if (chose != null) {
+                        if ("品牌".equals(chose.getType())) {
+                            if (brand != null) {
+                                refreshChoseRecycleview(chose.getType(), brand);
+                            } else {
+                                refreshChoseRecycleview(chose.getType(), "全部");
+                            }
+                        } else if ("价格".equals(chose.getType())) {
+                            if (!TextUtils.isEmpty(beginPrice) && !TextUtils.isEmpty(endPrice)) {
+                                refreshChoseRecycleview(chose.getType(), beginPrice + "-" + endPrice + "元");
+                            } else if (!TextUtils.isEmpty(beginPrice) && TextUtils.isEmpty(endPrice)) {
+                                refreshChoseRecycleview(chose.getType(), beginPrice+ "元以上");
+                            } else {
+                                refreshChoseRecycleview(chose.getType(), "全部");
+                            }
+                        }
+                        if (map != null) {
+                            //还原条件
+                            List<Type> types = map.get(chose.getType());
+                            if (types != null) {
 
-                        for (Type type : types) {
-                            if (type != null) {
-                                if (chose.getName().equals(type.getName())) {
-                                    type.setSelect(true);
-                                } else {
-                                    type.setSelect(false);
+                                for (Type type : types) {
+                                    if (type != null) {
+                                        if (chose.getName().equals(type.getName())) {
+                                            type.setSelect(true);
+                                        } else {
+                                            type.setSelect(false);
+                                        }
+                                    }
                                 }
                             }
                         }
+
                     }
                 }
 
+                lastEndPrice = endPrice;
+                lastBeginPrice = beginPrice;
+                lastBrand = brand;
             }
         }
 
-        lastEndPrice = endPrice;
-        lastBeginPrice = beginPrice;
-        lastBrand = brand;
+
 
     }
 

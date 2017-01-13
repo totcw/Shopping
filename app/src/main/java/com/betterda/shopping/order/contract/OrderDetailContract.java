@@ -14,6 +14,7 @@ public class OrderDetailContract {
     }
 
     public interface Presenter extends IPresenter<View> {
+        void comment();
     }
 
     public interface Model extends IModel{

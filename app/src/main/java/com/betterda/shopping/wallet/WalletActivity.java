@@ -66,4 +66,9 @@ public class WalletActivity extends BaseActivity<WalletContract.Presenter> imple
                 break;
         }
     }
+
+    @Override
+    public LoadingPager getLodapger() {
+        return mLoadpagerWallet;
+    }
 }

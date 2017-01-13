@@ -93,7 +93,7 @@ public interface Presenter extends IPresenter<View>{
     void comfirmChose();
 
 
-    void reFreshChose();
+    void reFreshChose(int pressNum);
 }
 
 public interface Model extends IModel{

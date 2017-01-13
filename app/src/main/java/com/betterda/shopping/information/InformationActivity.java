@@ -3,6 +3,7 @@ package com.betterda.shopping.information;
 import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Network;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -17,12 +18,17 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.betterda.mylibrary.Utils.PermissionUtil;
+import com.betterda.shopping.BuildConfig;
 import com.betterda.shopping.R;
 import com.betterda.shopping.base.BaseActivity;
+import com.betterda.shopping.http.MyObserver;
+import com.betterda.shopping.http.NetWork;
 import com.betterda.shopping.information.contract.InformationContract;
 import com.betterda.shopping.information.presenter.InformationPresenterImpl;
+import com.betterda.shopping.javabean.BaseCallModel;
 import com.betterda.shopping.utils.Constants;
 import com.betterda.shopping.utils.ImageTools;
+import com.betterda.shopping.utils.NetworkUtils;
 import com.betterda.shopping.utils.UiUtils;
 import com.betterda.shopping.utils.UtilMethod;
 import com.betterda.shopping.widget.NormalTopBar;
@@ -32,6 +38,9 @@ import java.io.File;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 /**
  * 个人资料
@@ -248,6 +257,44 @@ public class InformationActivity extends BaseActivity<InformationContract.Presen
                 + ".png";
 
         //TODO 上传照片到服务器
+        NetworkUtils.isNetWork(getmActivity(), mLinearInformationName, new NetworkUtils.SetDataInterface() {
+            @Override
+            public void getDataApi() {
+                //封装普通的string字段
+                RequestBody account = RequestBody.create(MediaType.parse("text/plain"), getAccount());
+                RequestBody token = RequestBody.create(MediaType.parse("text/plain"), getToken());
+                //封装文件
+                RequestBody file = RequestBody.create(MediaType.parse("multipart/form-data"), new File(goosimg));
+
+                //第一个参数是key,第二是文件名,如果没有文件名不会被当成文件
+                MultipartBody.Part filePart = MultipartBody.Part.createFormData("file", Constants.PHOTONAME
+                        + ".png", file);
+
+                getRxManager().add(NetWork.getNetService()
+                .getImgUpload(account,token,filePart)
+                .compose(NetWork.handleResult(new BaseCallModel<String>()))
+                .subscribe(new MyObserver<String>() {
+                    @Override
+                    protected void onSuccess(String data, String resultMsg) {
+                        if (BuildConfig.LOG_DEBUG) {
+                            System.out.println("图片上传路径:"+data.toString());
+                        }
+                    }
+
+                    @Override
+                    public void onFail(String resultMsg) {
+                        if (BuildConfig.LOG_DEBUG) {
+                            System.out.println("图片上传路径:"+resultMsg);
+                        }
+                    }
+
+                    @Override
+                    public void onExit() {
+
+                    }
+                }));
+            }
+        });
         mSvInformationTouxinag.setImageBitmap(pic);
     }
 
