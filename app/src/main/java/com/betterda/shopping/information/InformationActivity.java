@@ -277,14 +277,14 @@ public class InformationActivity extends BaseActivity<InformationContract.Presen
                     @Override
                     protected void onSuccess(String data, String resultMsg) {
                         if (BuildConfig.LOG_DEBUG) {
-                            System.out.println("图片上传路径:"+data.toString());
+                            System.out.println("图片上传路径success:"+data.toString());
                         }
                     }
 
                     @Override
                     public void onFail(String resultMsg) {
                         if (BuildConfig.LOG_DEBUG) {
-                            System.out.println("图片上传路径:"+resultMsg);
+                            System.out.println("图片上传路径fail:"+resultMsg);
                         }
                     }
 
