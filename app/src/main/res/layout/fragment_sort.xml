@@ -1,58 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
     android:id="@+id/linear_sort"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<LinearLayout
-    android:layout_width="match_parent"
-
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical">
-
-
-    <include layout="@layout/layout_search"></include>
-
-    <View
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/divierLine"></View>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:background="@color/backgroudGray"
-            android:id="@+id/linear_fragment_sort"
+
+        <include layout="@layout/layout_search"></include>
+
+        <View
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_height="1dp"
+            android:background="@color/divierLine"></View>
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_fragment_sort_sort"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:overScrollMode="never"
-                >
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-            </android.support.v7.widget.RecyclerView>
-
-            <View
-                android:layout_width="1dp"
+            <LinearLayout
+                android:id="@+id/linear_fragment_sort"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/divierLine"></View>
+                android:background="@color/backgroudGray"
+                android:orientation="horizontal">
 
-            <FrameLayout
-                android:background="#ffffff"
-                android:layout_weight="3"
-                android:layout_width="0dp"
-                android:layout_height="match_parent">
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_fragment_sort_sort"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:overScrollMode="never">
+
+                </android.support.v7.widget.RecyclerView>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/divierLine"></View>
+
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:background="#ffffff"
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
@@ -64,40 +60,43 @@
 
                     </com.betterda.shopping.widget.TwoToolBarView>
 
-
-                    <com.betterda.mylibrary.xrecycleview.XRecyclerView
-                        android:id="@+id/rv_fragment_sort_name"
-                        android:overScrollMode="never"
+                    <FrameLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                      >
 
-                    </com.betterda.mylibrary.xrecycleview.XRecyclerView>
+                        <com.betterda.mylibrary.xrecycleview.XRecyclerView
+                            android:id="@+id/rv_fragment_sort_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:overScrollMode="never">
+
+                        </com.betterda.mylibrary.xrecycleview.XRecyclerView>
+
+                        <com.betterda.mylibrary.LoadingPager
+
+                            android:id="@+id/loadpager_fragment_sort_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                        </com.betterda.mylibrary.LoadingPager>
+
+                    </FrameLayout>
+
                 </LinearLayout>
 
 
+            </LinearLayout>
 
-                <com.betterda.mylibrary.LoadingPager
+            <com.betterda.mylibrary.LoadingPager
+                android:id="@+id/loadpager_fragment_sort"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-                    android:id="@+id/loadpager_fragment_sort_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+            </com.betterda.mylibrary.LoadingPager>
 
-                </com.betterda.mylibrary.LoadingPager>
-
-            </FrameLayout>
-
-        </LinearLayout>
-
-        <com.betterda.mylibrary.LoadingPager
-            android:id="@+id/loadpager_fragment_sort"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </com.betterda.mylibrary.LoadingPager>
-
-    </FrameLayout>
+        </FrameLayout>
 
 
-
-</LinearLayout>
-    </FrameLayout>
+    </LinearLayout>
+</FrameLayout>

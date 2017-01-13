@@ -9,6 +9,7 @@ public class UserInfo {
     private String token;
     private String nickName; //昵称
     private String photo;  //头像
+    private String accountType;//是否是会员
 
     public String getAccount() {
         return account;
@@ -42,13 +43,26 @@ public class UserInfo {
         this.photo = photo;
     }
 
+    public String getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(String accountType) {
+        this.accountType = accountType;
+    }
+
     @Override
-    public String toString() {
+    public String
+
+
+
+    toString() {
         return "UserInfo{" +
                 "account='" + account + '\'' +
                 ", token='" + token + '\'' +
                 ", nickName='" + nickName + '\'' +
                 ", photo='" + photo + '\'' +
+                ", accountType='" + accountType + '\'' +
                 '}';
     }
 }

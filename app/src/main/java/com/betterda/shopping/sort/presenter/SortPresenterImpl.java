@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.betterda.mylibrary.recycleviehelper.HeaderAndFooterRecyclerViewAdapter;
+import com.betterda.shopping.BuildConfig;
 import com.betterda.shopping.R;
 import com.betterda.shopping.base.BasePresenter;
 import com.betterda.shopping.factory.LoadImageFactory;
@@ -29,6 +30,7 @@ import com.betterda.shopping.utils.Constants;
 import com.betterda.shopping.utils.GsonParse;
 import com.betterda.shopping.utils.GsonTools;
 import com.betterda.shopping.utils.UiUtils;
+import com.betterda.shopping.utils.UtilMethod;
 import com.betterda.shopping.welcome.WelcomeActivity;
 import com.zhy.base.adapter.ViewHolder;
 import com.zhy.base.adapter.recyclerview.CommonAdapter;
@@ -68,6 +70,7 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
         initSortRecycleview();
         initNameRecycleview();
         getCacheData();
+        getView().getLodapger().setLoadVisable();
         getData();
     }
 
@@ -229,10 +232,16 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
                             lastBrand = s.getName();
                         } else if ("价格".equals(type)) {
                             if (s.getName() != null) {
-                                String[] split = s.getName().split("-");
-                                if (split.length > 1) {
-                                    lastBeginPrice = split[0];
-                                    lastEndPrice = split[1];
+                                if ("全部".equals(s.getName())) {
+                                    lastBeginPrice = null;
+                                    lastEndPrice = null;
+                                } else {
+                                    String[] split = s.getName().split("-");
+                                    if (split.length > 1) {
+                                        lastBeginPrice = split[0];
+                                        lastEndPrice = split[1].substring(0,split[1].indexOf("元"));
+
+                                    }
                                 }
 
                             }
@@ -382,17 +391,20 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
                 .subscribe(new MyObserver<List<Shopping>>() {
                     @Override
                     protected void onSuccess(List<Shopping> data, String resultMsg) {
-
+                        if (BuildConfig.LOG_DEBUG) {
+                            System.out.println("商品列表:"+data.size());
+                        }
                         if (mNameList != null && mNameAdapter != null) {
                             mNameList.clear();
                             mNameList.addAll(data);
                             mNameAdapter.notifyDataSetChanged();
                         }
+                        UtilMethod.hideOrEmpty(data,getView().getLodapger());
                     }
 
                     @Override
                     public void onFail(String resultMsg) {
-
+                        UtilMethod.setLoadpagerError(getView().getLodapger());
                     }
 
                     @Override
@@ -578,7 +590,7 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
                     }
                 } else if ("价格".equals(chose.getType())) {
                     if (!TextUtils.isEmpty(beginPrice) && !TextUtils.isEmpty(endPrice)) {
-                        refreshChoseRecycleview(chose.getType(), beginPrice + "-" + endPrice);
+                        refreshChoseRecycleview(chose.getType(), beginPrice + "-" + endPrice+"元");
                     } else {
                         refreshChoseRecycleview(chose.getType(), "全部");
                     }

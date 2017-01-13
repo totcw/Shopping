@@ -1,6 +1,9 @@
 package com.betterda.shopping.wallet.contract;
 
 
+import android.view.View;
+import android.widget.TextView;
+
 import com.betterda.shopping.base.IModel;
 import com.betterda.shopping.base.IPresenter;
 import com.betterda.shopping.base.IView;
@@ -13,6 +16,8 @@ public class TiXianContract {
 
     public interface View extends IView {
         String getMoney();
+
+        TextView getTvBalance();
     }
 
     public interface Presenter extends IPresenter<View> {

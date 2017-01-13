@@ -168,7 +168,7 @@ public interface NetService {
      * @return
      */
     @FormUrlEncoded
-    @POST(Constants.Url.URL_LUNBO)
+    @POST(Constants.Url.URL_ADD_ORDER)
     Observable<BaseCallModel<String>> addOrder(@Field("account") String account,
                                                @Field("token") String token,
                                                @Field("dataJson") String dataJson
@@ -283,7 +283,7 @@ public interface NetService {
 
 
     /**
-     * 获取钱包明细
+     * 提现
      *
      * @param account
      * @param token
@@ -292,7 +292,7 @@ public interface NetService {
      * @return
      */
     @FormUrlEncoded
-    @POST(Constants.Url.URL_LUNBO)
+    @POST(Constants.Url.URL_GET_CASH)
     Observable<BaseCallModel<String>> getCash(@Field("account") String account,
                                               @Field("token") String token,
                                               @Field("money") String money,

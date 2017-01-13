@@ -405,5 +405,8 @@ public class SortFragment extends BaseFragment<SortContract.Presenter> implement
         return mEtNameEnd.getText().toString().trim();
     }
 
-
+    @Override
+    public LoadingPager getLodapger() {
+        return mLoadPagerSortName;
+    }
 }

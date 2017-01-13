@@ -165,7 +165,7 @@ public class OrderComfirmActivity extends BaseActivity<OrderComfrimContract.Pres
 
     @Override
     public void setValue(DefaultAddress data) {
-        System.out.println("va");
+
         mTvOrderNumber.setText(data.getMobilePhone());
         mTvOrderShouhuoren2.setText(data.getConsigneeName());
         mTvOrderAddress2.setText(data.getAddress()+data.getDetailAddress());

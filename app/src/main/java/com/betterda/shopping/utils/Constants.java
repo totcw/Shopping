@@ -19,6 +19,7 @@ public class Constants {
 
     public static class Cache{
         public final static String ISLOGIN = "isLogin";//登录状态
+        public final static String ISMEMBER = "isMember";//是否是会员
         public final static String ACCOUNT = "account";//
         public final static String TOKEN = "token";//
         public final static String NICKNAME = "nickName";//昵称
@@ -56,6 +57,8 @@ public class Constants {
         public static final String URL_SEARCH = "appAPI.do?api/product/search";//搜索
         public static final String URL_SEARCH_REMEN = "appAPI.do?api/hotSearch/get";//获取热门搜索记录
         public static final String URL_SEARCH_JILU = "appAPI.do?api/account/search/get";//获取搜索记录
+        public static final String URL_ADD_ORDER = "appAPI.do?api/account/order/add";//生成订单
+        public static final String URL_GET_CASH = "appAPI.do?api/account/cash/withdraw";//提现
 
 
     }

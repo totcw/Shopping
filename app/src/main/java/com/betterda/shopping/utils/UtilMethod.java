@@ -401,14 +401,15 @@ public class UtilMethod {
      *
      * @return
      */
-    public static float addUp(List<Bus> list) {
+    public static float addUp(Activity activity,List<Bus> list) {
         float a = 0;
-
+        boolean isMember = CacheUtils.getBoolean(activity, Constants.Cache.ISMEMBER, false);
         if (list != null) {
             for (Bus bus : list) {
                 try {
                     int amount = Integer.parseInt(bus.getTotalCount());
-                    float money = Float.parseFloat(bus.getSalePrice());
+                    //判断是否是会员
+                    float money = isMember?Float.parseFloat(bus.getVipPrice()):Float.parseFloat(bus.getSalePrice());
                     float sum = amount * money;
                     a += sum;
                 } catch (Exception e) {

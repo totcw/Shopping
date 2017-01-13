@@ -130,4 +130,23 @@ public class OrderComfirm {
     public void setVoucher(float voucher) {
         this.voucher = voucher;
     }
+
+    @Override
+    public String toString() {
+        return "OrderComfirm{" +
+                "account='" + account + '\'' +
+                ", orderId='" + orderId + '\'' +
+                ", time='" + time + '\'' +
+                ", name='" + name + '\'' +
+                ", number='" + number + '\'' +
+                ", ares='" + ares + '\'' +
+                ", address='" + address + '\'' +
+                ", busList=" + busList +
+                ", freight=" + freight +
+                ", bill='" + bill + '\'' +
+                ", type='" + type + '\'' +
+                ", money=" + money +
+                ", voucher=" + voucher +
+                '}';
+    }
 }
