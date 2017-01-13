@@ -7,7 +7,7 @@ package com.betterda.shopping.javabean;
 
 public class ShopDetail {
    // productName：商品名称；salePrice：原价；vipPrice：会员价；spec：规格；
-   // quantity；商品的评价数量；degree：好评度；bigPicture：商品大图片。
+   // quantity；商品的评价数量；degree：好评度；bigPicture：商品大图片。,购物车数量
     private String productName;
     private String salePrice;
     private String vipPrice;
