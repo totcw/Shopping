@@ -337,7 +337,7 @@ public class FindFragment extends BaseFragment<FindContract.Presenter> implement
             // 构造定位数据
             MyLocationData locData = new MyLocationData.Builder()
                     .accuracy(location.getRadius())
-                    // 此处设置开发者获取到的方向信息，顺时针0-360
+                    // 此处设置开发者获取到的方向信息，顺时针0-360  Latitude 纬度
                     .direction(100).latitude(location.getLatitude())
                     .longitude(location.getLongitude()).build();
             // 设置定位数据
@@ -350,13 +350,21 @@ public class FindFragment extends BaseFragment<FindContract.Presenter> implement
             //停止定位
             mLocationClient.stop();
 
+
+
             //显示商家信息
             marker(24.50408, 118.147768,"1m");
             marker(24.50608, 118.147768,"10m");
             marker(24.50508, 118.147768,"30m");
-
-
+            //获取商家信息
+            getData();
         }
+
+
+    }
+
+    private void getData() {
+
     }
 
     @Override

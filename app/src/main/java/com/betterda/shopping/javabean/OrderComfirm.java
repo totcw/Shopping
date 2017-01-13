@@ -9,8 +9,9 @@ import java.util.List;
  * Created by Administrator on 2016/6/27.
  */
 public class OrderComfirm {
+
     private String account;//用户
-    private String orderId;//订单id
+    private String orderId;//订单号
     private String time;//订单时间
     private String name;//收货人姓名
     private String number;//收货人电话
@@ -22,6 +23,7 @@ public class OrderComfirm {
     private String type;//配送方式  自提 快递
     private float money;//订单的实际支付金额  扣除代金卷
     private float voucher;//代金卷
+    private String orderStatus;//订单状态
 
 
 
@@ -114,10 +116,10 @@ public class OrderComfirm {
     public void setBill(String bill) {
         this.bill = bill;
     }
-
+/*
     public String getType() {
         return type;
-    }
+    }*/
 
     public void setType(String type) {
         this.type = type;
@@ -129,6 +131,16 @@ public class OrderComfirm {
 
     public void setVoucher(float voucher) {
         this.voucher = voucher;
+    }
+
+
+
+    public String getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(String orderStatus) {
+        this.orderStatus = orderStatus;
     }
 
     @Override
@@ -147,6 +159,7 @@ public class OrderComfirm {
                 ", type='" + type + '\'' +
                 ", money=" + money +
                 ", voucher=" + voucher +
+                ", orderStatus='" + orderStatus + '\'' +
                 '}';
     }
 }

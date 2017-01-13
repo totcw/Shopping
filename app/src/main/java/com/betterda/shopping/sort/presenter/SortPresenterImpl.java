@@ -235,13 +235,18 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
                                 if ("全部".equals(s.getName())) {
                                     lastBeginPrice = null;
                                     lastEndPrice = null;
+                                } else if (s.getName().contains("元以上")) {
+                                    int indexOf = s.getName().indexOf("元以上");
+                                    lastBeginPrice = s.getName().substring(0, indexOf);
+                                    lastEndPrice = null;
                                 } else {
                                     String[] split = s.getName().split("-");
                                     if (split.length > 1) {
                                         lastBeginPrice = split[0];
-                                        lastEndPrice = split[1].substring(0,split[1].indexOf("元"));
+                                        lastEndPrice = split[1].substring(0, split[1].indexOf("元"));
 
                                     }
+
                                 }
 
                             }
@@ -385,6 +390,8 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
      * 获取商品列表
      */
     private void getShopList() {
+
+
         getView().getRxManager().add(NetWork.getNetService()
                 .getShopList(productType, sort, brand, beginPrice, endPrice, pangeNo + "", Constants.PAGESIZE)
                 .compose(NetWork.handleResult(new BaseCallModel<List<Shopping>>()))
@@ -392,14 +399,14 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
                     @Override
                     protected void onSuccess(List<Shopping> data, String resultMsg) {
                         if (BuildConfig.LOG_DEBUG) {
-                            System.out.println("商品列表:"+data.size());
+                            System.out.println("商品列表:" + data.size());
                         }
                         if (mNameList != null && mNameAdapter != null) {
                             mNameList.clear();
                             mNameList.addAll(data);
                             mNameAdapter.notifyDataSetChanged();
                         }
-                        UtilMethod.hideOrEmpty(data,getView().getLodapger());
+                        UtilMethod.hideOrEmpty(data, getView().getLodapger());
                     }
 
                     @Override
@@ -542,7 +549,7 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
      */
     @Override
     public void priceComfirm() {
-        if (!TextUtils.isEmpty( getView().getStratPrice()) && !TextUtils.isEmpty(getView().getEndPrice())) {
+        if (!TextUtils.isEmpty(getView().getStratPrice()) && !TextUtils.isEmpty(getView().getEndPrice())) {
             lastBeginPrice = getView().getStratPrice();
             lastEndPrice = getView().getEndPrice();
             refreshTypeState(null, "价格");
@@ -579,7 +586,7 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
     @Override
     public void reFreshChose() {
         for (int i = 0; i < mChoseList.size(); i++) {
-        //还原来筛选
+            //还原来筛选
             Chose chose = mChoseList.get(i);
             if (chose != null) {
                 if ("品牌".equals(chose.getType())) {
@@ -590,7 +597,9 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
                     }
                 } else if ("价格".equals(chose.getType())) {
                     if (!TextUtils.isEmpty(beginPrice) && !TextUtils.isEmpty(endPrice)) {
-                        refreshChoseRecycleview(chose.getType(), beginPrice + "-" + endPrice+"元");
+                        refreshChoseRecycleview(chose.getType(), beginPrice + "-" + endPrice + "元");
+                    } else if (!TextUtils.isEmpty(beginPrice) && TextUtils.isEmpty(endPrice)) {
+                        refreshChoseRecycleview(chose.getType(), beginPrice+ "元以上");
                     } else {
                         refreshChoseRecycleview(chose.getType(), "全部");
                     }

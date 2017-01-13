@@ -58,7 +58,9 @@ public class Constants {
         public static final String URL_SEARCH_REMEN = "appAPI.do?api/hotSearch/get";//获取热门搜索记录
         public static final String URL_SEARCH_JILU = "appAPI.do?api/account/search/get";//获取搜索记录
         public static final String URL_ADD_ORDER = "appAPI.do?api/account/order/add";//生成订单
+        public static final String URL_GET_ORDER = "appAPI.do?api/account/order/get";//获取订单列表
         public static final String URL_GET_CASH = "appAPI.do?api/account/cash/withdraw";//提现
+        public static final String URL_GET_LOCATION = "appAPI.do?api/aroundShops/get";//获取位置信息
 
 
     }

@@ -1,28 +1,34 @@
 package com.betterda.shopping.order.fragment;
 
+import android.provider.Contacts;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.betterda.mylibrary.LoadingPager;
 import com.betterda.mylibrary.xrecycleview.XRecyclerView;
+import com.betterda.shopping.BuildConfig;
 import com.betterda.shopping.R;
 import com.betterda.shopping.base.BaseFragment;
+import com.betterda.shopping.factory.LoadImageFactory;
 import com.betterda.shopping.javabean.Bus;
 import com.betterda.shopping.http.MyObserver;
 import com.betterda.shopping.http.NetWork;
 import com.betterda.shopping.javabean.BaseCallModel;
+import com.betterda.shopping.javabean.OrderComfirm;
 import com.betterda.shopping.order.OrderDetailActivity;
 import com.betterda.shopping.order.contract.BaseOrderContract;
-import com.betterda.shopping.javabean.OrderAll;
 import com.betterda.shopping.order.presenter.BaseOrderPresenterImpl;
 import com.betterda.shopping.utils.Constants;
 import com.betterda.shopping.utils.UiUtils;
 import com.betterda.shopping.utils.UtilMethod;
 import com.zhy.base.adapter.ViewHolder;
 import com.zhy.base.adapter.recyclerview.CommonAdapter;
+
+import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,9 +48,10 @@ public class BaseOrderFragment extends BaseFragment<BaseOrderContract.Presenter>
     @BindView(R.id.layout_loadingpager)
     public LoadingPager mLoadingpager;
 
-    public CommonAdapter<OrderAll> mOrderAllCommonAdapter;
-    public List<OrderAll> mOrderAllList;
-    private int pageNo;//页数
+    public CommonAdapter<OrderComfirm> mOrderAllCommonAdapter;
+    public List<OrderComfirm> mOrderAllList;
+    private String orderStatus;//订单状态
+    private int pageNo=1;//页数
 
     @Override
     protected BaseOrderContract.Presenter onLoadPresenter() {
@@ -73,44 +80,44 @@ public class BaseOrderFragment extends BaseFragment<BaseOrderContract.Presenter>
         mRecycleview.setVisibility(View.VISIBLE);
         mRecycleview.setLayoutManager(new LinearLayoutManager(getmActivity()));
         mRecycleview.setLoadingMoreEnabled(true);
-        mOrderAllCommonAdapter = new CommonAdapter<OrderAll>(getmActivity(), R.layout.item_recycleview_order, mOrderAllList) {
+        mOrderAllCommonAdapter = new CommonAdapter<OrderComfirm>(getmActivity(), R.layout.item_recycleview_order, mOrderAllList) {
             @Override
-            public void convert(ViewHolder holder, OrderAll orderAll) {
-                settingView2(holder,orderAll);
+            public void convert(ViewHolder holder, OrderComfirm OrderComfirm) {
+                settingView2(holder, OrderComfirm);
             }
         };
         mRecycleview.setAdapter(mOrderAllCommonAdapter);
     }
 
-    public void settingView2(final ViewHolder viewHolder, final OrderAll orderAll) {
+    public void settingView2(final ViewHolder viewHolder, final OrderComfirm OrderComfirm) {
 
-        if (null != orderAll) {
+        if (null != OrderComfirm) {
             //设置时间
-            viewHolder.setText(R.id.tv_item_orderall_time, orderAll.getTime());
-            //设置交易类型
-            setType(viewHolder, orderAll);
+            viewHolder.setText(R.id.tv_item_orderall_time, OrderComfirm.getTime());
+            //设置订单状态
+            setType(viewHolder, OrderComfirm);
             //初始化商品列表
-            loadShop(viewHolder, orderAll, orderAll.getList());
+            loadShop(viewHolder, OrderComfirm, OrderComfirm.getBusList());
             //先判断有没有付款,没有是待付款的状态
-            if ("N".equals(orderAll.getType())) {
+            if ("待付款".equals(OrderComfirm.getOrderStatus())) {
                 //显示待付款的界面
-                show(viewHolder, true, true, true, false,false);
-            } else if ("alsend".equals(orderAll.getState())) {
+                show(viewHolder, true, true, true, false, false);
+            } else if ("待收货".equals(OrderComfirm.getOrderStatus())) {
                 //显示待收货的界面
-                show(viewHolder, true, false, false, true,false);
-            } else if ("sign".equals(orderAll.getState())) {
+                show(viewHolder, true, false, false, true, false);
+            } else if ("待评价".equals(OrderComfirm.getOrderStatus())) {
                 //显示待评价的界面
-                show(viewHolder, true, false, false, false,true);
+                show(viewHolder, true, false, false, false, true);
             } else {
                 //全部隐藏
-                show(viewHolder, false, false, false, false,false);
+                show(viewHolder, false, false, false, false, false);
             }
 
             //立即付款
             viewHolder.setOnClickListener(R.id.tv_item_orderall_pay, new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                  getPay(orderAll.getId());
+                    getPay(OrderComfirm.getOrderId());
 
                 }
             });
@@ -118,18 +125,7 @@ public class BaseOrderFragment extends BaseFragment<BaseOrderContract.Presenter>
             viewHolder.setOnClickListener(R.id.tv_item_orderall_delete, new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                   /* if (!.getmActivity().isFinishing()) {
-                        cancelOrderInterface = new CancelOrderInterface() {
-                            @Override
-                            public void Cancel() {
-                                getData3(orderAll.getId());
-                            }
-                        };
-                        if (dialog != null) {
-                            dialog.setTitle("确定要取消订单吗?");
-                            dialog.show();
-                        }
-                    }*/
+
 
                 }
             });
@@ -138,18 +134,7 @@ public class BaseOrderFragment extends BaseFragment<BaseOrderContract.Presenter>
                 @Override
                 public void onClick(View v) {
 
-               /*     if (!getmActivity().isFinishing()) {
-                        cancelOrderInterface = new CancelOrderInterface() {
-                            @Override
-                            public void Cancel() {
-                                getData2(orderAll.getId());
-                            }
-                        };
-                        if (dialog != null) {
-                            dialog.setTitle("确定要收货吗?");
-                            dialog.show();
-                        }
-                    }*/
+
                 }
             });
 
@@ -165,7 +150,7 @@ public class BaseOrderFragment extends BaseFragment<BaseOrderContract.Presenter>
             viewHolder.setOnClickListener(R.id.linear_comfirmorder, new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startOnDetail(orderAll.getId());
+                    startOnDetail(OrderComfirm.getOrderId());
                 }
             });
 
@@ -174,39 +159,27 @@ public class BaseOrderFragment extends BaseFragment<BaseOrderContract.Presenter>
 
     /**
      * 设置订单的type
+     *
      * @param viewHolder
-     * @param orderAll
      */
-    private void setType(ViewHolder viewHolder, OrderAll orderAll) {
-        if ("Y".equals(orderAll.getType())) {
-            viewHolder.setText(R.id.tv_item_orderall_type, "交易完成");
-        } else if ("N".equals(orderAll.getType())) {
-            viewHolder.setText(R.id.tv_item_orderall_type, "待付款");
-        }  else if ("sign".equals(orderAll.getState())) {
-            viewHolder.setText(R.id.tv_item_orderall_type, "待评价");
-        }  else if ("alsend".equals(orderAll.getType())) {
-            viewHolder.setText(R.id.tv_item_orderall_type, "待收货");
-        }  else if ("send".equals(orderAll.getType())) {
-            viewHolder.setText(R.id.tv_item_orderall_type, "待发货");
-        }  else if ("take".equals(orderAll.getType())) {
-            viewHolder.setText(R.id.tv_item_orderall_type, "待提货");
-        } else {
-            viewHolder.setText(R.id.tv_item_orderall_type, "交易关闭");
-        }
+    private void setType(ViewHolder viewHolder, OrderComfirm OrderComfirm) {
+
+        viewHolder.setText(R.id.tv_item_orderall_type, OrderComfirm.getOrderStatus());
+
     }
 
     /**
      * 加载订单的商品列表
+     *
      * @param viewHolder
-     * @param orderAll
      * @param busList
      */
-    private void loadShop(ViewHolder viewHolder, final OrderAll orderAll, final List<Bus> busList) {
+    private void loadShop(ViewHolder viewHolder, final OrderComfirm OrderComfirm, final List<Bus> busList) {
         if (null != busList) {
             //设置商品的件数
             viewHolder.setText(R.id.tv_item_orderall_amount2, "共" + UtilMethod.addAmount(busList) + "件商品");
             //设置商品的价格
-            viewHolder.setText(R.id.tv_item_orderall_money, "￥" + orderAll.getAmount());
+            viewHolder.setText(R.id.tv_item_orderall_money, "￥" + OrderComfirm.getMoney());
             RecyclerView rv = viewHolder.getView(R.id.rv_order_item);
             rv.setLayoutManager(new LinearLayoutManager(getmActivity()));
             rv.setAdapter(new CommonAdapter<Bus>(getmActivity(), R.layout.item_recycleview_comfirmorder, busList) {
@@ -216,7 +189,10 @@ public class BaseOrderFragment extends BaseFragment<BaseOrderContract.Presenter>
                         //设置商品信息
                         viewHolder.setText(R.id.tv_item_order_name, bus.getProductName());
                         viewHolder.setText(R.id.tv_item_order_price, "￥" + bus.getSalePrice());
+                        viewHolder.setText(R.id.tv_item_order_memberprice, "会员价￥:" + bus.getVipPrice());
                         viewHolder.setText(R.id.tv_item_order_amount, "X " + bus.getTotalCount());
+                        ImageView imageView = viewHolder.getView(R.id.sv_item_order);
+                        LoadImageFactory.getLoadImageInterface().loadImageCrop(getmActivity(),bus.getLittlePicture(),imageView);
                         if (!TextUtils.isEmpty(bus.getLittlePicture())) {
                             //TODO 加载图标
                         }
@@ -224,28 +200,15 @@ public class BaseOrderFragment extends BaseFragment<BaseOrderContract.Presenter>
                         viewHolder.setOnClickListener(R.id.linear_comfirmorder2, new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                startOnDetail(orderAll.getId());
+                                startOnDetail(OrderComfirm.getOrderId());
                             }
                         });
-                        //显示评价按钮
-                       /* if ("sign".equals(orderAll.getState())) {
 
-                            if ("N".equals(bus.getIsComment())) {
-                                viewHolder.setVisible(R.id.tv_item_comfirmorder_comment, true);
-                            } else {
-                                viewHolder.setVisible(R.id.tv_item_comfirmorder_comment, false);
-                            }
-                        }*/
                         //添加评价
                         viewHolder.setOnClickListener(R.id.tv_item_comfirmorder_comment, new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
 
-                               /* Intent intent = new Intent(getmActivity(), AddCommentActivity.class);
-                                intent.putExtra("orderid", orderAll.getId());
-                                intent.putExtra("productid", bus.getId());
-                                intent.putExtra("shopId", bus.getShopId());
-                                getmActivity().startActivity(intent);*/
 
                             }
                         });
@@ -263,7 +226,7 @@ public class BaseOrderFragment extends BaseFragment<BaseOrderContract.Presenter>
      *
      * @param viewHolder
      */
-    public  void show(ViewHolder viewHolder, boolean isshow, boolean show, boolean show2, boolean show3,boolean show4) {
+    public void show(ViewHolder viewHolder, boolean isshow, boolean show, boolean show2, boolean show3, boolean show4) {
         viewHolder.setVisible(R.id.relative_order_delete, isshow);
         viewHolder.setVisible(R.id.tv_item_orderall_pay, show);
         viewHolder.setVisible(R.id.tv_item_orderall_delete, show2);
@@ -274,9 +237,8 @@ public class BaseOrderFragment extends BaseFragment<BaseOrderContract.Presenter>
 
     /**
      * 立即付款
-     *
      */
-    private void getPay( String orderid) {
+    private void getPay(String orderid) {
 
 
     }
@@ -284,6 +246,7 @@ public class BaseOrderFragment extends BaseFragment<BaseOrderContract.Presenter>
 
     /**
      * 跳转至详情
+     *
      * @param orderid
      */
     private void startOnDetail(String orderid) {
@@ -298,24 +261,35 @@ public class BaseOrderFragment extends BaseFragment<BaseOrderContract.Presenter>
     public void getData() {
 
         getRxManager().add(NetWork.getNetService()
-        .getOrder("account","token","orderStatus",pageNo+"", Constants.PAGESIZE)
-        .compose(NetWork.handleResult(new BaseCallModel<OrderAll>()))
-        .subscribe(new MyObserver<OrderAll>() {
-            @Override
-            protected void onSuccess(OrderAll data, String resultMsg) {
+                .getOrder(getAccount(), getToken(), orderStatus, pageNo + "", Constants.PAGESIZE)
+                .compose(NetWork.handleResult(new BaseCallModel<List<OrderComfirm>>()))
+                .subscribe(new MyObserver<List<OrderComfirm>>() {
+                    @Override
+                    protected void onSuccess(List<OrderComfirm> data, String resultMsg) {
+                        if (BuildConfig.LOG_DEBUG) {
+                            System.out.println("获取订单列表success:" + data.toString());
+                        }
 
-            }
+                        if (mOrderAllList != null && mOrderAllCommonAdapter != null) {
+                            mOrderAllList.clear();
+                            mOrderAllList.addAll(data);
+                            mOrderAllCommonAdapter.notifyDataSetChanged();
+                        }
 
-            @Override
-            public void onFail(String resultMsg) {
+                    }
 
-            }
+                    @Override
+                    public void onFail(String resultMsg) {
+                        if (BuildConfig.LOG_DEBUG) {
+                            System.out.println("获取订单列表fail:" + resultMsg);
+                        }
+                    }
 
-            @Override
-            public void onExit() {
+                    @Override
+                    public void onExit() {
 
-            }
-        }));
+                    }
+                }));
 
     }
 

@@ -5,11 +5,12 @@ import com.betterda.shopping.javabean.Bus;
 import com.betterda.shopping.javabean.Comment;
 import com.betterda.shopping.javabean.BaseCallModel;
 import com.betterda.shopping.javabean.DefaultAddress;
+import com.betterda.shopping.javabean.OrderComfirm;
 import com.betterda.shopping.javabean.Search;
 import com.betterda.shopping.javabean.ShopBrand;
 import com.betterda.shopping.javabean.ShopDetail;
 import com.betterda.shopping.javabean.UserInfo;
-import com.betterda.shopping.javabean.OrderAll;
+
 import com.betterda.shopping.shouye.model.LunBoTu;
 import com.betterda.shopping.sort.model.Shopping;
 import com.betterda.shopping.sort.model.Sort;
@@ -126,7 +127,9 @@ public interface NetService {
      */
     @FormUrlEncoded
     @POST(Constants.Url.URL_GET_SHOPDETAIL)
-    Observable<BaseCallModel<ShopDetail>> getShopDetail(@Field("productId") String productId);
+    Observable<BaseCallModel<ShopDetail>> getShopDetail(@Field("account") String account,
+                                                        @Field("token") String token,
+                                                   @Field("productId") String productId);
 
 
     /**
@@ -185,12 +188,12 @@ public interface NetService {
      * @return
      */
     @FormUrlEncoded
-    @POST(Constants.Url.URL_LUNBO)
-    Observable<BaseCallModel<OrderAll>> getOrder(@Field("account") String account,
-                                                 @Field("token") String token,
-                                                 @Field("orderStatus") String orderStatus,
-                                                 @Field("pageNo") String pageNo,
-                                                 @Field("pageSize") String pageSize
+    @POST(Constants.Url.URL_GET_ORDER)
+    Observable<BaseCallModel<List<OrderComfirm>>> getOrder(@Field("account") String account,
+                                                     @Field("token") String token,
+                                                     @Field("orderStatus") String orderStatus,
+                                                     @Field("pageNo") String pageNo,
+                                                     @Field("pageSize") String pageSize
     );
 
     /**
@@ -203,7 +206,7 @@ public interface NetService {
      */
     @FormUrlEncoded
     @POST(Constants.Url.URL_LUNBO)
-    Observable<BaseCallModel<OrderAll>> getOrderDetail(@Field("account") String account,
+    Observable<BaseCallModel<OrderComfirm>> getOrderDetail(@Field("account") String account,
                                                        @Field("token") String token,
                                                        @Field("orderId") String orderId
     );
@@ -459,7 +462,7 @@ public interface NetService {
      * @return
      */
     @FormUrlEncoded
-    @POST(Constants.Url.URL_LUNBO)
+    @POST(Constants.Url.URL_GET_LOCATION)
     Observable<BaseCallModel<List<BankCard>>> getShop(@Field("longitude") String longitude,
                                                       @Field("latitude") String latitude
     );

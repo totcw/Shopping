@@ -1,6 +1,5 @@
 package com.betterda.shopping.order.fragment;
 
-import com.betterda.shopping.javabean.OrderAll;
 
 /**
  * 待付款订单
@@ -12,9 +11,5 @@ public class PayFragment extends BaseOrderFragment {
     @Override
     public void getData() {
         super.getData();
-        for ( int i=0;i<6;i++) {
-            mOrderAllList.add(new OrderAll());
-        }
-        mOrderAllCommonAdapter.notifyDataSetChanged();
     }
 }

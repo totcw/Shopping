@@ -353,6 +353,13 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailContract.Pr
         if (data.getBigPicture() != null) {
             LoadImageFactory.getLoadImageInterface().loadImageFit(getmActivity(),data.getBigPicture(),mIvProductdetailLogo);
         }
+        mTvBus.setText(data.getCount());
+        if ("0".equals(data.getCount())) {
+            mTvBus.setVisibility(View.INVISIBLE);
+        } else {
+            mTvBus.setVisibility(View.VISIBLE);
+        }
+
     }
 
     @Override

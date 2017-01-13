@@ -7,7 +7,7 @@ package com.betterda.shopping.javabean;
 
 public class ShopDetail {
    // productName：商品名称；salePrice：原价；vipPrice：会员价；spec：规格；
-   // quantity；商品的评价数量；degree：好评度；bigPicture：商品大图片。,购物车数量
+   // quantity；商品的评价数量；degree：好评度；bigPicture：商品大图片。,购物车数量count
     private String productName;
     private String salePrice;
     private String vipPrice;
@@ -15,6 +15,7 @@ public class ShopDetail {
     private String quantity;
     private String degree;
     private String bigPicture;
+    private String count;
 
     public String getProductName() {
         return productName;
@@ -72,6 +73,14 @@ public class ShopDetail {
         this.bigPicture = bigPicture;
     }
 
+    public String getCount() {
+        return count;
+    }
+
+    public void setCount(String count) {
+        this.count = count;
+    }
+
     @Override
     public String toString() {
         return "ShopDetail{" +
@@ -82,6 +91,7 @@ public class ShopDetail {
                 ", quantity='" + quantity + '\'' +
                 ", degree='" + degree + '\'' +
                 ", bigPicture='" + bigPicture + '\'' +
+                ", count='" + count + '\'' +
                 '}';
     }
 }
