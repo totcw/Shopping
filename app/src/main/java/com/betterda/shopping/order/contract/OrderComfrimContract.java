@@ -24,6 +24,16 @@ public class OrderComfrimContract {
         String getFreight();
 
         void setValue(DefaultAddress data);
+
+        void setFregiht(String fregiht);
+        //设置代金卷
+        void setDaijinjuan(float voucher);
+        //设置已使用的代金卷
+        void setDaijinjuan2(float voucher);
+        //设置商品金额
+        void setMoney(float money);
+
+        void setPayMoeny(float money);
     }
 
     public interface Presenter extends IPresenter<View> {
@@ -39,6 +49,8 @@ public class OrderComfrimContract {
         void fou();
         //提交订单
         void commit();
+
+        void editDaijinjuan();
     }
 
     public interface Model extends IModel{

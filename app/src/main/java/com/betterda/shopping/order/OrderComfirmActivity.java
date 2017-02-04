@@ -44,7 +44,7 @@ public class OrderComfirmActivity extends BaseActivity<OrderComfrimContract.Pres
     TextView mTvOrderNumber;//电话号码
     @BindView(R.id.frame_address)
     FrameLayout mFrameAddress;//添加配送地址
-     @BindView(R.id.relative_order_address)
+    @BindView(R.id.relative_order_address)
     RelativeLayout mRelativeAddress;//添加配送地址
     @BindView(R.id.rv_confirmorder)
     RecyclerView mRvConfirmorder;
@@ -52,8 +52,10 @@ public class OrderComfirmActivity extends BaseActivity<OrderComfrimContract.Pres
     TextView mTvOrderFapiao; //发票
     @BindView(R.id.relative_order_fapiao)
     RelativeLayout mRelativeOrderFapiao;
-    @BindView(R.id.tv_order_youhuiquan)
-    TextView mTvOrderYouhuiquan;
+    @BindView(R.id.tv_order_youhuiquan) //已用代金卷
+            TextView mTvOrderYouhuiquan;
+    @BindView(R.id.tv_order_youhuiquan2)//可用代金卷
+            TextView mTvOrderYouhuiquan2;
     @BindView(R.id.relative_order_youhuiquan)
     RelativeLayout mRelativeOrderYouhuiquan;
     @BindView(R.id.tv_order_peisong)
@@ -84,20 +86,23 @@ public class OrderComfirmActivity extends BaseActivity<OrderComfrimContract.Pres
         mTopbarOder.setTitle("填写订单");
     }
 
-    @OnClick({R.id.tv_order_pay, R.id.frame_address, R.id.relative_order_fapiao, R.id.relative_order_youhuiquan, R.id.relative_order_peisong,R.id.bar_back})
+    @OnClick({R.id.tv_order_pay, R.id.frame_address, R.id.relative_order_fapiao, R.id.relative_order_youhuiquan, R.id.relative_order_peisong, R.id.bar_back})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_order_pay://立即付款
-                getPresenter().commit();
+                if (mTvOrderPay.isSelected()) {
+                    getPresenter().commit();
+                }
                 break;
             case R.id.frame_address://添加配送地址
                 Intent intent = new Intent(getmActivity(), AddressActivity.class);
-                UiUtils.startIntentForResult(getmActivity(),intent,0);
+                UiUtils.startIntentForResult(getmActivity(), intent, 0);
                 break;
             case R.id.relative_order_fapiao://发票
                 showFapiao();
                 break;
             case R.id.relative_order_youhuiquan://代金券
+                getPresenter().editDaijinjuan();
                 break;
             case R.id.relative_order_peisong://配送方式
                 showpeison();
@@ -107,19 +112,19 @@ public class OrderComfirmActivity extends BaseActivity<OrderComfrimContract.Pres
                 break;
             case R.id.tv_peisong_ziti:
                 getPresenter().ziti();
-                 closePopupWindow();
+                closePopupWindow();
                 break;
             case R.id.tv_peisong_kuaidi:
                 getPresenter().kuaidi();
-                 closePopupWindow();
+                closePopupWindow();
                 break;
             case R.id.tv_fapiao_shi:
                 getPresenter().shi();
-                 closePopupWindow();
+                closePopupWindow();
                 break;
             case R.id.tv_fapiao_fou:
-                 getPresenter().fou();
-                 closePopupWindow();
+                getPresenter().fou();
+                closePopupWindow();
                 break;
         }
     }
@@ -127,7 +132,7 @@ public class OrderComfirmActivity extends BaseActivity<OrderComfrimContract.Pres
 
     public void initRvOrder(RecyclerView.Adapter adapter) {
         mRvConfirmorder.setLayoutManager(new LinearLayoutManager(getmActivity()));
-        mRvConfirmorder.addItemDecoration(new DividerItemDecoration(getmActivity(),DividerItemDecoration.VERTICAL_LIST));
+        mRvConfirmorder.addItemDecoration(new DividerItemDecoration(getmActivity(), DividerItemDecoration.VERTICAL_LIST));
         mRvConfirmorder.setAdapter(adapter);
     }
 
@@ -143,8 +148,9 @@ public class OrderComfirmActivity extends BaseActivity<OrderComfrimContract.Pres
             getPresenter().setAddress(name, number, area, address);
             mTvOrderNumber.setText(number);
             mTvOrderShouhuoren2.setText(name);
-            mTvOrderAddress2.setText(area+address);
+            mTvOrderAddress2.setText(area + address);
             mRelativeAddress.setVisibility(View.VISIBLE);
+            mTvOrderPay.setSelected(true);
         }
     }
 
@@ -165,11 +171,48 @@ public class OrderComfirmActivity extends BaseActivity<OrderComfrimContract.Pres
 
     @Override
     public void setValue(DefaultAddress data) {
+        if (data.getMobilePhone() == null || data.getDetailAddress() == null ||
+                data.getConsigneeName() == null || data.getAddress() == null) {
 
-        mTvOrderNumber.setText(data.getMobilePhone());
-        mTvOrderShouhuoren2.setText(data.getConsigneeName());
-        mTvOrderAddress2.setText(data.getAddress()+data.getDetailAddress());
-        mRelativeAddress.setVisibility(View.VISIBLE);
+        } else {
+            mTvOrderNumber.setText(data.getMobilePhone());
+            mTvOrderShouhuoren2.setText(data.getConsigneeName());
+            mTvOrderAddress2.setText(data.getAddress() + data.getDetailAddress());
+            mRelativeAddress.setVisibility(View.VISIBLE);
+            mTvOrderPay.setSelected(true);
+        }
+
+    }
+
+    @Override
+    public void setFregiht(String fregiht) {
+        if (mTvConfirmorderYunfei != null) {
+            mTvConfirmorderYunfei.setText(fregiht);
+        }
+    }
+
+    @Override
+    public void setDaijinjuan(float voucher) {
+        mTvOrderYouhuiquan2.setText("代金卷(可用:" + voucher + ")");
+    }
+
+    @Override
+    public void setDaijinjuan2(float voucher) {
+        mTvOrderYouhuiquan.setText("已用" + voucher + "代金卷");
+    }
+
+    @Override
+    public void setMoney(float money) {
+        if (mTvConfirmorderPrice != null) {
+            mTvConfirmorderPrice.setText("￥:" + money);
+        }
+    }
+
+    @Override
+    public void setPayMoeny(float money) {
+        if (mTvOrderMoney != null) {
+            mTvOrderMoney.setText("￥:" + money);
+        }
     }
 
 
@@ -184,6 +227,7 @@ public class OrderComfirmActivity extends BaseActivity<OrderComfrimContract.Pres
         tv_fou.setOnClickListener(this);
         setUpPopupWindow(view);
     }
+
     /**
      * 显示配送
      */
@@ -205,6 +249,6 @@ public class OrderComfirmActivity extends BaseActivity<OrderComfrimContract.Pres
     @Override
     public void dismiss() {
         super.dismiss();
-        UiUtils.backgroundAlpha(1.0f,getmActivity());
+        UiUtils.backgroundAlpha(1.0f, getmActivity());
     }
 }

@@ -23,7 +23,7 @@ public class HorizontalScrollViewPager extends ViewPager {
 	public boolean dispatchTouchEvent(MotionEvent ev) {
 		switch (ev.getAction()) {
 			case MotionEvent.ACTION_DOWN:
-				//getParent().requestDisallowInterceptTouchEvent(true);
+				getParent().requestDisallowInterceptTouchEvent(true);
 				downX = (int) ev.getX();
 				downY = (int) ev.getY();
 				break;

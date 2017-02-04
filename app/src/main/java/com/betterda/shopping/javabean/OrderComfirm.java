@@ -18,11 +18,11 @@ public class OrderComfirm {
     private String ares;//省市区
     private String address;//收货人详细地址
     private List<Bus> busList;//商品列表
-    private float freight ;//运费  0表示免费
+    private String freight ;//运费  99以下表示免费
     private String  bill;//是否需要发票
     private String type;//配送方式  自提 快递
-    private float money;//订单的实际支付金额  扣除代金卷
-    private float voucher;//代金卷
+    private String money;//订单的实际支付金额  扣除代金卷
+    private String voucher;//代金卷
     private String orderStatus;//订单状态
 
 
@@ -43,13 +43,6 @@ public class OrderComfirm {
         this.ares = ares;
     }
 
-    public float getMoney() {
-        return money;
-    }
-
-    public void setMoney(float money) {
-        this.money = money;
-    }
 
     public String getAccount() {
         return account;
@@ -101,13 +94,7 @@ public class OrderComfirm {
         this.busList = busList;
     }
 
-    public float getFreight() {
-        return freight;
-    }
 
-    public void setFreight(float freight) {
-        this.freight = freight;
-    }
 
     public String getBill() {
         return bill;
@@ -116,24 +103,38 @@ public class OrderComfirm {
     public void setBill(String bill) {
         this.bill = bill;
     }
-/*
-    public String getType() {
-        return type;
-    }*/
 
     public void setType(String type) {
         this.type = type;
     }
 
-    public float getVoucher() {
+    public String getFreight() {
+        return freight;
+    }
+
+    public void setFreight(String freight) {
+        this.freight = freight;
+    }
+
+    public String getMoney() {
+        return money;
+    }
+
+    public void setMoney(String money) {
+        this.money = money;
+    }
+
+    public String getVoucher() {
         return voucher;
     }
 
-    public void setVoucher(float voucher) {
+    public void setVoucher(String voucher) {
         this.voucher = voucher;
     }
 
-
+    public String getType() {
+        return type;
+    }
 
     public String getOrderStatus() {
         return orderStatus;

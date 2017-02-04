@@ -16,6 +16,7 @@ public class ShopDetail {
     private String degree;
     private String bigPicture;
     private String count;
+    private String littlePicture; //商品小图片
 
     public String getProductName() {
         return productName;
@@ -81,6 +82,14 @@ public class ShopDetail {
         this.count = count;
     }
 
+    public String getLittlePicture() {
+        return littlePicture;
+    }
+
+    public void setLittlePicture(String littlePicture) {
+        this.littlePicture = littlePicture;
+    }
+
     @Override
     public String toString() {
         return "ShopDetail{" +
@@ -92,6 +101,7 @@ public class ShopDetail {
                 ", degree='" + degree + '\'' +
                 ", bigPicture='" + bigPicture + '\'' +
                 ", count='" + count + '\'' +
+                ", littlePicture='" + littlePicture + '\'' +
                 '}';
     }
 }

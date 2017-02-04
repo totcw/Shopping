@@ -80,8 +80,8 @@ public class OrderActivity extends BaseActivity<OrderContract.Presenter> impleme
     private void initIndicator() {
         mDatas = new ArrayList<>();
         mDatas.add("全部");
-        mDatas.add("待发货");
         mDatas.add("待付款");
+        mDatas.add("待发货");
         mDatas.add("待收货");
         mDatas.add("待提货");
         mDatas.add("待评价");

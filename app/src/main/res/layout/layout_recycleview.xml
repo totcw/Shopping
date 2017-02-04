@@ -5,7 +5,6 @@
 
     <com.betterda.mylibrary.xrecycleview.XRecyclerView
         android:visibility="invisible"
-
         android:id="@+id/layout_recycleview"
         android:overScrollMode="never"
         android:layout_height="match_parent"

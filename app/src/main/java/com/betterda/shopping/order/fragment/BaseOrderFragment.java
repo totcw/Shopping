@@ -48,8 +48,8 @@ public class BaseOrderFragment extends BaseFragment<BaseOrderContract.Presenter>
 
     public CommonAdapter<OrderComfirm> mOrderAllCommonAdapter;
     public List<OrderComfirm> mOrderAllList;
-    private String orderStatus;//订单状态
-    private int pageNo=1;//页数
+    public String orderStatus;//订单状态
+    public int pageNo=1;//页数
 
     @Override
     protected BaseOrderContract.Presenter onLoadPresenter() {
@@ -65,8 +65,6 @@ public class BaseOrderFragment extends BaseFragment<BaseOrderContract.Presenter>
     public void initData() {
         super.initData();
         mOrderAllList = new ArrayList<>();
-
-        initRecycleview();
         getData();
     }
 
@@ -76,6 +74,7 @@ public class BaseOrderFragment extends BaseFragment<BaseOrderContract.Presenter>
      */
     public void initRecycleview() {
         mRecycleview.setVisibility(View.VISIBLE);
+        mRecycleview.setPullRefreshEnabled(false);
         mRecycleview.setLayoutManager(new LinearLayoutManager(getmActivity()));
         mRecycleview.setLoadingMoreEnabled(true);
         mOrderAllCommonAdapter = new CommonAdapter<OrderComfirm>(getmActivity(), R.layout.item_recycleview_order, mOrderAllList) {
@@ -273,9 +272,9 @@ public class BaseOrderFragment extends BaseFragment<BaseOrderContract.Presenter>
                         if (mOrderAllList != null && mOrderAllCommonAdapter != null) {
                             mOrderAllList.clear();
                             mOrderAllList.addAll(data);
-                            mOrderAllCommonAdapter.notifyDataSetChanged();
+                            // mOrderAllCommonAdapter.notifyDataSetChanged();
                         }
-
+                        initRecycleview();
                     }
 
                     @Override
@@ -290,7 +289,6 @@ public class BaseOrderFragment extends BaseFragment<BaseOrderContract.Presenter>
 
                     }
                 }));
-
     }
 
     /**

@@ -6,6 +6,7 @@ import com.betterda.shopping.pay.contract.PayContract;
 import com.betterda.shopping.pay.presenter.PayPresenterImpl;
 
 /**
+ * 付款界面
  * Created by Administrator on 2016/12/15.
  */
 

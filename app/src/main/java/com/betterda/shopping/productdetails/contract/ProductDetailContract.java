@@ -2,6 +2,7 @@ package com.betterda.shopping.productdetails.contract;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.betterda.shopping.base.IModel;
@@ -35,6 +36,10 @@ public class ProductDetailContract {
         RecyclerView.Adapter getRvShareAdapter();
 
         void addBus();
+        //立即购买
+        void addbuy();
+        //设置图片和价格
+        void setPriceAndPicture(TextView mTvPpPrice, TextView mTvPpPriceMember, ImageView mIvPpLogo);
     }
 
     public interface Model extends IModel{

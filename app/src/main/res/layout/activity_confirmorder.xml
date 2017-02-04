@@ -301,22 +301,29 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-
-                            android:text="代金券"
+                            android:id="@+id/tv_order_youhuiquan2"
+                            android:text="代金券(可用:0.0)"
                             android:textColor="@color/shouye_renmen_tv"
                             android:textSize="12sp" />
 
 
-
+                        <ImageView
+                            android:id="@+id/iv_order_jiantou4"
+                            android:layout_width="8dp"
+                            android:layout_height="15dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="10dp"
+                            android:background="@mipmap/jiantou" />
 
                         <TextView
+                            android:layout_toLeftOf="@id/iv_order_jiantou4"
                             android:id="@+id/tv_order_youhuiquan"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_marginRight="10dp"
-                            android:layout_alignParentRight="true"
-                            android:text="没有代金券"
+                            android:text="已用0.00代金卷"
                             android:textColor="@color/shouye_renmen_tv"
                             android:textSize="12sp" />
 

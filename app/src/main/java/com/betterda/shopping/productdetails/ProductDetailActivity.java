@@ -283,7 +283,7 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailContract.Pr
         Button mBtnComfirm = (Button) view.findViewById(R.id.btn_pp_productdetail_buy);
 
         mAasub.setAmount(mAddAndSub.getAmount());
-
+        getPresenter().setPriceAndPicture(mTvPpPrice, mTvPpPriceMember, mIvPpLogo);
         mIvPpdelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -295,7 +295,8 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailContract.Pr
             @Override
             public void onClick(View view) {
                 closePopupWindow();
-                UiUtils.startIntent(getmActivity(), OrderComfirmActivity.class);
+                getPresenter().addbuy();
+
             }
         });
         setUpPopupWindow(view);
