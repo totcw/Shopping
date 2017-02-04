@@ -24,6 +24,7 @@ import com.betterda.shopping.message.MeassageActivity;
 import com.betterda.shopping.my.contract.MyContract;
 import com.betterda.shopping.my.presenter.MyPresenterImpl;
 import com.betterda.shopping.order.OrderActivity;
+import com.betterda.shopping.order.OrderActivity2;
 import com.betterda.shopping.register.RegisterActivity;
 import com.betterda.shopping.setting.SettingActivity;
 import com.betterda.shopping.tuijian.LiJiTuijianActivity;
@@ -145,7 +146,7 @@ public class MyFragment extends BaseFragment<MyContract.Presenter> implements My
                 UiUtils.startIntent(getmActivity(), WalletActivity.class);
                 break;
             case R.id.relative_my_jiayouka://成为会员\
-                UiUtils.startIntent(getmActivity(), AddCommentActivity.class);
+
                 break;
             case R.id.relative_my_bus://立即推荐
                 UiUtils.startIntent(getmActivity(), LiJiTuijianActivity.class);
@@ -187,7 +188,7 @@ public class MyFragment extends BaseFragment<MyContract.Presenter> implements My
      * @param item
      */
     private void startToOrder(int item) {
-        Intent intent = new Intent(getmActivity(), OrderActivity.class);
+        Intent intent = new Intent(getmActivity(), OrderActivity2.class);
         intent.putExtra("item", item);
         UiUtils.startIntent(getmActivity(), intent);
     }

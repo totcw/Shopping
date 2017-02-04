@@ -164,6 +164,9 @@
         <activity
             android:name=".comment.AddCommentActivity"
             android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".order.OrderActivity2"
+            android:screenOrientation="portrait"></activity>
 
 
         <!--百度地图服务-->
