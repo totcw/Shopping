@@ -1,10 +1,12 @@
 package com.betterda.shopping.wallet;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 
 import com.betterda.shopping.R;
+import com.betterda.shopping.utils.UiUtils;
 
 import butterknife.OnClick;
 
@@ -27,6 +29,9 @@ public class XiaoFeiWalletActivity extends CashWalletActivity {
         switch (view.getId()) {
 
             case R.id.bar_action:
+                Intent intent = new Intent(getmActivity(), MingXiActivity.class);
+                intent.putExtra("type", "消费钱包");
+                UiUtils.startIntent(getmActivity(),intent);
                 break;
             case R.id.bar_back:
                 back();

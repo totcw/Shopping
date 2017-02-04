@@ -16,6 +16,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
+ * 明细
  * Created by Administrator on 2016/12/20.
  */
 

@@ -1,6 +1,7 @@
 package com.betterda.shopping.wallet;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
@@ -33,6 +34,7 @@ public class CashWalletActivity extends BaseActivity<CashWalletContract.Presente
     public RelativeLayout mRelativeWallet2Chongzhi;
     @BindView(R.id.loadpager_cashwallet)
     public LoadingPager mLoadpagerCashwallet;
+    public String money;
 
     @Override
     protected CashWalletContract.Presenter onLoadPresenter() {
@@ -51,6 +53,11 @@ public class CashWalletActivity extends BaseActivity<CashWalletContract.Presente
         mTopbarCashwallet.setTitle("现金钱包");
         mTopbarCashwallet.setActionText("明细");
         mTopbarCashwallet.setActionTextVisibility(true);
+        Intent intent = getIntent();
+        if (intent != null) {
+          money =  intent.getStringExtra("money");
+        }
+        mTvWallet2Money.setText(money);
     }
 
     @OnClick({R.id.relative_wallet2_chongzhi, R.id.bar_back, R.id.bar_action,R.id.tv_cashwallet_shouming})
@@ -60,7 +67,9 @@ public class CashWalletActivity extends BaseActivity<CashWalletContract.Presente
                 back();
                 break;
             case R.id.bar_action:
-                UiUtils.startIntent(getmActivity(),MingXiActivity.class);
+                Intent intent = new Intent(getmActivity(), MingXiActivity.class);
+                intent.putExtra("type", "现金钱包");
+                UiUtils.startIntent(getmActivity(),intent);
                 break;
             case R.id.relative_wallet2_chongzhi://提现
                 UiUtils.startIntent(getmActivity(),TiXianActivity.class);

@@ -19,6 +19,7 @@ import com.betterda.shopping.sort.model.Shopping;
 import com.betterda.shopping.sort.model.Sort;
 import com.betterda.shopping.utils.Constants;
 import com.betterda.shopping.wallet.model.BankCard;
+import com.betterda.shopping.wallet.model.MingXi;
 
 import java.util.List;
 
@@ -285,9 +286,9 @@ public interface NetService {
      */
     @FormUrlEncoded
     @POST(Constants.Url.URL_LUNBO)
-    Observable<BaseCallModel<String>> getWalletMingXi(@Field("account") String account,
-                                                      @Field("token") String token,
-                                                      @Field("wateType") String wateType
+    Observable<BaseCallModel<List<MingXi>>> getWalletMingXi(@Field("account") String account,
+                                                            @Field("token") String token,
+                                                            @Field("wateType") String wateType
     );
 
 

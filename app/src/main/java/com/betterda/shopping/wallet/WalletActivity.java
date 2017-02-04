@@ -1,5 +1,6 @@
 package com.betterda.shopping.wallet;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 import com.betterda.mylibrary.LoadingPager;
 import com.betterda.shopping.R;
 import com.betterda.shopping.base.BaseActivity;
+import com.betterda.shopping.javabean.Wallet;
 import com.betterda.shopping.utils.UiUtils;
 import com.betterda.shopping.wallet.contract.WalletContract;
 import com.betterda.shopping.wallet.presenter.WalletPresenterImpl;
@@ -32,6 +34,9 @@ public class WalletActivity extends BaseActivity<WalletContract.Presenter> imple
     @BindView(R.id.loadpager_wallet)
     LoadingPager mLoadpagerWallet;
 
+    private String cashWallet;//现金钱包
+    private String consumptionWallet;//消费钱包
+
     @Override
     protected WalletContract.Presenter onLoadPresenter() {
         return new WalletPresenterImpl();
@@ -53,10 +58,14 @@ public class WalletActivity extends BaseActivity<WalletContract.Presenter> imple
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.relative_wallet_jinbi://现金钱包
-                UiUtils.startIntent(getmActivity(),CashWalletActivity.class);
+                Intent intent = new Intent(getmActivity(), CashWalletActivity.class);
+                intent.putExtra("money", cashWallet);
+                UiUtils.startIntent(getmActivity(),intent);
                 break;
             case R.id.relative_wallet_yinbi://消费钱包
-                UiUtils.startIntent(getmActivity(),XiaoFeiWalletActivity.class);
+                Intent intent2 = new Intent(getmActivity(), XiaoFeiWalletActivity.class);
+                intent2.putExtra("money", consumptionWallet);
+                UiUtils.startIntent(getmActivity(),intent2);
                 break;
             case R.id.relative_wallet_yinhangka://我的银行卡
                 UiUtils.startIntent(getmActivity(),MyYinHangKaActivity.class);
@@ -70,5 +79,13 @@ public class WalletActivity extends BaseActivity<WalletContract.Presenter> imple
     @Override
     public LoadingPager getLodapger() {
         return mLoadpagerWallet;
+    }
+
+    @Override
+    public void setValue(Wallet data) {
+        cashWallet = data.getCashWallet();
+        consumptionWallet = data.getConsumptionWallet();
+        mTvCashWallet.setText(data.getCashWallet()+"元");
+        mTvXiaoFeiWallet.setText(data.getConsumptionWallet()+"元");
     }
 }
