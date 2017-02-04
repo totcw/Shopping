@@ -72,7 +72,9 @@ public class CashWalletActivity extends BaseActivity<CashWalletContract.Presente
                 UiUtils.startIntent(getmActivity(),intent);
                 break;
             case R.id.relative_wallet2_chongzhi://提现
-                UiUtils.startIntent(getmActivity(),TiXianActivity.class);
+                Intent intent2 = new Intent(getmActivity(), TiXianActivity.class);
+                intent2.putExtra("money", money);
+                UiUtils.startIntent(getmActivity(),intent2);
                 break;
             case R.id.tv_cashwallet_shouming://说明
                 AlertDialog.Builder builder = new AlertDialog.Builder(getmActivity());

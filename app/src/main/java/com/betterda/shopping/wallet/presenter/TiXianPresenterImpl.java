@@ -1,6 +1,8 @@
 package com.betterda.shopping.wallet.presenter;
 
 
+import android.content.Intent;
+
 import com.betterda.shopping.BuildConfig;
 import com.betterda.shopping.base.BasePresenter;
 import com.betterda.shopping.http.MyObserver;
@@ -23,11 +25,43 @@ public class TiXianPresenterImpl extends BasePresenter<TiXianContract.View,TiXia
 
     @Override
     public void start() {
-        getView().getTvBalance().setText(balance);
+        Intent intent = getView().getmActivity().getIntent();
+        if (intent != null) {
+            balance=  intent.getStringExtra("money");
+        }
+        getView().getTvBalance().setText(balance+"元");
     }
     @Override
     public void getAll() {
+        NetworkUtils.isNetWork(getView().getmActivity(), getView().getTvBalance(), new NetworkUtils.SetDataInterface() {
+            @Override
+            public void getDataApi() {
+                getView().getRxManager().add(NetWork.getNetService()
+                        .getCash(getView().getAccount(),getView().getToken(),balance,mBankCard)
+                        .compose(NetWork.handleResult(new BaseCallModel<String>()))
+                        .subscribe(new MyObserver<String>() {
+                            @Override
+                            protected void onSuccess(String data, String resultMsg) {
+                                if (BuildConfig.LOG_DEBUG) {
+                                    System.out.println("提现success:"+resultMsg);
+                                }
+                                getView().getmActivity().finish();
+                            }
 
+                            @Override
+                            public void onFail(String resultMsg) {
+                                if (BuildConfig.LOG_DEBUG) {
+                                    System.out.println("提现fail:"+resultMsg);
+                                }
+                            }
+
+                            @Override
+                            public void onExit() {
+
+                            }
+                        }));
+            }
+        });
     }
 
     @Override
