@@ -40,6 +40,8 @@ public class ProductDetailContract {
         void addbuy();
         //设置图片和价格
         void setPriceAndPicture(TextView mTvPpPrice, TextView mTvPpPriceMember, ImageView mIvPpLogo);
+
+        void startToComment();
     }
 
     public interface Model extends IModel{

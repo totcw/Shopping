@@ -21,6 +21,8 @@ public class OrderDetailContract {
         void pay();
 
         void cancel();
+
+        void get();
     }
 
     public interface Model extends IModel{

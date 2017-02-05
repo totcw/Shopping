@@ -90,7 +90,7 @@
                         android:visibility="gone"
                         android:id="@+id/relative_orderdetail_comment"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="48dp"
                         android:background="#ffffff">
 
                         <TextView
@@ -98,6 +98,21 @@
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
                             android:text="立即评价"
+                            android:textColor="@color/activityMainPressed"
+                            android:textSize="@dimen/textsize_large" />
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:visibility="gone"
+                        android:id="@+id/relative_orderdetail_get"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:background="#ffffff">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:text="立即收货"
                             android:textColor="@color/activityMainPressed"
                             android:textSize="@dimen/textsize_large" />
                     </RelativeLayout>

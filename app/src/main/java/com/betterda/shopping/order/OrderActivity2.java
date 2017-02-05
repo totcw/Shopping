@@ -179,7 +179,7 @@ public class OrderActivity2 extends BaseActivity {
                     DeleteDialog deleteDialog = new DeleteDialog(getmActivity(), new DeleteDialog.onConfirmListener() {
                         @Override
                         public void comfirm() {
-                            getData3("orderid");
+                            getData3(OrderComfirm.getOrderId());
                         }
 
                         @Override
@@ -199,7 +199,7 @@ public class OrderActivity2 extends BaseActivity {
                     DeleteDialog deleteDialog = new DeleteDialog(getmActivity(), new DeleteDialog.onConfirmListener() {
                         @Override
                         public void comfirm() {
-                            getData2("orderid");
+                            getData2(OrderComfirm.getOrderId());
                         }
 
                         @Override
@@ -223,7 +223,7 @@ public class OrderActivity2 extends BaseActivity {
                         for (Bus bus : busList) {
                             if (bus != null) {
                                 AddComment addComment = new AddComment();
-                                addComment.setShopcartDetailId(bus.getShopcartDetailId());
+                                addComment.setProductId(bus.getShopcartDetailId());
                                 addComment.setShopName(bus.getProductName());
                                 addComment.setShopUrl(bus.getLittlePicture());
                                 list.add(addComment);
@@ -363,6 +363,7 @@ public class OrderActivity2 extends BaseActivity {
                                     mOrderAllCommonAdapter.notifyDataSetChanged();
                                 }
 
+
                             }
 
                             @Override
@@ -395,12 +396,16 @@ public class OrderActivity2 extends BaseActivity {
                 .subscribe(new MyObserver<String>() {
                     @Override
                     protected void onSuccess(String data, String resultMsg) {
-
+                        if (BuildConfig.LOG_DEBUG) {
+                            System.out.println("收货成功:"+resultMsg);
+                        }
                     }
 
                     @Override
                     public void onFail(String resultMsg) {
-
+                        if (BuildConfig.LOG_DEBUG) {
+                            System.out.println("收货fail:"+resultMsg);
+                        }
                     }
 
                     @Override
@@ -419,6 +424,7 @@ public class OrderActivity2 extends BaseActivity {
      * @param orderid
      */
     private void getData3(final String orderid) {
+
         NetworkUtils.isNetWork(getmActivity(), mRecycleview, new NetworkUtils.SetDataInterface() {
             @Override
             public void getDataApi() {
@@ -428,12 +434,16 @@ public class OrderActivity2 extends BaseActivity {
                         .subscribe(new MyObserver<String>() {
                             @Override
                             protected void onSuccess(String data, String resultMsg) {
-
+                                if (BuildConfig.LOG_DEBUG) {
+                                    System.out.println("取消订单success:"+data);
+                                }
                             }
 
                             @Override
                             public void onFail(String resultMsg) {
-
+                                if (BuildConfig.LOG_DEBUG) {
+                                    System.out.println("取消订单fail:"+resultMsg);
+                                }
                             }
 
                             @Override

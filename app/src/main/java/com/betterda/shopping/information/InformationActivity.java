@@ -21,11 +21,13 @@ import com.betterda.mylibrary.Utils.PermissionUtil;
 import com.betterda.shopping.BuildConfig;
 import com.betterda.shopping.R;
 import com.betterda.shopping.base.BaseActivity;
+import com.betterda.shopping.factory.LoadImageFactory;
 import com.betterda.shopping.http.MyObserver;
 import com.betterda.shopping.http.NetWork;
 import com.betterda.shopping.information.contract.InformationContract;
 import com.betterda.shopping.information.presenter.InformationPresenterImpl;
 import com.betterda.shopping.javabean.BaseCallModel;
+import com.betterda.shopping.utils.CacheUtils;
 import com.betterda.shopping.utils.Constants;
 import com.betterda.shopping.utils.ImageTools;
 import com.betterda.shopping.utils.NetworkUtils;
@@ -97,6 +99,48 @@ public class InformationActivity extends BaseActivity<InformationContract.Presen
                 break;
         }
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        //先判断是否登录
+        boolean islogin = CacheUtils.getBoolean(getmActivity(), Constants.Cache.ISLOGIN, false);
+        if (islogin) {
+            String number = getAccount();
+
+            if (!TextUtils.isEmpty(number)) {
+
+                //为了做到换号登录，数据还在，所以头像，昵称 要跟帐号绑定
+                String touxiang = CacheUtils.getString(getmActivity(), number + Constants.Cache.TOUXIANG, "");
+                if (!TextUtils.isEmpty(touxiang)) {
+                    if (null != mSvInformationTouxinag) {
+                        System.out.println("头像:"+touxiang);
+                        LoadImageFactory.getLoadImageInterface().loadImageFit(getmActivity(),touxiang,mSvInformationTouxinag);
+                    }
+
+                }
+                String name = CacheUtils.getString(getmActivity(), number + Constants.Cache.NICKNAME, "");
+                if (!TextUtils.isEmpty(name)) {
+                    if (null != mTvInformationName) {
+
+                        mTvInformationName.setText(name);
+                    }
+                }
+            }
+        } else {
+
+            if (null != mSvInformationTouxinag) {
+                //设置默认图片
+            }
+            if (null != mTvInformationName) {
+
+                mTvInformationName.setText("还没有昵称呢");
+            }
+        }
+
+
+    }
+
 
     /**
      * 开启头像选择
@@ -212,6 +256,7 @@ public class InformationActivity extends BaseActivity<InformationContract.Presen
 
             Bitmap pic = ImageTools.scacleToBitmap(path, this);
             if (pic != null) {// 这个ImageView是拍照完成后显示图片
+
                 setPhoto(pic);
             }
         }
@@ -247,7 +292,7 @@ public class InformationActivity extends BaseActivity<InformationContract.Presen
     }
 
     //设置照片
-    private void setPhoto(Bitmap pic) {
+    private void setPhoto(final Bitmap pic) {
 
         // 将bitmap保存到本地
         ImageTools.savePhotoToSDCard(pic, Constants.PHOTOPATH,
@@ -279,6 +324,8 @@ public class InformationActivity extends BaseActivity<InformationContract.Presen
                         if (BuildConfig.LOG_DEBUG) {
                             System.out.println("图片上传路径success:"+data.toString());
                         }
+                        mSvInformationTouxinag.setImageBitmap(pic);
+                        CacheUtils.putString(getmActivity(), getAccount() + Constants.Cache.TOUXIANG, data);
                     }
 
                     @Override
@@ -295,7 +342,7 @@ public class InformationActivity extends BaseActivity<InformationContract.Presen
                 }));
             }
         });
-        mSvInformationTouxinag.setImageBitmap(pic);
+
     }
 
     @Override

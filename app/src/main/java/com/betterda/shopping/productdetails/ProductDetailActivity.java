@@ -180,7 +180,7 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailContract.Pr
                 back();
                 break;
             case R.id.linear_productdetail_comment://评价
-                UiUtils.startIntent(getmActivity(), CommentActivity.class);
+                getPresenter().startToComment();
                 break;
             case R.id.linear_productdetail_bus://购物车
                 UiUtils.startIntent(getmActivity(), BusActivity.class);

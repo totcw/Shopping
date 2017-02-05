@@ -27,6 +27,7 @@ import com.zhy.base.adapter.ViewHolder;
 import com.zhy.base.adapter.recyclerview.CommonAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -46,6 +47,8 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailContract.Presen
     RelativeLayout mRelativeOrderdetailPay;//立即付款
     @BindView(R.id.relative_orderdetail_comment)
     RelativeLayout mRelativeOrderdetailComment;//立即评价
+     @BindView(R.id.relative_orderdetail_get)
+    RelativeLayout mRelativeOrderdetailGet;//立即收货
     @BindView(R.id.linear_orderdetail_payandcancel)
     LinearLayout mLinearOrderdetailPay; //显示立即付款和取消订单
     @BindView(R.id.tv_orderdetail_state)
@@ -111,6 +114,10 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailContract.Presen
                 getPresenter().comment();
 
                 break;
+            case R.id.relative_orderdetail_get://立即收货
+                getPresenter().get();
+
+                break;
             case R.id.bar_back:
                 back();
                 break;
@@ -139,10 +146,15 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailContract.Presen
             mLinearOrderdetailPay.setVisibility(View.VISIBLE);
         } else if ("待评价".equals(data.getOrderStatus())) {
             mRelativeOrderdetailComment.setVisibility(View.VISIBLE);
+        }else if ("待收货".equals(data.getOrderStatus())) {
+            mRelativeOrderdetailGet.setVisibility(View.VISIBLE);
         }
-
+        List<Bus> busList = data.getBusList();
+        if (busList == null) {
+            busList = new ArrayList<>();
+        }
         mRvOrderdetail.setLayoutManager(new LinearLayoutManager(getmActivity()));
-        mRvOrderdetail.setAdapter(new CommonAdapter<Bus>(getmActivity(), R.layout.item_recycleview_comfirmorder, data.getBusList()) {
+        mRvOrderdetail.setAdapter(new CommonAdapter<Bus>(getmActivity(), R.layout.item_recycleview_comfirmorder, busList) {
             @Override
             public void convert(ViewHolder viewHolder, final Bus bus) {
                 if (bus != null) {

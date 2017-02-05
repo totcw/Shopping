@@ -138,13 +138,17 @@ public class LoginActivity extends BaseActivity<LoginContract.Presenter> impleme
     UMAuthListener umAuthListener = new UMAuthListener() {
         @Override
         public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
-            log(share_media.toString() + ",i:" + i);
-            Set<Map.Entry<String, String>> entries = map.entrySet();
+
+            /*Set<Map.Entry<String, String>> entries = map.entrySet();
             for (Map.Entry<String, String> m : entries) {
                 System.out.println(m.getKey() + ":" + m.getValue());
-            }
+            }*/
 
-            getPresenter().loginThree(share_media.toString(), "uid");
+            String userName = map.get("userName");
+            String uid = map.get("uid");
+            String icon_url = map.get("icon_url");
+            System.out.println("loginthree:  "+" username:"+userName+"uid:"+uid+"url:"+icon_url+"type:"+share_media);
+            getPresenter().loginThree(share_media.toString(), uid);
         }
 
         @Override

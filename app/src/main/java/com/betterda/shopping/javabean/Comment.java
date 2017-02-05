@@ -5,26 +5,27 @@ package com.betterda.shopping.javabean;
  * Created by Administrator on 2016/5/17.
  */
 public class Comment {
-    private String url;  //图片路径
+    private String littlePicture;  //图片路径
     private String name; //用户名
     private String time;//时间
     private String content;//内容
-    private int star;
+    private float commentstar;
 
-    public int getStar() {
-        return star;
+
+    public String getLittlePicture() {
+        return littlePicture;
     }
 
-    public void setStar(int star) {
-        this.star = star;
+    public void setLittlePicture(String littlePicture) {
+        this.littlePicture = littlePicture;
     }
 
-    public String getUrl() {
-        return url;
+    public float getCommentstar() {
+        return commentstar;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setCommentstar(float commentstar) {
+        this.commentstar = commentstar;
     }
 
     public String getName() {
@@ -49,5 +50,16 @@ public class Comment {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "littlePicture='" + littlePicture + '\'' +
+                ", name='" + name + '\'' +
+                ", time='" + time + '\'' +
+                ", content='" + content + '\'' +
+                ", commentstar=" + commentstar +
+                '}';
     }
 }

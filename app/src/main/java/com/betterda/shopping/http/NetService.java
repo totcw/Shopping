@@ -74,7 +74,7 @@ public interface NetService {
      */
     @FormUrlEncoded
     @POST(Constants.Url.URL_LOGIN)
-    Observable<BaseCallModel<UserInfo>> getLoginThree(@Field("account") String account, @Field("type") String type);
+    Observable<BaseCallModel<UserInfo>> getLoginThree(@Field("account") String account, @Field("logType") String type);
 
     /**
      * 忘记密码
@@ -86,7 +86,9 @@ public interface NetService {
     @FormUrlEncoded
     @POST(Constants.Url.URL_PWD_UPDATE)
     Observable<BaseCallModel<String>> getPwdUpdate(@Field("account") String account,
-                                                   @Field("password") String password);
+                                                   @Field("password") String password,
+                                                   @Field("nickName") String nickName,
+                                                   @Field("photo") String photo);
 
     /**
      * 获取广告栏
@@ -106,12 +108,12 @@ public interface NetService {
     @FormUrlEncoded
     @POST(Constants.Url.URL_GET_SHOPLIST)
     Observable<BaseCallModel<List<Shopping>>> getShopList(@Field("productType") String productType,
-                                                    @Field("sort") String sort,
-                                                    @Field("brand") String brand,
-                                                    @Field("beginPrice") String beginPrice,
-                                                    @Field("endPrice") String endPrice,
-                                                    @Field("pageNo") String pageNo,
-                                                    @Field("pageSize") String pageSize);
+                                                          @Field("sort") String sort,
+                                                          @Field("brand") String brand,
+                                                          @Field("beginPrice") String beginPrice,
+                                                          @Field("endPrice") String endPrice,
+                                                          @Field("pageNo") String pageNo,
+                                                          @Field("pageSize") String pageSize);
 
     /**
      * 商品类型接口
@@ -139,7 +141,7 @@ public interface NetService {
     @POST(Constants.Url.URL_GET_SHOPDETAIL)
     Observable<BaseCallModel<ShopDetail>> getShopDetail(@Field("account") String account,
                                                         @Field("token") String token,
-                                                   @Field("productId") String productId);
+                                                        @Field("productId") String productId);
 
 
     /**
@@ -151,11 +153,11 @@ public interface NetService {
      * @return
      */
     @FormUrlEncoded
-    @POST(Constants.Url.URL_LUNBO)
+    @POST(Constants.Url.URL_ADD_SHOPCOMMENT)
     Observable<BaseCallModel<String>> addComment(@Field("account") String account,
                                                  @Field("token") String token,
                                                  @Field("dataJson") String dataJson
-                                              );
+    );
 
     /**
      * 获取商品评论列表
@@ -166,10 +168,10 @@ public interface NetService {
      * @return
      */
     @FormUrlEncoded
-    @POST(Constants.Url.URL_LUNBO)
+    @POST(Constants.Url.URL_GET_SHOPCOMMENT)
     Observable<BaseCallModel<List<Comment>>> getComment(@Field("productId") String productId,
-                                                  @Field("pageNo") String pageNo,
-                                                  @Field("pageSize") String pageSize
+                                                        @Field("pageNo") String pageNo,
+                                                        @Field("pageSize") String pageSize
     );
 
     /**
@@ -200,10 +202,10 @@ public interface NetService {
     @FormUrlEncoded
     @POST(Constants.Url.URL_GET_ORDER)
     Observable<BaseCallModel<List<OrderComfirm>>> getOrder(@Field("account") String account,
-                                                     @Field("token") String token,
-                                                     @Field("orderStatus") String orderStatus,
-                                                     @Field("pageNo") String pageNo,
-                                                     @Field("pageSize") String pageSize
+                                                           @Field("token") String token,
+                                                           @Field("orderStatus") String orderStatus,
+                                                           @Field("pageNo") String pageNo,
+                                                           @Field("pageSize") String pageSize
     );
 
     /**
@@ -217,8 +219,8 @@ public interface NetService {
     @FormUrlEncoded
     @POST(Constants.Url.URL_GET_ORDERDETAIL)
     Observable<BaseCallModel<OrderComfirm>> getOrderDetail(@Field("account") String account,
-                                                       @Field("token") String token,
-                                                       @Field("orderId") String orderId
+                                                           @Field("token") String token,
+                                                           @Field("orderId") String orderId
     );
 
     /**
@@ -292,7 +294,6 @@ public interface NetService {
                                                             @Field("token") String token,
                                                             @Field("wateType") String wateType
     );
-
 
 
     /**
@@ -401,8 +402,8 @@ public interface NetService {
     @FormUrlEncoded
     @POST(Constants.Url.URL_SEARCH)
     Observable<BaseCallModel<Search>> getSearch(@Field("account") String account,
-                                                      @Field("token") String token,
-                                                      @Field("searchKey") String searchKey
+                                                @Field("token") String token,
+                                                @Field("searchKey") String searchKey
     );
 
     /**
@@ -413,8 +414,6 @@ public interface NetService {
 
     @GET(Constants.Url.URL_SEARCH_REMEN)
     Observable<BaseCallModel<List<String>>> getRemenSearchList();
-
-
 
 
     /**
@@ -440,7 +439,7 @@ public interface NetService {
     @FormUrlEncoded
     @POST(Constants.Url.URL_SEARCH_JILU)
     Observable<BaseCallModel<List<String>>> getSearchList(@Field("account") String account,
-                                                            @Field("token") String token
+                                                          @Field("token") String token
     );
 
     /**
@@ -474,7 +473,7 @@ public interface NetService {
     @FormUrlEncoded
     @POST(Constants.Url.URL_GET_LOCATION)
     Observable<BaseCallModel<List<Location>>> getShop(@Field("latitude") String latitude,
-            @Field("longitude") String longitude
+                                                      @Field("longitude") String longitude
 
     );
 
@@ -493,12 +492,12 @@ public interface NetService {
     @FormUrlEncoded
     @POST(Constants.Url.URL_ADD_ADDRESS)
     Observable<BaseCallModel<String>> addAddress(@Field("account") String account,
-                                                         @Field("token") String token,
-                                                         @Field("consigneeName") String consigneeName,
-                                                         @Field("mobilePhone") String mobilePhone,
-                                                         @Field("address") String address,
-                                                         @Field("detailAddress") String detailAddress,
-                                                         @Field("isDefault") String isDefault
+                                                 @Field("token") String token,
+                                                 @Field("consigneeName") String consigneeName,
+                                                 @Field("mobilePhone") String mobilePhone,
+                                                 @Field("address") String address,
+                                                 @Field("detailAddress") String detailAddress,
+                                                 @Field("isDefault") String isDefault
 
     );
 
@@ -517,13 +516,13 @@ public interface NetService {
     @FormUrlEncoded
     @POST(Constants.Url.URL_UPDATE_ADDRESS)
     Observable<BaseCallModel<String>> editAddress(@Field("account") String account,
-                                                          @Field("token") String token,
-                                                          @Field("consigneeName") String consigneeName,
-                                                          @Field("mobilePhone") String mobilePhone,
-                                                          @Field("address") String address,
-                                                          @Field("detailAddress") String detailAddress,
-                                                          @Field("isDefault") String isDefault,
-                                                            @Field("addressId") String addressId
+                                                  @Field("token") String token,
+                                                  @Field("consigneeName") String consigneeName,
+                                                  @Field("mobilePhone") String mobilePhone,
+                                                  @Field("address") String address,
+                                                  @Field("detailAddress") String detailAddress,
+                                                  @Field("isDefault") String isDefault,
+                                                  @Field("addressId") String addressId
 
     );
 
@@ -539,8 +538,8 @@ public interface NetService {
     @FormUrlEncoded
     @POST(Constants.Url.URL_DEL_ADDRESS)
     Observable<BaseCallModel<String>> deleteAddress(@Field("account") String account,
-                                                            @Field("token") String token,
-                                                            @Field("addressId") String addressId
+                                                    @Field("token") String token,
+                                                    @Field("addressId") String addressId
     );
 
     /**
@@ -579,7 +578,7 @@ public interface NetService {
     @FormUrlEncoded
     @POST(Constants.Url.URL_TUIJIAN)
     Observable<BaseCallModel<String>> Tuijian(@Field("account") String account,
-                                                               @Field("token") String token
+                                              @Field("token") String token
     );
 
     /**
@@ -605,10 +604,11 @@ public interface NetService {
     @FormUrlEncoded
     @POST(Constants.Url.URL_ADD_BUS)
     Observable<BaseCallModel<String>> addBus(@Field("account") String account,
-                                                               @Field("token") String token,
-                                                               @Field("productId") String productId,
-                                                               @Field("totalCount") String totalCount
+                                             @Field("token") String token,
+                                             @Field("productId") String productId,
+                                             @Field("totalCount") String totalCount
     );
+
     /**
      * 更新购物车
      *
@@ -619,9 +619,9 @@ public interface NetService {
     @FormUrlEncoded
     @POST(Constants.Url.URL_UPDATE_BUS)
     Observable<BaseCallModel<String>> updateBus(@Field("account") String account,
-                                                               @Field("token") String token,
-                                                               @Field("shopcartDetailId") String shopcartDetailId,
-                                                               @Field("totalCount") String totalCount
+                                                @Field("token") String token,
+                                                @Field("shopcartDetailId") String shopcartDetailId,
+                                                @Field("totalCount") String totalCount
     );
 
     /**
@@ -636,6 +636,7 @@ public interface NetService {
     Observable<BaseCallModel<List<Bus>>> getBus(@Field("account") String account,
                                                 @Field("token") String token
     );
+
     /**
      * 删除购物车
      *
@@ -646,8 +647,8 @@ public interface NetService {
     @FormUrlEncoded
     @POST(Constants.Url.URL_DEL_BUS)
     Observable<BaseCallModel<String>> deleteBus(@Field("account") String account,
-                                                               @Field("token") String token,
-                                                               @Field("jsonData") String jsonData
+                                                @Field("token") String token,
+                                                @Field("jsonData") String jsonData
     );
 
     /**
@@ -662,6 +663,7 @@ public interface NetService {
     Observable<BaseCallModel<DefaultAddress>> getDefaultAddress(@Field("account") String account,
                                                                 @Field("token") String token
     );
+
     /**
      * 获取购物车数量
      *
@@ -673,7 +675,7 @@ public interface NetService {
     @POST(Constants.Url.URL_BUS_COUNT)
     Observable<BaseCallModel<String>> getBusCount(@Field("account") String account,
 
-                                                               @Field("token") String token
+                                                  @Field("token") String token
     );
 
     /**
@@ -686,13 +688,13 @@ public interface NetService {
     @FormUrlEncoded
     @POST(Constants.Url.URL_GET_ZITIMA)
     Observable<BaseCallModel<List<ZItiMa>>> getZiTiMa(@Field("account") String account,
-                                                @Field("token") String token
+                                                      @Field("token") String token
     );
-
 
 
     /**
      * 图片上传
+     *
      * @param account
      * @param token
      * @param file

@@ -9,21 +9,24 @@ import android.os.Parcelable;
  */
 
 public class AddComment implements Parcelable{
-    private String shopcartDetailId;//商品的id
+    private String productId;//商品的id
     private String shopName;
     private String shopUrl;
-    private double shopStar;
-    private String commentContent;
+    private float commentstar;
+    private String content;
 
-    protected AddComment(Parcel in) {
-        shopcartDetailId = in.readString();
-        shopName = in.readString();
-        shopUrl = in.readString();
-        shopStar = in.readDouble();
-        commentContent = in.readString();
-    }
+
 
     public AddComment() {
+    }
+
+
+    protected AddComment(Parcel in) {
+        productId = in.readString();
+        shopName = in.readString();
+        shopUrl = in.readString();
+        commentstar = in.readFloat();
+        content = in.readString();
     }
 
     public static final Creator<AddComment> CREATOR = new Creator<AddComment>() {
@@ -38,12 +41,26 @@ public class AddComment implements Parcelable{
         }
     };
 
-    public String getShopcartDetailId() {
-        return shopcartDetailId;
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
-    public void setShopcartDetailId(String shopcartDetailId) {
-        this.shopcartDetailId = shopcartDetailId;
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(productId);
+        dest.writeString(shopName);
+        dest.writeString(shopUrl);
+        dest.writeDouble(commentstar);
+        dest.writeString(content);
+    }
+
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
     }
 
     public String getShopName() {
@@ -62,44 +79,30 @@ public class AddComment implements Parcelable{
         this.shopUrl = shopUrl;
     }
 
-    public double getShopStar() {
-        return shopStar;
+    public double getCommentstar() {
+        return commentstar;
     }
 
-    public void setShopStar(double shopStar) {
-        this.shopStar = shopStar;
+    public void setCommentstar(float commentstar) {
+        this.commentstar = commentstar;
     }
 
-    public String getCommentContent() {
-        return commentContent;
+    public String getContent() {
+        return content;
     }
 
-    public void setCommentContent(String commentContent) {
-        this.commentContent = commentContent;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     @Override
     public String toString() {
         return "AddComment{" +
-                "shopcartDetailId='" + shopcartDetailId + '\'' +
+                "productId='" + productId + '\'' +
                 ", shopName='" + shopName + '\'' +
                 ", shopUrl='" + shopUrl + '\'' +
-                ", shopStar=" + shopStar +
-                ", commentContent='" + commentContent + '\'' +
+                ", commentstar=" + commentstar +
+                ", content='" + content + '\'' +
                 '}';
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(shopcartDetailId);
-        dest.writeString(shopName);
-        dest.writeString(shopUrl);
-        dest.writeDouble(shopStar);
-        dest.writeString(commentContent);
     }
 }
