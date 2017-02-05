@@ -66,4 +66,8 @@ public class ZiTiActivity extends BaseActivity<ZiTiContract.Presenter> implement
 
     }
 
+    @Override
+    public LoadingPager getLodapger() {
+        return mLoadingpager;
+    }
 }

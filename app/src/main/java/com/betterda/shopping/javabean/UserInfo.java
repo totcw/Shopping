@@ -55,7 +55,6 @@ public class UserInfo {
     public String
 
 
-
     toString() {
         return "UserInfo{" +
                 "account='" + account + '\'' +

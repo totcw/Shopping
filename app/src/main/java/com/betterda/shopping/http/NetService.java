@@ -73,7 +73,7 @@ public interface NetService {
      * @return
      */
     @FormUrlEncoded
-    @POST(Constants.Url.URL_LOGIN)
+    @POST(Constants.Url.URL_LOGINTHREE)
     Observable<BaseCallModel<UserInfo>> getLoginThree(@Field("account") String account, @Field("logType") String type);
 
     /**
@@ -442,26 +442,6 @@ public interface NetService {
                                                           @Field("token") String token
     );
 
-    /**
-     * 添加位置记录
-     *
-     * @param account
-     * @param token
-     * @param longitude     经度
-     * @param latitude      纬度
-     * @param address       省市区
-     * @param detailAddress 详细地址
-     * @return
-     */
-    @FormUrlEncoded
-    @POST(Constants.Url.URL_LUNBO)
-    Observable<BaseCallModel<List<BankCard>>> addLocation(@Field("account") String account,
-                                                          @Field("token") String token,
-                                                          @Field("longitude") String longitude,
-                                                          @Field("latitude") String latitude,
-                                                          @Field("address") String address,
-                                                          @Field("detailAddress") String detailAddress
-    );
 
     /**
      * 获取附近商家

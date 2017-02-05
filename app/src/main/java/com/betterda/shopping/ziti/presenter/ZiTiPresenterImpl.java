@@ -1,4 +1,6 @@
 package com.betterda.shopping.ziti.presenter;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
@@ -9,6 +11,8 @@ import com.betterda.shopping.http.MyObserver;
 import com.betterda.shopping.http.NetWork;
 import com.betterda.shopping.javabean.BaseCallModel;
 import com.betterda.shopping.javabean.ZItiMa;
+import com.betterda.shopping.order.OrderDetailActivity;
+import com.betterda.shopping.utils.ImageTools;
 import com.betterda.shopping.utils.NetworkUtils;
 import com.betterda.shopping.utils.UiUtils;
 import com.betterda.shopping.ziti.EweiMaActivity;
@@ -39,12 +43,26 @@ public class ZiTiPresenterImpl  extends BasePresenter<ZiTiContract.View,ZiTiCont
 
         mZiTiCommonAdapter = new CommonAdapter<ZItiMa>(getView().getmActivity(), R.layout.item_recyclevew_kaquan,mZiTiList) {
             @Override
-            public void convert(ViewHolder holder, ZItiMa ziTi) {
+            public void convert(ViewHolder holder, final ZItiMa ziTi) {
                 if (ziTi != null) {
+                    holder.setText(R.id.tv_tiem_hexiao_kahao, ziTi.getBarCode());
+                    holder.setText(R.id.tv_item_hexiao_time, ziTi.getTime());
+                    Bitmap bitmap = ImageTools.generateQRCode(ziTi.getBarCode(), getView().getmActivity());
+                    holder.setImageBitmap(R.id.iv_kaquan, bitmap);
                     holder.setOnClickListener(R.id.relative_item_kaquan, new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            UiUtils.startIntent(getView().getmActivity(), EweiMaActivity.class);
+                            Intent intent = new Intent(getView().getmActivity(), EweiMaActivity.class);
+                            intent.putExtra("bianhao", ziTi.getBarCode());
+                            UiUtils.startIntent(getView().getmActivity(), intent);
+                        }
+                    });
+                    holder.setOnClickListener(R.id.linear_kaquan, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(getView().getmActivity(), OrderDetailActivity.class);
+                            intent.putExtra("orderId", ziTi.getOrderNum());
+                            UiUtils.startIntent(getView().getmActivity(), intent);
                         }
                     });
                 }
@@ -54,36 +72,50 @@ public class ZiTiPresenterImpl  extends BasePresenter<ZiTiContract.View,ZiTiCont
     }
 
     private void getData() {
+        getView().getLodapger().setLoadVisable();
         NetworkUtils.isNetWork(getView().getmActivity(), getView().getLodapger(), new NetworkUtils.SetDataInterface() {
             @Override
             public void getDataApi() {
-                System.out.println("自提码");
-                getView().getRxManager().add(NetWork.getNetService()
-                .getZiTiMa(getView().getAccount(),getView().getToken())
-                .compose(NetWork.handleResult(new BaseCallModel<List<ZItiMa>>()))
-                .subscribe(new MyObserver<List<ZItiMa>>() {
+                NetworkUtils.isNetWork(getView().getmActivity(), getView().getLodapger(), new NetworkUtils.SetDataInterface() {
                     @Override
-                    protected void onSuccess(List<ZItiMa> data, String resultMsg) {
-                        if (BuildConfig.LOG_DEBUG) {
-                            System.out.println("自提码success:"+data.toString());
-                        }
-                        UiUtils.showToast(getView().getmActivity(),data.toString());
-                    }
+                    public void getDataApi() {
+                        getView().getRxManager().add(NetWork.getNetService()
+                                .getZiTiMa(getView().getAccount(),getView().getToken())
+                                .compose(NetWork.handleResult(new BaseCallModel<List<ZItiMa>>()))
+                                .subscribe(new MyObserver<List<ZItiMa>>() {
+                                    @Override
+                                    protected void onSuccess(List<ZItiMa> data, String resultMsg) {
+                                        if (BuildConfig.LOG_DEBUG) {
+                                            System.out.println("自提码success:"+data.toString());
+                                        }
+                                        if (mZiTiList != null) {
+                                            mZiTiList.addAll(data);
+                                        }
+                                        if (mZiTiCommonAdapter != null) {
+                                            mZiTiCommonAdapter.notifyDataSetChanged();
+                                        }
+                                        getView().getLodapger().hide();
+                                        UiUtils.showToast(getView().getmActivity(),data.toString());
+                                    }
 
-                    @Override
-                    public void onFail(String resultMsg) {
-                        if (BuildConfig.LOG_DEBUG) {
-                            System.out.println("自提码fail:"+resultMsg);
-                        }
-                    }
+                                    @Override
+                                    public void onFail(String resultMsg) {
+                                        if (BuildConfig.LOG_DEBUG) {
+                                            System.out.println("自提码fail:"+resultMsg);
+                                        }
+                                        getView().getLodapger().setErrorVisable();
+                                    }
 
-                    @Override
-                    public void onExit() {
-                        if (BuildConfig.LOG_DEBUG) {
-                            System.out.println("token失效");
-                        }
+                                    @Override
+                                    public void onExit() {
+                                        if (BuildConfig.LOG_DEBUG) {
+                                            System.out.println("token失效");
+                                        }
+                                    }
+                                }));
                     }
-                }));
+                });
+
             }
         });
     }

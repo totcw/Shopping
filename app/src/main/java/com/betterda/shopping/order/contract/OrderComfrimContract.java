@@ -1,6 +1,7 @@
 package com.betterda.shopping.order.contract;
 
 import android.support.v7.widget.RecyclerView;
+import android.widget.TextView;
 
 import com.betterda.shopping.base.IModel;
 import com.betterda.shopping.base.IPresenter;
@@ -34,6 +35,8 @@ public class OrderComfrimContract {
         void setMoney(float money);
 
         void setPayMoeny(float money);
+
+        TextView getTvPay();
     }
 
     public interface Presenter extends IPresenter<View> {

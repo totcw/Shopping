@@ -215,6 +215,11 @@ public class OrderComfirmActivity extends BaseActivity<OrderComfrimContract.Pres
         }
     }
 
+    @Override
+    public TextView getTvPay() {
+        return mTvOrderPay;
+    }
+
 
     /**
      * 显示发票
