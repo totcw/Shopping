@@ -69,9 +69,11 @@
 
         <activity
             android:name=".productdetails.ProductDetailActivity"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"></activity>
         <activity
             android:name=".bus.BusActivity"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"></activity>
         <activity
             android:name=".order.OrderComfirmActivity"
@@ -85,6 +87,7 @@
             android:screenOrientation="portrait"></activity>
         <activity
             android:name=".pay.PayActivity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"></activity>
         <activity
             android:name=".search.SearchActivity"

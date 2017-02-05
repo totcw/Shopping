@@ -172,6 +172,13 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailContract.Pr
         });
     }
 
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        getPresenter().onNewIntent(intent);
+    }
+
     @OnClick({R.id.ib_productdetail_back, R.id.linear_productdetail_comment, R.id.linear_productdetail_bus, R.id.tv_productdetail_buy,
             R.id.tv_productdetail_add, R.id.relative_productdetail_share})
     public void onClick(View view) {
