@@ -10,10 +10,12 @@ import com.betterda.shopping.javabean.OrderComfirm;
 import com.betterda.shopping.javabean.Search;
 import com.betterda.shopping.javabean.ShopBrand;
 import com.betterda.shopping.javabean.ShopDetail;
+import com.betterda.shopping.javabean.TuiJian;
 import com.betterda.shopping.javabean.UserInfo;
 
 import com.betterda.shopping.javabean.Wallet;
 import com.betterda.shopping.javabean.ZItiMa;
+import com.betterda.shopping.message.model.MeassageContent;
 import com.betterda.shopping.shouye.model.LunBoTu;
 import com.betterda.shopping.sort.model.Shopping;
 import com.betterda.shopping.sort.model.Sort;
@@ -380,12 +382,12 @@ public interface NetService {
      * @return
      */
     @FormUrlEncoded
-    @POST(Constants.Url.URL_LUNBO)
-    Observable<BaseCallModel<List<BankCard>>> getMeassage(@Field("account") String account,
-                                                          @Field("token") String token,
-                                                          @Field("pageNo") String pageNo,
+    @POST(Constants.Url.URL_GET_MEASSAGELIST)
+    Observable<BaseCallModel<List<MeassageContent>>> getMeassage(@Field("account") String account,
+                                                                 @Field("token") String token,
+                                                                 @Field("pageNo") String pageNo,
 
-                                                          @Field("pageSize") String pageSize
+                                                                 @Field("pageSize") String pageSize
     );
 
     /**
@@ -562,8 +564,21 @@ public interface NetService {
      * @return
      */
     @FormUrlEncoded
-    @POST(Constants.Url.URL_LUNBO)
-    Observable<BaseCallModel<List<BankCard>>> getTuijianmenber(@Field("account") String account,
+    @POST(Constants.Url.URL_GET_FANXIANMONEY)
+    Observable<BaseCallModel<TuiJian>> getTuijianmenber(@Field("account") String account,
+                                                        @Field("token") String token
+    );
+
+    /**
+     * 立即推荐
+     *
+     * @param account
+     * @param token
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(Constants.Url.URL_TUIJIAN)
+    Observable<BaseCallModel<String>> Tuijian(@Field("account") String account,
                                                                @Field("token") String token
     );
 

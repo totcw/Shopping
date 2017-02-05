@@ -50,7 +50,7 @@ public class LiJiTuijianActivity extends BaseActivity<LiJiTuijianContract.Presen
         mTopbarMyeweima.setTitle("立即推荐");
         mTopbarMyeweima.setShareVisbility(true);
 
-        mIvMyerweima.setImageBitmap(ImageTools.generateQRCode("s",getmActivity()));
+
     }
     @OnClick({R.id.bar_back, R.id.relative_share})
     public void onClick(View view) {
@@ -99,6 +99,21 @@ public class LiJiTuijianActivity extends BaseActivity<LiJiTuijianContract.Presen
     @Override
     public void close() {
         closePopupWindow();
+    }
+
+    @Override
+    public void setUrl(String url) {
+        mIvMyerweima.setImageBitmap(ImageTools.generateQRCode(url,getmActivity()));
+    }
+
+    @Override
+    public View getImageview() {
+        return mIvMyerweima;
+    }
+
+    @Override
+    public LoadingPager getLodapger() {
+        return mLoadpagerMyeweima;
     }
 
     @Override

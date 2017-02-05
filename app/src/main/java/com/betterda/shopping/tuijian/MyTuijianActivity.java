@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.betterda.mylibrary.LoadingPager;
 import com.betterda.shopping.R;
 import com.betterda.shopping.base.BaseActivity;
+import com.betterda.shopping.javabean.TuiJian;
 import com.betterda.shopping.tuijian.contract.MyTuijianContract;
 import com.betterda.shopping.tuijian.presenter.MyTuijianPresenterImpl;
 import com.betterda.shopping.utils.UiUtils;
@@ -65,5 +66,11 @@ public class MyTuijianActivity extends BaseActivity<MyTuijianContract.Presenter>
                 back();
                 break;
         }
+    }
+
+    @Override
+    public void setValue(TuiJian data) {
+        mTvWalletJinbi.setText("￥"+data.getHeapCashback());
+        mTvWalletYinbi.setText(data.getNumber()+"人");
     }
 }
