@@ -60,10 +60,13 @@ public class Constants {
         public static final String URL_ADD_ORDER = "appAPI.do?api/account/order/add";//生成订单
         public static final String URL_GET_ORDER = "appAPI.do?api/account/order/get";//获取订单列表
         public static final String URL_GET_ORDERDETAIL = "appAPI.do?api/account/order/detail/get";//获取订单详情
+        public static final String URL_CANCELORDER = "appAPI.do?api/account/order/cancel";//取消订单
+        public static final String URL_GET_GOODS = "appAPI.do?api/account/order/receive";//立即收货
         public static final String URL_GET_CASH = "appAPI.do?api/account/cash/withdraw";//提现
         public static final String URL_GET_LOCATION = "appAPI.do?api/aroundShops/get";//获取附近商家信息
         public static final String URL_UPLOAD = "appAPI.do?api/android/img/upload";//上传图片
         public static final String URL_GET_WALLET = "appAPI.do?api/account/wallet/get";//我的钱包
+        public static final String URL_GET_WALLETMINGXI = "appAPI.do?api/account/wallet/detail/get";//钱包的交易明细
         public static final String URL_GET_ZITIMA = "appAPI.do?api/account/order/barcode/get";//获取自提码
 
 

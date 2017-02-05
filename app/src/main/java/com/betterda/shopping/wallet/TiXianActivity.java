@@ -92,7 +92,7 @@ public class TiXianActivity extends BaseActivity<TiXianContract.Presenter> imple
             String bankCrad = data.getStringExtra("bankCard");
             String id = data.getStringExtra("id");
             getPresenter().setBank(bank, id);
-           // System.out.println(id);
+
             if (relativeTixianChose != null) {
                 relativeTixianChose.setVisibility(View.INVISIBLE);
             }

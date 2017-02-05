@@ -5,17 +5,17 @@ package com.betterda.shopping.wallet.model;
  * Created by Administrator on 2016/7/7.
  */
 public class MingXi {
-    private String type; //类型
+    private String source; //来源
     private String time; //时间
-    private String money; //余额
-    private String money2;//交易的钱
+    private String sum; //余额
+    private String money;//交易的钱
 
-    public String getType() {
-        return type;
+    public String getSource() {
+        return source;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setSource(String source) {
+        this.source = source;
     }
 
     public String getTime() {
@@ -26,6 +26,14 @@ public class MingXi {
         this.time = time;
     }
 
+    public String getSum() {
+        return sum;
+    }
+
+    public void setSum(String sum) {
+        this.sum = sum;
+    }
+
     public String getMoney() {
         return money;
     }
@@ -34,11 +42,13 @@ public class MingXi {
         this.money = money;
     }
 
-    public String getMoney2() {
-        return money2;
-    }
-
-    public void setMoney2(String money2) {
-        this.money2 = money2;
+    @Override
+    public String toString() {
+        return "MingXi{" +
+                "source='" + source + '\'' +
+                ", time='" + time + '\'' +
+                ", sum='" + sum + '\'' +
+                ", money='" + money + '\'' +
+                '}';
     }
 }

@@ -228,7 +228,7 @@ public interface NetService {
      * @return
      */
     @FormUrlEncoded
-    @POST(Constants.Url.URL_LUNBO)
+    @POST(Constants.Url.URL_CANCELORDER)
     Observable<BaseCallModel<String>> cancelOrder(@Field("account") String account,
                                                   @Field("token") String token,
                                                   @Field("orderId") String orderId
@@ -243,7 +243,7 @@ public interface NetService {
      * @return
      */
     @FormUrlEncoded
-    @POST(Constants.Url.URL_LUNBO)
+    @POST(Constants.Url.URL_GET_GOODS)
     Observable<BaseCallModel<String>> getGoods(@Field("account") String account,
                                                @Field("token") String token,
                                                @Field("orderId") String orderId
@@ -285,7 +285,7 @@ public interface NetService {
      * @return
      */
     @FormUrlEncoded
-    @POST(Constants.Url.URL_LUNBO)
+    @POST(Constants.Url.URL_GET_WALLETMINGXI)
     Observable<BaseCallModel<List<MingXi>>> getWalletMingXi(@Field("account") String account,
                                                             @Field("token") String token,
                                                             @Field("wateType") String wateType

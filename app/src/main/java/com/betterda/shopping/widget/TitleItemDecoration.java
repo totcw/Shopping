@@ -55,7 +55,7 @@ public class TitleItemDecoration<T> extends RecyclerView.ItemDecoration {
                     .getLayoutParams();
             int position = params.getViewLayoutPosition()-1;
             //我记得Rv的item position在重置时可能为-1.保险点判断一下吧
-            if (position > -1) {
+            if (position > -1&&mDatas.size()>0) {
                 if (position == 0) {//等于0肯定要有title的
                     drawTitleArea(c, left, right, child, params, position);
 
@@ -82,7 +82,7 @@ public class TitleItemDecoration<T> extends RecyclerView.ItemDecoration {
      * @param position
      */
     private void drawTitleArea(Canvas c, int left, int right, View child, RecyclerView.LayoutParams params, int position) {//最先调用，绘制在最下层
-        if (mDatas != null&&mDatas.get(position).getTag()!=null) {
+        if (mDatas != null&&mDatas.get(position)!=null&&mDatas.get(position).getTag()!=null) {
 
             mPaint.setColor(COLOR_TITLE_BG);
             c.drawRect(left, child.getTop() - params.topMargin - mTitleHeight, right, child.getTop() - params.topMargin, mPaint);
@@ -99,7 +99,7 @@ public class TitleItemDecoration<T> extends RecyclerView.ItemDecoration {
 
     @Override
     public void onDrawOver(Canvas c, RecyclerView parent, RecyclerView.State state) {//最后调用 绘制在最上层
-        if (mDatas != null) {
+        if (mDatas != null&&mDatas.size()>0) {
             int pos = ((LinearLayoutManager) (parent.getLayoutManager())).findFirstVisibleItemPosition();
 
             if (pos-1 > -1 && pos-1 < mDatas.size()) {
