@@ -232,6 +232,7 @@ public class OrderActivity2 extends BaseActivity {
                     }
                     Intent intent = new Intent(getmActivity(), AddCommentActivity.class);
                     intent.putParcelableArrayListExtra("list", list);
+                    intent.putExtra("orderId", OrderComfirm.getOrderId());
                     UiUtils.startIntent(getmActivity(), intent);
                 }
             });

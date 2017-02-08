@@ -34,10 +34,11 @@ public class EweiMaActivity extends BaseActivity {
     public void init() {
         super.init();
         String bianhao = getIntent().getStringExtra("bianhao");
+        String orderId = getIntent().getStringExtra("orderId");
         if (TextUtils.isEmpty(bianhao)) {
             bitmap = ImageTools.generateQRCode("1",getmActivity());
         } else {
-            bitmap = ImageTools.generateQRCode(bianhao,getmActivity());
+            bitmap = ImageTools.generateQRCode(bianhao+","+orderId,getmActivity());
         }
 
         iv.setImageBitmap(bitmap);

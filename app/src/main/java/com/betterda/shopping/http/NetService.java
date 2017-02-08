@@ -15,7 +15,7 @@ import com.betterda.shopping.javabean.UserInfo;
 
 import com.betterda.shopping.javabean.Wallet;
 import com.betterda.shopping.javabean.ZItiMa;
-import com.betterda.shopping.message.model.MeassageContent;
+import com.betterda.shopping.javabean.MeassageContent;
 import com.betterda.shopping.shouye.model.LunBoTu;
 import com.betterda.shopping.sort.model.Shopping;
 import com.betterda.shopping.sort.model.Sort;
@@ -74,7 +74,7 @@ public interface NetService {
      */
     @FormUrlEncoded
     @POST(Constants.Url.URL_LOGINTHREE)
-    Observable<BaseCallModel<UserInfo>> getLoginThree(@Field("account") String account, @Field("logType") String type);
+    Observable<BaseCallModel<UserInfo>> getLoginThree(@Field("accounts") String account, @Field("logType") String type);
 
     /**
      * 忘记密码
@@ -97,7 +97,7 @@ public interface NetService {
      */
 
     @GET(Constants.Url.URL_LUNBO)
-    Observable<BaseCallModel<LunBoTu>> getAdvertisement();
+    Observable<BaseCallModel<List<LunBoTu>>> getAdvertisement();
 
 
     /**
@@ -156,6 +156,7 @@ public interface NetService {
     @POST(Constants.Url.URL_ADD_SHOPCOMMENT)
     Observable<BaseCallModel<String>> addComment(@Field("account") String account,
                                                  @Field("token") String token,
+                                                 @Field("orderId") String orderId,
                                                  @Field("dataJson") String dataJson
     );
 
@@ -569,9 +570,11 @@ public interface NetService {
      * @return
      */
     @FormUrlEncoded
-    @POST(Constants.Url.URL_LUNBO)
-    Observable<BaseCallModel<List<BankCard>>> getTuijianMingxi(@Field("account") String account,
-                                                               @Field("token") String token
+    @POST(Constants.Url.URL_TUIJIAN_MINGXI)
+    Observable<BaseCallModel<List<MingXi>>> getTuijianMingxi(@Field("account") String account,
+                                                             @Field("token") String token,
+                                                             @Field("pageNo") String pageNo,
+                                                             @Field("pageSize") String pageSize
     );
 
     /**

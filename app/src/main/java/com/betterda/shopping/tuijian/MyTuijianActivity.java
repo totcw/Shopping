@@ -1,5 +1,6 @@
 package com.betterda.shopping.tuijian;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -58,7 +59,7 @@ public class MyTuijianActivity extends BaseActivity<MyTuijianContract.Presenter>
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.relative_wallet_jinbi://推荐返现
-                UiUtils.startIntent(getmActivity(),TuiJianFanxianActivity.class);
+                getPresenter().fanxian();
                 break;
             case R.id.relative_wallet_yinbi://推荐人数
                 break;

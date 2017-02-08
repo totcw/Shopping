@@ -1,4 +1,4 @@
-package com.betterda.shopping.message.model;
+package com.betterda.shopping.javabean;
 
 /**
  * 具体消息列表

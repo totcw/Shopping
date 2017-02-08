@@ -1,5 +1,6 @@
 package com.betterda.shopping.tuijian;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -46,9 +47,19 @@ public class TuiJianFanxianActivity extends BaseActivity {
         mTopbarCashwallet.setTitle("推荐返现");
         mTopbarCashwallet.setActionText("明细");
         mTopbarCashwallet.setActionTextVisibility(true);
+
+        Intent intent = getIntent();
+        if (intent != null) {
+            String money = intent.getStringExtra("money");
+            if (money != null) {
+
+                mTvWallet2Money.setText(money);
+            }
+
+        }
     }
 
-    @OnClick({R.id.bar_back,R.id.bar_action})
+    @OnClick({R.id.bar_back, R.id.bar_action})
     public void onClick(View view) {
         switch (view.getId()) {
 
@@ -56,7 +67,8 @@ public class TuiJianFanxianActivity extends BaseActivity {
                 back();
                 break;
             case R.id.bar_action:
-                UiUtils.startIntent(getmActivity(), MingXiActivity.class);
+                Intent intent = new Intent(getmActivity(), MingXiActivity.class);
+                UiUtils.startIntent(getmActivity(), intent);
                 break;
         }
     }

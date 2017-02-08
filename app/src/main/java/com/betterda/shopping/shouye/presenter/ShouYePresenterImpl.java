@@ -59,16 +59,24 @@ public class ShouYePresenterImpl extends BasePresenter<ShouYeContract.View,ShouY
             return;
         }
         stringList = new ArrayList<>();
-        stringList.add(new LunBoTu("http://www.meichebang.com.cn/xsnano_web/upload/files/20161024162309xE23Av0x.png","1"));
-        getView().initVpLunbotu(new LunBoTuAdapter(this));
 
         getView().getRxManager().add(NetWork.getNetService()
         .getAdvertisement()
-        .compose(NetWork.handleResult(new BaseCallModel<LunBoTu>()))
-        .subscribe(new MyObserver<LunBoTu>() {
+        .compose(NetWork.handleResult(new BaseCallModel<List<LunBoTu>>()))
+        .subscribe(new MyObserver<List<LunBoTu>>() {
             @Override
-            protected void onSuccess(LunBoTu data, String resultMsg) {
+            protected void onSuccess(List<LunBoTu> data, String resultMsg) {
 
+
+                if (stringList != null) {
+                    stringList.clear();
+                    stringList.addAll(data);
+                }
+
+                getView().initVpLunbotu(new LunBoTuAdapter(ShouYePresenterImpl.this));
+
+                //设置为true,表示轮播加载成功
+                isShow = true;
             }
 
             @Override
@@ -83,57 +91,6 @@ public class ShouYePresenterImpl extends BasePresenter<ShouYeContract.View,ShouY
         }));
 
 
-      /*  RequestParams params = new RequestParams(Constants.URL_LUNBO);
-        params.addBodyParameter("regionId", Constants.regiondId);
-        GetNetUtil.getData(GetNetUtil.POST, params, new GetNetUtil.GetDataCallBack() {
-            @Override
-            public void onSuccess(String s) {
-                if (stringList != null) {
-                    stringList.clear();
-                }
-                UtilMethod.parSerJson(s, new ParserJsonInterface() {
-                    @Override
-                    public void parser(Map<String, Object> map) {
-                        if (map != null) {
-                            LunBoTu lunBoTu = new LunBoTu();
-                            lunBoTu.setUrl(UtilMethod.url(map.get("picture").toString()));
-                            lunBoTu.setId(map.get("id").toString());
-                            if (stringList != null) {
-                                stringList.add(lunBoTu);
-                            }
-                        }
-
-                    }
-                });
-
-
-
-                if (iShouyeView != null) {
-                    iShouyeView.setLunBoAdapter();
-                    //  iShouyeView.getViewPager().setPageTransformer(true,new CubeTransformer());
-                    //设置为true,表示轮播加载成功
-                    isShow = true;
-                }
-                if (iShouyeView != null) {
-                    if (iShouyeView.getImageviewMianFirst() != null) {
-                        iShouyeView.getImageviewMianFirst().setVisibility(View.INVISIBLE);
-                    }
-
-                }
-
-            }
-
-            @Override
-            public void onError(Throwable throwable, boolean b) {
-                if (iShouyeView != null) {
-                    if (iShouyeView.getImageviewMianFirst() != null) {
-                        iShouyeView.getImageviewMianFirst().setVisibility(View.VISIBLE);
-                    }
-
-                }
-
-            }
-        });*/
     }
 
 

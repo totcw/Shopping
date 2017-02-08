@@ -11,6 +11,7 @@ import com.betterda.shopping.base.IView;
 public class FindContract {
 
     public interface View extends IView {
+        void marker(double latitude, double longitude, String distance,String title);
     }
 
     public interface Presenter extends IPresenter<View> {

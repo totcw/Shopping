@@ -1,7 +1,5 @@
 package com.betterda.shopping.message.presenter;
 
-import android.net.Network;
-
 import com.betterda.shopping.BuildConfig;
 import com.betterda.shopping.R;
 import com.betterda.shopping.base.BasePresenter;
@@ -9,7 +7,7 @@ import com.betterda.shopping.http.MyObserver;
 import com.betterda.shopping.http.NetWork;
 import com.betterda.shopping.javabean.BaseCallModel;
 import com.betterda.shopping.message.contract.MeassageContract;
-import com.betterda.shopping.message.model.MeassageContent;
+import com.betterda.shopping.javabean.MeassageContent;
 import com.betterda.shopping.utils.Constants;
 import com.betterda.shopping.utils.NetworkUtils;
 import com.zhy.base.adapter.ViewHolder;

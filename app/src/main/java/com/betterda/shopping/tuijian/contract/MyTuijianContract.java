@@ -16,6 +16,7 @@ public class MyTuijianContract {
     }
 
     public interface Presenter extends IPresenter<View>{
+        void fanxian();
     }
 
     public interface Model extends IModel{

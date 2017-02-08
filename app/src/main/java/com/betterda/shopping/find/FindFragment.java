@@ -162,7 +162,7 @@ public class FindFragment extends BaseFragment<FindContract.Presenter> implement
     @Override
     public boolean onMyLocationClick() {
         //showPaoPao();
-        showInfoWindow(ll);
+        showInfoWindow(ll,"我的位置");
         return true;
     }
 
@@ -196,7 +196,8 @@ public class FindFragment extends BaseFragment<FindContract.Presenter> implement
             e.printStackTrace();
 
         }*/
-        showInfoWindow(marker.getPosition());
+        showInfoWindow(marker.getPosition(),marker.getTitle());
+
         showRoteLine(marker.getPosition());
         return false;
     }
@@ -223,10 +224,10 @@ public class FindFragment extends BaseFragment<FindContract.Presenter> implement
      *
      * @param latLng
      */
-    public void showInfoWindow(LatLng latLng) {
+    public void showInfoWindow(LatLng latLng,String title) {
         //创建InfoWindow展示的view
         Button button = new Button(getmActivity());
-        button.setText("弹窗");
+        button.setText(title);
         button.setTextColor(Color.BLACK);
         //定义用于显示该InfoWindow的坐标点
         button.setBackgroundColor(Color.WHITE);
@@ -256,10 +257,12 @@ public class FindFragment extends BaseFragment<FindContract.Presenter> implement
 
     /**
      * 设置标记
+     * latitude 纬度
+     *longitude 经度
      */
-    private void marker(double l, double a,String distance) {
+    public void marker(double latitude, double longitude,String distance,String title) {
         //定义Maker坐标点
-        LatLng point = new LatLng(l, a);
+        LatLng point = new LatLng(latitude, longitude);
         //构建Marker图标
         View inflate = View.inflate(getmActivity(), R.layout.layout_marker, null);
         TextView marker = (TextView) inflate.findViewById(R.id.tv_marker);
@@ -268,6 +271,7 @@ public class FindFragment extends BaseFragment<FindContract.Presenter> implement
         //构建MarkerOption，用于在地图上添加Marker
         OverlayOptions option = new MarkerOptions()
                 .position(point)
+                .title(title)
                 .icon(bitmap)
                 .zIndex(4)  //设置marker所在层级
                 .draggable(false);  //设置手势拖拽;
@@ -353,9 +357,9 @@ public class FindFragment extends BaseFragment<FindContract.Presenter> implement
 
 
             //显示商家信息
-            marker(24.50408, 118.147768,"1m");
+           /* marker(24.50408, 118.147768,"1m");
             marker(24.50608, 118.147768,"10m");
-            marker(24.50508, 118.147768,"30m");
+            marker(24.50508, 118.147768,"30m");*/
             //获取商家信息
             getPresenter().getData(location.getLongitude(), location.getLatitude());
         }

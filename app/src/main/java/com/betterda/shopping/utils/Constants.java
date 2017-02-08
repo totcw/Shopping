@@ -34,7 +34,7 @@ public class Constants {
         public static final String URL_LOGIN = "appAPI.do?api/account/user/login";
         public static final String URL_LOGINTHREE = "appAPI.do?api/account/third/login";//三方登录
         public static final String URL_PWD_UPDATE = "appAPI.do?api/account/update";//修改密码,头像
-        public static final String URL_LUNBO = URL+"appAPI.do?api/indeximages/get";//轮播广告
+        public static final String URL_LUNBO ="appAPI.do?api/indeximages/get";//轮播广告
         public static final String URL_ADD_BANK = "appAPI.do?api/account/bank/add";//添加银行卡
         public static final String URL_GET_BANK = "appAPI.do?api/account/bank/get";//获取银行卡列表
         public static final String URL_DEL_BANK = "appAPI.do?api/account/bank/del";//删除银行卡
@@ -72,6 +72,7 @@ public class Constants {
         public static final String URL_GET_MEASSAGELIST = "appAPI.do?api/account/message/get";//获取消息列表
         public static final String URL_GET_FANXIANMONEY = "appAPI.do?api/account/recommend/mype/get";//获取推荐返现的金额
         public static final String URL_TUIJIAN = "appAPI.do?api/account/code/get";//立即推荐
+        public static final String URL_TUIJIAN_MINGXI = "appAPI.do?api/account/recommend/detail/get";//推荐返现明细
 
 
     }

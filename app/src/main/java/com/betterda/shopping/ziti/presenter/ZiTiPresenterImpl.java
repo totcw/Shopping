@@ -47,13 +47,14 @@ public class ZiTiPresenterImpl  extends BasePresenter<ZiTiContract.View,ZiTiCont
                 if (ziTi != null) {
                     holder.setText(R.id.tv_tiem_hexiao_kahao, ziTi.getBarCode());
                     holder.setText(R.id.tv_item_hexiao_time, ziTi.getTime());
-                    Bitmap bitmap = ImageTools.generateQRCode(ziTi.getBarCode(), getView().getmActivity());
+                    Bitmap bitmap = ImageTools.generateQRCode(ziTi.getBarCode()+","+ziTi.getOrderNum(), getView().getmActivity());
                     holder.setImageBitmap(R.id.iv_kaquan, bitmap);
                     holder.setOnClickListener(R.id.relative_item_kaquan, new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             Intent intent = new Intent(getView().getmActivity(), EweiMaActivity.class);
                             intent.putExtra("bianhao", ziTi.getBarCode());
+                            intent.putExtra("orderId", ziTi.getOrderNum());
                             UiUtils.startIntent(getView().getmActivity(), intent);
                         }
                     });

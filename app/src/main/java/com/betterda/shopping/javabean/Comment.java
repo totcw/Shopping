@@ -5,35 +5,27 @@ package com.betterda.shopping.javabean;
  * Created by Administrator on 2016/5/17.
  */
 public class Comment {
-    private String littlePicture;  //图片路径
-    private String name; //用户名
+    private String photo;  //图片路径
+    private String nickName; //用户名
     private String time;//时间
     private String content;//内容
     private float commentstar;
 
 
-    public String getLittlePicture() {
-        return littlePicture;
+    public String getPhoto() {
+        return photo;
     }
 
-    public void setLittlePicture(String littlePicture) {
-        this.littlePicture = littlePicture;
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
-    public float getCommentstar() {
-        return commentstar;
+    public String getNickName() {
+        return nickName;
     }
 
-    public void setCommentstar(float commentstar) {
-        this.commentstar = commentstar;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
     }
 
     public String getTime() {
@@ -52,11 +44,19 @@ public class Comment {
         this.content = content;
     }
 
+    public float getCommentstar() {
+        return commentstar;
+    }
+
+    public void setCommentstar(float commentstar) {
+        this.commentstar = commentstar;
+    }
+
     @Override
     public String toString() {
         return "Comment{" +
-                "littlePicture='" + littlePicture + '\'' +
-                ", name='" + name + '\'' +
+                "photo='" + photo + '\'' +
+                ", nickName='" + nickName + '\'' +
                 ", time='" + time + '\'' +
                 ", content='" + content + '\'' +
                 ", commentstar=" + commentstar +
