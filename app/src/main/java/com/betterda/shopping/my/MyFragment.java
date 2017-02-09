@@ -96,6 +96,11 @@ public class MyFragment extends BaseFragment<MyContract.Presenter> implements My
         initIdv();
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        getPresenter().onStart();
+    }
 
     @Override
     public void onHiddenChanged(boolean hidden) {
@@ -193,4 +198,13 @@ public class MyFragment extends BaseFragment<MyContract.Presenter> implements My
         UiUtils.startIntent(getmActivity(), intent);
     }
 
+    @Override
+    public TextView getTextViewNumber() {
+        return mTvMyNumber;
+    }
+
+    @Override
+    public ImageView getSimpleDraweeView() {
+        return mSvTouxiang;
+    }
 }

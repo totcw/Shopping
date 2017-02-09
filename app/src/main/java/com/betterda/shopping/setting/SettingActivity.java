@@ -65,6 +65,7 @@ public class SettingActivity extends BaseActivity<SettingContract.Presenter> imp
             case R.id.linear_setting_us:
                 break;
             case R.id.btn_setting_exit:
+                getPresenter().exit();
                 break;
             case R.id.bar_back:
                 back();

@@ -53,6 +53,7 @@ public class LoginActivity extends BaseActivity<LoginContract.Presenter> impleme
     public void init() {
         super.init();
         mTopbarLogin.setTitle("登录");
+        mTopbarLogin.setBackVisibility(false);
     }
 
     @OnClick({R.id.tv_login_pwd, R.id.bar_back, R.id.btn_login, R.id.relative_login_register, R.id.relative_login_wx, R.id.relative_login_weibo, R.id.relative_login_QQ})

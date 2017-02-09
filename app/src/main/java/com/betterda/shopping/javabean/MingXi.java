@@ -1,4 +1,4 @@
-package com.betterda.shopping.wallet.model;
+package com.betterda.shopping.javabean;
 
 /**
  * 明细

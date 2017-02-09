@@ -18,6 +18,7 @@ import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.betterda.mylibrary.LoadingPager;
 import com.betterda.shopping.javabean.Bus;
+import com.betterda.shopping.login.LoginActivity;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -463,6 +464,30 @@ public class UtilMethod {
         option.SetIgnoreCacheException(false);//可选，默认false，设置是否收集CRASH信息，默认收集
         option.setEnableSimulateGps(false);//可选，默认false，设置是否需要过滤gps仿真结果，默认需要
         mLocationClient.setLocOption(option);
+    }
+
+
+    /**
+     * 判断是否登录并且跳转
+     *
+     * @param context
+     * @param clazz   要跳转的界面
+     */
+    public static void isLogin(Context context, Class<?> clazz) {
+        boolean islogin = isLogin(context);
+        if (islogin) {
+            UiUtils.startIntent(context, clazz);
+        } else {
+            UiUtils.startIntent(context, LoginActivity.class);
+        }
+    }
+
+    /**
+     * 判断是否登录
+     */
+    public static boolean isLogin(Context context) {
+        boolean islogin = CacheUtils.getBoolean(context, Constants.Cache.ISLOGIN, false);
+        return islogin;
     }
 
 

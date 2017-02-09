@@ -6,7 +6,7 @@ import com.betterda.shopping.base.IModel;
 import com.betterda.shopping.base.IPresenter;
 import com.betterda.shopping.base.IView;
 import com.betterda.shopping.javabean.TitleBean;
-import com.betterda.shopping.wallet.model.MingXi;
+import com.betterda.shopping.javabean.MingXi;
 
 import java.util.List;
 

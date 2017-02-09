@@ -48,7 +48,7 @@ public abstract class MyObserver<T> extends Subscriber<BaseCallModel<T>> {
             }else if (baseCallModel.getCode() == 1) {//成功
                 onSuccess(baseCallModel.getData(),baseCallModel.getResultMsg());
             } else {//错误
-                onFail(baseCallModel.getResultMsg());
+                onFail("服务器异常:"+baseCallModel.getResultMsg());
             }
         } else {
             onFail("数据为空");

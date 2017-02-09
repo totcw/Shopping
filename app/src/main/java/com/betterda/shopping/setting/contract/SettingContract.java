@@ -14,6 +14,7 @@ public class SettingContract {
     }
 
     public interface Presenter extends IPresenter<View>{
+        void exit();
     }
 
     public interface Model extends IModel {

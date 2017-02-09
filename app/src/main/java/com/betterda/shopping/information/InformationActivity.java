@@ -20,9 +20,11 @@ import android.widget.TextView;
 import com.betterda.mylibrary.Utils.PermissionUtil;
 import com.betterda.shopping.BuildConfig;
 import com.betterda.shopping.R;
+import com.betterda.shopping.application.MyApplication;
 import com.betterda.shopping.base.BaseActivity;
 import com.betterda.shopping.factory.LoadImageFactory;
 import com.betterda.shopping.http.MyObserver;
+import com.betterda.shopping.http.NetService;
 import com.betterda.shopping.http.NetWork;
 import com.betterda.shopping.information.contract.InformationContract;
 import com.betterda.shopping.information.presenter.InformationPresenterImpl;
@@ -40,9 +42,16 @@ import java.io.File;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Cache;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import retrofit2.Retrofit;
+import rx.Observable;
+import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 
 /**
  * 个人资料
@@ -114,7 +123,7 @@ public class InformationActivity extends BaseActivity<InformationContract.Presen
                 String touxiang = CacheUtils.getString(getmActivity(), number + Constants.Cache.TOUXIANG, "");
                 if (!TextUtils.isEmpty(touxiang)) {
                     if (null != mSvInformationTouxinag) {
-                        System.out.println("头像:"+touxiang);
+
                         LoadImageFactory.getLoadImageInterface().loadImageFit(getmActivity(),touxiang,mSvInformationTouxinag);
                     }
 
@@ -131,6 +140,7 @@ public class InformationActivity extends BaseActivity<InformationContract.Presen
 
             if (null != mSvInformationTouxinag) {
                 //设置默认图片
+                mSvInformationTouxinag.setImageResource(R.mipmap.zwt_zheng);
             }
             if (null != mTvInformationName) {
 
@@ -291,6 +301,7 @@ public class InformationActivity extends BaseActivity<InformationContract.Presen
         }
     }
 
+
     //设置照片
     private void setPhoto(final Bitmap pic) {
 
@@ -317,6 +328,7 @@ public class InformationActivity extends BaseActivity<InformationContract.Presen
 
                 getRxManager().add(NetWork.getNetService()
                 .getImgUpload(account,token,filePart)
+
                 .compose(NetWork.handleResult(new BaseCallModel<String>()))
                 .subscribe(new MyObserver<String>() {
                     @Override
@@ -324,8 +336,31 @@ public class InformationActivity extends BaseActivity<InformationContract.Presen
                         if (BuildConfig.LOG_DEBUG) {
                             System.out.println("图片上传路径success:"+data.toString());
                         }
-                        mSvInformationTouxinag.setImageBitmap(pic);
-                        CacheUtils.putString(getmActivity(), getAccount() + Constants.Cache.TOUXIANG, data);
+
+                        getRxManager().add(NetWork.getNetService()
+                                .getPwdUpdate(getAccount(),null,null,data)
+                                .compose(NetWork.handleResult(new BaseCallModel<String>()))
+                                .subscribe(new MyObserver<String>() {
+                                    @Override
+                                    protected void onSuccess(String data, String resultMsg) {
+                                        UiUtils.showToast(getmActivity(),resultMsg);
+                                        mSvInformationTouxinag.setImageBitmap(pic);
+                                        CacheUtils.putString(getmActivity(), getAccount() + Constants.Cache.TOUXIANG, data);
+                                    }
+
+                                    @Override
+                                    public void onFail(String resultMsg) {
+                                        UiUtils.showToast(getmActivity(),resultMsg);
+                                    }
+
+                                    @Override
+                                    public void onExit() {
+
+                                    }
+                                }));
+
+
+
                     }
 
                     @Override
@@ -333,15 +368,20 @@ public class InformationActivity extends BaseActivity<InformationContract.Presen
                         if (BuildConfig.LOG_DEBUG) {
                             System.out.println("图片上传路径fail:"+resultMsg);
                         }
+                        UiUtils.showToast(getmActivity(),resultMsg);
                     }
 
                     @Override
                     public void onExit() {
-
+                        if (BuildConfig.LOG_DEBUG) {
+                            System.out.println("token");
+                        }
                     }
                 }));
             }
         });
+
+
 
     }
 

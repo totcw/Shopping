@@ -20,8 +20,8 @@ import com.betterda.shopping.shouye.model.LunBoTu;
 import com.betterda.shopping.sort.model.Shopping;
 import com.betterda.shopping.sort.model.Sort;
 import com.betterda.shopping.utils.Constants;
-import com.betterda.shopping.wallet.model.BankCard;
-import com.betterda.shopping.wallet.model.MingXi;
+import com.betterda.shopping.javabean.BankCard;
+import com.betterda.shopping.javabean.MingXi;
 
 import java.util.List;
 
@@ -64,7 +64,8 @@ public interface NetService {
     @FormUrlEncoded
     @POST(Constants.Url.URL_LOGIN)
     Observable<BaseCallModel<UserInfo>> getLogin(@Field("account") String account,
-                                                 @Field("password") String password);
+                                                 @Field("password") String password
+                                                 );
 
     /**
      * 三方登录
@@ -88,7 +89,9 @@ public interface NetService {
     Observable<BaseCallModel<String>> getPwdUpdate(@Field("account") String account,
                                                    @Field("password") String password,
                                                    @Field("nickName") String nickName,
-                                                   @Field("photo") String photo);
+                                                   @Field("photo") String photo);    /**
+
+
 
     /**
      * 获取广告栏
@@ -363,18 +366,7 @@ public interface NetService {
                                                          @Field("token") String token
     );
 
-    /**
-     * 获取二维码
-     *
-     * @param account
-     * @param token
-     * @return
-     */
-    @FormUrlEncoded
-    @POST(Constants.Url.URL_LUNBO)
-    Observable<BaseCallModel<List<BankCard>>> getErweima(@Field("account") String account,
-                                                         @Field("token") String token
-    );
+
 
     /**
      * 获取消息列表
