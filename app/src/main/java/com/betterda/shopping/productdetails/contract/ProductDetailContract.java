@@ -45,6 +45,8 @@ public class ProductDetailContract {
         void startToComment();
 
         void onNewIntent(Intent intent);
+
+        void onLoadError();
     }
 
     public interface Model extends IModel{

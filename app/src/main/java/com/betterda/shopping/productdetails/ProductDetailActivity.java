@@ -126,7 +126,12 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailContract.Pr
     public void init() {
         super.init();
         setStatusBar();
-
+        mLoadingPager.setonErrorClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getPresenter().onLoadError();
+            }
+        });
 
     }
 

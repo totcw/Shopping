@@ -262,23 +262,28 @@ public class FindFragment extends BaseFragment<FindContract.Presenter> implement
      *longitude 经度
      */
     public void marker(double latitude, double longitude,String distance,String title) {
-        //定义Maker坐标点
-        LatLng point = new LatLng(latitude, longitude);
-        //构建Marker图标
-        View inflate = View.inflate(getmActivity(), R.layout.layout_marker, null);
-        TextView marker = (TextView) inflate.findViewById(R.id.tv_marker);
-        marker.setText(distance);
-        BitmapDescriptor bitmap = BitmapDescriptorFactory.fromView(inflate);
-        //构建MarkerOption，用于在地图上添加Marker
-        OverlayOptions option = new MarkerOptions()
-                .position(point)
-                .title(title)
-                .icon(bitmap)
-                .zIndex(4)  //设置marker所在层级
-                .draggable(false);  //设置手势拖拽;
+        try {
+            //定义Maker坐标点
+            LatLng point = new LatLng(latitude, longitude);
+            //构建Marker图标
+            View inflate = View.inflate(getmActivity(), R.layout.layout_marker, null);
+            TextView marker = (TextView) inflate.findViewById(R.id.tv_marker);
+            marker.setText(distance);
+            BitmapDescriptor bitmap = BitmapDescriptorFactory.fromView(inflate);
+            //构建MarkerOption，用于在地图上添加Marker
+            OverlayOptions option = new MarkerOptions()
+                    .position(point)
+                    .title(title)
+                    .icon(bitmap)
+                    .zIndex(4)  //设置marker所在层级
+                    .draggable(false);  //设置手势拖拽;
 
-        //在地图上添加Marker，并显示
-        mBaiduMap.addOverlay(option);
+            //在地图上添加Marker，并显示
+            mBaiduMap.addOverlay(option);
+        } catch (Exception e) {
+
+        }
+
     }
 
 

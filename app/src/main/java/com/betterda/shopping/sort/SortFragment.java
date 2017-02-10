@@ -100,7 +100,12 @@ public class SortFragment extends BaseFragment<SortContract.Presenter> implement
         mTtbvSort.setFirstTitle("综合排序");
         mTtbvSort.setSecondTitle("筛选");
 
-
+        mLoadPagerSortName.setonErrorClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getPresenter().onLoadError();
+            }
+        });
     }
 
 
@@ -158,16 +163,17 @@ public class SortFragment extends BaseFragment<SortContract.Presenter> implement
     public void initRvSortName(RecyclerView.Adapter adapter) {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getmActivity(), 2);
         mRvSortName.setLayoutManager(gridLayoutManager);
+        mRvSortName.setPullRefreshEnabled(false);
         mRvSortName.setLoadingMoreEnabled(true);
         mRvSortName.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
-                mRvSortName.refreshComplete();
+
             }
 
             @Override
             public void onLoadMore() {
-
+                getPresenter().onLoadMore();
             }
         });
         mRvSortName.setAdapter(adapter);

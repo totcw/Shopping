@@ -73,4 +73,9 @@ public class MeassageActivity extends BaseActivity<MeassageContract.Presenter> i
             }
         });
     }
+
+    @Override
+    public LoadingPager getLodapger() {
+        return mLoadingpager;
+    }
 }

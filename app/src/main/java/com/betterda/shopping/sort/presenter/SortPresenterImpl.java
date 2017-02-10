@@ -70,7 +70,7 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
         attachModel(new SortModelImpl());
         initSortRecycleview();
         initNameRecycleview();
-
+        getView().getLodapger().setLoadVisable();
     }
 
 
@@ -167,7 +167,7 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
 
                                                     @Override
                                                     public void onExit() {
-                                                            getView().ExitToLogin();
+                                                        getView().ExitToLogin();
                                                     }
                                                 }));
                                     }
@@ -320,8 +320,6 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
     }
 
 
-
-
     /**
      * 获取缓存数据 如:品牌
      */
@@ -361,6 +359,20 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
         }
     }
 
+    //加载更多
+    @Override
+    public void onLoadMore() {
+        pangeNo++;
+        getShopList();
+    }
+
+    //加载错误
+    @Override
+    public void onLoadError() {
+            getView().getLodapger().setLoadVisable();
+            getShopList();
+    }
+
 
     /**
      * 获取商品类型
@@ -386,8 +398,9 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
                     @Override
                     public void onFail(String resultMsg) {
                         if (BuildConfig.LOG_DEBUG) {
-                            System.out.println("获取商品类型fail:"+resultMsg);
+                            System.out.println("获取商品类型fail:" + resultMsg);
                         }
+                        UtilMethod.setLoadpagerError(getView().getLodapger());
                     }
 
                     @Override
@@ -415,7 +428,7 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
      */
     private void getShopList() {
 
-        getView().getLodapger().setLoadVisable();
+
         getView().getRxManager().add(NetWork.getNetService()
                 .getShopList(productType, sort, brand, beginPrice, endPrice, pangeNo + "", Constants.PAGESIZE)
                 .compose(NetWork.handleResult(new BaseCallModel<List<Shopping>>()))
@@ -426,7 +439,9 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
                             System.out.println("商品列表:" + data.size());
                         }
                         if (mNameList != null && mNameAdapter != null) {
-                            mNameList.clear();
+                            if (pangeNo == 1) {
+                                mNameList.clear();
+                            }
                             mNameList.addAll(data);
                             mNameAdapter.notifyDataSetChanged();
                         }
@@ -625,7 +640,7 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
                             if (!TextUtils.isEmpty(beginPrice) && !TextUtils.isEmpty(endPrice)) {
                                 refreshChoseRecycleview(chose.getType(), beginPrice + "-" + endPrice + "元");
                             } else if (!TextUtils.isEmpty(beginPrice) && TextUtils.isEmpty(endPrice)) {
-                                refreshChoseRecycleview(chose.getType(), beginPrice+ "元以上");
+                                refreshChoseRecycleview(chose.getType(), beginPrice + "元以上");
                             } else {
                                 refreshChoseRecycleview(chose.getType(), "全部");
                             }
@@ -655,7 +670,6 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
                 lastBrand = brand;
             }
         }
-
 
 
     }

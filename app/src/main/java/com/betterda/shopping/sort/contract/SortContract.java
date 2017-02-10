@@ -98,6 +98,10 @@ public interface Presenter extends IPresenter<View>{
     void getData();
 
     void getCacheData();
+
+    void onLoadMore();
+
+    void onLoadError();
 }
 
 public interface Model extends IModel{

@@ -10,6 +10,7 @@ import com.betterda.shopping.message.contract.MeassageContract;
 import com.betterda.shopping.javabean.MeassageContent;
 import com.betterda.shopping.utils.Constants;
 import com.betterda.shopping.utils.NetworkUtils;
+import com.betterda.shopping.utils.UiUtils;
 import com.betterda.shopping.utils.UtilMethod;
 import com.zhy.base.adapter.ViewHolder;
 import com.zhy.base.adapter.recyclerview.CommonAdapter;
@@ -51,6 +52,7 @@ public class MeassagePresenterImpl  extends BasePresenter<MeassageContract.View,
 
 
     private void getData() {
+        getView().getLodapger().setLoadVisable();
         NetworkUtils.isNetWork(getView().getmActivity(), getView().getLodapger(), new NetworkUtils.SetDataInterface() {
             @Override
             public void getDataApi() {
@@ -70,6 +72,7 @@ public class MeassagePresenterImpl  extends BasePresenter<MeassageContract.View,
                             meassageContentList.addAll(data);
                             contentCommonAdapter.notifyDataSetChanged();
                         }
+                        UtilMethod.hideOrEmpty(data,getView().getLodapger());
                     }
 
                     @Override
@@ -77,6 +80,7 @@ public class MeassagePresenterImpl  extends BasePresenter<MeassageContract.View,
                         if (BuildConfig.LOG_DEBUG) {
                             System.out.println("消息列表fail:"+resultMsg);
                         }
+                        UtilMethod.setLoadpagerError(getView().getLodapger());
                     }
 
                     @Override
