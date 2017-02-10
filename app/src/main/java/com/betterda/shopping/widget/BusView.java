@@ -36,7 +36,7 @@ public class BusView extends FrameLayout{
         mRelativeBus.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                UtilMethod.isLogin(context, LoginActivity.class);
+                UtilMethod.isLogin(context, BusActivity.class);
             }
         });
     }

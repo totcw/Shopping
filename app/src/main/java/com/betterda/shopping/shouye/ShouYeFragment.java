@@ -13,10 +13,18 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
+import com.baidu.location.LocationClient;
+import com.baidu.mapapi.map.MapStatusUpdate;
+import com.baidu.mapapi.map.MapStatusUpdateFactory;
+import com.baidu.mapapi.map.MyLocationData;
+import com.baidu.mapapi.model.LatLng;
 import com.betterda.mylibrary.LoadingPager;
 import com.betterda.mylibrary.Utils.StatusBarCompat;
 import com.betterda.shopping.R;
 import com.betterda.shopping.base.BaseFragment;
+import com.betterda.shopping.find.FindFragment;
 import com.betterda.shopping.home.MainActivity;
 import com.betterda.shopping.location.LocationActivity;
 import com.betterda.shopping.message.MeassageActivity;
@@ -59,6 +67,14 @@ public class ShouYeFragment extends BaseFragment<ShouYeContract.Presenter> imple
     private RelativeLayout mRelativeFirst, mRelativeSecond, mRelativeThree, mRelativeFour,
             mRelativeFive, mRelativeSix, mRelativeSeven, mRelativeEight;
     private LinearLayout mLinearThree1, mLinearThree2, mLinearThree3, mLinearThree4;
+
+
+    /**
+     * 定位功能
+     */
+    public LocationClient mLocationClient = null; //定位的类
+    public BDLocationListener myListener = new MyLocationListener();
+
 
     @Override
     public View initView(LayoutInflater inflater) {
@@ -105,6 +121,7 @@ public class ShouYeFragment extends BaseFragment<ShouYeContract.Presenter> imple
         } else {
             StatusBarCompat.setStatusBar5(getmActivity(), R.color.backgroudyellow);
             ((MainActivity)getmActivity()).getmBvMain().setVisibility(View.VISIBLE);
+            startLocation();
         }
     }
 
@@ -230,5 +247,45 @@ public class ShouYeFragment extends BaseFragment<ShouYeContract.Presenter> imple
                 mTvShouyeCity.setText(address);
             }
         }
+    }
+
+    /**
+     * 开始定位相关
+     */
+    private void startLocation() {
+        /**
+         * 定位相关
+         */
+        mLocationClient = new LocationClient(getmActivity());     //声明LocationClient类
+        mLocationClient.registerLocationListener(myListener);    //注册监听函数
+
+        UtilMethod.initLocation(mLocationClient);
+        //开启定位
+        mLocationClient.start();
+    }
+
+
+    /**
+     * 定位的回调方法
+     */
+    public class MyLocationListener implements BDLocationListener {
+
+        @Override
+        public void onReceiveLocation(BDLocation location) {
+            if (location != null) {
+                if (mTvShouyeCity != null) {
+                    mTvShouyeCity.setText(location.getCity());
+                }
+            }
+
+            //停止定位
+            if (mLocationClient != null) {
+
+                mLocationClient.stop();
+            }
+
+        }
+
+
     }
 }

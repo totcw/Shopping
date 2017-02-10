@@ -88,7 +88,7 @@ public class FindFragment extends BaseFragment<FindContract.Presenter> implement
 
         //创建线路规划
         mSearch = RoutePlanSearch.newInstance();
-        startLocation();
+
 
 
     }
@@ -101,6 +101,7 @@ public class FindFragment extends BaseFragment<FindContract.Presenter> implement
         } else {
             StatusBarCompat.setStatusBar5(getmActivity(), R.color.white);
             ((MainActivity)getmActivity()).getmBvMain().setVisibility(View.GONE);
+            startLocation();
         }
     }
 
@@ -338,30 +339,31 @@ public class FindFragment extends BaseFragment<FindContract.Presenter> implement
 
         @Override
         public void onReceiveLocation(BDLocation location) {
-            // 构造定位数据
-            MyLocationData locData = new MyLocationData.Builder()
-                    .accuracy(location.getRadius())
-                    // 此处设置开发者获取到的方向信息，顺时针0-360  Latitude 纬度
-                    .direction(100).latitude(location.getLatitude())
-                    .longitude(location.getLongitude()).build();
-            // 设置定位数据
-            mBaiduMap.setMyLocationData(locData);
-            ll = new LatLng(location.getLatitude(),
-                    location.getLongitude());
-            MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(ll);
-            //更新地图
-            mBaiduMap.animateMapStatus(u);
+            if (location != null) {
+                // 构造定位数据
+                MyLocationData locData = new MyLocationData.Builder()
+                        .accuracy(location.getRadius())
+                        // 此处设置开发者获取到的方向信息，顺时针0-360  Latitude 纬度
+                        .direction(100).latitude(location.getLatitude())
+                        .longitude(location.getLongitude()).build();
+                // 设置定位数据
+                mBaiduMap.setMyLocationData(locData);
+                ll = new LatLng(location.getLatitude(),
+                        location.getLongitude());
+                MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(ll);
+                //更新地图
+                mBaiduMap.animateMapStatus(u);
+                //获取商家信息
+                getPresenter().getData(location.getLongitude(), location.getLatitude());
+            }
+
             //停止定位
-            mLocationClient.stop();
+            if (mLocationClient != null) {
+
+                mLocationClient.stop();
+            }
 
 
-
-            //显示商家信息
-           /* marker(24.50408, 118.147768,"1m");
-            marker(24.50608, 118.147768,"10m");
-            marker(24.50508, 118.147768,"30m");*/
-            //获取商家信息
-            getPresenter().getData(location.getLongitude(), location.getLatitude());
         }
 
 
