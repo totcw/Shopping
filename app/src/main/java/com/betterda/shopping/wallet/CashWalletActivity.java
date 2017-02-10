@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -56,6 +57,9 @@ public class CashWalletActivity extends BaseActivity<CashWalletContract.Presente
         Intent intent = getIntent();
         if (intent != null) {
           money =  intent.getStringExtra("money");
+            if (TextUtils.isEmpty(money)) {
+                money = "0";
+            }
         }
         mTvWallet2Money.setText(money);
     }

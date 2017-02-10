@@ -10,6 +10,7 @@ import com.betterda.shopping.message.contract.MeassageContract;
 import com.betterda.shopping.javabean.MeassageContent;
 import com.betterda.shopping.utils.Constants;
 import com.betterda.shopping.utils.NetworkUtils;
+import com.betterda.shopping.utils.UtilMethod;
 import com.zhy.base.adapter.ViewHolder;
 import com.zhy.base.adapter.recyclerview.CommonAdapter;
 
@@ -80,7 +81,7 @@ public class MeassagePresenterImpl  extends BasePresenter<MeassageContract.View,
 
                     @Override
                     public void onExit() {
-
+                        getView().ExitToLogin();
                     }
                 }));
             }

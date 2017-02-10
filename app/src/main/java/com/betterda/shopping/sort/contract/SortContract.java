@@ -94,6 +94,10 @@ public interface Presenter extends IPresenter<View>{
 
 
     void reFreshChose(int pressNum);
+
+    void getData();
+
+    void getCacheData();
 }
 
 public interface Model extends IModel{

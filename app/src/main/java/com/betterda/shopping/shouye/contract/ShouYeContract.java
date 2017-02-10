@@ -2,13 +2,12 @@ package com.betterda.shopping.shouye.contract;
 
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.betterda.shopping.base.IModel;
 import com.betterda.shopping.base.IPresenter;
 import com.betterda.shopping.base.IView;
-import com.betterda.shopping.shouye.model.LunBoTu;
+import com.betterda.shopping.javabean.LunBoTu;
 
 import java.util.List;
 

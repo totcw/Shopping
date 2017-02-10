@@ -376,7 +376,7 @@ public class OrderActivity2 extends BaseActivity {
 
                             @Override
                             public void onExit() {
-
+                                ExitToLogin();
                             }
                         }));
             }
@@ -400,6 +400,8 @@ public class OrderActivity2 extends BaseActivity {
                         if (BuildConfig.LOG_DEBUG) {
                             System.out.println("收货成功:"+resultMsg);
                         }
+                        UiUtils.showToast(getmActivity(),resultMsg);
+                        getData();
                     }
 
                     @Override
@@ -407,11 +409,12 @@ public class OrderActivity2 extends BaseActivity {
                         if (BuildConfig.LOG_DEBUG) {
                             System.out.println("收货fail:"+resultMsg);
                         }
+                        UiUtils.showToast(getmActivity(),resultMsg);
                     }
 
                     @Override
                     public void onExit() {
-
+                                ExitToLogin();
                     }
                 }));
             }
@@ -438,6 +441,8 @@ public class OrderActivity2 extends BaseActivity {
                                 if (BuildConfig.LOG_DEBUG) {
                                     System.out.println("取消订单success:"+data);
                                 }
+                                UiUtils.showToast(getmActivity(),resultMsg);
+                                getData();
                             }
 
                             @Override
@@ -445,11 +450,13 @@ public class OrderActivity2 extends BaseActivity {
                                 if (BuildConfig.LOG_DEBUG) {
                                     System.out.println("取消订单fail:"+resultMsg);
                                 }
+                                UiUtils.showToast(getmActivity(),resultMsg);
+
                             }
 
                             @Override
                             public void onExit() {
-
+                                ExitToLogin();
                             }
                         }));
             }

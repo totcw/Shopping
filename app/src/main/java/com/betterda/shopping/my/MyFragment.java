@@ -19,6 +19,8 @@ import com.betterda.shopping.comment.AddCommentActivity;
 import com.betterda.shopping.findpwd.FindPwdActivity;
 import com.betterda.shopping.findpwd.contract.FindPwdContract;
 import com.betterda.shopping.home.MainActivity;
+import com.betterda.shopping.information.InformationActivity;
+import com.betterda.shopping.location.LocationActivity;
 import com.betterda.shopping.login.LoginActivity;
 import com.betterda.shopping.message.MeassageActivity;
 import com.betterda.shopping.my.contract.MyContract;
@@ -30,6 +32,7 @@ import com.betterda.shopping.setting.SettingActivity;
 import com.betterda.shopping.tuijian.LiJiTuijianActivity;
 import com.betterda.shopping.tuijian.MyTuijianActivity;
 import com.betterda.shopping.utils.UiUtils;
+import com.betterda.shopping.utils.UtilMethod;
 import com.betterda.shopping.wallet.WalletActivity;
 import com.betterda.shopping.ziti.ZiTiActivity;
 
@@ -121,13 +124,13 @@ public class MyFragment extends BaseFragment<MyContract.Presenter> implements My
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.relative_my_touxiang:
-                UiUtils.startIntent(getmActivity(), LoginActivity.class);
+                UtilMethod.isLogin(getmActivity(), InformationActivity.class);
                 break;
             case R.id.relative_my_setting:
                 UiUtils.startIntent(getmActivity(), SettingActivity.class);
                 break;
             case R.id.relative_my_message://消息
-                UiUtils.startIntent(getmActivity(), MeassageActivity.class);
+                UtilMethod.isLogin(getmActivity(), MeassageActivity.class);
                 break;
             case R.id.relative_my_all://我的订单
                 startToOrder(0);
@@ -148,24 +151,29 @@ public class MyFragment extends BaseFragment<MyContract.Presenter> implements My
                 startToOrder(5);
                 break;
             case R.id.relative_my_tuikuan://我的钱包
-                UiUtils.startIntent(getmActivity(), WalletActivity.class);
+                UtilMethod.isLogin(getmActivity(), WalletActivity.class);
                 break;
             case R.id.relative_my_jiayouka://成为会员\
 
                 break;
             case R.id.relative_my_bus://立即推荐
-                UiUtils.startIntent(getmActivity(), LiJiTuijianActivity.class);
+                UtilMethod.isLogin(getmActivity(), LiJiTuijianActivity.class);
                 break;
             case R.id.relative_my_address://我的推荐
-                UiUtils.startIntent(getmActivity(), MyTuijianActivity.class);
+                UtilMethod.isLogin(getmActivity(), MyTuijianActivity.class);
                 break;
             case R.id.relative_my_ziti://自提码
-                UiUtils.startIntent(getmActivity(), ZiTiActivity.class);
+                UtilMethod.isLogin(getmActivity(), ZiTiActivity.class);
                 break;
             case R.id.relative_my_kefu://常用地址
-                Intent intent = new Intent(getmActivity(), AddressActivity.class);
-                intent.putExtra("isMy", true);
-                UiUtils.startIntent(getmActivity(), intent);
+                if (UtilMethod.isLogin(getmActivity())) {
+                    Intent intent = new Intent(getmActivity(), AddressActivity.class);
+                    intent.putExtra("isMy", true);
+                    UiUtils.startIntent(getmActivity(), intent);
+                } else {
+                    UiUtils.startIntent(getmActivity(),LoginActivity.class);
+                }
+
                 break;
         }
     }
@@ -195,7 +203,12 @@ public class MyFragment extends BaseFragment<MyContract.Presenter> implements My
     private void startToOrder(int item) {
         Intent intent = new Intent(getmActivity(), OrderActivity2.class);
         intent.putExtra("item", item);
-        UiUtils.startIntent(getmActivity(), intent);
+        if (UtilMethod.isLogin(getmActivity())) {
+            UiUtils.startIntent(getmActivity(), intent);
+        } else {
+            UiUtils.startIntent(getmActivity(), LoginActivity.class);
+        }
+
     }
 
     @Override

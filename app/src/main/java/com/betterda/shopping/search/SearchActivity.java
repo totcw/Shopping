@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.betterda.mylibrary.LoadingPager;
@@ -14,6 +15,7 @@ import com.betterda.shopping.R;
 import com.betterda.shopping.base.BaseActivity;
 import com.betterda.shopping.search.contract.SearchContract;
 import com.betterda.shopping.search.presenter.SearchPresenterImpl;
+import com.betterda.shopping.utils.UtilMethod;
 import com.betterda.shopping.widget.BusView;
 import com.betterda.shopping.widget.SearchView;
 import com.zhy.view.flowlayout.FlowLayout;
@@ -41,6 +43,8 @@ public class SearchActivity extends BaseActivity<SearchContract.Presenter> imple
     LinearLayout mLinearSearch;
     @BindView(R.id.frame_search)
     FrameLayout mFrameSearch;
+    @BindView(R.id.relative_search_delete)
+    RelativeLayout mRelativeDelete;
     @BindView(R.id.searchview_search)
     SearchView mSearchView;
     @BindView(R.id.busview_search)
@@ -84,6 +88,11 @@ public class SearchActivity extends BaseActivity<SearchContract.Presenter> imple
     @Override
     protected void onStart() {
         super.onStart();
+        if (UtilMethod.isLogin(getmActivity())) {
+            mRelativeDelete.setVisibility(View.VISIBLE);
+        } else {
+            mRelativeDelete.setVisibility(View.GONE);
+        }
         getPresenter().getDataForBusCount();
     }
 

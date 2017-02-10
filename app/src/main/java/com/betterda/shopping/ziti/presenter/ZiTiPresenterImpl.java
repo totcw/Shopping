@@ -112,6 +112,7 @@ public class ZiTiPresenterImpl  extends BasePresenter<ZiTiContract.View,ZiTiCont
                                         if (BuildConfig.LOG_DEBUG) {
                                             System.out.println("token失效");
                                         }
+                                        getView().ExitToLogin();
                                     }
                                 }));
                     }

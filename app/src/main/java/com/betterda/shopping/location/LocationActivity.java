@@ -27,13 +27,18 @@ import com.baidu.mapapi.search.sug.SuggestionResult;
 import com.baidu.mapapi.search.sug.SuggestionSearch;
 import com.baidu.mapapi.search.sug.SuggestionSearchOption;
 import com.betterda.mylibrary.LoadingPager;
+import com.betterda.shopping.BuildConfig;
 import com.betterda.shopping.R;
 
 import com.betterda.shopping.address.AddAddressActivity;
 import com.betterda.shopping.base.BaseActivity;
+import com.betterda.shopping.http.MyObserver;
+import com.betterda.shopping.http.NetWork;
+import com.betterda.shopping.javabean.BaseCallModel;
 import com.betterda.shopping.location.contract.LocationContract;
 import com.betterda.shopping.location.model.Address;
 import com.betterda.shopping.location.presenter.LocationPresenterImpl;
+import com.betterda.shopping.login.LoginActivity;
 import com.betterda.shopping.utils.UiUtils;
 import com.betterda.shopping.utils.UtilMethod;
 import com.zhy.base.adapter.ViewHolder;
@@ -70,7 +75,7 @@ public class LocationActivity extends BaseActivity<LocationContract.Presenter> i
     TextView mTvAddress;//当前地址
     @BindView(R.id.tv_loaction_dingwei)
     TextView mTvDingwei;//定位按钮
-     @BindView(R.id.tv__search_cancel)
+    @BindView(R.id.tv__search_cancel)
     TextView mTvCancel;//取消
     @BindView(R.id.et_search)
     EditText et_search;//搜索的输入框
@@ -89,7 +94,7 @@ public class LocationActivity extends BaseActivity<LocationContract.Presenter> i
     @BindView(R.id.frame_location_show)
     FrameLayout frame_location_show;//搜索的阴影层
     @BindView(R.id.frame_pp_choseaddress)
-    FrameLayout  frame_pp_choseaddress; //搜藏层
+    FrameLayout frame_pp_choseaddress; //搜藏层
 
     private int currententValue;//记录当前的值
     private boolean isFinishAnim;//是否完成过动画
@@ -124,7 +129,7 @@ public class LocationActivity extends BaseActivity<LocationContract.Presenter> i
     public void init() {
         super.init();
         mLinearSearch.setBackgroundColor(getResources().getColor(R.color.backgroudyellow));
-
+        et_search.setHint("请输入地址");
         initSuggestionAndLocation();
         list = new ArrayList<>();
         listLocation = new ArrayList<>();
@@ -138,16 +143,15 @@ public class LocationActivity extends BaseActivity<LocationContract.Presenter> i
     }
 
 
-
-    @OnClick({R.id.linear_location_current,R.id.tv__search_cancel ,R.id.frame_location_show
-    ,R.id.iv_layout_search_delete,R.id.et_search,R.id.relative_location_delete,
-            R.id.tv_loaction_dingwei,R.id.tv_location_choseaddress})
+    @OnClick({R.id.linear_location_current, R.id.tv__search_cancel, R.id.frame_location_show
+            , R.id.iv_layout_search_delete, R.id.et_search, R.id.relative_location_delete,
+            R.id.tv_loaction_dingwei, R.id.tv_location_choseaddress})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.linear_location_current://点击当前地址
                 if (mTvAddress != null) {
                     String address = (String) mTvAddress.getText();
-                    if (TextUtils.isEmpty(address )|| "定位失败".equals(address)) {
+                    if (TextUtils.isEmpty(address) || "定位失败".equals(address)) {
                         return;
                     }
                 }
@@ -181,9 +185,14 @@ public class LocationActivity extends BaseActivity<LocationContract.Presenter> i
                 }
                 break;
             case R.id.tv_location_choseaddress://新增收货地址
-                Intent intent = new Intent(getmActivity(), AddAddressActivity.class);
-                intent.putExtra("isAdd", true);
-                UiUtils.startIntent(getmActivity(), intent);
+                if (UtilMethod.isLogin(getmActivity())) {
+
+                    Intent intent = new Intent(getmActivity(), AddAddressActivity.class);
+                    intent.putExtra("isAdd", true);
+                    UiUtils.startIntent(getmActivity(), intent);
+                } else {
+                    UiUtils.startIntent(getmActivity(), LoginActivity.class);
+                }
                 break;
         }
     }
@@ -209,6 +218,7 @@ public class LocationActivity extends BaseActivity<LocationContract.Presenter> i
 
     /**
      * 建议查询需要实现的类
+     *
      * @param res
      */
     @Override
@@ -299,7 +309,7 @@ public class LocationActivity extends BaseActivity<LocationContract.Presenter> i
 
                             }
                             close(address.getKey());
-                           // uploadAddress(address.getLongitude(), address.getLatitude(), address.getKey(), address.getAddress());
+                            // uploadAddress(address.getLongitude(), address.getLatitude(), address.getKey(), address.getAddress());
                         }
                     });
                 }
@@ -322,7 +332,17 @@ public class LocationActivity extends BaseActivity<LocationContract.Presenter> i
             public void convert(ViewHolder holder, final com.betterda.shopping.javabean.Address address) {
                 if (null != address) {
                     holder.setVisible(R.id.relative_item_address, false);
+                    holder.setText(R.id.tv_address_name, address.getConsigneeName());
+                    holder.setText(R.id.tv_address_number, address.getMobilePhone());
+                    holder.setText(R.id.tv_address_address, address.getAddress());
+                    holder.setText(R.id.tv_address_address2, address.getDetailAddress());
 
+                    holder.setOnClickListener(R.id.linear_item_address, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            close(address.getDetailAddress());
+                        }
+                    });
                 }
             }
         };
@@ -330,7 +350,6 @@ public class LocationActivity extends BaseActivity<LocationContract.Presenter> i
         mRvLocation.setLayoutManager(new LinearLayoutManager(this));
         mRvLocation.setAdapter(adapterLocation);
     }
-
 
 
     /**
@@ -385,7 +404,6 @@ public class LocationActivity extends BaseActivity<LocationContract.Presenter> i
     }
 
 
-
     /**
      * 关闭选择地址界面
      */
@@ -395,11 +413,12 @@ public class LocationActivity extends BaseActivity<LocationContract.Presenter> i
         }
         Intent intent = new Intent();
         intent.putExtra("address", city);
-        intent.putExtra("longitude",longitude);
-        intent.putExtra("dimension",dimension);
+        intent.putExtra("longitude", longitude);
+        intent.putExtra("dimension", dimension);
         setResult(0, intent);
         back();
     }
+
     /**
      * 开启动画
      */
@@ -491,6 +510,7 @@ public class LocationActivity extends BaseActivity<LocationContract.Presenter> i
 
         }
     }
+
     /**
      * 打开软键盘
      */
@@ -570,12 +590,42 @@ public class LocationActivity extends BaseActivity<LocationContract.Presenter> i
     }
 
     private void getData() {
-        for (int i=0;i<3;i++) {
-            listLocation.add(new com.betterda.shopping.javabean.Address());
+        if (!UtilMethod.isLogin(getmActivity())) {
+            return;
         }
-        adapterLocation.notifyDataSetChanged();
-    }
+        getRxManager().add(NetWork.getNetService()
+                .getAddress(getAccount(), getToken())
+                .compose(NetWork.handleResult(new BaseCallModel<List<com.betterda.shopping.javabean.Address>>()))
+                .subscribe(new MyObserver<List<com.betterda.shopping.javabean.Address>>() {
+                    @Override
+                    protected void onSuccess(List<com.betterda.shopping.javabean.Address> data, String resultMsg) {
+                        if (listLocation != null) {
+                            listLocation.clear();
+                            listLocation.addAll(data);
+                        }
+                        if (adapterLocation != null) {
+                            adapterLocation.notifyDataSetChanged();
+                        }
 
+                        if (BuildConfig.LOG_DEBUG) {
+                            System.out.println("收货地址sussecs:" + data.toString());
+                        }
+                    }
+
+                    @Override
+                    public void onFail(String resultMsg) {
+
+                        if (BuildConfig.LOG_DEBUG) {
+                            System.out.println("收货地址fail:" + resultMsg);
+                        }
+                    }
+
+                    @Override
+                    public void onExit() {
+                            ExitToLogin();
+                    }
+                }));
+    }
 
 
     @Override

@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 
 
 import com.betterda.shopping.shouye.contract.ShouYeContract;
-import com.betterda.shopping.shouye.model.LunBoTu;
+import com.betterda.shopping.javabean.LunBoTu;
 
 import java.util.List;
 

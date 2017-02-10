@@ -332,7 +332,7 @@ public class InformationActivity extends BaseActivity<InformationContract.Presen
                 .compose(NetWork.handleResult(new BaseCallModel<String>()))
                 .subscribe(new MyObserver<String>() {
                     @Override
-                    protected void onSuccess(String data, String resultMsg) {
+                    protected void onSuccess(final String data, String resultMsg) {
                         if (BuildConfig.LOG_DEBUG) {
                             System.out.println("图片上传路径success:"+data.toString());
                         }
@@ -342,7 +342,7 @@ public class InformationActivity extends BaseActivity<InformationContract.Presen
                                 .compose(NetWork.handleResult(new BaseCallModel<String>()))
                                 .subscribe(new MyObserver<String>() {
                                     @Override
-                                    protected void onSuccess(String data, String resultMsg) {
+                                    protected void onSuccess(String data2, String resultMsg) {
                                         UiUtils.showToast(getmActivity(),resultMsg);
                                         mSvInformationTouxinag.setImageBitmap(pic);
                                         CacheUtils.putString(getmActivity(), getAccount() + Constants.Cache.TOUXIANG, data);
@@ -355,7 +355,7 @@ public class InformationActivity extends BaseActivity<InformationContract.Presen
 
                                     @Override
                                     public void onExit() {
-
+                                        ExitToLogin();
                                     }
                                 }));
 
@@ -376,6 +376,7 @@ public class InformationActivity extends BaseActivity<InformationContract.Presen
                         if (BuildConfig.LOG_DEBUG) {
                             System.out.println("token");
                         }
+                        ExitToLogin();
                     }
                 }));
             }

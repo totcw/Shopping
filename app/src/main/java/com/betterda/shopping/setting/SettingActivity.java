@@ -12,6 +12,7 @@ import com.betterda.shopping.information.InformationActivity;
 import com.betterda.shopping.setting.contract.SettingContract;
 import com.betterda.shopping.setting.presenter.SettingPresenterImpl;
 import com.betterda.shopping.utils.UiUtils;
+import com.betterda.shopping.utils.UtilMethod;
 import com.betterda.shopping.widget.NormalTopBar;
 
 import butterknife.BindView;
@@ -57,7 +58,7 @@ public class SettingActivity extends BaseActivity<SettingContract.Presenter> imp
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.linear_setting_ziliao:
-                UiUtils.startIntent(getmActivity(), InformationActivity.class);
+                UtilMethod.isLogin(getmActivity(),InformationActivity.class);
                 break;
             case R.id.linear_setting_editpwd:
                 UiUtils.startIntent(getmActivity(), FindPwdActivity.class);

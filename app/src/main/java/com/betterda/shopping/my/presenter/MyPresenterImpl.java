@@ -29,7 +29,7 @@ public class MyPresenterImpl extends BasePresenter<MyContract.View,MyContract.Mo
             if (!TextUtils.isEmpty(number)) {
                 if (getView().getTextViewNumber() != null) {
                     //显示用户的昵称
-                    String nickname = CacheUtils.getString(getView().getmActivity(), number +Constants.Cache.ACCOUNT, "还没有昵称呢");
+                    String nickname = CacheUtils.getString(getView().getmActivity(), number +Constants.Cache.NICKNAME, "还没有昵称呢");
                     getView().getTextViewNumber().setText(nickname);
                 }
                 String touxiang = CacheUtils.getString(getView().getmActivity(), number + Constants.Cache.TOUXIANG, "");

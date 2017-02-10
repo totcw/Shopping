@@ -121,7 +121,7 @@ public class NameActivity extends BaseActivity {
 
                     @Override
                     public void onExit() {
-
+                        ExitToLogin();
                     }
                 }));
             }

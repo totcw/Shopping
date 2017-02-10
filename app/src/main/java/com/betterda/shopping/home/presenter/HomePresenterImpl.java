@@ -19,6 +19,7 @@ import com.betterda.shopping.javabean.BaseCallModel;
 import com.betterda.shopping.my.MyFragment;
 import com.betterda.shopping.shouye.ShouYeFragment;
 import com.betterda.shopping.sort.SortFragment;
+import com.betterda.shopping.utils.UtilMethod;
 
 /**
  * Created by Administrator on 2016/12/05
@@ -134,37 +135,51 @@ public class HomePresenterImpl extends BasePresenter<HomeContract.View, HomeCont
      * 获取购物车数量
      */
     public void getData() {
-        getView().getRxManager().add(NetWork.getNetService()
-                .getBusCount(getView().getAccount(), getView().getToken())
-                .compose(NetWork.handleResult(new BaseCallModel<String>()))
-                .subscribe(new MyObserver<String>() {
-                    @Override
-                    protected void onSuccess(String data, String resultMsg) {
-                        if (BuildConfig.LOG_DEBUG) {
-                            System.out.println("首页bus:" + data);
+        if (UtilMethod.isLogin(getView().getmActivity())) {
+
+            getView().getRxManager().add(NetWork.getNetService()
+                    .getBusCount(getView().getAccount(), getView().getToken())
+                    .compose(NetWork.handleResult(new BaseCallModel<String>()))
+                    .subscribe(new MyObserver<String>() {
+                        @Override
+                        protected void onSuccess(String data, String resultMsg) {
+                            if (BuildConfig.LOG_DEBUG) {
+                                System.out.println("首页bus:" + data);
+                            }
+                            if (!"0".equals(data)) {
+                                getView().getBusView().setTvBusVisable(true);
+                                getView().getBusView().setTvBusText(data);
+                            } else {
+                                getView().getBusView().setTvBusVisable(false);
+                                getView().getBusView().setTvBusText("0");
+                            }
                         }
-                        if (!"0".equals(data)) {
-                            getView().getBusView().setTvBusVisable(true);
-                            getView().getBusView().setTvBusText(data);
-                        } else {
+
+                        @Override
+                        public void onFail(String resultMsg) {
+                            if (BuildConfig.LOG_DEBUG) {
+                                System.out.println("首页busfail:" + resultMsg);
+                            }
+
                             getView().getBusView().setTvBusVisable(false);
                             getView().getBusView().setTvBusText("0");
-                        }
-                    }
 
-                    @Override
-                    public void onFail(String resultMsg) {
-                        if (BuildConfig.LOG_DEBUG) {
-                            System.out.println("首页busfail:" + resultMsg);
+
                         }
 
-                    }
+                        @Override
+                        public void onExit() {
+                            if (BuildConfig.LOG_DEBUG) {
+                                System.out.println("token:");
+                            }
+                            getView().ExitToLogin();
+                        }
+                    }));
+        } else {
+            getView().getBusView().setTvBusVisable(false);
+            getView().getBusView().setTvBusText("0");
+        }
 
-                    @Override
-                    public void onExit() {
-
-                    }
-                }));
     }
 
     @Override

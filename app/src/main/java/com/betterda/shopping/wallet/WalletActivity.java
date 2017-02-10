@@ -34,7 +34,7 @@ public class WalletActivity extends BaseActivity<WalletContract.Presenter> imple
     @BindView(R.id.loadpager_wallet)
     LoadingPager mLoadpagerWallet;
 
-    private String cashWallet;//现金钱包
+    private String cashWallet ;//现金钱包
     private String consumptionWallet;//消费钱包
 
     @Override

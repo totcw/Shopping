@@ -111,6 +111,8 @@ public class SortFragment extends BaseFragment<SortContract.Presenter> implement
         } else {
             StatusBarCompat.setStatusBar5(getmActivity(),R.color.white);
             ((MainActivity)getmActivity()).getmBvMain().setVisibility(View.VISIBLE);
+            getPresenter().getCacheData();
+            getPresenter().getData();
         }
     }
 

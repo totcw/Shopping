@@ -34,7 +34,7 @@ public class Constants {
         public static final String URL_LOGIN = "appAPI.do?api/account/user/login";
         public static final String URL_LOGINTHREE = "appAPI.do?api/account/third/login";//三方登录
         public static final String URL_PWD_UPDATE = "appAPI.do?api/account/update";//修改密码,头像
-        public static final String URL_LUNBO ="appAPI.do?api/indeximages/get";//轮播广告
+        public static final String URL_LUNBO ="appAPI.do?api/account/indeximg/get";//轮播广告
         public static final String URL_ADD_BANK = "appAPI.do?api/account/bank/add";//添加银行卡
         public static final String URL_GET_BANK = "appAPI.do?api/account/bank/get";//获取银行卡列表
         public static final String URL_DEL_BANK = "appAPI.do?api/account/bank/del";//删除银行卡
@@ -58,6 +58,7 @@ public class Constants {
         public static final String URL_SEARCH = "appAPI.do?api/product/search";//搜索
         public static final String URL_SEARCH_REMEN = "appAPI.do?api/hotSearch/get";//获取热门搜索记录
         public static final String URL_SEARCH_JILU = "appAPI.do?api/account/search/get";//获取搜索记录
+        public static final String URL_SEARCH_DELETE = "appAPI.do?api/account/search/del";//删除搜索记录
         public static final String URL_ADD_ORDER = "appAPI.do?api/account/order/add";//生成订单
         public static final String URL_GET_ORDER = "appAPI.do?api/account/order/get";//获取订单列表
         public static final String URL_GET_ORDERDETAIL = "appAPI.do?api/account/order/detail/get";//获取订单详情

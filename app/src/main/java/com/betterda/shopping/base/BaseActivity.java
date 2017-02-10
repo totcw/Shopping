@@ -3,11 +3,13 @@ package com.betterda.shopping.base;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.view.ViewCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
@@ -21,6 +23,7 @@ import com.betterda.mylibrary.Utils.StatusBarCompat;
 import com.betterda.shopping.BuildConfig;
 import com.betterda.shopping.R;
 import com.betterda.shopping.application.MyApplication;
+import com.betterda.shopping.login.LoginActivity;
 import com.betterda.shopping.utils.CacheUtils;
 import com.betterda.shopping.utils.Constants;
 import com.betterda.shopping.utils.PermissionUtil;
@@ -44,7 +47,8 @@ public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivi
     protected P mPresenter;
     protected RxManager mRxManager;
     private PopupWindow popupWindow;
-
+    private AlertDialog.Builder builder;
+    private boolean isDismiss;//token 失效对话框 是否已经显示
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +88,7 @@ public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivi
     protected void onResume() {
         super.onResume();
         //统一检查权限
-        PermissionUtil.checkPermission(getmActivity(), REQUEST_PERMISSIONS,  new PermissionUtil.permissionInterface() {
+        PermissionUtil.checkPermission(getmActivity(), REQUEST_PERMISSIONS, new PermissionUtil.permissionInterface() {
             @Override
             public void success() {
 
@@ -92,7 +96,7 @@ public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivi
 
             @Override
             public void fail(List<String> permissions) {
-                    //没有权限就回到欢迎页面
+                //没有权限就回到欢迎页面
                 UiUtils.startIntent(getmActivity(), WelcomeActivity.class);
 
             }
@@ -144,6 +148,7 @@ public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivi
 
     /**
      * 获取帐号
+     *
      * @return
      */
     public String getAccount() {
@@ -152,10 +157,11 @@ public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivi
 
     /**
      * 获取token
+     *
      * @return
      */
     public String getToken() {
-        return  CacheUtils.getString(getmActivity(), getAccount()+Constants.Cache.TOKEN, "");
+        return CacheUtils.getString(getmActivity(), getAccount() + Constants.Cache.TOKEN, "");
     }
 
 
@@ -176,14 +182,52 @@ public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivi
         return mRxManager;
     }
 
-    public LoadingPager getLodapger(){
+    public LoadingPager getLodapger() {
         return null;
-    };
+    }
+
+    ;
+
+    /**
+     * 强制跳转到登录界面
+     */
+    public void ExitToLogin() {
+        if (!isDismiss) {
+            isDismiss = true;
+            if (builder == null) {
+                builder = new AlertDialog.Builder(getmActivity());
+            }
+            builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(DialogInterface dialog) {
+                    isDismiss = false;
+                    builder = null;
+                }
+            });
+
+            builder.setTitle("温馨提示")
+                    .setMessage("您的帐号已在别处登录,请重新登录")
+                    .setNegativeButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            CacheUtils.putBoolean(getmActivity(), Constants.Cache.ISLOGIN, false);
+                            CacheUtils.putString(getmActivity(), Constants.Cache.ACCOUNT, "");
+                            UiUtils.startIntent(getmActivity(), LoginActivity.class);
+                        }
+                    })
+                    .setCancelable(false)
+                    .show();
+        }
+
+
+    }
+
 
     /**
      * 初始化并显示PopupWindow
      *
-     * @param view     要显示的界面
+     * @param view 要显示的界面
      */
     public void setUpPopupWindow(View view) {
         // 如果activity不在运行 就返回
@@ -204,7 +248,7 @@ public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivi
 
         if (popupWindow != null) {
             if (!popupWindow.isShowing()) {
-                    //设置动画
+                //设置动画
                 popupWindow.setAnimationStyle(R.style.popwin_anim_style);
                 popupWindow.showAtLocation(view, Gravity.BOTTOM, 0, 0);
 
@@ -221,8 +265,6 @@ public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivi
                 popupWindow = null;
             }
         });
-
-
 
 
     }
@@ -269,7 +311,6 @@ public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivi
 
         super.onDestroy();
     }
-
 
 
 }

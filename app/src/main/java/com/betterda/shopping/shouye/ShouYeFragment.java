@@ -24,6 +24,7 @@ import com.betterda.shopping.search.SearchActivity;
 import com.betterda.shopping.shouye.contract.ShouYeContract;
 import com.betterda.shopping.shouye.presenter.ShouYePresenterImpl;
 import com.betterda.shopping.utils.UiUtils;
+import com.betterda.shopping.utils.UtilMethod;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -113,12 +114,14 @@ public class ShouYeFragment extends BaseFragment<ShouYeContract.Presenter> imple
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.linear_location:
+
                 Intent intent = new Intent(getmActivity(), LocationActivity.class);
                 startActivityForResult(intent, 0);
                 UiUtils.setOverdepengingIn(getmActivity());
                 break;
             case R.id.relative_shouye_message:
-                UiUtils.startIntent(getmActivity(), MeassageActivity.class);
+                UtilMethod.isLogin(getmActivity(),MeassageActivity.class);
+
                 break;
             case R.id.iv_shouye_search:
                 UiUtils.startIntent(getmActivity(), SearchActivity.class);

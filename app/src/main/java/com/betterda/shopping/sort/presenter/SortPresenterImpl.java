@@ -17,6 +17,7 @@ import com.betterda.shopping.http.MyObserver;
 import com.betterda.shopping.http.NetWork;
 import com.betterda.shopping.javabean.BaseCallModel;
 import com.betterda.shopping.javabean.ShopBrand;
+import com.betterda.shopping.login.LoginActivity;
 import com.betterda.shopping.productdetails.ProductDetailActivity;
 import com.betterda.shopping.sort.contract.SortContract;
 import com.betterda.shopping.sort.model.Chose;
@@ -69,9 +70,7 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
         attachModel(new SortModelImpl());
         initSortRecycleview();
         initNameRecycleview();
-        getCacheData();
 
-        getData();
     }
 
 
@@ -143,14 +142,40 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
                     holder.setOnClickListener(R.id.iv_item_sort_name_add, new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            ViewGroup viewgroup = getView().getViewgroup();
-                            View busView = getView().getBusView();
-                            AnimUtils.playAnimation(getView().getmActivity(), view, viewgroup, busView, new AnimUtils.AnimEndListener() {
-                                @Override
-                                public void end() {
-                                    getView().addBus(1);
-                                }
-                            });
+                            if (UtilMethod.isLogin(getView().getmActivity())) {
+                                ViewGroup viewgroup = getView().getViewgroup();
+                                View busView = getView().getBusView();
+                                AnimUtils.playAnimation(getView().getmActivity(), view, viewgroup, busView, new AnimUtils.AnimEndListener() {
+                                    @Override
+                                    public void end() {
+
+                                        getView().getRxManager().add(NetWork.getNetService()
+                                                .addBus(getView().getAccount(), getView().getToken(), s.getId(), "1")
+                                                .compose(NetWork.handleResult(new BaseCallModel<String>()))
+                                                .subscribe(new MyObserver<String>() {
+                                                    @Override
+                                                    protected void onSuccess(String data, String resultMsg) {
+
+                                                        UiUtils.showToast(getView().getmActivity(), resultMsg);
+                                                        getView().addBus(1);
+                                                    }
+
+                                                    @Override
+                                                    public void onFail(String resultMsg) {
+                                                        UiUtils.showToast(getView().getmActivity(), resultMsg);
+                                                    }
+
+                                                    @Override
+                                                    public void onExit() {
+                                                            getView().ExitToLogin();
+                                                    }
+                                                }));
+                                    }
+                                });
+                            } else {
+                                UiUtils.startIntent(getView().getmActivity(), LoginActivity.class);
+                            }
+
 
                         }
                     });
@@ -300,7 +325,7 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
     /**
      * 获取缓存数据 如:品牌
      */
-    private void getCacheData() {
+    public void getCacheData() {
         String string = CacheUtils.getString(getView().getmActivity(), Constants.Cache.PINPAI, "");
         if (TextUtils.isEmpty(string)) {//如果为空,表示没有缓存,需要从服务器去获取
             getView().getRxManager().add(NetWork.getNetService()
@@ -340,7 +365,7 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
     /**
      * 获取商品类型
      */
-    private void getData() {
+    public void getData() {
         getView().getRxManager().add(NetWork.getNetService()
                 .getShopTypeList()
                 .compose(NetWork.handleResult(new BaseCallModel<List<Sort>>()))
@@ -360,7 +385,9 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
 
                     @Override
                     public void onFail(String resultMsg) {
-
+                        if (BuildConfig.LOG_DEBUG) {
+                            System.out.println("获取商品类型fail:"+resultMsg);
+                        }
                     }
 
                     @Override

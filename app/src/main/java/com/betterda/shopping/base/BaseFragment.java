@@ -1,9 +1,11 @@
 package com.betterda.shopping.base;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -13,6 +15,7 @@ import android.widget.PopupWindow;
 
 import com.betterda.mylibrary.LoadingPager;
 import com.betterda.shopping.R;
+import com.betterda.shopping.login.LoginActivity;
 import com.betterda.shopping.utils.CacheUtils;
 import com.betterda.shopping.utils.Constants;
 import com.betterda.shopping.utils.RxManager;
@@ -29,7 +32,8 @@ public abstract class BaseFragment <P extends IPresenter> extends Fragment imple
     protected P mPresenter;
     protected RxManager mRxManager;
     private PopupWindow popupWindow;
-
+    private AlertDialog.Builder builder;
+    private boolean isDismiss;//token 失效对话框 是否已经显示
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -127,6 +131,40 @@ public abstract class BaseFragment <P extends IPresenter> extends Fragment imple
     public LoadingPager getLodapger(){
         return null;
     };
+
+    /**
+     * 强制跳转到登录界面
+     */
+    public void ExitToLogin() {
+        if (!isDismiss) {
+            isDismiss = true;
+            if (builder == null) {
+                builder = new AlertDialog.Builder(getmActivity());
+            }
+            builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(DialogInterface dialog) {
+                    isDismiss = false;
+                    builder = null;
+                }
+            });
+
+            builder.setTitle("温馨提示")
+                    .setMessage("您的帐号已在别处登录,请重新登录")
+                    .setNegativeButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            UiUtils.startIntent(getmActivity(), LoginActivity.class);
+                        }
+                    })
+                    .setCancelable(false)
+                    .show();
+        }
+
+
+    }
+
 
     /**
      * 初始化并显示PopupWindow

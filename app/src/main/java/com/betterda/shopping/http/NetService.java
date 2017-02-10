@@ -16,7 +16,7 @@ import com.betterda.shopping.javabean.UserInfo;
 import com.betterda.shopping.javabean.Wallet;
 import com.betterda.shopping.javabean.ZItiMa;
 import com.betterda.shopping.javabean.MeassageContent;
-import com.betterda.shopping.shouye.model.LunBoTu;
+import com.betterda.shopping.javabean.LunBoTu;
 import com.betterda.shopping.sort.model.Shopping;
 import com.betterda.shopping.sort.model.Sort;
 import com.betterda.shopping.utils.Constants;
@@ -417,8 +417,8 @@ public interface NetService {
      * @return
      */
     @FormUrlEncoded
-    @POST(Constants.Url.URL_LUNBO)
-    Observable<BaseCallModel<List<BankCard>>> deleteSearch(@Field("account") String account,
+    @POST(Constants.Url.URL_SEARCH_DELETE)
+    Observable<BaseCallModel<String>> deleteSearch(@Field("account") String account,
                                                            @Field("token") String token
     );
 

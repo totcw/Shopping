@@ -9,7 +9,9 @@ import android.widget.TextView;
 
 import com.betterda.shopping.R;
 import com.betterda.shopping.bus.BusActivity;
+import com.betterda.shopping.login.LoginActivity;
 import com.betterda.shopping.utils.UiUtils;
+import com.betterda.shopping.utils.UtilMethod;
 
 /**
  * 购物车控件
@@ -34,7 +36,7 @@ public class BusView extends FrameLayout{
         mRelativeBus.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                UiUtils.startIntent(context, BusActivity.class);
+                UtilMethod.isLogin(context, LoginActivity.class);
             }
         });
     }

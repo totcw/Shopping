@@ -1,10 +1,7 @@
 package com.betterda.shopping.shouye.presenter;
 import android.app.Activity;
-import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.Fragment;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.view.MotionEvent;
@@ -12,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.betterda.shopping.BuildConfig;
 import com.betterda.shopping.R;
 import com.betterda.shopping.base.BasePresenter;
 import com.betterda.shopping.factory.LoadImageFactory;
@@ -20,18 +18,12 @@ import com.betterda.shopping.http.NetWork;
 import com.betterda.shopping.javabean.BaseCallModel;
 import com.betterda.shopping.shouye.adapter.LunBoTuAdapter;
 import com.betterda.shopping.shouye.contract.ShouYeContract;
-import com.betterda.shopping.shouye.model.LunBoTu;
-import com.betterda.shopping.utils.GlideCircleTransform;
-import com.betterda.shopping.utils.GlideRoundTransform;
+import com.betterda.shopping.javabean.LunBoTu;
 import com.betterda.shopping.utils.UtilMethod;
-import com.bumptech.glide.Glide;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
-import static android.R.attr.fragment;
 
 /**
 * Created by Administrator on 2016/12/08
@@ -66,7 +58,9 @@ public class ShouYePresenterImpl extends BasePresenter<ShouYeContract.View,ShouY
         .subscribe(new MyObserver<List<LunBoTu>>() {
             @Override
             protected void onSuccess(List<LunBoTu> data, String resultMsg) {
-
+                if (BuildConfig.LOG_DEBUG) {
+                    System.out.println("轮播图success:"+resultMsg);
+                }
 
                 if (stringList != null) {
                     stringList.clear();
@@ -81,7 +75,9 @@ public class ShouYePresenterImpl extends BasePresenter<ShouYeContract.View,ShouY
 
             @Override
             public void onFail(String resultMsg) {
-
+                if (BuildConfig.LOG_DEBUG) {
+                    System.out.println("轮播图fail:"+resultMsg);
+                }
             }
 
             @Override
@@ -285,7 +281,7 @@ public class ShouYePresenterImpl extends BasePresenter<ShouYeContract.View,ShouY
             });
             // 从服务器获取图片
             if (null != stringList) {
-                String url = stringList.get(position).getUrl();
+                String url = stringList.get(position).getpicture();
                 if (!TextUtils.isEmpty(url)) {
                     LoadImageFactory.getLoadImageInterface().loadImageCrop(getView().getmActivity(),url,iv);
                 }
