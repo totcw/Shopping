@@ -445,8 +445,9 @@ public interface NetService {
      */
     @FormUrlEncoded
     @POST(Constants.Url.URL_GET_LOCATION)
-    Observable<BaseCallModel<List<Location>>> getShop(@Field("latitude") String latitude,
-                                                      @Field("longitude") String longitude
+    Observable<BaseCallModel<List<Location>>> getShop(@Field("longitude") String longitude,
+            @Field("latitude") String latitude
+
 
     );
 

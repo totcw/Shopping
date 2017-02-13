@@ -60,6 +60,7 @@ public class MeassageActivity extends BaseActivity<MeassageContract.Presenter> i
         mRecycleview.setVisibility(View.VISIBLE);
         mRecycleview.setLayoutManager(new LinearLayoutManager(getmActivity()));
         mRecycleview.setLoadingMoreEnabled(true);
+        mRecycleview.setPullRefreshEnabled(false);
         mRecycleview.setAdapter(adapter);
         mRecycleview.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override

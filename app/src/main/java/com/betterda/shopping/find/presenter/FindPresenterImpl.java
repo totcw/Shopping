@@ -45,7 +45,7 @@ public class FindPresenterImpl extends BasePresenter<FindContract.View, FindCont
                             for (Location location : data) {
                                 if (location != null) {
                                     try {
-                                        getView().marker(Double.valueOf(location.getLongitude()), Double.valueOf(location.getLatitude()), location.getDistance(),location.getShopName());
+                                        getView().marker(Double.valueOf(location.getLatitude()), Double.valueOf(location.getLongitude()), location.getDistance(),location.getShopName());
                                     } catch (Exception e) {
 
                                     }

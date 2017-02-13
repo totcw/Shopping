@@ -43,12 +43,13 @@ public class MyYinHangKaActivity extends BaseActivity<MyYinHangKaContract.Presen
         setContentView(R.layout.activity_myyinhangka);
     }
 
+
+
     @Override
     public void init() {
         super.init();
         setTopBar();
 
-        mLoadingpager.setLoadVisable();
 
         initRv();
     }
@@ -72,6 +73,11 @@ public class MyYinHangKaActivity extends BaseActivity<MyYinHangKaContract.Presen
         }
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        getPresenter().onStart();
+    }
 
     private void initRv() {
         mRecycleview.setLayoutManager(new LinearLayoutManager(getmActivity()));

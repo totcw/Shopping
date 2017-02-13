@@ -9,6 +9,7 @@ import com.betterda.shopping.R;
 import com.betterda.shopping.base.BaseActivity;
 import com.betterda.shopping.pay.contract.PayContract;
 import com.betterda.shopping.pay.presenter.PayPresenterImpl;
+import com.betterda.shopping.utils.UiUtils;
 import com.betterda.shopping.widget.NormalTopBar;
 
 import butterknife.BindView;
@@ -61,6 +62,7 @@ public class PayActivity extends BaseActivity<PayContract.Presenter> implements 
             case R.id.relative_pay_zfbpay:
                 break;
             case R.id.relative_pay_wypay:
+                UiUtils.startIntent(getmActivity(),JsActivity.class);
                 break;
             case R.id.btn_pay_confirm:
                 break;
