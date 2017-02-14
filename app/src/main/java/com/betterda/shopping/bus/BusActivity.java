@@ -63,7 +63,12 @@ public class BusActivity extends BaseActivity<BusContract.Presenter> implements 
         mTopBar.setTitle("购物车");
         mTopBar.setActionText("编辑");
         mTopBar.setActionTextVisibility(true);
-
+        loadpagerBus.setonErrorClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getPresenter().onError();
+            }
+        });
     }
 
     @OnClick({R.id.relative_bus_check, R.id.iv_bus_jiesuan, R.id.iv_bus_delete, R.id.bar_back, R.id.bar_action})

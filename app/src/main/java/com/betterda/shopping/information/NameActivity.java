@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.betterda.mylibrary.ShapeLoadingDialog;
 import com.betterda.shopping.R;
 import com.betterda.shopping.base.BaseActivity;
 import com.betterda.shopping.base.IPresenter;
@@ -102,6 +103,8 @@ public class NameActivity extends BaseActivity {
         NetworkUtils.isNetWork(getmActivity(), etNameName, new NetworkUtils.SetDataInterface() {
             @Override
             public void getDataApi() {
+                final ShapeLoadingDialog dialog = UiUtils.createDialog(getmActivity(), "正在提交...");
+                UiUtils.showDialog(getmActivity(),dialog);
                 getRxManager().add(NetWork.getNetService()
                 .getPwdUpdate(getAccount(),null,name,null)
                 .compose(NetWork.handleResult(new BaseCallModel<String>()))
@@ -109,6 +112,7 @@ public class NameActivity extends BaseActivity {
                     @Override
                     protected void onSuccess(String data, String resultMsg) {
                         UiUtils.showToast(getmActivity(),resultMsg);
+                        UiUtils.dissmissDialog(getmActivity(),dialog);
                         //缓存昵称
                         CacheUtils.putString(getmActivity(), getAccount() + Constants.Cache.NICKNAME, name);
                         finish();
@@ -116,11 +120,13 @@ public class NameActivity extends BaseActivity {
 
                     @Override
                     public void onFail(String resultMsg) {
+                        UiUtils.dissmissDialog(getmActivity(),dialog);
                         UiUtils.showToast(getmActivity(),resultMsg);
                     }
 
                     @Override
                     public void onExit() {
+                        UiUtils.dissmissDialog(getmActivity(),dialog);
                         ExitToLogin();
                     }
                 }));

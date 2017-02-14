@@ -72,6 +72,11 @@ public class ZiTiPresenterImpl  extends BasePresenter<ZiTiContract.View,ZiTiCont
         return mZiTiCommonAdapter;
     }
 
+    @Override
+    public void onError() {
+        getData();
+    }
+
     private void getData() {
         getView().getLodapger().setLoadVisable();
         NetworkUtils.isNetWork(getView().getmActivity(), getView().getLodapger(), new NetworkUtils.SetDataInterface() {
@@ -90,6 +95,7 @@ public class ZiTiPresenterImpl  extends BasePresenter<ZiTiContract.View,ZiTiCont
                                             System.out.println("自提码success:"+data.toString());
                                         }
                                         if (mZiTiList != null) {
+                                            mZiTiList.clear();
                                             mZiTiList.addAll(data);
                                         }
                                         if (mZiTiCommonAdapter != null) {

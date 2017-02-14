@@ -84,6 +84,12 @@ public class OrderComfirmActivity extends BaseActivity<OrderComfrimContract.Pres
     public void init() {
         super.init();
         mTopbarOder.setTitle("填写订单");
+        mLoadpagerOrder.setonErrorClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getPresenter().onError();
+            }
+        });
     }
 
     @OnClick({R.id.tv_order_pay, R.id.frame_address, R.id.relative_order_fapiao, R.id.relative_order_youhuiquan, R.id.relative_order_peisong, R.id.bar_back})

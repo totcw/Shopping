@@ -48,6 +48,12 @@ public class CommentActivity extends BaseActivity<CommentContract.Presenter> imp
         super.init();
         mTopbarComment.setTitle("商品评论");
         initRvComment();
+        mLoadpagerComment.setonErrorClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getPresenter().onError();
+            }
+        });
     }
 
 

@@ -30,6 +30,7 @@ public class MeassagePresenterImpl  extends BasePresenter<MeassageContract.View,
     @Override
     public void start() {
         initRv();
+        getView().getLodapger().setLoadVisable();
         getData();
     }
 
@@ -52,7 +53,7 @@ public class MeassagePresenterImpl  extends BasePresenter<MeassageContract.View,
 
 
     private void getData() {
-        getView().getLodapger().setLoadVisable();
+
         NetworkUtils.isNetWork(getView().getmActivity(), getView().getLodapger(), new NetworkUtils.SetDataInterface() {
             @Override
             public void getDataApi() {
@@ -97,5 +98,12 @@ public class MeassagePresenterImpl  extends BasePresenter<MeassageContract.View,
     @Override
     public void destroy() {
 
+    }
+
+    @Override
+    public void onError() {
+        getView().getLodapger().setLoadVisable();
+        pageNo = 1;
+        getData();
     }
 }

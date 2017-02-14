@@ -369,8 +369,9 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
     //加载错误
     @Override
     public void onLoadError() {
-            getView().getLodapger().setLoadVisable();
-            getShopList();
+        getView().getLodapger().setLoadVisable();
+        pangeNo = 1;
+        getShopList();
     }
 
 

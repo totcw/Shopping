@@ -43,6 +43,12 @@ public class ZiTiActivity extends BaseActivity<ZiTiContract.Presenter> implement
         super.init();
 
         initRv();
+        mLoadingpager.setonErrorClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getPresenter().onError();
+            }
+        });
     }
 
 

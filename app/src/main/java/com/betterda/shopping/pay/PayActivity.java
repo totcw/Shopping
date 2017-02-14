@@ -62,7 +62,10 @@ public class PayActivity extends BaseActivity<PayContract.Presenter> implements 
             case R.id.relative_pay_zfbpay:
                 break;
             case R.id.relative_pay_wypay:
-                UiUtils.startIntent(getmActivity(),JsActivity.class);
+                Intent intent = new Intent(getmActivity(), JsActivity.class);
+                intent.putExtra("orderId", orderId);
+                intent.putExtra("money", money);
+                UiUtils.startIntent(getmActivity(),intent);
                 break;
             case R.id.btn_pay_confirm:
                 break;

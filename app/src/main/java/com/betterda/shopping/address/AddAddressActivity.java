@@ -286,4 +286,9 @@ public class AddAddressActivity extends BaseActivity<AddAddressContract.Presente
     public String getaddressText() {
         return mEtAddress2.getText().toString().trim();
     }
+
+    @Override
+    public View getTvPwd() {
+        return mTvAddress;
+    }
 }

@@ -97,7 +97,12 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailContract.Presen
     public void init() {
         super.init();
         mTopbarOderdetail.setTitle("订单明细");
-
+        mLoadpagerOrderdetail.setonErrorClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getPresenter().onError();
+            }
+        });
     }
 
     @OnClick({R.id.relative_orderdetail_delete, R.id.relative_orderdetail_pay,

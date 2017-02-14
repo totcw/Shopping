@@ -50,7 +50,13 @@ public class AddressActivity extends BaseActivity<AddressContract.Presenter> imp
         mTopBarAddress.setActionText("添加");
         mTopBarAddress.setActionTextVisibility(true);
 
-        mLoadingpager.setLoadVisable();
+        mLoadingpager.setonErrorClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getPresenter().onError();
+            }
+        });
+
 
     }
 

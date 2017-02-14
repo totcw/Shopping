@@ -44,6 +44,12 @@ public class MeassageActivity extends BaseActivity<MeassageContract.Presenter> i
     public void init() {
         super.init();
         mTopbarMeassage.setTitle("消息");
+        mLoadingpager.setonErrorClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getPresenter().onError();
+            }
+        });
     }
 
     @OnClick({R.id.bar_back})

@@ -19,6 +19,7 @@ public class ZiTiContract {
     public interface Presenter extends IPresenter<View> {
         RecyclerView.Adapter getRvAdapter();
 
+        void onError();
     }
 
     public interface Model extends IModel {

@@ -98,4 +98,9 @@ public class RegisterActivity extends BaseActivity<RegisterContract.Presenter> i
     public String getNumber() {
         return mEtRegisterPhone.getText().toString().trim();
     }
+
+    @Override
+    public EditText getTvPwd() {
+        return mEtRegisterPwd;
+    }
 }

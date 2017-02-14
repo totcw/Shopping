@@ -23,6 +23,8 @@ public class OrderDetailContract {
         void cancel();
 
         void get();
+
+        void onError();
     }
 
     public interface Model extends IModel{

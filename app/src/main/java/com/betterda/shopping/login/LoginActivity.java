@@ -7,6 +7,7 @@ import android.widget.EditText;
 import com.betterda.shopping.R;
 import com.betterda.shopping.base.BaseActivity;
 import com.betterda.shopping.findpwd.FindPwdActivity;
+import com.betterda.shopping.home.MainActivity;
 import com.betterda.shopping.login.contract.LoginContract;
 import com.betterda.shopping.login.presenter.LoginPresenterImpl;
 import com.betterda.shopping.register.RegisterActivity;
@@ -174,4 +175,13 @@ public class LoginActivity extends BaseActivity<LoginContract.Presenter> impleme
         return mEtLoginPwd.getText().toString().trim();
     }
 
+    @Override
+    public EditText getTvPwd() {
+        return mEtLoginPwd;
+    }
+
+    @Override
+    public void onBackPressed() {
+        UiUtils.startIntent(getmActivity(),MainActivity.class);
+    }
 }

@@ -65,7 +65,12 @@ public class SearchActivity extends BaseActivity<SearchContract.Presenter> imple
     public void init() {
         super.init();
         mSearchView.setTvCancelVisable(true);
-
+        mLoadingPager.setonErrorClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getPresenter().onError();
+            }
+        });
     }
 
     @Override

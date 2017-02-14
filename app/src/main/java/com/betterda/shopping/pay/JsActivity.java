@@ -1,5 +1,6 @@
 package com.betterda.shopping.pay;
 
+import android.content.Intent;
 import android.os.Build;
 import android.view.View;
 import android.webkit.JavascriptInterface;
@@ -19,6 +20,8 @@ import com.betterda.shopping.base.IPresenter;
 public class JsActivity extends BaseActivity {
 
     private WebView webView;
+    private String orderId;
+    private float money;
 
     @Override
     public void initView() {
@@ -35,7 +38,11 @@ public class JsActivity extends BaseActivity {
     @Override
     public void init() {
         super.init();
-
+        Intent intent = getIntent();
+        if (intent != null) {
+            orderId = intent.getStringExtra("orderId");
+            money = intent.getFloatExtra("money", 0);
+        }
         final WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setSupportZoom(true);
@@ -54,7 +61,7 @@ public class JsActivity extends BaseActivity {
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-                setParams("dsaf454","100");
+               // setParams("dsaf454","100");
             }
         });
 
@@ -71,7 +78,8 @@ public class JsActivity extends BaseActivity {
         getWindow().getDecorView().post(new Runnable() {
             @Override
             public void run() {
-                String url = "http://192.168.1.104:8080/POS_TRADE_WAP/index.jsp";
+
+                String url = "http://192.168.1.104:8080/POS_TRADE_WAP/index.jsp?orderId="+orderId+"&money="+money;
                 webView.loadUrl(url);
 
             }
@@ -94,6 +102,6 @@ public class JsActivity extends BaseActivity {
     }
 
     public void setParams(String orderId, String money) {
-        webView.loadUrl(String.format("javascript:setParams("+ orderId +", \""+ money +"\")"));
+        webView.loadUrl(String.format("javascript:setParams("+ orderId +", "+ money +")"));
     }
 }

@@ -1,5 +1,8 @@
 package com.betterda.shopping.login.contract;
 
+import android.view.View;
+import android.widget.EditText;
+
 import com.betterda.shopping.base.IModel;
 import com.betterda.shopping.base.IPresenter;
 import com.betterda.shopping.base.IView;
@@ -16,6 +19,8 @@ public interface View extends IView{
     String getAccount();
 
     String getPwd();
+
+    EditText getTvPwd();
 }
 
 public interface Presenter extends IPresenter<View>{

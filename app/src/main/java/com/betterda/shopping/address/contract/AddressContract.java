@@ -22,6 +22,8 @@ public interface View extends IView{
 public interface Presenter extends IPresenter<View>{
 
     void getData();
+
+    void onError();
 }
 
 public interface Model extends IModel{

@@ -1,5 +1,7 @@
 package com.betterda.shopping.address.contract;
 
+import android.view.View;
+
 import com.betterda.shopping.base.IModel;
 import com.betterda.shopping.base.IPresenter;
 import com.betterda.shopping.base.IView;
@@ -18,6 +20,8 @@ public class AddAddressContract {
         String getAreaText();
 
         String getaddressText();
+
+        android.view.View getTvPwd();
     }
 
     public interface Presenter extends IPresenter<View> {

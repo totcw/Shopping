@@ -1,5 +1,8 @@
 package com.betterda.shopping.findpwd.contract;
 
+import android.view.View;
+import android.widget.EditText;
+
 import com.betterda.shopping.base.IModel;
 import com.betterda.shopping.base.IPresenter;
 import com.betterda.shopping.base.IView;
@@ -20,6 +23,8 @@ public interface View extends IView{
     String getPwd2();
 
     String getYzm();
+
+    EditText getTvPwd();
 }
 
 public interface Presenter extends IPresenter<View>{

@@ -73,6 +73,8 @@ public class SearchContract {
         void load(String content);
 
         void getDataForBusCount();
+
+        void onError();
     }
 
     public interface Model extends IModel{

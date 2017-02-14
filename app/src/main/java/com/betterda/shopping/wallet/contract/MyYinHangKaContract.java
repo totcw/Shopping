@@ -24,6 +24,8 @@ public class MyYinHangKaContract {
         RecyclerView.Adapter getRvAdapter();
 
         void onStart();
+
+        void onError();
     }
 
     public interface Model extends IModel {

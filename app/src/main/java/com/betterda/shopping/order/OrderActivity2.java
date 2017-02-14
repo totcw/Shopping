@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.betterda.mylibrary.LoadingPager;
+import com.betterda.mylibrary.ShapeLoadingDialog;
 import com.betterda.mylibrary.xrecycleview.XRecyclerView;
 import com.betterda.shopping.BuildConfig;
 import com.betterda.shopping.R;
@@ -72,7 +73,15 @@ public class OrderActivity2 extends BaseActivity {
         mOrderAllList = new ArrayList<>();
         initRecycleview();
         initTopBar();
+        mLoadingpager.setLoadVisable();
         getData();
+        mLoadingpager.setonErrorClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mLoadingpager.setLoadVisable();
+                getData();
+            }
+        });
     }
 
     private void initTopBar() {
@@ -359,11 +368,13 @@ public class OrderActivity2 extends BaseActivity {
                                 }
 
                                 if (mOrderAllList != null && mOrderAllCommonAdapter != null) {
-                                    mOrderAllList.clear();
+                                    if (pageNo == 1) {
+                                        mOrderAllList.clear();
+                                    }
                                     mOrderAllList.addAll(data);
                                     mOrderAllCommonAdapter.notifyDataSetChanged();
                                 }
-
+                                UtilMethod.hideOrEmpty(data,mLoadingpager);
 
                             }
 
@@ -372,6 +383,7 @@ public class OrderActivity2 extends BaseActivity {
                                 if (BuildConfig.LOG_DEBUG) {
                                     System.out.println("获取订单列表fail:" + resultMsg);
                                 }
+                                UtilMethod.setLoadpagerError(mLoadingpager);
                             }
 
                             @Override
@@ -391,32 +403,37 @@ public class OrderActivity2 extends BaseActivity {
         NetworkUtils.isNetWork(getmActivity(), mRecycleview, new NetworkUtils.SetDataInterface() {
             @Override
             public void getDataApi() {
+                final ShapeLoadingDialog dialog = UiUtils.createDialog(getmActivity(), "正在提交...");
+                UiUtils.showDialog(getmActivity(),dialog);
                 getRxManager().add(NetWork.getNetService()
-                .getGoods(getAccount(),getToken(),orderid)
-                .compose(NetWork.handleResult(new BaseCallModel<String>()))
-                .subscribe(new MyObserver<String>() {
-                    @Override
-                    protected void onSuccess(String data, String resultMsg) {
-                        if (BuildConfig.LOG_DEBUG) {
-                            System.out.println("收货成功:"+resultMsg);
-                        }
-                        UiUtils.showToast(getmActivity(),resultMsg);
-                        getData();
-                    }
+                        .getGoods(getAccount(), getToken(), orderid)
+                        .compose(NetWork.handleResult(new BaseCallModel<String>()))
+                        .subscribe(new MyObserver<String>() {
+                            @Override
+                            protected void onSuccess(String data, String resultMsg) {
+                                if (BuildConfig.LOG_DEBUG) {
+                                    System.out.println("收货成功:" + resultMsg);
+                                }
+                                UiUtils.dissmissDialog(getmActivity(),dialog);
+                                UiUtils.showToast(getmActivity(), resultMsg);
+                                getData();
+                            }
 
-                    @Override
-                    public void onFail(String resultMsg) {
-                        if (BuildConfig.LOG_DEBUG) {
-                            System.out.println("收货fail:"+resultMsg);
-                        }
-                        UiUtils.showToast(getmActivity(),resultMsg);
-                    }
+                            @Override
+                            public void onFail(String resultMsg) {
+                                if (BuildConfig.LOG_DEBUG) {
+                                    System.out.println("收货fail:" + resultMsg);
+                                }
+                                UiUtils.dissmissDialog(getmActivity(),dialog);
+                                UiUtils.showToast(getmActivity(), resultMsg);
+                            }
 
-                    @Override
-                    public void onExit() {
+                            @Override
+                            public void onExit() {
+                                UiUtils.dissmissDialog(getmActivity(),dialog);
                                 ExitToLogin();
-                    }
-                }));
+                            }
+                        }));
             }
         });
 
@@ -432,30 +449,35 @@ public class OrderActivity2 extends BaseActivity {
         NetworkUtils.isNetWork(getmActivity(), mRecycleview, new NetworkUtils.SetDataInterface() {
             @Override
             public void getDataApi() {
+                final ShapeLoadingDialog dialog = UiUtils.createDialog(getmActivity(), "正在提交...");
+                UiUtils.showDialog(getmActivity(),dialog);
                 getRxManager().add(NetWork.getNetService()
-                        .cancelOrder(getAccount(),getToken(),orderid)
+                        .cancelOrder(getAccount(), getToken(), orderid)
                         .compose(NetWork.handleResult(new BaseCallModel<String>()))
                         .subscribe(new MyObserver<String>() {
                             @Override
                             protected void onSuccess(String data, String resultMsg) {
                                 if (BuildConfig.LOG_DEBUG) {
-                                    System.out.println("取消订单success:"+data);
+                                    System.out.println("取消订单success:" + data);
                                 }
-                                UiUtils.showToast(getmActivity(),resultMsg);
+                                UiUtils.dissmissDialog(getmActivity(),dialog);
+                                UiUtils.showToast(getmActivity(), resultMsg);
                                 getData();
                             }
 
                             @Override
                             public void onFail(String resultMsg) {
                                 if (BuildConfig.LOG_DEBUG) {
-                                    System.out.println("取消订单fail:"+resultMsg);
+                                    System.out.println("取消订单fail:" + resultMsg);
                                 }
-                                UiUtils.showToast(getmActivity(),resultMsg);
+                                UiUtils.dissmissDialog(getmActivity(),dialog);
+                                UiUtils.showToast(getmActivity(), resultMsg);
 
                             }
 
                             @Override
                             public void onExit() {
+                                UiUtils.dissmissDialog(getmActivity(),dialog);
                                 ExitToLogin();
                             }
                         }));

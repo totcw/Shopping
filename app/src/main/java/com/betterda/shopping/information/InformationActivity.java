@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.betterda.mylibrary.ShapeLoadingDialog;
 import com.betterda.mylibrary.Utils.PermissionUtil;
 import com.betterda.shopping.BuildConfig;
 import com.betterda.shopping.R;
@@ -326,6 +327,8 @@ public class InformationActivity extends BaseActivity<InformationContract.Presen
                 MultipartBody.Part filePart = MultipartBody.Part.createFormData("file", Constants.PHOTONAME
                         + ".png", file);
 
+                final ShapeLoadingDialog dialog = UiUtils.createDialog(getmActivity(), "正在上传...");
+                UiUtils.showDialog(getmActivity(),dialog);
                 getRxManager().add(NetWork.getNetService()
                 .getImgUpload(account,token,filePart)
 
@@ -343,6 +346,7 @@ public class InformationActivity extends BaseActivity<InformationContract.Presen
                                 .subscribe(new MyObserver<String>() {
                                     @Override
                                     protected void onSuccess(String data2, String resultMsg) {
+                                        UiUtils.dissmissDialog(getmActivity(),dialog);
                                         UiUtils.showToast(getmActivity(),resultMsg);
                                         mSvInformationTouxinag.setImageBitmap(pic);
                                         CacheUtils.putString(getmActivity(), getAccount() + Constants.Cache.TOUXIANG, data);
@@ -350,11 +354,13 @@ public class InformationActivity extends BaseActivity<InformationContract.Presen
 
                                     @Override
                                     public void onFail(String resultMsg) {
+                                        UiUtils.dissmissDialog(getmActivity(),dialog);
                                         UiUtils.showToast(getmActivity(),resultMsg);
                                     }
 
                                     @Override
                                     public void onExit() {
+                                        UiUtils.dissmissDialog(getmActivity(),dialog);
                                         ExitToLogin();
                                     }
                                 }));
@@ -368,6 +374,7 @@ public class InformationActivity extends BaseActivity<InformationContract.Presen
                         if (BuildConfig.LOG_DEBUG) {
                             System.out.println("图片上传路径fail:"+resultMsg);
                         }
+                        UiUtils.dissmissDialog(getmActivity(),dialog);
                         UiUtils.showToast(getmActivity(),resultMsg);
                     }
 
@@ -376,6 +383,7 @@ public class InformationActivity extends BaseActivity<InformationContract.Presen
                         if (BuildConfig.LOG_DEBUG) {
                             System.out.println("token");
                         }
+                        UiUtils.dissmissDialog(getmActivity(),dialog);
                         ExitToLogin();
                     }
                 }));

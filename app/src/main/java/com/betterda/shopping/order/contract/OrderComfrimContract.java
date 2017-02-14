@@ -54,6 +54,8 @@ public class OrderComfrimContract {
         void commit();
 
         void editDaijinjuan();
+
+        void onError();
     }
 
     public interface Model extends IModel{

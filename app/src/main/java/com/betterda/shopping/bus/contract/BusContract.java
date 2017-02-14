@@ -49,6 +49,8 @@ public class BusContract {
         void jiesuan();
 
         void checkAll();
+
+        void onError();
     }
 
     public interface Model extends IModel {

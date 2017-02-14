@@ -20,6 +20,8 @@ public class CommentContract {
 
     public interface Presenter extends IPresenter<View>{
         RecyclerView.Adapter getRvCommentAdapter();
+
+        void onError();
     }
 
     public interface Model extends IModel{

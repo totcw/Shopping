@@ -43,6 +43,12 @@ public class MingXiActivity extends BaseActivity<MingXiContract.Presenter> imple
     public void init() {
         super.init();
         mTopbarMingxi.setTitle("明细");
+        mLayoutLoadingpager.setonErrorClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getPresenter().onError();
+            }
+        });
     }
 
     @OnClick({R.id.bar_back})
@@ -69,7 +75,7 @@ public class MingXiActivity extends BaseActivity<MingXiContract.Presenter> imple
 
             @Override
             public void onLoadMore() {
-
+                getPresenter().onLoadMore();
             }
         });
     }
