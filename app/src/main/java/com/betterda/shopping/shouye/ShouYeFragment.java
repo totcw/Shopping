@@ -147,7 +147,7 @@ public class ShouYeFragment extends BaseFragment<ShouYeContract.Presenter> imple
                 break;
             case R.id.relative_tjq://第二区域1
                 ((MainActivity) getmActivity()).changeToSort();
-                getRxManager().post(SortFragment.class.getSimpleName(),new Chose("白酒",null));
+                getRxManager().post(SortFragment.class.getSimpleName(),new Chose("白酒","三国酒"));
                 break;
             case R.id.relative_zpjy://第二区域2
                 UiUtils.showToast(getmActivity(), "2");

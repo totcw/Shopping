@@ -200,8 +200,13 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
         if (mChoseList == null) {
             mChoseList = new ArrayList<>();
             Chose chose = new Chose();
+            if (brand != null) {
+                chose.setName(brand);
+            } else {
+                chose.setName("全部");
+            }
             chose.setType("品牌");
-            chose.setName("全部");
+
             mChoseList.add(chose);
             Chose chose2 = new Chose();
             chose2.setType("价格");
