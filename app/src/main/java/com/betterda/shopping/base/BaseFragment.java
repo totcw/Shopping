@@ -67,6 +67,7 @@ public abstract class BaseFragment <P extends IPresenter> extends Fragment imple
             //开始presenter的逻辑
             getPresenter().start();
         }
+        setLoadpagerBackgroud();
     }
 
 
@@ -131,6 +132,14 @@ public abstract class BaseFragment <P extends IPresenter> extends Fragment imple
     public LoadingPager getLodapger(){
         return null;
     };
+
+    public void setLoadpagerBackgroud() {
+        if (getLodapger() != null) {
+            getLodapger().setEmptyBackground(R.mipmap.load_empty);
+            getLodapger().setErrorBackground(R.mipmap.load_error);
+            getLodapger().setLoadBackground(R.drawable.loadinganim);
+        }
+    }
 
     /**
      * 强制跳转到登录界面

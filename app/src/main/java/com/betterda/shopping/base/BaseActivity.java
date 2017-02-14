@@ -69,16 +69,7 @@ public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivi
             getPresenter().start();
         }
 
-  /*    if (BuildConfig.DEBUG) {
-            StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
-                    .detectAll()
-                    .penaltyLog()
-                    .build());
-
-            StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder().detectAll()
-                    .penaltyLog()
-                    .build());
-       }*/
+        setLoadpagerBackgroud();
 
 
     }
@@ -162,6 +153,14 @@ public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivi
      */
     public String getToken() {
         return CacheUtils.getString(getmActivity(), getAccount() + Constants.Cache.TOKEN, "");
+    }
+
+    public void setLoadpagerBackgroud() {
+        if (getLodapger() != null) {
+            getLodapger().setEmptyBackground(R.mipmap.load_empty);
+            getLodapger().setErrorBackground(R.mipmap.load_error);
+            getLodapger().setLoadBackground(R.drawable.loadinganim);
+        }
     }
 
 

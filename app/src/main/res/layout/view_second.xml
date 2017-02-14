@@ -66,7 +66,7 @@
                         android:layout_below="@id/iv_main_second2"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="5dp"
-                        android:text="4S店"
+                        android:text="红酒"
                         android:textColor="@color/shouye_renmen_tv"
                         android:textSize="@dimen/textsize_small" />
                 </RelativeLayout>
@@ -91,7 +91,7 @@
                         android:layout_below="@id/iv_main_second3"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="5dp"
-                        android:text="二手车"
+                        android:text="洋酒"
                         android:textColor="@color/shouye_renmen_tv"
                         android:textSize="@dimen/textsize_small" />
                 </RelativeLayout>
@@ -116,7 +116,7 @@
                         android:layout_below="@id/iv_main_second4"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="5dp"
-                        android:text="车辆租赁"
+                        android:text="啤酒"
                         android:textColor="@color/shouye_renmen_tv"
                         android:textSize="@dimen/textsize_small" />
                 </RelativeLayout>
@@ -144,7 +144,7 @@
                         android:layout_width="@dimen/iv_main_second"
                         android:layout_height="@dimen/iv_main_second"
                         android:layout_centerHorizontal="true"
-                        android:background="@mipmap/white_wine"
+                        android:background="@mipmap/yellow_wine"
                         android:scaleType="fitXY" />
 
                     <TextView
@@ -153,7 +153,7 @@
                         android:layout_below="@id/iv_main_second5"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="5dp"
-                        android:text="车金融"
+                        android:text="黄酒"
                         android:textColor="@color/shouye_renmen_tv"
                         android:textSize="@dimen/textsize_small" />
                 </RelativeLayout>
@@ -170,7 +170,7 @@
                         android:layout_width="@dimen/iv_main_second"
                         android:layout_height="@dimen/iv_main_second"
                         android:layout_centerHorizontal="true"
-                        android:background="@mipmap/red_wine"
+                        android:background="@mipmap/shouye_buy"
                         android:scaleType="fitXY" />
 
                     <TextView
@@ -179,7 +179,7 @@
                         android:layout_below="@id/iv_main_second6"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="5dp"
-                        android:text="车保险"
+                        android:text="常购买"
                         android:textColor="@color/shouye_renmen_tv"
                         android:textSize="@dimen/textsize_small" />
                 </RelativeLayout>
@@ -195,7 +195,7 @@
                         android:layout_width="@dimen/iv_main_second"
                         android:layout_height="@dimen/iv_main_second"
                         android:layout_centerHorizontal="true"
-                        android:background="@mipmap/yang_wine"
+                        android:background="@mipmap/shouye_huiyuan"
                         android:scaleType="fitXY" />
 
                     <TextView
@@ -204,7 +204,7 @@
                         android:layout_below="@id/iv_main_second7"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="5dp"
-                        android:text="油站商店"
+                        android:text="会员推荐"
                         android:textColor="@color/shouye_renmen_tv"
                         android:textSize="@dimen/textsize_small" />
                 </RelativeLayout>
@@ -220,7 +220,7 @@
                         android:layout_width="@dimen/iv_main_second"
                         android:layout_height="@dimen/iv_main_second"
                         android:layout_centerHorizontal="true"
-                        android:background="@mipmap/sort_wine"
+                        android:background="@mipmap/shouye_huodong"
                         android:scaleType="fitXY" />
 
                     <TextView
@@ -229,7 +229,7 @@
                         android:layout_below="@id/iv_main_second8"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="5dp"
-                        android:text="生活缴费"
+                        android:text="活动专区"
                         android:textColor="@color/shouye_renmen_tv"
                         android:textSize="@dimen/textsize_small" />
                 </RelativeLayout>

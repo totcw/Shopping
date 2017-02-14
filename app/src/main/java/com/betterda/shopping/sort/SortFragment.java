@@ -21,6 +21,7 @@ import com.betterda.shopping.R;
 import com.betterda.shopping.base.BaseFragment;
 import com.betterda.shopping.home.MainActivity;
 import com.betterda.shopping.search.SearchActivity;
+import com.betterda.shopping.shouye.model.Chose;
 import com.betterda.shopping.sort.contract.SortContract;
 import com.betterda.shopping.sort.presenter.SortPresenterImpl;
 import com.betterda.shopping.utils.UiUtils;
@@ -30,6 +31,7 @@ import com.zhy.base.adapter.recyclerview.DividerItemDecoration;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import rx.functions.Action1;
 
 
 /**
@@ -104,6 +106,20 @@ public class SortFragment extends BaseFragment<SortContract.Presenter> implement
             @Override
             public void onClick(View v) {
                 getPresenter().onLoadError();
+            }
+        });
+
+
+        //使用rxbus 监听 从首页跳转分类
+        getRxManager().on(SortFragment.class.getSimpleName(), new Action1<Chose>() {
+            @Override
+            public void call(Chose s) {
+                System.out.println("类型:"+s.getProductType());
+                if (s != null) {
+                    getPresenter().setProduct(s.getProductType(), s.getPinpai());
+                }
+                getPresenter().getCacheData();
+                getPresenter().getData();
             }
         });
     }

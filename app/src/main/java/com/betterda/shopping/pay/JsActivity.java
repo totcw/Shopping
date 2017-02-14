@@ -79,7 +79,8 @@ public class JsActivity extends BaseActivity {
             @Override
             public void run() {
 
-                String url = "http://192.168.1.104:8080/POS_TRADE_WAP/index.jsp?orderId="+orderId+"&money="+money;
+              //  String url = "http://192.168.1.104:8080/POS_TRADE_WAP/index.jsp?orderId="+orderId+"&money="+money;
+            String url=  "http://192.168.1.104:8080/WinePIN/tOnlinePayController.do?onlinePay&orderId=5kh896bn8966k89&money=108.56&cardNum=6221560691294337&number=13730607599"  ;
                 webView.loadUrl(url);
 
             }

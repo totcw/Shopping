@@ -102,6 +102,8 @@ public interface Presenter extends IPresenter<View>{
     void onLoadMore();
 
     void onLoadError();
+
+    void setProduct(String s, String s1);
 }
 
 public interface Model extends IModel{

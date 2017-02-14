@@ -30,7 +30,9 @@ import com.betterda.shopping.location.LocationActivity;
 import com.betterda.shopping.message.MeassageActivity;
 import com.betterda.shopping.search.SearchActivity;
 import com.betterda.shopping.shouye.contract.ShouYeContract;
+import com.betterda.shopping.shouye.model.Chose;
 import com.betterda.shopping.shouye.presenter.ShouYePresenterImpl;
+import com.betterda.shopping.sort.SortFragment;
 import com.betterda.shopping.utils.UiUtils;
 import com.betterda.shopping.utils.UtilMethod;
 
@@ -144,7 +146,8 @@ public class ShouYeFragment extends BaseFragment<ShouYeContract.Presenter> imple
                 UiUtils.startIntent(getmActivity(), SearchActivity.class);
                 break;
             case R.id.relative_tjq://第二区域1
-                UiUtils.showToast(getmActivity(), "1");
+                ((MainActivity) getmActivity()).changeToSort();
+                getRxManager().post(SortFragment.class.getSimpleName(),new Chose("白酒",null));
                 break;
             case R.id.relative_zpjy://第二区域2
                 UiUtils.showToast(getmActivity(), "2");

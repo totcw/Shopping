@@ -10,6 +10,8 @@ import com.betterda.shopping.R;
 import com.betterda.shopping.base.BaseActivity;
 import com.betterda.shopping.home.contract.HomeContract;
 import com.betterda.shopping.home.presenter.HomePresenterImpl;
+import com.betterda.shopping.shouye.model.Chose;
+import com.betterda.shopping.sort.SortFragment;
 import com.betterda.shopping.utils.UiUtils;
 import com.betterda.shopping.welcome.WelcomeActivity;
 import com.betterda.shopping.widget.BusView;
@@ -38,6 +40,8 @@ public class MainActivity extends BaseActivity<HomeContract.Presenter> implement
 
     @BindView(R.id.bv_main)
     BusView mBvMain;//购物车
+
+
 
     @Override
     public void initView() {
@@ -144,6 +148,15 @@ public class MainActivity extends BaseActivity<HomeContract.Presenter> implement
         //发送广播 关闭欢迎页面
         mRxManager.post(WelcomeActivity.class.getSimpleName(),"finish");
         super.onBackPressed();
+
+    }
+
+    /**
+     * 跳转到分类
+     */
+    public void changeToSort() {
+        switchTo(mIdvSort);
+        getPresenter().switchToFragment(R.id.idv_activity_main_sort);
 
     }
 

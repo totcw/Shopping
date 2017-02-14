@@ -374,6 +374,12 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
         getShopList();
     }
 
+    @Override
+    public void setProduct(String s, String s1) {
+        this.productType = s;
+        this.brand = s1;
+    }
+
 
     /**
      * 获取商品类型
@@ -416,8 +422,19 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
     //获取第一个商品类型的商品
     private void initNameFirst(List<Sort> data) {
         if (data != null && data.size() > 0) {
-            productType = data.get(0).getCatalogname();
-            data.get(0).setSelect(true);
+            if (productType != null) {
+                for (int i = 0; i < data.size(); i++) {
+                    Sort sort = data.get(i);
+                    if (sort != null) {
+                        if (productType.equals(sort.getCatalogname())) {
+                            data.get(i).setSelect(true);
+                        }
+                    }
+                }
+            } else {
+                productType = data.get(0).getCatalogname();
+                data.get(0).setSelect(true);
+            }
             mSortAdapter.notifyDataSetChanged();
             getShopList();
         }
@@ -553,13 +570,26 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
                     List<String> listString = GsonParse.getListString(string);
                     if (listString != null) {
                         for (String s : listString) {
-                            if ("全部".equals(s)) {
-                                Type type1 = new Type(s, true);
-                                mTypeList.add(type1);
+                            if (brand != null) {
+                                if (brand.equals(s)) {
+                                    Type type1 = new Type(s, true);
+                                    mTypeList.add(type1);
+
+                                } else {
+                                    Type type1 = new Type(s, false);
+                                    mTypeList.add(type1);
+                                }
                             } else {
-                                Type type1 = new Type(s, false);
-                                mTypeList.add(type1);
+                                //默认设置全部 为选中
+                                if ("全部".equals(s)) {
+                                    Type type1 = new Type(s, true);
+                                    mTypeList.add(type1);
+                                } else {
+                                    Type type1 = new Type(s, false);
+                                    mTypeList.add(type1);
+                                }
                             }
+
                         }
                     } else {
                         mTypeList.add(new Type("全部", true));
