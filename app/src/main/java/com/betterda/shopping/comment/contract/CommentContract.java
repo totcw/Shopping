@@ -22,6 +22,8 @@ public class CommentContract {
         RecyclerView.Adapter getRvCommentAdapter();
 
         void onError();
+
+        void onLoadMore();
     }
 
     public interface Model extends IModel{

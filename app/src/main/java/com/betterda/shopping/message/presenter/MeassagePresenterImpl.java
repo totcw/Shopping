@@ -106,4 +106,10 @@ public class MeassagePresenterImpl  extends BasePresenter<MeassageContract.View,
         pageNo = 1;
         getData();
     }
+
+    @Override
+    public void onLoadMore() {
+        pageNo++;
+        getData();
+    }
 }

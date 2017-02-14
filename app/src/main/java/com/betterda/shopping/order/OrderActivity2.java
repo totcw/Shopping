@@ -141,6 +141,18 @@ public class OrderActivity2 extends BaseActivity {
             }
         };
         mRecycleview.setAdapter(mOrderAllCommonAdapter);
+        mRecycleview.setLoadingListener(new XRecyclerView.LoadingListener() {
+            @Override
+            public void onRefresh() {
+
+            }
+
+            @Override
+            public void onLoadMore() {
+                pageNo++;
+                getData();
+            }
+        });
     }
 
     public void settingView2(final ViewHolder viewHolder, final OrderComfirm OrderComfirm) {

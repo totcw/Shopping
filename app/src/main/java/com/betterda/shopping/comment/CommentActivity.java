@@ -72,6 +72,7 @@ public class CommentActivity extends BaseActivity<CommentContract.Presenter> imp
         mRvComment.setLayoutManager(new LinearLayoutManager(getmActivity()));
        // mRvComment.addItemDecoration(new DividerItemDecoration(getmActivity(),DividerItemDecoration.VERTICAL_LIST));
         mRvComment.setAdapter(getPresenter().getRvCommentAdapter());
+        mRvComment.setPullRefreshEnabled(false);
         mRvComment.setLoadingMoreEnabled(true);
         mRvComment.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
@@ -81,7 +82,7 @@ public class CommentActivity extends BaseActivity<CommentContract.Presenter> imp
 
             @Override
             public void onLoadMore() {
-
+                getPresenter().onLoadMore();
             }
         });
 

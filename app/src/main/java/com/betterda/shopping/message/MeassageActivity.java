@@ -76,7 +76,7 @@ public class MeassageActivity extends BaseActivity<MeassageContract.Presenter> i
 
             @Override
             public void onLoadMore() {
-
+                getPresenter().onLoadMore();
             }
         });
     }
