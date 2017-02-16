@@ -87,4 +87,9 @@ public class CommentActivity extends BaseActivity<CommentContract.Presenter> imp
         });
 
     }
+
+    @Override
+    public LoadingPager getLodapger() {
+        return mLoadpagerComment;
+    }
 }

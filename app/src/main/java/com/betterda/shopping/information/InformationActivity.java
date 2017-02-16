@@ -125,9 +125,13 @@ public class InformationActivity extends BaseActivity<InformationContract.Presen
                 if (!TextUtils.isEmpty(touxiang)) {
                     if (null != mSvInformationTouxinag) {
 
-                        LoadImageFactory.getLoadImageInterface().loadImageFit(getmActivity(),touxiang,mSvInformationTouxinag);
+                        LoadImageFactory.getLoadImageInterface().loadImageFit(getmActivity(), touxiang, mSvInformationTouxinag);
                     }
 
+                } else {
+                    if (mSvInformationTouxinag != null) {
+                        mSvInformationTouxinag.setImageResource(R.mipmap.zwt_zheng);
+                    }
                 }
                 String name = CacheUtils.getString(getmActivity(), number + Constants.Cache.NICKNAME, "");
                 if (!TextUtils.isEmpty(name)) {

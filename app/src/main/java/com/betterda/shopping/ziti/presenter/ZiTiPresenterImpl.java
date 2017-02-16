@@ -15,6 +15,7 @@ import com.betterda.shopping.order.OrderDetailActivity;
 import com.betterda.shopping.utils.ImageTools;
 import com.betterda.shopping.utils.NetworkUtils;
 import com.betterda.shopping.utils.UiUtils;
+import com.betterda.shopping.utils.UtilMethod;
 import com.betterda.shopping.ziti.EweiMaActivity;
 import com.betterda.shopping.ziti.contract.ZiTiContract;
 
@@ -101,8 +102,8 @@ public class ZiTiPresenterImpl  extends BasePresenter<ZiTiContract.View,ZiTiCont
                                         if (mZiTiCommonAdapter != null) {
                                             mZiTiCommonAdapter.notifyDataSetChanged();
                                         }
-                                        getView().getLodapger().hide();
-                                        UiUtils.showToast(getView().getmActivity(),data.toString());
+                                        UtilMethod.hideOrEmpty(data,getView().getLodapger());
+                                       // UiUtils.showToast(getView().getmActivity(),data.toString());
                                     }
 
                                     @Override

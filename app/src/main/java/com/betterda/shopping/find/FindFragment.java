@@ -90,7 +90,6 @@ public class FindFragment extends BaseFragment<FindContract.Presenter> implement
         mSearch = RoutePlanSearch.newInstance();
 
 
-
     }
 
 
@@ -100,7 +99,7 @@ public class FindFragment extends BaseFragment<FindContract.Presenter> implement
         if (hidden) {//隐藏
         } else {
             StatusBarCompat.setStatusBar5(getmActivity(), R.color.white);
-            ((MainActivity)getmActivity()).getmBvMain().setVisibility(View.GONE);
+            ((MainActivity) getmActivity()).getmBvMain().setVisibility(View.GONE);
             startLocation();
         }
     }
@@ -129,7 +128,7 @@ public class FindFragment extends BaseFragment<FindContract.Presenter> implement
     private void setMap() {
         //设置缩放级别
         mBaiduMap.setMapStatus(MapStatusUpdateFactory.
-                newMapStatus(new MapStatus.Builder().zoom(19).build()));
+                newMapStatus(new MapStatus.Builder().zoom(17).build()));
         //设置当前位置的点击事件
         mBaiduMap.setOnMyLocationClickListener(this);
         //设置marker的点击事件
@@ -145,7 +144,9 @@ public class FindFragment extends BaseFragment<FindContract.Presenter> implement
         /**
          * 定位相关
          */
-        mLocationClient = new LocationClient(getmActivity());     //声明LocationClient类
+        if (null == mLocationClient) {
+            mLocationClient = new LocationClient(getmActivity());     //声明LocationClient类
+        }
         mLocationClient.registerLocationListener(myListener);    //注册监听函数
         //开启定位图层
         mBaiduMap.setMyLocationEnabled(true);
@@ -163,7 +164,7 @@ public class FindFragment extends BaseFragment<FindContract.Presenter> implement
     @Override
     public boolean onMyLocationClick() {
         //showPaoPao();
-        showInfoWindow(ll,"我的位置");
+        showInfoWindow(ll, "我的位置");
         return true;
     }
 
@@ -197,7 +198,7 @@ public class FindFragment extends BaseFragment<FindContract.Presenter> implement
             e.printStackTrace();
 
         }*/
-        showInfoWindow(marker.getPosition(),marker.getTitle());
+        showInfoWindow(marker.getPosition(), marker.getTitle());
 
         showRoteLine(marker.getPosition());
         return false;
@@ -225,7 +226,7 @@ public class FindFragment extends BaseFragment<FindContract.Presenter> implement
      *
      * @param latLng
      */
-    public void showInfoWindow(LatLng latLng,String title) {
+    public void showInfoWindow(LatLng latLng, String title) {
         //创建InfoWindow展示的view
         Button button = new Button(getmActivity());
         button.setText(title);
@@ -259,9 +260,9 @@ public class FindFragment extends BaseFragment<FindContract.Presenter> implement
     /**
      * 设置标记
      * latitude 纬度
-     *longitude 经度
+     * longitude 经度
      */
-    public void marker(double latitude, double longitude,String distance,String title) {
+    public void marker(double latitude, double longitude, String distance, String title) {
         try {
             //定义Maker坐标点
             LatLng point = new LatLng(latitude, longitude);

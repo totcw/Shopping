@@ -19,7 +19,7 @@
             android:id="@+id/sv_comment"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:src="@mipmap/zwt"
+            android:background="@mipmap/zwt_zheng"
             />
 
         <LinearLayout
@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/shouye_renmen_tv"
                 android:textSize="12sp"
-                android:text="用户名" />
+                android:text="暂无昵称" />
 
             <TextView
                 android:layout_marginRight="10dp"

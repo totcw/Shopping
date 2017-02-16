@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.betterda.mylibrary.xrecycleview.XRecyclerView;
 import com.betterda.shopping.base.IModel;
 import com.betterda.shopping.base.IPresenter;
 import com.betterda.shopping.base.IView;
@@ -51,6 +52,8 @@ public interface View extends IView{
     ViewGroup getViewgroup();
     //获取购物车的view
     android.view.View getBusView();
+
+    XRecyclerView getRv();
 }
 
 public interface Presenter extends IPresenter<View>{

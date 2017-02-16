@@ -169,7 +169,7 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailContract.Presen
                     viewHolder.setText(R.id.tv_item_order_memberprice, "会员价￥:" + bus.getVipPrice());
                     viewHolder.setText(R.id.tv_item_order_amount, "X " + bus.getTotalCount());
                     ImageView imageView = viewHolder.getView(R.id.sv_item_order);
-                    LoadImageFactory.getLoadImageInterface().loadImageCrop(getmActivity(), bus.getLittlePicture(), imageView);
+                    LoadImageFactory.getLoadImageInterface().loadImageFit(getmActivity(), bus.getLittlePicture(), imageView);
 
 
                 }

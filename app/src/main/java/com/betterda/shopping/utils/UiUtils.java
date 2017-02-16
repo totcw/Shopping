@@ -46,7 +46,7 @@ public class UiUtils {
      */
     public static void showSnackBar(View view, String message) {
         Snackbar.make(view, message, Snackbar.LENGTH_LONG)
-                .setAction("UNDO", new View.OnClickListener() {
+                .setAction("确定", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
 

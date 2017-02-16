@@ -79,4 +79,9 @@ public class MingXiActivity extends BaseActivity<MingXiContract.Presenter> imple
             }
         });
     }
+
+    @Override
+    public LoadingPager getLodapger() {
+        return mLayoutLoadingpager;
+    }
 }

@@ -36,9 +36,13 @@ public class MyPresenterImpl extends BasePresenter<MyContract.View,MyContract.Mo
 
                 if (!TextUtils.isEmpty(touxiang)) {
                     if (getView().getSimpleDraweeView() != null) {
-                        LoadImageFactory.getLoadImageInterface().loadImageFit(getView().getmActivity(),touxiang,getView().getSimpleDraweeView());
+                        LoadImageFactory.getLoadImageInterface().loadImageFit(getView().getmActivity(), touxiang, getView().getSimpleDraweeView());
                     }
 
+                } else {
+                    if (getView().getSimpleDraweeView() != null) {
+                        getView().getSimpleDraweeView().setImageResource(R.mipmap.zwt_zheng);
+                    }
                 }
             }
 

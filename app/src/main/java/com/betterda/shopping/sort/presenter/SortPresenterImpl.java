@@ -464,11 +464,18 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
                         if (mNameList != null && mNameAdapter != null) {
                             if (pangeNo == 1) {
                                 mNameList.clear();
+                                getView().getRv().setNoMore(false);
+                            } else {
+                                if (data.size() < Constants.PAGESIZE2) {
+                                    getView().getRv().setNoMore(true);
+                                } else {
+                                    getView().getRv().setNoMore(false);
+                                }
                             }
                             mNameList.addAll(data);
                             mNameAdapter.notifyDataSetChanged();
                         }
-                        UtilMethod.hideOrEmpty(data, getView().getLodapger());
+                        UtilMethod.hideOrEmpty(mNameList, getView().getLodapger());
                     }
 
                     @Override

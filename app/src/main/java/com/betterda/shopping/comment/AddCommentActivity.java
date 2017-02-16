@@ -51,6 +51,10 @@ public class AddCommentActivity extends BaseActivity<AddCommentContract.Presente
         mRvAddcomment.setAdapter(adapter);
     }
 
+    @Override
+    public View getTvPwd() {
+        return mTvAddcomment;
+    }
 
 
     @OnClick({R.id.bar_back, R.id.tv_addcomment})

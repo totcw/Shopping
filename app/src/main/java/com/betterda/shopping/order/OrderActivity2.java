@@ -74,7 +74,7 @@ public class OrderActivity2 extends BaseActivity {
         initRecycleview();
         initTopBar();
         mLoadingpager.setLoadVisable();
-        getData();
+
         mLoadingpager.setonErrorClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -82,6 +82,13 @@ public class OrderActivity2 extends BaseActivity {
                 getData();
             }
         });
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        getData();
     }
 
     private void initTopBar() {
@@ -134,13 +141,7 @@ public class OrderActivity2 extends BaseActivity {
         mRecycleview.setPullRefreshEnabled(false);
         mRecycleview.setLayoutManager(new LinearLayoutManager(getmActivity()));
         mRecycleview.setLoadingMoreEnabled(true);
-        mOrderAllCommonAdapter = new CommonAdapter<OrderComfirm>(getmActivity(), R.layout.item_recycleview_order, mOrderAllList) {
-            @Override
-            public void convert(ViewHolder holder, OrderComfirm OrderComfirm) {
-                settingView2(holder, OrderComfirm);
-            }
-        };
-        mRecycleview.setAdapter(mOrderAllCommonAdapter);
+
         mRecycleview.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
@@ -149,10 +150,19 @@ public class OrderActivity2 extends BaseActivity {
 
             @Override
             public void onLoadMore() {
+                System.out.println("上啦加载");
                 pageNo++;
                 getData();
             }
         });
+        mOrderAllCommonAdapter = new CommonAdapter<OrderComfirm>(getmActivity(), R.layout.item_recycleview_order, mOrderAllList) {
+            @Override
+            public void convert(ViewHolder holder, OrderComfirm OrderComfirm) {
+                settingView2(holder, OrderComfirm);
+            }
+        };
+        mRecycleview.setAdapter(mOrderAllCommonAdapter);
+
     }
 
     public void settingView2(final ViewHolder viewHolder, final OrderComfirm OrderComfirm) {
@@ -304,7 +314,7 @@ public class OrderActivity2 extends BaseActivity {
                         viewHolder.setText(R.id.tv_item_order_memberprice, "会员价￥:" + bus.getVipPrice());
                         viewHolder.setText(R.id.tv_item_order_amount, "X " + bus.getTotalCount());
                         ImageView imageView = viewHolder.getView(R.id.sv_item_order);
-                        LoadImageFactory.getLoadImageInterface().loadImageCrop(getmActivity(), bus.getLittlePicture(), imageView);
+                        LoadImageFactory.getLoadImageInterface().loadImageFit(getmActivity(), bus.getLittlePicture(), imageView);
 
                         //订单详情
                         viewHolder.setOnClickListener(R.id.linear_comfirmorder2, new View.OnClickListener() {
@@ -383,10 +393,20 @@ public class OrderActivity2 extends BaseActivity {
                                     if (pageNo == 1) {
                                         mOrderAllList.clear();
                                     }
+                                    /*else {
+                                        if (data.size() < Constants.PAGESIZE2) {
+                                            mRecycleview.refreshComplete();
+                                        } else {
+                                            mRecycleview.setNoMore(true);
+                                        }
+                                    }*/
                                     mOrderAllList.addAll(data);
                                     mOrderAllCommonAdapter.notifyDataSetChanged();
+
+
                                 }
                                 UtilMethod.hideOrEmpty(data,mLoadingpager);
+
 
                             }
 
@@ -495,5 +515,10 @@ public class OrderActivity2 extends BaseActivity {
                         }));
             }
         });
+    }
+
+    @Override
+    public LoadingPager getLodapger() {
+        return mLoadingpager;
     }
 }

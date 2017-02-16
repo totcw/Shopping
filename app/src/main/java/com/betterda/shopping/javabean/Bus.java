@@ -9,6 +9,7 @@ import android.os.Parcelable;
  */
 public class Bus implements Parcelable {
     private String shopcartDetailId;//商品的id
+    private String productId;//商品的id
     private boolean isChosed; //是否选择
     private String littlePicture; //图片的地址
     private String productName;//商品名字
@@ -17,8 +18,16 @@ public class Bus implements Parcelable {
     private String vipPrice;//会员价
     private String spec;//规格
 
+
+
+    public Bus() {
+
+    }
+
+
     protected Bus(Parcel in) {
         shopcartDetailId = in.readString();
+        productId = in.readString();
         isChosed = in.readByte() != 0;
         littlePicture = in.readString();
         productName = in.readString();
@@ -26,10 +35,6 @@ public class Bus implements Parcelable {
         totalCount = in.readString();
         vipPrice = in.readString();
         spec = in.readString();
-    }
-
-    public Bus() {
-
     }
 
     public static final Creator<Bus> CREATOR = new Creator<Bus>() {
@@ -108,6 +113,14 @@ public class Bus implements Parcelable {
         this.spec = spec;
     }
 
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
+    }
+
     @Override
     public String toString() {
         return "Bus{" +
@@ -122,20 +135,22 @@ public class Bus implements Parcelable {
                 '}';
     }
 
+
     @Override
     public int describeContents() {
         return 0;
     }
 
     @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(shopcartDetailId);
-        dest.writeByte((byte) (isChosed ? 1 : 0));
-        dest.writeString(littlePicture);
-        dest.writeString(productName);
-        dest.writeString(salePrice);
-        dest.writeString(totalCount);
-        dest.writeString(vipPrice);
-        dest.writeString(spec);
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(shopcartDetailId);
+        parcel.writeString(productId);
+        parcel.writeByte((byte) (isChosed ? 1 : 0));
+        parcel.writeString(littlePicture);
+        parcel.writeString(productName);
+        parcel.writeString(salePrice);
+        parcel.writeString(totalCount);
+        parcel.writeString(vipPrice);
+        parcel.writeString(spec);
     }
 }

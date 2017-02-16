@@ -49,6 +49,7 @@ public class ZiTiActivity extends BaseActivity<ZiTiContract.Presenter> implement
                 getPresenter().onError();
             }
         });
+
     }
 
 

@@ -189,7 +189,8 @@ public class SortFragment extends BaseFragment<SortContract.Presenter> implement
 
             @Override
             public void onLoadMore() {
-                getPresenter().onLoadMore();
+
+               getPresenter().onLoadMore();
             }
         });
         mRvSortName.setAdapter(adapter);
@@ -350,6 +351,11 @@ public class SortFragment extends BaseFragment<SortContract.Presenter> implement
     @Override
     public View getBusView() {
       return   ((MainActivity) getActivity()).getmBvMain();
+    }
+
+    @Override
+    public XRecyclerView getRv() {
+        return mRvSortName;
     }
 
     /*    *

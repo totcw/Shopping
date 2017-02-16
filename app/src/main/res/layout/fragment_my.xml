@@ -71,7 +71,7 @@
                             android:layout_width="72dp"
                             android:layout_height="72dp"
                             android:scaleType="fitXY"
-                            android:src="@mipmap/zwt"
+                            android:background="@mipmap/zwt_zheng"
                             />
 
                         <TextView
