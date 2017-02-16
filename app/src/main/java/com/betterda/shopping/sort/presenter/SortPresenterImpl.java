@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.betterda.mylibrary.recycleviehelper.HeaderAndFooterRecyclerViewAdapter;
+import com.betterda.mylibrary.xrecycleview.XRecyclerView;
 import com.betterda.shopping.BuildConfig;
 import com.betterda.shopping.R;
 import com.betterda.shopping.base.BasePresenter;
@@ -466,11 +467,7 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
                                 mNameList.clear();
                                 getView().getRv().setNoMore(false);
                             } else {
-                                if (data.size() < Constants.PAGESIZE2) {
-                                    getView().getRv().setNoMore(true);
-                                } else {
-                                    getView().getRv().setNoMore(false);
-                                }
+                                UtilMethod.onLoadMore(data,getView().getRv());
                             }
                             mNameList.addAll(data);
                             mNameAdapter.notifyDataSetChanged();
@@ -489,6 +486,8 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
                     }
                 }));
     }
+
+
 
     /**
      * 设置文字的颜色

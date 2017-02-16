@@ -392,20 +392,16 @@ public class OrderActivity2 extends BaseActivity {
                                 if (mOrderAllList != null && mOrderAllCommonAdapter != null) {
                                     if (pageNo == 1) {
                                         mOrderAllList.clear();
+                                        mRecycleview.setNoMore(false);
+                                    } else {
+                                       UtilMethod.onLoadMore(data,mRecycleview);
                                     }
-                                    /*else {
-                                        if (data.size() < Constants.PAGESIZE2) {
-                                            mRecycleview.refreshComplete();
-                                        } else {
-                                            mRecycleview.setNoMore(true);
-                                        }
-                                    }*/
                                     mOrderAllList.addAll(data);
                                     mOrderAllCommonAdapter.notifyDataSetChanged();
 
 
                                 }
-                                UtilMethod.hideOrEmpty(data,mLoadingpager);
+                                UtilMethod.hideOrEmpty(mOrderAllList,mLoadingpager);
 
 
                             }

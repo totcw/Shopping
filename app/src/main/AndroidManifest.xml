@@ -163,6 +163,7 @@
             android:screenOrientation="portrait"></activity>
         <activity
             android:name=".message.MeassageActivity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"></activity>
         <activity
             android:name=".comment.AddCommentActivity"
@@ -174,6 +175,18 @@
             android:name=".pay.JsActivity"
             android:screenOrientation="portrait"></activity>
 
+        <!--JPUSH-->
+        <receiver
+            android:name=".receiver.JpushReceiver"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" />
+
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" />
+
+                <category android:name="com.betterda.shopping" />
+            </intent-filter>
+        </receiver>
 
         <!--百度地图服务-->
         <service

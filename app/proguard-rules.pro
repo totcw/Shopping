@@ -295,3 +295,11 @@
 #-keep resourcexmlelements manifest/application/meta-data@value=GlideModule
 
 #glide end
+
+#jpush start
+-dontwarn cn.jpush.**
+-keep class cn.jpush.** { *; }
+
+-dontwarn cn.jiguang.**
+-keep class cn.jiguang.** { *; }
+#end

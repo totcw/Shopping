@@ -2,6 +2,7 @@ package com.betterda.shopping.comment.contract;
 
 import android.support.v7.widget.RecyclerView;
 
+import com.betterda.mylibrary.xrecycleview.XRecyclerView;
 import com.betterda.shopping.base.IModel;
 import com.betterda.shopping.base.IPresenter;
 import com.betterda.shopping.base.IView;
@@ -16,6 +17,7 @@ import java.util.List;
 public class CommentContract {
 
     public interface View extends IView{
+        XRecyclerView getRv();
     }
 
     public interface Presenter extends IPresenter<View>{

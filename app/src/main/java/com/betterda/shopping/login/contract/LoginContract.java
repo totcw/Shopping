@@ -21,6 +21,8 @@ public interface View extends IView{
     String getPwd();
 
     EditText getTvPwd();
+
+    void setAlias(String alias);
 }
 
 public interface Presenter extends IPresenter<View>{

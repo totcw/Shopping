@@ -67,13 +67,20 @@ public class MeassagePresenterImpl  extends BasePresenter<MeassageContract.View,
                             System.out.println("消息列表success:"+data.toString());
                         }
                         if (data != null) {
-                            if (pageNo == 1) {
-                                meassageContentList.clear();
+                            if (meassageContentList != null && contentCommonAdapter != null) {
+                                if (pageNo == 1) {
+                                    meassageContentList.clear();
+                                    getView().getRv().setNoMore(false);
+                                }else {
+                                    UtilMethod.onLoadMore(data,getView().getRv());
+                                }
+
+                                meassageContentList.addAll(data);
+                                contentCommonAdapter.notifyDataSetChanged();
                             }
-                            meassageContentList.addAll(data);
-                            contentCommonAdapter.notifyDataSetChanged();
+
                         }
-                        UtilMethod.hideOrEmpty(data,getView().getLodapger());
+                        UtilMethod.hideOrEmpty(meassageContentList,getView().getLodapger());
                     }
 
                     @Override

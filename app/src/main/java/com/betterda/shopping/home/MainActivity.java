@@ -1,5 +1,6 @@
 package com.betterda.shopping.home;
 
+import android.os.Handler;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -16,8 +17,12 @@ import com.betterda.shopping.utils.UiUtils;
 import com.betterda.shopping.welcome.WelcomeActivity;
 import com.betterda.shopping.widget.BusView;
 
+import java.util.Set;
+
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.TagAliasCallback;
 
 /**
  * 首页
@@ -60,6 +65,7 @@ public class MainActivity extends BaseActivity<HomeContract.Presenter> implement
     public void init() {
         super.init();
         initIdv();
+
     }
 
 
@@ -169,4 +175,7 @@ public class MainActivity extends BaseActivity<HomeContract.Presenter> implement
     public BusView getBusView() {
         return mBvMain;
     }
+
+
+
 }

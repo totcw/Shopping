@@ -19,6 +19,7 @@ import android.view.inputmethod.InputMethodManager;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.betterda.mylibrary.LoadingPager;
+import com.betterda.mylibrary.xrecycleview.XRecyclerView;
 import com.betterda.shopping.javabean.Bus;
 import com.betterda.shopping.login.LoginActivity;
 
@@ -398,6 +399,18 @@ public class UtilMethod {
         }
     }
 
+    /**
+     * 设置 recycleview的加载状态
+     * @param data
+     * @param recyclerView
+     */
+    public static void onLoadMore(List data, XRecyclerView recyclerView) {
+        if (data.size() < Constants.PAGESIZE2) {
+            recyclerView.setNoMore(true);
+        } else {
+            recyclerView.setNoMore(false);
+        }
+    }
 
     /**
      * 计算总价

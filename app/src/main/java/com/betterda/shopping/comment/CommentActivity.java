@@ -92,4 +92,9 @@ public class CommentActivity extends BaseActivity<CommentContract.Presenter> imp
     public LoadingPager getLodapger() {
         return mLoadpagerComment;
     }
+
+    @Override
+    public XRecyclerView getRv() {
+        return mRvComment;
+    }
 }

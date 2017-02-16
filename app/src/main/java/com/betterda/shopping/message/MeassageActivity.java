@@ -82,6 +82,11 @@ public class MeassageActivity extends BaseActivity<MeassageContract.Presenter> i
     }
 
     @Override
+    public XRecyclerView getRv() {
+        return mRecycleview;
+    }
+
+    @Override
     public LoadingPager getLodapger() {
         return mLoadingpager;
     }

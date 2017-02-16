@@ -81,6 +81,11 @@ public class MingXiActivity extends BaseActivity<MingXiContract.Presenter> imple
     }
 
     @Override
+    public XRecyclerView getRv() {
+        return mLayoutRecycleview;
+    }
+
+    @Override
     public LoadingPager getLodapger() {
         return mLayoutLoadingpager;
     }

@@ -12,6 +12,8 @@ import com.umeng.socialize.UMShareAPI;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.jpush.android.api.JPushInterface;
+
 /**
  * Created by lyf
  */
@@ -44,7 +46,9 @@ public class MyApplication extends Application {
         //对应平台没有安装的时候跳转转到应用商店下载
         Config.isJumptoAppStore = true;
 
-
+        //极光推送
+        JPushInterface.setDebugMode(true); 	// 设置开启日志,发布时请关闭日志
+        JPushInterface.init(this);     		// 初始化 JPush
 
     }
 

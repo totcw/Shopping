@@ -11,6 +11,7 @@ import com.betterda.shopping.base.IView;
 public class SettingContract {
 
     public interface View extends IView{
+        void setAlias(String s);
     }
 
     public interface Presenter extends IPresenter<View>{
