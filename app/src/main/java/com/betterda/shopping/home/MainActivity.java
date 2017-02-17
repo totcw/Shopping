@@ -1,5 +1,6 @@
 package com.betterda.shopping.home;
 
+import android.app.Notification;
 import android.os.Handler;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -21,6 +22,8 @@ import java.util.Set;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.jpush.android.api.BasicPushNotificationBuilder;
+import cn.jpush.android.api.CustomPushNotificationBuilder;
 import cn.jpush.android.api.JPushInterface;
 import cn.jpush.android.api.TagAliasCallback;
 

@@ -20,6 +20,8 @@ public class ZiTiContract {
         RecyclerView.Adapter getRvAdapter();
 
         void onError();
+
+        void onStart();
     }
 
     public interface Model extends IModel {

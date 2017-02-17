@@ -34,7 +34,7 @@ public class ZiTiPresenterImpl  extends BasePresenter<ZiTiContract.View,ZiTiCont
     private CommonAdapter<ZItiMa> mZiTiCommonAdapter;
     @Override
     public void start() {
-        getData();
+
     }
 
 
@@ -75,6 +75,11 @@ public class ZiTiPresenterImpl  extends BasePresenter<ZiTiContract.View,ZiTiCont
 
     @Override
     public void onError() {
+        getData();
+    }
+
+    @Override
+    public void onStart() {
         getData();
     }
 

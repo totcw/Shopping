@@ -27,10 +27,13 @@ import com.betterda.shopping.my.contract.MyContract;
 import com.betterda.shopping.my.presenter.MyPresenterImpl;
 import com.betterda.shopping.order.OrderActivity;
 import com.betterda.shopping.order.OrderActivity2;
+import com.betterda.shopping.receiver.JpushReceiver;
 import com.betterda.shopping.register.RegisterActivity;
 import com.betterda.shopping.setting.SettingActivity;
 import com.betterda.shopping.tuijian.LiJiTuijianActivity;
 import com.betterda.shopping.tuijian.MyTuijianActivity;
+import com.betterda.shopping.utils.CacheUtils;
+import com.betterda.shopping.utils.Constants;
 import com.betterda.shopping.utils.UiUtils;
 import com.betterda.shopping.utils.UtilMethod;
 import com.betterda.shopping.wallet.WalletActivity;
@@ -39,6 +42,7 @@ import com.betterda.shopping.ziti.ZiTiActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import rx.functions.Action1;
 
 /**
  * 我的
@@ -50,6 +54,8 @@ public class MyFragment extends BaseFragment<MyContract.Presenter> implements My
 
     @BindView(R.id.sv_touxiang)
     ImageView mSvTouxiang;
+    @BindView(R.id.iv_fragment_my_message)
+    ImageView mIvMessage;
     @BindView(R.id.tv_my_number)
     TextView mTvMyNumber;
     @BindView(R.id.relative_my_touxiang)
@@ -97,6 +103,24 @@ public class MyFragment extends BaseFragment<MyContract.Presenter> implements My
     public void initData() {
         super.initData();
         initIdv();
+        judgeMessage();
+        initRxBus();
+    }
+
+    private void initRxBus() {
+        getRxManager().on(JpushReceiver.class.getSimpleName(), new Action1<Boolean>() {
+            @Override
+            public void call(Boolean s) {
+                if (mIvMessage != null) {
+                    if (s) {
+                        mIvMessage.setSelected(true);
+                    } else {
+                        mIvMessage.setSelected(false);
+                    }
+
+                }
+            }
+        });
     }
 
     @Override
@@ -104,6 +128,8 @@ public class MyFragment extends BaseFragment<MyContract.Presenter> implements My
         super.onStart();
         getPresenter().onStart();
     }
+
+
 
     @Override
     public void onHiddenChanged(boolean hidden) {
@@ -130,7 +156,7 @@ public class MyFragment extends BaseFragment<MyContract.Presenter> implements My
                 UiUtils.startIntent(getmActivity(), SettingActivity.class);
                 break;
             case R.id.relative_my_message://消息
-                UtilMethod.isLogin(getmActivity(), MeassageActivity.class);
+                UiUtils.startIntent(getmActivity(),MeassageActivity.class);
                 break;
             case R.id.relative_my_all://我的订单
                 startToOrder(0);
@@ -178,7 +204,16 @@ public class MyFragment extends BaseFragment<MyContract.Presenter> implements My
         }
     }
 
-
+    /**
+     * 判断是否是有新消息
+     */
+    private void judgeMessage() {
+        String account = CacheUtils.getString(getmActivity(), Constants.Cache.ACCOUNT, "");
+        boolean messsage = CacheUtils.getBoolean(getmActivity(), account+ Constants.Cache.MESSAGE, false);
+        if (mIvMessage != null) {
+            mIvMessage.setSelected(messsage);
+        }
+    }
     private void initIdv() {
         mIdvPay.setTitle("待付款");
         mIdvSend.setTitle("待发货");

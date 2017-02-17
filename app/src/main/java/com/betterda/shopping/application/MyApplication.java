@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.Application;
 
 import com.baidu.mapapi.SDKInitializer;
+import com.betterda.shopping.R;
+import com.betterda.shopping.home.MainActivity;
 import com.betterda.shopping.javabean.Bus;
 import com.umeng.socialize.Config;
 import com.umeng.socialize.PlatformConfig;
@@ -12,6 +14,8 @@ import com.umeng.socialize.UMShareAPI;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.jpush.android.api.BasicPushNotificationBuilder;
+import cn.jpush.android.api.CustomPushNotificationBuilder;
 import cn.jpush.android.api.JPushInterface;
 
 /**
@@ -49,6 +53,7 @@ public class MyApplication extends Application {
         //极光推送
         JPushInterface.setDebugMode(true); 	// 设置开启日志,发布时请关闭日志
         JPushInterface.init(this);     		// 初始化 JPush
+
 
     }
 

@@ -88,6 +88,7 @@ public class OrderActivity2 extends BaseActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        pageNo = 1;
         getData();
     }
 

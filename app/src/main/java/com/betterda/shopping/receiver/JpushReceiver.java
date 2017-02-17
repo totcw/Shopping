@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.betterda.shopping.message.MeassageActivity;
+import com.betterda.shopping.utils.CacheUtils;
+import com.betterda.shopping.utils.Constants;
+import com.betterda.shopping.utils.RxManager;
 import com.betterda.shopping.utils.UiUtils;
 
 import cn.jpush.android.api.JPushInterface;
@@ -19,6 +22,7 @@ import cn.jpush.android.api.JPushInterface;
 
 public class JpushReceiver extends BroadcastReceiver {
     private String TAG=JpushReceiver.class.getSimpleName();
+    protected RxManager mRxManager = new RxManager();
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -29,6 +33,9 @@ public class JpushReceiver extends BroadcastReceiver {
      if (JPushInterface.ACTION_MESSAGE_RECEIVED.equals(intent.getAction())) {
             Log.d(TAG, "收到了自定义消息。消息内容是：" + bundle.getString(JPushInterface.EXTRA_MESSAGE));
             // 自定义消息不会展示在通知栏，完全要开发者写代码去处理
+         mRxManager.post(JpushReceiver.class.getSimpleName(),true);
+         String account = CacheUtils.getString(context, Constants.Cache.ACCOUNT, "");
+         CacheUtils.putBoolean(context, account+Constants.Cache.MESSAGE, true);
         }  else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
             Log.d(TAG, "用户点击打开了通知");
             // 在这里可以自己写代码去定义用户点击后的行为

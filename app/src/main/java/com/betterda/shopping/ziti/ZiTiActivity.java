@@ -52,6 +52,11 @@ public class ZiTiActivity extends BaseActivity<ZiTiContract.Presenter> implement
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        getPresenter().onStart();
+    }
 
     @OnClick({R.id.iv_ziti_back})
     public void onClick(View view) {

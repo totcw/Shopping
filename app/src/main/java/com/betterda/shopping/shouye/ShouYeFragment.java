@@ -28,17 +28,21 @@ import com.betterda.shopping.find.FindFragment;
 import com.betterda.shopping.home.MainActivity;
 import com.betterda.shopping.location.LocationActivity;
 import com.betterda.shopping.message.MeassageActivity;
+import com.betterda.shopping.receiver.JpushReceiver;
 import com.betterda.shopping.search.SearchActivity;
 import com.betterda.shopping.shouye.contract.ShouYeContract;
 import com.betterda.shopping.shouye.model.Chose;
 import com.betterda.shopping.shouye.presenter.ShouYePresenterImpl;
 import com.betterda.shopping.sort.SortFragment;
+import com.betterda.shopping.utils.CacheUtils;
+import com.betterda.shopping.utils.Constants;
 import com.betterda.shopping.utils.UiUtils;
 import com.betterda.shopping.utils.UtilMethod;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import rx.functions.Action1;
 
 /**
  * 首页
@@ -58,6 +62,8 @@ public class ShouYeFragment extends BaseFragment<ShouYeContract.Presenter> imple
     FrameLayout mFrameShouyeSecond;//第二区域
     @BindView(R.id.frame_shouye_three)
     FrameLayout mFrameShouyeThree;//第三区域
+    @BindView(R.id.iv_shouye_message)
+    ImageView mIvMessage;
     @BindView(R.id.loadpager_shouye)
     LoadingPager mLoadpagerShouye;
     private View mViewLunbotu; //轮播图
@@ -97,6 +103,41 @@ public class ShouYeFragment extends BaseFragment<ShouYeContract.Presenter> imple
         initSecond();
         //加载第三区域
         initThree();
+
+        judgeMessage();
+        initRxBus();
+
+    }
+
+    /**
+     * 判断是否是有新消息
+     */
+    private void judgeMessage() {
+        String account = CacheUtils.getString(getmActivity(), Constants.Cache.ACCOUNT, "");
+        boolean messsage = CacheUtils.getBoolean(getmActivity(), account+ Constants.Cache.MESSAGE, false);
+        if (mIvMessage != null) {
+            mIvMessage.setSelected(messsage);
+        }
+    }
+
+    /**
+     * 设置rxbus
+     */
+    private void initRxBus() {
+        getRxManager().on(JpushReceiver.class.getSimpleName(), new Action1<Boolean>() {
+            @Override
+            public void call(Boolean s) {
+                //改变消息是样式
+                if (mIvMessage != null) {
+                    if (s) {
+                        mIvMessage.setSelected(true);
+                    } else {
+                        mIvMessage.setSelected(false);
+                    }
+
+                }
+            }
+        });
     }
 
     @Override
@@ -139,8 +180,7 @@ public class ShouYeFragment extends BaseFragment<ShouYeContract.Presenter> imple
                 UiUtils.setOverdepengingIn(getmActivity());
                 break;
             case R.id.relative_shouye_message:
-                UtilMethod.isLogin(getmActivity(),MeassageActivity.class);
-
+                UiUtils.startIntent(getmActivity(),MeassageActivity.class);
                 break;
             case R.id.iv_shouye_search:
                 UiUtils.startIntent(getmActivity(), SearchActivity.class);

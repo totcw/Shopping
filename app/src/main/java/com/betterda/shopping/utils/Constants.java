@@ -26,11 +26,12 @@ public class Constants {
         public final static String NICKNAME = "nickName";//昵称
         public final static String TOUXIANG = "touxiang";//头像
         public final static String PINPAI = "touxiang";//品牌
+        public final static String MESSAGE = "message";//是否是新消息
     }
 
     public static class Url {
 
-       public  final static String URL="http://192.168.1.104:8080/WinePIN/";
+       public  final static String URL="http://192.168.1.145:8080/WinePIN/";
         public static final String URL_REGISTER = "appAPI.do?api/account/user/register";
         public static final String URL_LOGIN = "appAPI.do?api/account/user/login";
         public static final String URL_LOGINTHREE = "appAPI.do?api/account/third/login";//三方登录

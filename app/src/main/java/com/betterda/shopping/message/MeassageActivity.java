@@ -10,6 +10,9 @@ import com.betterda.shopping.R;
 import com.betterda.shopping.base.BaseActivity;
 import com.betterda.shopping.message.contract.MeassageContract;
 import com.betterda.shopping.message.presenter.MeassagePresenterImpl;
+import com.betterda.shopping.receiver.JpushReceiver;
+import com.betterda.shopping.utils.CacheUtils;
+import com.betterda.shopping.utils.Constants;
 import com.betterda.shopping.widget.NormalTopBar;
 
 
@@ -50,6 +53,11 @@ public class MeassageActivity extends BaseActivity<MeassageContract.Presenter> i
                 getPresenter().onError();
             }
         });
+        //将信息的标志设置为false
+        getRxManager().post(JpushReceiver.class.getSimpleName(),false);
+        String account = CacheUtils.getString(getmActivity(), Constants.Cache.ACCOUNT, "");
+
+        CacheUtils.putBoolean(getmActivity(), account+Constants.Cache.MESSAGE, false);
     }
 
     @OnClick({R.id.bar_back})
