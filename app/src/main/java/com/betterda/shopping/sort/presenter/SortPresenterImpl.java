@@ -102,6 +102,7 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
                                 //记录商品类型
                                 productType = s.getCatalogname();
                                 refreshState(holder);
+                                pangeNo = 1;
                                 getShopList();
                             }
                         }
@@ -314,6 +315,7 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
                         //记录排序
                         sort = s.getCatalogname();
                         getModel().clear(mSortPList, holder.getAdapterPosition());
+                        pangeNo = 1;
                         getShopList();
                         getView().close();
                         // mSortPAdapter.notifyDataSetChanged();
@@ -657,6 +659,7 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
         brand = lastBrand;
         beginPrice = lastBeginPrice;
         endPrice = lastEndPrice;
+        pangeNo = 1;
         getShopList();
         getView().close();
     }

@@ -63,7 +63,8 @@ public class AddressActivity extends BaseActivity<AddressContract.Presenter> imp
     @Override
     protected void onStart() {
         super.onStart();
-        getPresenter().getData();
+        getPresenter().onStart();
+
     }
 
     public void initRv(RecyclerView.Adapter adapter) {
