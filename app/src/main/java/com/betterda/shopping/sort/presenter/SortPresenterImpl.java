@@ -158,13 +158,11 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
                                                     @Override
                                                     protected void onSuccess(String data, String resultMsg) {
 
-                                                        UiUtils.showToast(getView().getmActivity(), resultMsg);
                                                         getView().addBus(1);
                                                     }
 
                                                     @Override
                                                     public void onFail(String resultMsg) {
-                                                        UiUtils.showToast(getView().getmActivity(), resultMsg);
                                                     }
 
                                                     @Override
@@ -214,8 +212,19 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
             chose2.setType("价格");
             chose2.setName("全部");
             mChoseList.add(chose2);
-
+        } else {
+            if (mChoseList.size() > 0) {
+                Chose chose = mChoseList.get(0);
+                if (brand != null) {
+                    chose.setName(brand);
+                } else {
+                    chose.setName("全部");
+                }
+            }
         }
+
+
+
         mChoseAdapter = new CommonAdapter<Chose>(getView().getmActivity(), R.layout.item_rv_pp_shaixuan, mChoseList) {
             @Override
             public void convert(ViewHolder holder, final Chose s) {

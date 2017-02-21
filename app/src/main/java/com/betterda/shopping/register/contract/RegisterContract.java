@@ -2,6 +2,7 @@ package com.betterda.shopping.register.contract;
 
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.betterda.shopping.base.IModel;
 import com.betterda.shopping.base.IPresenter;
@@ -25,6 +26,8 @@ public interface View extends IView{
     String getNumber();
 
     EditText getTvPwd();
+
+    ImageView getIvChoose();
 }
 
 public interface Presenter extends IPresenter<View>{

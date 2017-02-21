@@ -114,7 +114,7 @@ public class SortFragment extends BaseFragment<SortContract.Presenter> implement
         getRxManager().on(SortFragment.class.getSimpleName(), new Action1<Chose>() {
             @Override
             public void call(Chose s) {
-                System.out.println("类型:"+s.getProductType());
+                System.out.println("s:"+s.getPinpai());
                 if (s != null) {
                     getPresenter().setProduct(s.getProductType(), s.getPinpai());
                 }

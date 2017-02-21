@@ -45,7 +45,7 @@ public class JsActivity extends BaseActivity {
         }
         final WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
-        settings.setSupportZoom(true);
+        settings.setSupportZoom(false);
         settings.setBuiltInZoomControls(true);
         settings.setUseWideViewPort(true);
         settings.setDomStorageEnabled(true);

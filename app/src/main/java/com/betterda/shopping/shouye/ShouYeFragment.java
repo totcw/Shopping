@@ -186,20 +186,19 @@ public class ShouYeFragment extends BaseFragment<ShouYeContract.Presenter> imple
                 UiUtils.startIntent(getmActivity(), SearchActivity.class);
                 break;
             case R.id.relative_tjq://第二区域1
-                ((MainActivity) getmActivity()).changeToSort();
-                getRxManager().post(SortFragment.class.getSimpleName(),new Chose("白酒","三国酒"));
+                changeToSort("白酒",null);
                 break;
             case R.id.relative_zpjy://第二区域2
-                UiUtils.showToast(getmActivity(), "2");
+                changeToSort("红酒",null);
                 break;
             case R.id.relative_qcjy://第二区域3
-                UiUtils.showToast(getmActivity(), "3");
+                changeToSort("洋酒",null);
                 break;
             case R.id.relative_xiuc://第二区域4
-                UiUtils.showToast(getmActivity(), "4");
+                changeToSort("啤酒",null);
                 break;
             case R.id.relative_xic://第二区域5
-                UiUtils.showToast(getmActivity(), "5");
+                changeToSort("黄酒",null);
                 break;
             case R.id.relative_jyz://第二区域6
                 UiUtils.showToast(getmActivity(), "6");
@@ -211,18 +210,26 @@ public class ShouYeFragment extends BaseFragment<ShouYeContract.Presenter> imple
                 UiUtils.showToast(getmActivity(), "8");
                 break;
             case R.id.linear_view_three1://第3区域1
-                UiUtils.showToast(getmActivity(), "1");
+                changeToSort("白酒","茅台");
                 break;
             case R.id.linear_view_three2://第3区域2
-                UiUtils.showToast(getmActivity(), "2");
+                changeToSort("白酒",null);
                 break;
             case R.id.linear_view_three3://第3区域3
-                UiUtils.showToast(getmActivity(), "3");
+                changeToSort("白酒",null);
                 break;
             case R.id.linear_view_three4://第3区域4
-                UiUtils.showToast(getmActivity(), "4");
+                changeToSort("白酒",null);
                 break;
         }
+    }
+
+    /**
+     * 跳转到分类界面
+     */
+    private void changeToSort(String sort,String pinpai) {
+        ((MainActivity) getmActivity()).changeToSort();
+        getRxManager().post(SortFragment.class.getSimpleName(),new Chose(sort,pinpai));
     }
 
     /**

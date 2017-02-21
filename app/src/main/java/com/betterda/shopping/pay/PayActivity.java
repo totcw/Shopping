@@ -66,6 +66,7 @@ public class PayActivity extends BaseActivity<PayContract.Presenter> implements 
                 intent.putExtra("orderId", orderId);
                 intent.putExtra("money", money);
                 UiUtils.startIntent(getmActivity(),intent);
+                getmActivity().finish();
                 break;
             case R.id.btn_pay_confirm:
                 break;

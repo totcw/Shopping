@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
     <ImageView
         android:id="@+id/iv_welcome"
-        android:background="@color/white"
+        android:background="@mipmap/welcome_bg"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

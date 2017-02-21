@@ -31,6 +31,7 @@ import com.betterda.shopping.receiver.JpushReceiver;
 import com.betterda.shopping.register.RegisterActivity;
 import com.betterda.shopping.setting.SettingActivity;
 import com.betterda.shopping.tuijian.LiJiTuijianActivity;
+import com.betterda.shopping.tuijian.MyMemberActivity;
 import com.betterda.shopping.tuijian.MyTuijianActivity;
 import com.betterda.shopping.utils.CacheUtils;
 import com.betterda.shopping.utils.Constants;
@@ -180,7 +181,7 @@ public class MyFragment extends BaseFragment<MyContract.Presenter> implements My
                 UtilMethod.isLogin(getmActivity(), WalletActivity.class);
                 break;
             case R.id.relative_my_jiayouka://成为会员\
-
+                UtilMethod.isLogin(getmActivity(), MyMemberActivity.class);
                 break;
             case R.id.relative_my_bus://立即推荐
                 UtilMethod.isLogin(getmActivity(), LiJiTuijianActivity.class);

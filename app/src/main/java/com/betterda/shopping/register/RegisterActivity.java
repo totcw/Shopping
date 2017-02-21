@@ -57,12 +57,12 @@ public class RegisterActivity extends BaseActivity<RegisterContract.Presenter> i
         mCountdownRegister.setCountdownBackground(R.drawable.yzm_selector);
     }
 
-    @OnClick({R.id.countdown_register, R.id.bar_back,R.id.iv_register_choose, R.id.btn_register})
+    @OnClick({R.id.countdown_register, R.id.bar_back,R.id.linear_register_xieyi, R.id.btn_register})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.countdown_register:
                 break;
-            case R.id.iv_register_choose:
+            case R.id.linear_register_xieyi:
                 mIvRegisterChoose.setSelected(!mIvRegisterChoose.isSelected());
                 break;
             case R.id.btn_register:
@@ -102,5 +102,10 @@ public class RegisterActivity extends BaseActivity<RegisterContract.Presenter> i
     @Override
     public EditText getTvPwd() {
         return mEtRegisterPwd;
+    }
+
+    @Override
+    public ImageView getIvChoose() {
+        return mIvRegisterChoose;
     }
 }
