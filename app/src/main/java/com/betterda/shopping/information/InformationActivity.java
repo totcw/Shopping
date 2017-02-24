@@ -351,7 +351,7 @@ public class InformationActivity extends BaseActivity<InformationContract.Presen
                                     @Override
                                     protected void onSuccess(String data2, String resultMsg) {
                                         UiUtils.dissmissDialog(getmActivity(),dialog);
-                                        UiUtils.showToast(getmActivity(),resultMsg);
+                                        //UiUtils.showToast(getmActivity(),resultMsg);
                                         mSvInformationTouxinag.setImageBitmap(pic);
                                         CacheUtils.putString(getmActivity(), getAccount() + Constants.Cache.TOUXIANG, data);
                                     }

@@ -25,6 +25,8 @@ public class OrderDetailContract {
         void get();
 
         void onError();
+
+        void onStart();
     }
 
     public interface Model extends IModel{

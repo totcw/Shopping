@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import com.betterda.mylibrary.ShapeLoadingDialog;
 import com.betterda.shopping.BuildConfig;
 import com.betterda.shopping.base.BasePresenter;
+import com.betterda.shopping.dialog.DeleteDialog;
 import com.betterda.shopping.http.MyObserver;
 import com.betterda.shopping.http.NetWork;
 import com.betterda.shopping.javabean.BaseCallModel;
@@ -39,94 +40,123 @@ public class TiXianPresenterImpl extends BasePresenter<TiXianContract.View,TiXia
     }
     @Override
     public void getAll() {
-        NetworkUtils.isNetWork(getView().getmActivity(), getView().getTvBalance(), new NetworkUtils.SetDataInterface() {
+
+        DeleteDialog deleteDialog = new DeleteDialog(getView().getmActivity(), new DeleteDialog.onConfirmListener() {
             @Override
-            public void getDataApi() {
-                final ShapeLoadingDialog dialog = UiUtils.createDialog(getView().getmActivity(), "正在提交...");
-                UiUtils.showDialog(getView().getmActivity(),dialog);
-                getView().getRxManager().add(NetWork.getNetService()
-                        .getCash(getView().getAccount(),getView().getToken(),balance,mBankCard)
-                        .compose(NetWork.handleResult(new BaseCallModel<String>()))
-                        .subscribe(new MyObserver<String>() {
-                            @Override
-                            protected void onSuccess(String data, String resultMsg) {
-                                if (BuildConfig.LOG_DEBUG) {
-                                    System.out.println("提现success:"+resultMsg);
-                                }
-                                UiUtils.dissmissDialog(getView().getmActivity(),dialog);
-                                getView().getmActivity().finish();
-                            }
+            public void comfirm() {
+                NetworkUtils.isNetWork(getView().getmActivity(), getView().getTvBalance(), new NetworkUtils.SetDataInterface() {
+                    @Override
+                    public void getDataApi() {
+                        final ShapeLoadingDialog dialog = UiUtils.createDialog(getView().getmActivity(), "正在提交...");
+                        UiUtils.showDialog(getView().getmActivity(),dialog);
+                        getView().getRxManager().add(NetWork.getNetService()
+                                .getCash(getView().getAccount(),getView().getToken(),balance,mBankCard)
+                                .compose(NetWork.handleResult(new BaseCallModel<String>()))
+                                .subscribe(new MyObserver<String>() {
+                                    @Override
+                                    protected void onSuccess(String data, String resultMsg) {
+                                        if (BuildConfig.LOG_DEBUG) {
+                                            System.out.println("提现success:"+resultMsg);
+                                        }
+                                        UiUtils.dissmissDialog(getView().getmActivity(),dialog);
+                                        getView().getmActivity().finish();
+                                    }
 
-                            @Override
-                            public void onFail(String resultMsg) {
-                                if (BuildConfig.LOG_DEBUG) {
-                                    System.out.println("提现fail:"+resultMsg);
-                                }
-                                UiUtils.dissmissDialog(getView().getmActivity(),dialog);
-                            }
+                                    @Override
+                                    public void onFail(String resultMsg) {
+                                        if (BuildConfig.LOG_DEBUG) {
+                                            System.out.println("提现fail:"+resultMsg);
+                                        }
+                                        UiUtils.dissmissDialog(getView().getmActivity(),dialog);
+                                    }
 
-                            @Override
-                            public void onExit() {
-                                UiUtils.dissmissDialog(getView().getmActivity(),dialog);
-                                getView().ExitToLogin();
-                            }
-                        }));
+                                    @Override
+                                    public void onExit() {
+                                        UiUtils.dissmissDialog(getView().getmActivity(),dialog);
+                                        getView().ExitToLogin();
+                                    }
+                                }));
+                    }
+                });
+            }
+
+            @Override
+            public void cancel() {
+
             }
         });
+        deleteDialog.setTvcontent("确定要全部提取吗?");
+        deleteDialog.show();
+
+
     }
 
     @Override
     public void commit() {
 
-        try {
-            if (TextUtils.isEmpty(mBankCard)) {
-                UiUtils.showToast(getView().getmActivity(), "请选择银行卡");
-                return;
-            }
-            money=  getView().getMoney();
-            if (TextUtils.isEmpty(money)) {
-                UiUtils.showToast(getView().getmActivity(), "请输入提现金额");
-                return;
-            }else if ("0".equals(money)) {
+        DeleteDialog deleteDialog = new DeleteDialog(getView().getmActivity(), new DeleteDialog.onConfirmListener() {
+            @Override
+            public void comfirm() {
+                try {
+                    if (TextUtils.isEmpty(mBankCard)) {
+                        UiUtils.showToast(getView().getmActivity(), "请选择银行卡");
+                        return;
+                    }
+                    money=  getView().getMoney();
+                    if (TextUtils.isEmpty(money)) {
+                        UiUtils.showToast(getView().getmActivity(), "请输入提现金额");
+                        return;
+                    }else if ("0".equals(money)) {
 
-                UiUtils.showToast(getView().getmActivity(), "提现的数量不能为0");
-                return;
-            } else if (Float.parseFloat(money) > Float.parseFloat(balance)) {
-                UiUtils.showToast(getView().getmActivity(), "超出可提现金额");
-                return;
-            }
-            NetworkUtils.isNetWork(getView().getmActivity(), getView().getTvBalance(), new NetworkUtils.SetDataInterface() {
-                @Override
-                public void getDataApi() {
-                    getView().getRxManager().add(NetWork.getNetService()
-                            .getCash(getView().getAccount(),getView().getToken(),money,mBankCard)
-                            .compose(NetWork.handleResult(new BaseCallModel<String>()))
-                            .subscribe(new MyObserver<String>() {
-                                @Override
-                                protected void onSuccess(String data, String resultMsg) {
-                                    if (BuildConfig.LOG_DEBUG) {
-                                        System.out.println("提现success:"+resultMsg);
-                                    }
-                                    getView().getmActivity().finish();
-                                }
+                        UiUtils.showToast(getView().getmActivity(), "提现的数量不能为0");
+                        return;
+                    } else if (Float.parseFloat(money) > Float.parseFloat(balance)) {
+                        UiUtils.showToast(getView().getmActivity(), "超出可提现金额");
+                        return;
+                    }
+                    NetworkUtils.isNetWork(getView().getmActivity(), getView().getTvBalance(), new NetworkUtils.SetDataInterface() {
+                        @Override
+                        public void getDataApi() {
+                            getView().getRxManager().add(NetWork.getNetService()
+                                    .getCash(getView().getAccount(),getView().getToken(),money,mBankCard)
+                                    .compose(NetWork.handleResult(new BaseCallModel<String>()))
+                                    .subscribe(new MyObserver<String>() {
+                                        @Override
+                                        protected void onSuccess(String data, String resultMsg) {
+                                            if (BuildConfig.LOG_DEBUG) {
+                                                System.out.println("提现success:"+resultMsg);
+                                            }
+                                            getView().getmActivity().finish();
+                                        }
 
-                                @Override
-                                public void onFail(String resultMsg) {
-                                    if (BuildConfig.LOG_DEBUG) {
-                                        System.out.println("提现fail:"+resultMsg);
-                                    }
-                                }
+                                        @Override
+                                        public void onFail(String resultMsg) {
+                                            if (BuildConfig.LOG_DEBUG) {
+                                                System.out.println("提现fail:"+resultMsg);
+                                            }
+                                        }
 
-                                @Override
-                                public void onExit() {
+                                        @Override
+                                        public void onExit() {
                                             getView().ExitToLogin();
-                                }
-                            }));
-                }
-            });
-        } catch (Exception e) {
+                                        }
+                                    }));
+                        }
+                    });
+                } catch (Exception e) {
 
-        }
+                }
+            }
+
+            @Override
+            public void cancel() {
+
+            }
+        });
+        deleteDialog.setTvcontent("确定要提现吗?");
+        deleteDialog.show();
+
+
 
 
     }

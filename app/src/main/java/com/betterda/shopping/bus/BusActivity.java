@@ -71,6 +71,12 @@ public class BusActivity extends BaseActivity<BusContract.Presenter> implements 
         });
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        getPresenter().onStart();
+    }
+
     @OnClick({R.id.relative_bus_check, R.id.iv_bus_jiesuan, R.id.iv_bus_delete, R.id.bar_back, R.id.bar_action})
     public void onClick(View view) {
         switch (view.getId()) {

@@ -111,7 +111,7 @@ public class NameActivity extends BaseActivity {
                 .subscribe(new MyObserver<String>() {
                     @Override
                     protected void onSuccess(String data, String resultMsg) {
-                        UiUtils.showToast(getmActivity(),resultMsg);
+                      //  UiUtils.showToast(getmActivity(),resultMsg);
                         UiUtils.dissmissDialog(getmActivity(),dialog);
                         //缓存昵称
                         CacheUtils.putString(getmActivity(), getAccount() + Constants.Cache.NICKNAME, name);

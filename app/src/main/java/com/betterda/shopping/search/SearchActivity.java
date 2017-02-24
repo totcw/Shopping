@@ -173,5 +173,8 @@ public class SearchActivity extends BaseActivity<SearchContract.Presenter> imple
         return mFrameSearch;
     }
 
-
+    @Override
+    public LoadingPager getLodapger() {
+        return mLoadingPager;
+    }
 }

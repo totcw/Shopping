@@ -105,7 +105,13 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailContract.Presen
         });
     }
 
-    @OnClick({R.id.relative_orderdetail_delete, R.id.relative_orderdetail_pay,
+    @Override
+    protected void onStart() {
+        super.onStart();
+        getPresenter().onStart();
+    }
+
+    @OnClick({R.id.relative_orderdetail_delete, R.id.relative_orderdetail_pay,R.id.relative_orderdetail_get,
             R.id.bar_back,R.id.relative_orderdetail_comment})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -120,6 +126,7 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailContract.Presen
 
                 break;
             case R.id.relative_orderdetail_get://立即收货
+
                 getPresenter().get();
 
                 break;
@@ -147,6 +154,9 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailContract.Presen
         mTvOrderdetailFapiao.setText(data.getBill());
         mTvOrderdetailBiamhao.setText(data.getOrderId());
         mTvOrderdetailTime.setText(data.getTime());
+        mRelativeOrderdetailGet.setVisibility(View.GONE);
+        mRelativeOrderdetailComment.setVisibility(View.GONE);
+        mLinearOrderdetailPay.setVisibility(View.GONE);
         if ("待付款".equals(data.getOrderStatus())) {
             mLinearOrderdetailPay.setVisibility(View.VISIBLE);
         } else if ("待评价".equals(data.getOrderStatus())) {

@@ -51,6 +51,8 @@ public class BusContract {
         void checkAll();
 
         void onError();
+
+        void onStart();
     }
 
     public interface Model extends IModel {
