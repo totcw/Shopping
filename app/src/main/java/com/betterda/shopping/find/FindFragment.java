@@ -128,7 +128,7 @@ public class FindFragment extends BaseFragment<FindContract.Presenter> implement
     private void setMap() {
         //设置缩放级别
         mBaiduMap.setMapStatus(MapStatusUpdateFactory.
-                newMapStatus(new MapStatus.Builder().zoom(17).build()));
+                newMapStatus(new MapStatus.Builder().zoom(15).build()));
         //设置当前位置的点击事件
         mBaiduMap.setOnMyLocationClickListener(this);
         //设置marker的点击事件
