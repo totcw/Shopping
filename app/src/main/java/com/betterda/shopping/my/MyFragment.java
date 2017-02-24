@@ -106,6 +106,7 @@ public class MyFragment extends BaseFragment<MyContract.Presenter> implements My
         initIdv();
         judgeMessage();
         initRxBus();
+
     }
 
     private void initRxBus() {
@@ -128,6 +129,7 @@ public class MyFragment extends BaseFragment<MyContract.Presenter> implements My
     public void onStart() {
         super.onStart();
         getPresenter().onStart();
+
     }
 
 
@@ -136,7 +138,7 @@ public class MyFragment extends BaseFragment<MyContract.Presenter> implements My
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         if (hidden) {//隐藏
-
+            System.out.println("隐藏");
         } else {
             StatusBarCompat.setStatusBar5(getmActivity(), R.color.backgroudyellow);
             ((MainActivity)getmActivity()).getmBvMain().setVisibility(View.GONE);
