@@ -106,7 +106,7 @@ public class MyFragment extends BaseFragment<MyContract.Presenter> implements My
         initIdv();
         judgeMessage();
         initRxBus();
-        System.out.println("我的");
+        System.out.println("你的");
     }
 
     private void initRxBus() {
