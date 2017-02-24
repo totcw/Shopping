@@ -137,7 +137,7 @@ public class MyFragment extends BaseFragment<MyContract.Presenter> implements My
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         if (hidden) {//隐藏
-
+            System.out.println("yinc");
         } else {
             StatusBarCompat.setStatusBar5(getmActivity(), R.color.backgroudyellow);
             ((MainActivity)getmActivity()).getmBvMain().setVisibility(View.GONE);
