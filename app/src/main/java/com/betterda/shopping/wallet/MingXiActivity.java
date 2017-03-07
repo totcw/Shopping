@@ -64,6 +64,7 @@ public class MingXiActivity extends BaseActivity<MingXiContract.Presenter> imple
     public void initRv(RecyclerView.Adapter adapter) {
         mLayoutRecycleview.setVisibility(View.VISIBLE);
         mLayoutRecycleview.setLayoutManager(new LinearLayoutManager(getmActivity()));
+        mLayoutRecycleview.setPullRefreshEnabled(false);
         mLayoutRecycleview.setLoadingMoreEnabled(true);
         mLayoutRecycleview.addItemDecoration(getPresenter().getItemDecoration());
         mLayoutRecycleview.setAdapter(adapter);

@@ -14,7 +14,7 @@ import com.betterda.shopping.base.IPresenter;
 
 
 /**
- * 图文详细
+ * js支付界面
  * Created by Administrator on 2016/5/30.
  */
 public class JsActivity extends BaseActivity {
@@ -45,7 +45,7 @@ public class JsActivity extends BaseActivity {
         }
         final WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
-        settings.setSupportZoom(false);
+        settings.setSupportZoom(true);
         settings.setBuiltInZoomControls(true);
         settings.setUseWideViewPort(true);
         settings.setDomStorageEnabled(true);
@@ -78,9 +78,8 @@ public class JsActivity extends BaseActivity {
         getWindow().getDecorView().post(new Runnable() {
             @Override
             public void run() {
-
-              //  String url = "http://192.168.1.104:8080/POS_TRADE_WAP/index.jsp?orderId="+orderId+"&money="+money;
-            String url=  "http://192.168.1.104:8080/WinePIN/tOnlinePayController.do?onlinePay&orderId=5kh896bn8966k89&money=108.56&cardNum=6221560691294337&number=13730607599"  ;
+                String url = "http://192.168.1.104:8080/WinePIN/tOnlinePayController.do?onlinePay&orderId="+orderId+"&money="+money;
+           // String url=  "http://192.168.1.104:8080/WinePIN/tOnlinePayController.do?onlinePay&orderId=5kh896bn8966k89&money=108.56&cardNum=6221560691294337&number=13730607599"  ;
                 webView.loadUrl(url);
 
             }

@@ -296,7 +296,9 @@ public interface NetService {
     @POST(Constants.Url.URL_GET_WALLETMINGXI)
     Observable<BaseCallModel<List<MingXi>>> getWalletMingXi(@Field("account") String account,
                                                             @Field("token") String token,
-                                                            @Field("wateType") String wateType
+                                                            @Field("wateType") String wateType,
+                                                            @Field("pageNo") String pageNo,
+                                                            @Field("pageSize") String pageSize
     );
 
 

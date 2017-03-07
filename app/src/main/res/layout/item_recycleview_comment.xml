@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/shouye_renmen_tv"
                 android:textSize="12sp"
-                android:text="暂无昵称" />
+                android:text="匿名" />
 
             <TextView
                 android:layout_marginRight="10dp"
