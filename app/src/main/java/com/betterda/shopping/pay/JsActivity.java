@@ -1,5 +1,6 @@
 package com.betterda.shopping.pay;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.view.View;
@@ -17,6 +18,7 @@ import com.betterda.shopping.base.IPresenter;
  * js支付界面
  * Created by Administrator on 2016/5/30.
  */
+@SuppressLint("SetJavaScriptEnabled")
 public class JsActivity extends BaseActivity {
 
     private WebView webView;
@@ -49,7 +51,7 @@ public class JsActivity extends BaseActivity {
         settings.setBuiltInZoomControls(true);
         settings.setUseWideViewPort(true);
         settings.setDomStorageEnabled(true);
-        webView.addJavascriptInterface(new JsInterce(),"pay");
+        webView.addJavascriptInterface(new JsInterce(),"android");
         webView.setWebViewClient(new WebViewClient() {
 
             @Override
@@ -89,8 +91,15 @@ public class JsActivity extends BaseActivity {
     public class JsInterce{
         //在js中调用window.AndroidWebView.showInfoFromJs(name)，便会触发此方法。
         @JavascriptInterface
-        public void showInfoFromJs(String name) {
-            System.out.println("js中调用了showInforFormJs方法");
+        public String showInfoFromJs(String name) {
+            System.out.println("js中调用了showInforFormJs方法"+name);
+            return "调用";
+        }
+
+        @JavascriptInterface
+        public void isMember(boolean isMember) {
+            System.out.println("js中调用了showToast方法");
+
         }
     }
 

@@ -1,5 +1,7 @@
 package com.betterda.shopping.tuijian;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Build;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
@@ -18,7 +20,7 @@ import butterknife.BindView;
  * 成为会员的界面
  * Created by Administrator on 2017/2/20.
  */
-
+@SuppressLint("SetJavaScriptEnabled")
 public class MyMemberActivity extends BaseActivity {
     @BindView(R.id.slidedetails_behind)
     WebView mWebView;
@@ -45,7 +47,7 @@ public class MyMemberActivity extends BaseActivity {
         settings.setBuiltInZoomControls(true);
         settings.setUseWideViewPort(true);
         settings.setDomStorageEnabled(true);
-        mWebView.addJavascriptInterface(new JsInterce(),"member");
+        mWebView.addJavascriptInterface(new JsInterce(getmActivity()),"android");
         mWebView.setWebViewClient(new WebViewClient() {
 
             @Override
@@ -78,10 +80,25 @@ public class MyMemberActivity extends BaseActivity {
 
 
     public class JsInterce{
+        private Context context;
+
+        public JsInterce(Context context) {
+            this.context = context;
+        }
+
         //在js中调用window.AndroidWebView.showInfoFromJs(name)，便会触发此方法。
         @JavascriptInterface
         public void showInfoFromJs(String name) {
             System.out.println("js中调用了showInforFormJs方法");
         }
+
+        @JavascriptInterface
+        public void isMember(boolean isMember) {
+            System.out.println("js中调用了isMember方法"+isMember);
+            if (isMember) {
+                CacheUtils.putBoolean(context,Constants.Cache.ISMEMBER,true);
+            }
+        }
+
     }
 }

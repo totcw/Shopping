@@ -31,7 +31,7 @@ public class Constants {
 
     public static class Url {
 
-       public  final static String URL="http://192.168.1.145:8080/WinePIN/";
+       public  final static String URL="http://192.168.1.104:8080/WinePIN/";
         public static final String URL_REGISTER = "appAPI.do?api/account/user/register";
         public static final String URL_LOGIN = "appAPI.do?api/account/user/login";
         public static final String URL_LOGINTHREE = "appAPI.do?api/account/third/login";//三方登录
