@@ -136,6 +136,12 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailContract.Pr
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        getPresenter().onStart();
+    }
+
+    @Override
     public void initListener() {
         super.initListener();
         ViewTreeObserver vto = mRatioLayout.getViewTreeObserver();

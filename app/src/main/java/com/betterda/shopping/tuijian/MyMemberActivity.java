@@ -13,6 +13,7 @@ import com.betterda.shopping.base.BaseActivity;
 import com.betterda.shopping.base.IPresenter;
 import com.betterda.shopping.utils.CacheUtils;
 import com.betterda.shopping.utils.Constants;
+import com.betterda.shopping.utils.UiUtils;
 
 import butterknife.BindView;
 
@@ -93,11 +94,11 @@ public class MyMemberActivity extends BaseActivity {
         }
 
         @JavascriptInterface
-        public void isMember(boolean isMember) {
-            System.out.println("js中调用了isMember方法"+isMember);
-            if (isMember) {
-                CacheUtils.putBoolean(context,Constants.Cache.ISMEMBER,true);
-            }
+        public void isMember(String account) {
+            System.out.println("js中调用了isMember方法"+account);
+            UiUtils.showToast(context,"支付成功:"+account);
+            CacheUtils.putBoolean(context,account +Constants.Cache.ISMEMBER,true);
+
         }
 
     }

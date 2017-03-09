@@ -47,6 +47,8 @@ public class ProductDetailContract {
         void onNewIntent(Intent intent);
 
         void onLoadError();
+
+        void onStart();
     }
 
     public interface Model extends IModel{

@@ -7,6 +7,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Build;
+import android.os.SystemClock;
 import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
 import android.telephony.TelephonyManager;
@@ -419,17 +420,20 @@ public class UtilMethod {
      */
     public static float addUp(Activity activity,List<Bus> list) {
         float a = 0;
-        boolean isMember = CacheUtils.getBoolean(activity, Constants.Cache.ISMEMBER, false);
+        String account = CacheUtils.getString(activity, Constants.Cache.ACCOUNT, SystemClock.currentThreadTimeMillis()+"");
+        boolean isMember = CacheUtils.getBoolean(activity, account+Constants.Cache.ISMEMBER, false);
         if (list != null) {
             for (Bus bus : list) {
-                try {
-                    int amount = Integer.parseInt(bus.getTotalCount());
-                    //判断是否是会员
-                    float money = isMember?Float.parseFloat(bus.getVipPrice()):Float.parseFloat(bus.getSalePrice());
-                    float sum = amount * money;
-                    a += sum;
-                } catch (Exception e) {
+                if (bus!=null&&bus.isChosed()){
+                    try {
+                        int amount = Integer.parseInt(bus.getTotalCount());
+                        //判断是否是会员
+                        float money = isMember ? Float.parseFloat(bus.getVipPrice()) : Float.parseFloat(bus.getSalePrice());
+                        float sum = amount * money;
+                        a += sum;
+                    } catch (Exception e) {
 
+                    }
                 }
 
             }
