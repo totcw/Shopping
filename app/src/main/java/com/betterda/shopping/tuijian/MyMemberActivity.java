@@ -43,7 +43,7 @@ public class MyMemberActivity extends BaseActivity {
         account = CacheUtils.getString(getmActivity(), Constants.Cache.ACCOUNT, "");
         final WebSettings settings = mWebView.getSettings();
         settings.setJavaScriptEnabled(true);
-        settings.setSupportZoom(false);
+        settings.setSupportZoom(true);
         settings.setBuiltInZoomControls(true);
         settings.setUseWideViewPort(true);
         settings.setDomStorageEnabled(true);
