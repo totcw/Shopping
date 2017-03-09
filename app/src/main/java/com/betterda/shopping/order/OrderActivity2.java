@@ -443,7 +443,6 @@ public class OrderActivity2 extends BaseActivity {
                                 if (BuildConfig.LOG_DEBUG) {
                                     System.out.println("收货成功:" + resultMsg);
                                 }
-                                UiUtils.dissmissDialog(getmActivity(),dialog);
                                 UiUtils.showToast(getmActivity(), resultMsg);
                                 getData();
                             }
@@ -489,7 +488,6 @@ public class OrderActivity2 extends BaseActivity {
                                 if (BuildConfig.LOG_DEBUG) {
                                     System.out.println("取消订单success:" + data);
                                 }
-                                UiUtils.dissmissDialog(getmActivity(),dialog);
                                 UiUtils.showToast(getmActivity(), resultMsg);
                                 getData();
                             }

@@ -169,7 +169,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
         permissionDialog.setTvcontent(sb.toString());
         permissionDialog.show();
-        UiUtils.showToast(WelcomeActivity.this,"获取权限失败,开启获取权限的对话框");
+
     }
 
     /**

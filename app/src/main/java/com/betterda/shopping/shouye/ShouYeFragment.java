@@ -201,13 +201,13 @@ public class ShouYeFragment extends BaseFragment<ShouYeContract.Presenter> imple
                 changeToSort("黄酒",null);
                 break;
             case R.id.relative_jyz://第二区域6
-                UiUtils.showToast(getmActivity(), "6");
+
                 break;
             case R.id.relative_xhfw://第二区域7
-                UiUtils.showToast(getmActivity(), "7");
+
                 break;
             case R.id.relative_dj://第二区域8
-                UiUtils.showToast(getmActivity(), "8");
+
                 break;
             case R.id.linear_view_three1://第3区域1
                 changeToSort("白酒","茅台");
