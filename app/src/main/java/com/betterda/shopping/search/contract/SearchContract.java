@@ -75,6 +75,8 @@ public class SearchContract {
         void getDataForBusCount();
 
         void onError();
+        //重新刷新搜索记录
+        void reFresh();
     }
 
     public interface Model extends IModel{

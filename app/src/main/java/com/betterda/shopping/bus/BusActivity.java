@@ -21,6 +21,7 @@ import com.zhy.base.adapter.recyclerview.DividerItemDecoration;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import rx.Observable;
 
 /**
  * Created by Administrator on 2016/12/13.
@@ -74,7 +75,9 @@ public class BusActivity extends BaseActivity<BusContract.Presenter> implements 
     @Override
     protected void onStart() {
         super.onStart();
+        mTvBusMoney.setText("￥ 0");
         getPresenter().onStart();
+        Observable.just().map()
     }
 
     @OnClick({R.id.relative_bus_check, R.id.iv_bus_jiesuan, R.id.iv_bus_delete, R.id.bar_back, R.id.bar_action})

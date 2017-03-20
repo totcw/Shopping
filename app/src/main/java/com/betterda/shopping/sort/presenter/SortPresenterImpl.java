@@ -655,6 +655,9 @@ public class SortPresenterImpl extends BasePresenter<SortContract.View, SortCont
     @Override
     public void clearChose() {
         refreshChoseRecycleview(null, "全部");
+        lastBrand = null;
+        lastBeginPrice = null;
+        lastEndPrice = null;
         beginPrice = null;
         endPrice = null;
         brand = null;

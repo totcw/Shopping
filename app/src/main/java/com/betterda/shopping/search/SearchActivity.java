@@ -86,6 +86,7 @@ public class SearchActivity extends BaseActivity<SearchContract.Presenter> imple
             public void cancel() {
                 mLoadingPager.hide();
                 setRvSearchVisable(false);
+                getPresenter().reFresh();
             }
         });
     }
@@ -143,6 +144,7 @@ public class SearchActivity extends BaseActivity<SearchContract.Presenter> imple
     public void initxRV(RecyclerView.Adapter adapter) {
         mXRecyclerView.setLayoutManager(new GridLayoutManager(getmActivity(),2));
         mXRecyclerView.setPullRefreshEnabled(false);
+        mXRecyclerView.setLoadingMoreEnabled(false);
         mXRecyclerView.setAdapter(adapter);
 
     }
